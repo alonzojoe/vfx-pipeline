@@ -7,13 +7,15 @@ import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { Preview } from '@/components/editor/Preview'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Timeline } from '@/components/editor/Timeline'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
   const { info, project } = vfx
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
@@ -62,7 +64,14 @@ export default function App(): JSX.Element {
           <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
           <aside className="w-[340px] shrink-0 border-l bg-panel" aria-label="Chat and inspector" />
         </div>
-        <section className="h-[300px] shrink-0 border-t bg-panel" aria-label="Timeline" />
+        <Timeline
+          project={project}
+          time={pb.time}
+          playing={pb.playing}
+          selectedId={selectedId}
+          onSeek={pb.setTime}
+          onSelect={setSelectedId}
+        />
       </div>
     </TooltipProvider>
   )
