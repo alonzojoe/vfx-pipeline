@@ -10,13 +10,12 @@ type Part = { kind: 'text' | 'tool' | 'error'; text: string; name?: string }
 type Msg = { role: 'user' | 'claude'; id?: string; parts: Part[]; done?: boolean; cost?: number }
 
 const STARTERS = [
-  'Make a new reel from this script: ',
   'Review the open reel against REVIEW.md and list what to fix',
   'Fix what the last review found',
   'Suggest the next 5 topics we haven’t done (check TOPICS.md)'
 ]
 
-type Build = { renamed?: string; script: boolean; cards: boolean; built: boolean; done: boolean; ok: boolean }
+type Build = { renamed?: string; script: boolean; cards: boolean; done: boolean; ok: boolean }
 export type VoiceState = 'todo' | 'doing' | 'done' | 'failed'
 
 type Props = {
@@ -26,19 +25,22 @@ type Props = {
   draft: boolean
   /** ElevenLabs voice run for the open reel (the app starts it after the script is in) */
   voice: VoiceState
+  /** the app's preview build right after the script is in */
+  preview: VoiceState
   onRenamed: (to: string) => void
-  onDone: (ok: boolean) => void
+  /** newReel = this reply was building a "+ New reel" from a pasted script */
+  onDone: (ok: boolean, newReel: boolean) => void
   /** bumps on every "+ New reel" → fresh conversation */
   newKey: number
 }
 
 /** New-reel checklist shown while Claude builds it and the app makes the voice. */
-function BuildChecklist({ b, voice }: { b: Build; voice: VoiceState }): JSX.Element {
+function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; preview: VoiceState }): JSX.Element {
   const steps: [string, boolean, boolean][] = [
     [b.renamed ? `Named ${b.renamed}` : 'Naming the reel from your topic', !!b.renamed, !b.renamed],
     ['Script → lines, pairs, recap, CTA', b.script, !!b.renamed && !b.script],
     ['Cards with your name', b.cards, b.script && !b.cards],
-    ['Preview built', b.built, b.cards && !b.built],
+    ['Preview built', preview === 'done', b.done && preview === 'doing'],
     ['Voice — ElevenLabs', voice === 'done', b.done && voice === 'doing'],
     ['Timeline synced to the voice', voice === 'done', false]
   ]
@@ -57,18 +59,21 @@ function BuildChecklist({ b, voice }: { b: Build; voice: VoiceState }): JSX.Elem
           {label}
         </div>
       ))}
+      {preview === 'failed' && <div className="text-sm text-red-300">The preview build failed — see the log; ask me to fix it.</div>}
       {voice === 'failed' && <div className="text-sm text-red-300">The voice step failed — see the log, then press Export or ask me to fix it.</div>}
     </div>
   )
 }
 
-export function Chat({ project, available, draft, voice, onRenamed, onDone, newKey }: Props): JSX.Element {
+export function Chat({ project, available, draft, voice, preview, onRenamed, onDone, newKey }: Props): JSX.Element {
   const [msgs, setMsgs] = useState<Msg[]>([])
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
   const [build, setBuild] = useState<Build | null>(null)
   const end = useRef<HTMLDivElement>(null)
   const input = useRef<HTMLTextAreaElement>(null)
+  const buildRef = useRef(build)
+  buildRef.current = build
   const cb = useRef({ onRenamed, onDone })
   cb.current = { onRenamed, onDone }
 
@@ -97,14 +102,14 @@ export function Chat({ project, available, draft, voice, onRenamed, onDone, newK
               b && {
                 ...b,
                 script: b.script || (/Write|Edit/.test(e.name) && d.includes('script.json')),
-                cards: b.cards || (/Edit|Write/.test(e.name) && d.includes('build.mjs')),
-                built: b.built || (e.name === 'Bash' && /node .*build\.mjs/.test(d))
+                cards: b.cards || (/Edit|Write/.test(e.name) && d.includes('build.mjs'))
               }
           )
         }
         if (e.type === 'done') {
-          setBuild((b) => b && { ...b, done: true, ok: e.ok })
-          cb.current.onDone(e.ok)
+          const b = buildRef.current
+          cb.current.onDone(e.ok, !!b && !b.done)
+          setBuild((x) => x && { ...x, done: true, ok: e.ok })
         }
         setMsgs((ms) => {
           const last = ms[ms.length - 1]
@@ -130,7 +135,7 @@ export function Chat({ project, available, draft, voice, onRenamed, onDone, newK
     setText('')
     setBusy(true)
     setMsgs((ms) => [...ms, { role: 'user', parts: [{ kind: 'text', text: m }] }])
-    if (draft) setBuild({ script: false, cards: false, built: false, done: false, ok: false })
+    if (draft) setBuild({ script: false, cards: false, done: false, ok: false })
     await window.api.chat(m, project, fresh || msgs.length === 0)
   }
 
@@ -219,7 +224,7 @@ export function Chat({ project, available, draft, voice, onRenamed, onDone, newK
               </div>
             )
           )}
-          {build && <BuildChecklist b={build} voice={voice} />}
+          {build && <BuildChecklist b={build} voice={voice} preview={preview} />}
           {busy && msgs[msgs.length - 1]?.role === 'user' && (
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <Loader2 className="h-3 w-3 animate-spin text-primary" /> starting Claude Code…

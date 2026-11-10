@@ -21,12 +21,28 @@ Joe pasted the content below. Do this in order, without asking questions:
    Use the exact name it prints ("renamed ${p} → <name>") from then on.
 2. Write hyperframes/<name>/script.json in the format of the newest finished reel's script.json, following BRAND.md §2 and .claude/agents/script-writer.md: keep Joe's words verbatim (only split them into lines), hook first, pairs/cards with show/focus, actions on spoken words, his recap as a 2×2 recap, CTA line {"text":"auto","cta":true} unless his script already ends with a CTA, a title, pauses only on big beats. If he gave a topic instead of a script, write a ~30s script in BRAND.md style.
 3. Update the CARDS map in hyperframes/<name>/build.mjs for this topic — Joe's name in every mock UI, numbers that add up.
-4. Run node hyperframes/<name>/build.mjs (estimated timing is fine) and fix any error.
-5. Add the TOPICS.md row (bg and cta from the build's output line).
-Do NOT generate the voice and do NOT render: the app does that next. Do not commit. Finish with two short lines: what you built and anything Joe should check.
+4. Add the TOPICS.md row for <name> (today's date, topic, format, hook, voice) with \`bg: auto · cta: auto\` in the Background column — the app fills both in after it builds.
+Write and change files only with your Edit/Write tools — never through node/python/shell scripts. The only command you may run is the rename script (and ls).
+Do NOT build, generate the voice or render: right after you finish, the app builds the preview, then makes the ElevenLabs voice. Do not commit. Finish with two short lines: what you built and anything Joe should check.
 
 Joe's content:
 ${content}`
+
+/**
+ * Commands the chat may run without a prompt (headless Claude Code can't ask). Passed on the command line because
+ * .claude/settings.json allow rules are ignored until the folder has been trusted in an interactive session.
+ */
+const ALLOWED = [
+  'Bash(./scripts/rename-project.sh:*)',
+  'Bash(./scripts/review.sh:*)',
+  'Bash(npx hyperframes:*)',
+  'Bash(ls:*)',
+  'Bash(git status:*)',
+  'Bash(git diff:*)',
+  'Bash(git log:*)',
+  'Bash(git add:*)',
+  'Bash(git commit:*)'
+]
 
 let child: ChildProcess | null = null
 let sessionId: string | null = null
@@ -59,6 +75,7 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
     q(prompt),
     '--output-format stream-json --verbose',
     '--permission-mode acceptEdits',
+    `--allowedTools ${ALLOWED.map(q).join(' ')}`,
     sessionId ? `--resume ${q(sessionId)}` : ''
   ].join(' ')
   const proc = loginShell(args, { cwd: root })

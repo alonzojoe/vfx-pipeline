@@ -129,3 +129,15 @@ export function createProject(root: string, base = 'new-reel'): string {
   writeFileSync(join(dir, 'script.json'), JSON.stringify(script, null, 2) + '\n')
   return name
 }
+
+/** After a build: put the background + CTA the build picked into the reel's TOPICS.md row (new reels log "auto"). */
+export function logTopicPick(root: string, name: string, buildLog: string): void {
+  const m = /bg:\s*([^\s]+)\s+cta:\s*(\w+)/.exec(buildLog)
+  const file = join(root, 'TOPICS.md')
+  if (!m || !existsSync(file)) return
+  const lines = readFileSync(file, 'utf8').split('\n')
+  const i = lines.findIndex((l) => l.includes(`| ${name} |`) && /bg:\s*auto|cta:\s*auto/.test(l))
+  if (i < 0) return
+  lines[i] = lines[i].replace(/bg:\s*auto/, `bg: ${m[1]}`).replace(/cta:\s*auto/, `cta: ${m[2]}`)
+  writeFileSync(file, lines.join('\n'))
+}

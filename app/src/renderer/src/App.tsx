@@ -22,11 +22,17 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  // new reel: after the chat writes the script → preview build → ElevenLabs voice (no terminal)
+  const pendingVoice = useRef<string | null>(null)
   const runs = useRuns((run) => {
     vfx.reload()
     vfx.loadProjects()
     // Export = render, then the review runs by itself
     if (run.kind === 'render' && run.code === 0) runs.start('review', run.project)
+    if (run.kind === 'build' && run.project === pendingVoice.current) {
+      pendingVoice.current = null
+      if (run.code === 0) runs.start('voice', run.project)
+    }
   })
   const rebuild = (): void => {
     if (vfx.current && !runs.active) runs.start('build', vfx.current)
@@ -68,15 +74,21 @@ export default function App(): JSX.Element {
     vfx.setCurrent(to)
   }
   // when the script is in and there's no voice yet, make it with ElevenLabs (make.sh --no-render) — no terminal
-  const onChatDone = async (ok: boolean): Promise<void> => {
+  const onChatDone = async (ok: boolean, newReel: boolean): Promise<void> => {
     const name = currentRef.current
     await vfx.loadProjects()
-    if (!ok || !name) return
+    if (!ok || !newReel || !name) return
     const p = await window.api.getProject(name)
-    if (p.lines.length && !p.hasVoice && !runs.active) runs.start('voice', name)
+    if (!p.lines.length || runs.active) return
+    pendingVoice.current = p.hasVoice ? null : name
+    runs.start('build', name)
   }
-  const lastVoice = [...runs.runs].reverse().find((r) => r.kind === 'voice' && r.project === vfx.current)
-  const voice: VoiceState = lastVoice && !lastVoice.done ? 'doing' : lastVoice?.done && lastVoice.code !== 0 ? 'failed' : project?.hasVoice ? 'done' : 'todo'
+  const stateOf = (kind: 'voice' | 'build', done: boolean): VoiceState => {
+    const r = [...runs.runs].reverse().find((x) => x.kind === kind && x.project === vfx.current)
+    return r && !r.done ? 'doing' : r?.done && r.code !== 0 ? 'failed' : r?.done || done ? 'done' : 'todo'
+  }
+  const voice = stateOf('voice', !!project?.hasVoice)
+  const preview = stateOf('build', false)
 
   const setReaction = async (line: number, sticker: string): Promise<void> => {
     if (!vfx.current) return
@@ -139,6 +151,7 @@ export default function App(): JSX.Element {
                 available={!!info?.claudeAvailable}
                 draft={!!summary?.draft}
                 voice={voice}
+                preview={preview}
                 onRenamed={onRenamed}
                 onDone={onChatDone}
                 newKey={newKey}
