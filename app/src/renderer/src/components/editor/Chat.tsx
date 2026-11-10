@@ -55,7 +55,7 @@ export function Chat({ project, available }: { project: string | null; available
 
   if (!available) {
     return (
-      <div className="flex flex-col gap-3 p-4 text-[13px] leading-relaxed">
+      <div className="flex flex-col gap-3 p-4 text-sm leading-relaxed">
         <div className="font-semibold">Connect Claude Code</div>
         <p className="text-muted-foreground">
           Chat runs Claude Code on this Mac inside your vfx folder (your own Claude login — no API key here). Install it once in Terminal:
@@ -103,7 +103,7 @@ export function Chat({ project, available }: { project: string | null; available
                 <div className="flex min-w-0 flex-col gap-1.5">
                   {m.parts.map((p, j) =>
                     p.kind === 'tool' ? (
-                      <div key={j} className="flex items-center gap-1.5 truncate font-mono text-[11px] text-muted-foreground">
+                      <div key={j} className="flex items-center gap-1.5 truncate font-mono text-xs text-muted-foreground">
                         <Wrench className="h-3 w-3 shrink-0" />
                         <span className="text-zinc-400">{p.name}</span>
                         <span className="truncate">{p.text}</span>
@@ -161,7 +161,7 @@ export function Chat({ project, available }: { project: string | null; available
               <Plus />
               New chat
             </Button>
-            <span className="truncate text-[11px] text-muted-foreground">Claude Code · vfx folder</span>
+            <span className="truncate text-xs text-muted-foreground">Claude Code · vfx folder</span>
             <div className="flex-1" />
             {busy ? (
               <Button size="icon-sm" variant="secondary" aria-label="Stop" onClick={() => window.api.stopChat().then(() => setBusy(false))}>

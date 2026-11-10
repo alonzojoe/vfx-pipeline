@@ -75,7 +75,6 @@ export default function App(): JSX.Element {
         <TitleBar
           project={vfx.current ?? undefined}
           projects={vfx.projects.map((p) => p.name)}
-          branch={info?.branch ?? undefined}
           status={{ voice: !!project?.hasVoice, build: !!project?.hasBuild, render: !!project?.hasFinal }}
           onProject={vfx.setCurrent}
           busy={runs.active?.kind ?? null}

@@ -1,4 +1,4 @@
-import { ClipboardCheck, Folder, GitBranch, Sparkles, ChevronDown } from 'lucide-react'
+import { ClipboardCheck, Folder, Sparkles, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -7,7 +7,6 @@ export type Status = { voice: boolean; build: boolean; render: boolean }
 type Props = {
   project?: string
   projects: string[]
-  branch?: string
   status: Status
   busy?: string | null
   onProject: (name: string) => void
@@ -24,7 +23,7 @@ function Dot({ on, label }: { on: boolean; label: string }): JSX.Element {
   )
 }
 
-export function TitleBar({ project, projects, branch, status, busy, onProject, onReview, onMake }: Props): JSX.Element {
+export function TitleBar({ project, projects, status, busy, onProject, onReview, onMake }: Props): JSX.Element {
   return (
     <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-[#141416] pl-[84px] pr-3">
       <div className="flex items-center gap-2">
@@ -42,7 +41,7 @@ export function TitleBar({ project, projects, branch, status, busy, onProject, o
           aria-label="Project"
           value={project ?? ''}
           onChange={(e) => onProject(e.target.value)}
-          className="appearance-none bg-transparent pr-5 text-[13px] outline-none"
+          className="appearance-none bg-transparent pr-5 text-sm outline-none"
         >
           {projects.length === 0 && <option value="">No projects</option>}
           {projects.map((p) => (
@@ -54,12 +53,6 @@ export function TitleBar({ project, projects, branch, status, busy, onProject, o
         <ChevronDown className="pointer-events-none absolute right-2 h-3 w-3 text-muted-foreground" />
       </label>
 
-      {branch && (
-        <span className="flex h-6 items-center gap-1.5 rounded-full border border-input bg-[#18181b] px-2.5 font-mono text-[11px] text-muted-foreground">
-          <GitBranch className="h-3 w-3" />
-          {branch}
-        </span>
-      )}
 
       <div className="flex-1" />
 

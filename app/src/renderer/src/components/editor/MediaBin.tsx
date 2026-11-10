@@ -27,7 +27,7 @@ function Thumb({ item }: { item: MediaItem }): JSX.Element {
       className="group flex cursor-grab flex-col items-center gap-1 rounded-lg border border-[#2a2a2e] bg-[#1c1c1f] p-1.5 hover:border-primary/60 active:cursor-grabbing"
     >
       <img src={item.url} alt={item.name} loading="lazy" draggable={false} className="h-[62px] w-full object-contain" />
-      <span className="max-w-full truncate text-[10.5px] text-muted-foreground">{item.name.replace(/\.\w+$/, '')}</span>
+      <span className="max-w-full truncate text-xs text-muted-foreground">{item.name.replace(/\.\w+$/, '')}</span>
     </div>
   )
 }
@@ -48,7 +48,7 @@ function SoundRow({ item, playing, onPlay }: { item: MediaItem; playing: boolean
       </button>
       <div className="min-w-0 flex-1">
         <div className="truncate">{item.name}</div>
-        <div className="truncate text-[11px] text-muted-foreground">{item.note}</div>
+        <div className="truncate text-xs text-muted-foreground">{item.note}</div>
       </div>
     </div>
   )
@@ -149,11 +149,11 @@ export function MediaBin({ project, media, onImported }: Props): JSX.Element {
               {media?.backgrounds.map((b) => (
                 <div key={b.path} className="overflow-hidden rounded-lg border border-[#2a2a2e]">
                   <img src={b.url} alt={b.name} className="h-28 w-full object-cover" />
-                  <div className="truncate px-2 py-1 text-[11px] text-muted-foreground">{b.name}</div>
+                  <div className="truncate px-2 py-1 text-xs text-muted-foreground">{b.name}</div>
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-[11.5px] leading-snug text-muted-foreground">
+            <p className="mt-2 text-xs leading-snug text-muted-foreground">
               Picked automatically per reel — never the same as the previous one (BRAND.md).
             </p>
           </ScrollArea>
