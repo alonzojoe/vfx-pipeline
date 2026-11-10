@@ -1,0 +1,28 @@
+# Git rules (always)
+
+- **No Claude attribution, ever.** Never add `Co-Authored-By: Claude …`, "Generated with Claude Code", 🤖 lines,
+  or any AI/Claude/Anthropic mention to commit messages, PR titles/bodies, tags, or code comments.
+  Commits are Joe's (`alonzojoe`). `.claude/settings.json` also turns the co-author trailer off.
+- **Commit small and often.** One logical step per commit — scaffold, a component, a fix, a doc — never one giant
+  commit at the end. If a task has 6 steps, it has ~6 commits.
+- **Commit message format: `type: message`** — lowercase type, colon, short imperative message (≤ 72 chars),
+  no scope, no trailing period. Body only when the why isn't obvious.
+  | Type | Use for |
+  |---|---|
+  | `feat:` | new feature or screen (`feat: add timeline zoom`) |
+  | `fix:` | bug fix (`fix: arrow lands on the card bottom`) |
+  | `chore:` | tooling, deps, scaffolding, housekeeping (`chore: add electron-vite scaffold`) |
+  | `config:` | settings/config files (`config: build mac dmg for arm64 and x64`) |
+  | `style:` | visual/styling or formatting only, no behavior change (`style: dark zinc theme with brand orange`) |
+  | `perf:` | faster/lighter, same behavior (`perf: cache waveform peaks`) |
+  | `refactor:` | restructure, same behavior |
+  | `docs:` | markdown/docs only |
+  | `test:` | tests only |
+- **Branches:** work on `develop` (or a `feat/*` branch off it). Never commit straight to `main`. Never force-push,
+  never rewrite pushed history, never `git reset --hard` without asking.
+- **Never commit secrets:** `.env` stays ignored (`.gitignore` covers `.env`, `.env.*`, `**/.env`). Run `git status`
+  before every commit and look at what's staged. Rendered videos (`output/`), `node_modules/`, `app/out`, `app/dist`
+  are never committed.
+- **Before committing code:** app → `npm run typecheck && npm run build` in `app/`; reels → `npx hyperframes lint <p>`
+  from `hyperframes/`. Don't commit something that doesn't build.
+- Push only when Joe asks.

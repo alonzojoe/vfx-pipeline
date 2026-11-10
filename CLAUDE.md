@@ -4,6 +4,11 @@ Reels are 1080x1920 (9:16) by default.
 
 **Brand: read `BRAND.md` before every reel** — topics, script style, colors, fonts, avatar use, motion and sound for @knowledgebyjoe.
 
+**Project rules (always follow):**
+@.claude/rules/git.md
+@.claude/rules/engineering.md
+@.claude/rules/reels.md
+
 ## Layout
 - `input/<project>/` — that project's raw footage/music. `input/general/` — shared default resources (logos, fonts, music, sfx, overlays, reactions…) usable by every project.
 - `output/<project>/` — renders, named `<project>-<engine>-<timestamp>.mp4`.
