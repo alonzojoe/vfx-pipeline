@@ -127,3 +127,11 @@ YouTube pays for original, authored content and refuses "content that looks like
   "Joe's Savings" / "Joe's Credit", balances "Joe owes $…", invoices "Bill to: Joe", pay stubs "Employee: Joe",
   phone/bank apps "Joe's Account". Companies/banks stay fictional (MyBank, Acme Studio/Inc.).
 - Brand colors: orange `#ff4d2e` (`--hot`: arrow, "joe" in the handle, "?" marks, recap "= …") and ink `#161616` (`--ink`).
+
+## vfx Studio app (`app/`)
+- Mac editor for this pipeline (Electron + React + TS + Tailwind + shadcn/ui): media bin, frame-accurate preview,
+  timeline, inspector, Claude Code chat, Make reel / Review buttons. See `app/README.md`.
+- Run: `cd app && npm install && npm run dev`. Build dmgs (Apple Silicon + Intel): `npm run dist:mac`.
+- Timeline edits live in `hyperframes/<project>/overrides.json` and are applied by every `build.mjs` through
+  `scripts/overrides.mjs` — new projects copied from `hyperframes/business-terms/` already include that call.
+- Use the `app-engineer` agent for app work; commit each step (`.claude/rules/git.md`).
