@@ -26,7 +26,24 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git branch*)",
-      "Bash(git switch *)"
-    ]
+      "Bash(git switch *)",
+      "Bash(./scripts/ship.sh *)",
+      "Bash(cd app && npm run *)",
+      "Bash(cd app && npm test*)",
+      "Bash(npm test*)",
+      "Bash(npx tsc*)",
+      "Bash(node hyperframes/*/build.mjs*)",
+      "Bash(cd hyperframes && npx hyperframes *)",
+      "Bash(git show*)",
+      "Bash(git restore --staged*)",
+      "Bash(git stash list*)",
+      "Bash(ls*)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(find *)",
+      "Bash(ffprobe *)"
+    ],
+    "defaultMode": "acceptEdits"
   }
 }
