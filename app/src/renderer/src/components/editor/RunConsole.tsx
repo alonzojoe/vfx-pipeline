@@ -7,7 +7,18 @@ import { cn } from '@/lib/utils'
 const LABEL: Record<Run['kind'], string> = { make: 'Make reel', voice: 'Voice + rebuild', build: 'Rebuild', render: 'Export', review: 'Review' }
 
 /** Floating log panel for the running / last pipeline command. */
-export function RunConsole({ run, onStop, onOpenReview }: { run: Run | null; onStop: () => void; onOpenReview: () => void }): JSX.Element | null {
+export function RunConsole({
+  run,
+  onStop,
+  onOpenReview,
+  onShowVideo
+}: {
+  run: Run | null
+  onStop: () => void
+  onOpenReview: () => void
+  /** reveal output/<p>/<p>-FINAL.mp4 in Finder */
+  onShowVideo: (project: string) => void
+}): JSX.Element | null {
   const [open, setOpen] = useState(true)
   const [hidden, setHidden] = useState(false)
   const pre = useRef<HTMLPreElement>(null)
@@ -41,8 +52,13 @@ export function RunConsole({ run, onStop, onOpenReview }: { run: Run | null; onS
             Stop
           </Button>
         )}
+        {run.done && ok && (run.kind === 'review' || run.kind === 'render' || run.kind === 'make') && (
+          <Button size="sm" onClick={() => onShowVideo(run.project)}>
+            Show in Finder
+          </Button>
+        )}
         {run.done && run.kind === 'review' && ok && (
-          <Button size="sm" onClick={onOpenReview}>
+          <Button size="sm" variant="outline" onClick={onOpenReview}>
             Open report
           </Button>
         )}

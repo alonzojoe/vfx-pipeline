@@ -192,7 +192,12 @@ export default function App(): JSX.Element {
           onDropMedia={edits.dropMedia}
           onDelete={edits.remove}
         />
-        <RunConsole run={runs.last} onStop={runs.stop} onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)} />
+        <RunConsole
+          run={runs.last}
+          onStop={runs.stop}
+          onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)}
+          onShowVideo={(p) => window.api.reveal(`output/${p}/${p}-FINAL.mp4`)}
+        />
       </div>
     </TooltipProvider>
   )
