@@ -42,7 +42,7 @@ export function TitleBar({ project, projects, branch, status, busy, onProject, o
           aria-label="Project"
           value={project ?? ''}
           onChange={(e) => onProject(e.target.value)}
-          className="appearance-none bg-transparent pr-5 text-[13px] outline-none"
+          className="appearance-none bg-transparent pr-5 text-sm outline-none"
         >
           {projects.length === 0 && <option value="">No projects</option>}
           {projects.map((p) => (
@@ -55,7 +55,7 @@ export function TitleBar({ project, projects, branch, status, busy, onProject, o
       </label>
 
       {branch && (
-        <span className="flex h-6 items-center gap-1.5 rounded-full border border-input bg-[#18181b] px-2.5 font-mono text-[11px] text-muted-foreground">
+        <span className="flex h-6 items-center gap-1.5 rounded-full border border-input bg-[#18181b] px-2.5 font-mono text-xs text-muted-foreground">
           <GitBranch className="h-3 w-3" />
           {branch}
         </span>

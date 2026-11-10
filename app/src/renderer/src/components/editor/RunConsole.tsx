@@ -33,7 +33,7 @@ export function RunConsole({ run, onStop, onOpenReview }: { run: Run | null; onS
           <XCircle className="h-4 w-4 text-red-400" />
         )}
         <span className="font-semibold">{LABEL[run.kind]}</span>
-        <span className="truncate font-mono text-[11px] text-muted-foreground">{run.command}</span>
+        <span className="truncate font-mono text-xs text-muted-foreground">{run.command}</span>
         <div className="flex-1" />
         {!run.done && (
           <Button variant="outline" size="sm" onClick={onStop}>
@@ -56,7 +56,7 @@ export function RunConsole({ run, onStop, onOpenReview }: { run: Run | null; onS
         )}
       </div>
       {open && (
-        <pre ref={pre} className={cn('max-h-[260px] overflow-auto whitespace-pre-wrap p-3 font-mono text-[11px] leading-relaxed text-zinc-300')}>
+        <pre ref={pre} className={cn('max-h-[260px] overflow-auto whitespace-pre-wrap p-3 font-mono text-xs leading-relaxed text-zinc-300')}>
           {run.log || 'Starting…'}
         </pre>
       )}

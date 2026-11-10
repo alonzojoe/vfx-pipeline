@@ -22,7 +22,7 @@ const TRACK: Record<TrackKind, { name: string; h: number; bg: string; dot: strin
 }
 const MOVABLE = new Set<TrackKind>(['captions', 'cards', 'avatar', 'fx', 'media', 'sfx'])
 const MAX_ROWS: Record<TrackKind, number> = { captions: 1, cards: 2, avatar: 1, fx: 2, media: 3, voice: 1, sfx: 2, background: 1 }
-const HEADER = 150
+const HEADER = 160
 const RULER = 24
 
 type Props = {
@@ -178,7 +178,7 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
               {ticks.out.map((s) => (
                 <span
                   key={s}
-                  className="absolute top-0 h-full border-l border-zinc-800 pl-1 font-mono text-[10px] leading-6 text-zinc-500"
+                  className="absolute top-0 h-full border-l border-zinc-800 pl-1 font-mono text-[11px] leading-6 text-zinc-400"
                   style={{ left: s * pps }}
                 >
                   {Number.isInteger(s) ? `${s}s` : ''}
@@ -230,7 +230,7 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
                           if ((e.key === 'Backspace' || e.key === 'Delete') && c.added) onDelete?.(c)
                         }}
                         className={cn(
-                          'absolute flex items-center gap-1 overflow-hidden whitespace-nowrap rounded-md border px-1.5 text-[11px] text-zinc-50',
+                          'absolute flex items-center gap-1 overflow-hidden whitespace-nowrap rounded-md border px-1.5 text-xs font-medium text-zinc-50',
                           T.bg,
                           selectedId === c.id ? 'border-primary ring-1 ring-primary' : 'border-white/5 hover:border-white/25',
                           MOVABLE.has(c.track) && onMove ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',

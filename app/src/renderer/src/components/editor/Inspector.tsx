@@ -57,7 +57,7 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
           <MousePointerClick className="h-4 w-4" />
           Select a clip on the timeline to edit it.
         </div>
-        <dl className="grid grid-cols-[90px_1fr] gap-y-2 text-[13px]">
+        <dl className="grid grid-cols-[90px_1fr] gap-y-2 text-sm">
           <dt className="text-muted-foreground">Reel</dt>
           <dd>{project.title}</dd>
           <dt className="text-muted-foreground">Length</dt>
@@ -90,7 +90,7 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
               {TRACK_NAME[clip.track]} · {clip.label || clip.id}
             </div>
             {line && <div className="truncate text-xs text-muted-foreground">Line {clip.line! + 1} · “{line.text}”</div>}
-            <div className="font-mono text-[11px] text-zinc-500">{clip.id}</div>
+            <div className="font-mono text-xs text-zinc-500">{clip.id}</div>
           </div>
         </div>
 
