@@ -9,7 +9,9 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | **Timeline** (bottom) | Captions, Cards, Avatar, FX, Media, Voice (waveform), SFX, Background. Click/drag the ruler to scrub, drag clips to move them (snaps to words), drop media to add it, ⌫ removes media you added, zoom slider. |
 | **Inspector** (right) | Start/duration of the selected clip, position + volume of added media, and a sticker picker that swaps the reaction for that script line. |
 | **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a new script, ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
-| **Make reel / Review** (title bar) | Runs `hyperframes/<p>/make.sh` (voice → build → render) and `scripts/review.sh <p>` with a live log. |
+| **+ New reel** (title bar, media bin tile, reel picker) | Creates and opens `new-reel` right away (drop files into it), then you paste a script in the chat: Claude renames the reel from the topic, writes the script + cards, the app builds the preview and makes the **ElevenLabs voice by itself** — no Terminal. |
+| **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
+| **Export / Review** (title bar) | Export renders `<p>-FINAL.mp4` and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
 
 Keys: <kbd>Space</kbd> play/pause · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
 
@@ -29,6 +31,13 @@ npm run dev          # opens the app with hot reload
 
 The app finds the vfx folder automatically (this repo, or `~/Desktop/vfx`); otherwise it asks once.
 Chat needs Claude Code installed and signed in: `npm install -g @anthropic-ai/claude-code`, then `claude` once.
+The voice needs the ElevenLabs key in the vfx folder's `.env` (same as `MAKE-REEL.command`).
+
+## New reel flow (spec 0003)
+`+ New reel` → `new-reel` (draft) → paste script → chat runs `scripts/rename-project.sh new-reel <topic>` and writes
+`script.json` + cards + the TOPICS row (`bg: auto · cta: auto`) → app runs `build.mjs` (preview) → app runs
+`make.sh --no-render` (ElevenLabs voice + synced build) and fills the TOPICS row → tweak → Export.
+The chat runs headless with only the commands in `ALLOWED` (`src/main/services/chat.ts`).
 
 ## Build the Mac app (Apple Silicon + Intel)
 

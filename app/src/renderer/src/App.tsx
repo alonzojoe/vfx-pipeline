@@ -2,19 +2,19 @@ import { FolderOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { MediaBin } from '@/components/editor/MediaBin'
-import { TitleBar } from '@/components/editor/TitleBar'
+import { TitleBar, type Stages } from '@/components/editor/TitleBar'
 import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { Preview } from '@/components/editor/Preview'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
 import { RunConsole } from '@/components/editor/RunConsole'
 import { useRuns } from '@/hooks/useRuns'
 import { useEdits } from '@/hooks/useEdits'
 import { RightPanel } from '@/components/editor/RightPanel'
 import { Inspector } from '@/components/editor/Inspector'
-import { Chat } from '@/components/editor/Chat'
+import { Chat, type VoiceState } from '@/components/editor/Chat'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -22,7 +22,18 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const runs = useRuns(vfx.reload)
+  // new reel: after the chat writes the script → preview build → ElevenLabs voice (no terminal)
+  const pendingVoice = useRef<string | null>(null)
+  const runs = useRuns((run) => {
+    vfx.reload()
+    vfx.loadProjects()
+    // Export = render, then the review runs by itself
+    if (run.kind === 'render' && run.code === 0) runs.start('review', run.project)
+    if (run.kind === 'build' && run.project === pendingVoice.current) {
+      pendingVoice.current = null
+      if (run.code === 0) runs.start('voice', run.project)
+    }
+  })
   const rebuild = (): void => {
     if (vfx.current && !runs.active) runs.start('build', vfx.current)
   }
@@ -33,6 +44,60 @@ export default function App(): JSX.Element {
     setSelectedId(id)
     if (id) setTab('inspector')
   }
+  const summary = vfx.projects.find((p) => p.name === vfx.current) ?? null
+  const active = runs.active?.project === vfx.current ? runs.active?.kind : undefined
+  const stages: Stages = {
+    script: summary?.draft ? 'todo' : summary ? 'done' : 'todo',
+    voice: active === 'voice' || active === 'make' ? 'doing' : project?.hasVoice ? 'done' : 'todo',
+    build: active === 'build' ? 'doing' : project?.hasBuild && !summary?.draft ? 'done' : 'todo',
+    render: active === 'render' ? 'doing' : project?.hasFinal ? 'done' : 'todo'
+  }
+
+  /** + New reel: create new-reel (new-reel-2…), open it and focus the chat for the script */
+  const [newKey, setNewKey] = useState(0)
+  const newReel = async (): Promise<void> => {
+    const name = await window.api.createProject()
+    await vfx.loadProjects()
+    vfx.setCurrent(name)
+    setSelectedId(null)
+    pb.setTime(0)
+    setTab('chat')
+    setNewKey((k) => k + 1)
+  }
+
+  // the chat renames the new reel from its topic → follow it
+  const currentRef = useRef(vfx.current)
+  currentRef.current = vfx.current
+  const onRenamed = async (to: string): Promise<void> => {
+    currentRef.current = to
+    await vfx.loadProjects()
+    vfx.setCurrent(to)
+  }
+  // when the script is in and there's no voice yet, make it with ElevenLabs (make.sh --no-render) — no terminal
+  const onChatDone = async (ok: boolean, newReel: boolean, edited: boolean): Promise<void> => {
+    const name = currentRef.current
+    await vfx.loadProjects()
+    if (!ok || !name) return
+    // a revision on an existing reel: make.sh --no-render rebuilds, and re-makes the voice only if the words changed
+    if (!newReel) {
+      if (edited && !runs.active) {
+        const p = await window.api.getProject(name)
+        if (p.lines.length) runs.start(p.hasVoice ? 'voice' : 'build', name)
+      }
+      return
+    }
+    const p = await window.api.getProject(name)
+    if (!p.lines.length || runs.active) return
+    pendingVoice.current = p.hasVoice ? null : name
+    runs.start('build', name)
+  }
+  const stateOf = (kind: 'voice' | 'build', done: boolean): VoiceState => {
+    const r = [...runs.runs].reverse().find((x) => x.kind === kind && x.project === vfx.current)
+    return r && !r.done ? 'doing' : r?.done && r.code !== 0 ? 'failed' : r?.done || done ? 'done' : 'todo'
+  }
+  const voice = stateOf('voice', !!project?.hasVoice)
+  const preview = stateOf('build', false)
+
   const setReaction = async (line: number, sticker: string): Promise<void> => {
     if (!vfx.current) return
     await window.api.setLineReaction(vfx.current, line, sticker)
@@ -73,21 +138,33 @@ export default function App(): JSX.Element {
     <TooltipProvider delayDuration={300}>
       <div className="relative flex h-full flex-col">
         <TitleBar
-          project={vfx.current ?? undefined}
-          projects={vfx.projects.map((p) => p.name)}
-          status={{ voice: !!project?.hasVoice, build: !!project?.hasBuild, render: !!project?.hasFinal }}
-          onProject={vfx.setCurrent}
+          project={summary}
+          projects={vfx.projects}
+          stages={stages}
           busy={runs.active?.kind ?? null}
+          onProject={vfx.setCurrent}
+          onNew={newReel}
           onReview={() => vfx.current && runs.start('review', vfx.current)}
-          onMake={() => vfx.current && runs.start('make', vfx.current)}
+          onExport={() => vfx.current && runs.start('render', vfx.current)}
         />
         <div className="flex min-h-0 flex-1">
-          <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
+          <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} onNew={newReel} />
           <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
           <RightPanel
             tab={tab}
             onTab={setTab}
-            chat={<Chat project={vfx.current} available={!!info?.claudeAvailable} />}
+            chat={
+              <Chat
+                project={vfx.current}
+                available={!!info?.claudeAvailable}
+                draft={!!summary?.draft}
+                voice={voice}
+                preview={preview}
+                onRenamed={onRenamed}
+                onDone={onChatDone}
+                newKey={newKey}
+              />
+            }
             inspector={
               <Inspector
                 project={project}
@@ -115,7 +192,12 @@ export default function App(): JSX.Element {
           onDropMedia={edits.dropMedia}
           onDelete={edits.remove}
         />
-        <RunConsole run={runs.last} onStop={runs.stop} onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)} />
+        <RunConsole
+          run={runs.last}
+          onStop={runs.stop}
+          onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)}
+          onShowVideo={(p) => window.api.reveal(`output/${p}/${p}-FINAL.mp4`)}
+        />
       </div>
     </TooltipProvider>
   )

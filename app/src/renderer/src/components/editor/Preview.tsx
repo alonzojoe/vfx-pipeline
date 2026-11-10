@@ -88,7 +88,24 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
       </div>
 
       <div ref={box} className="relative flex min-h-0 flex-1 items-center justify-center">
-        {project ? (
+        {project?.draft ? (
+          <div
+            className="flex flex-col items-center justify-center gap-5 rounded-xl border-2 border-dashed border-zinc-700 p-6 text-center"
+            style={{ width: w, height: h }}
+          >
+            <div className="text-[15px] font-semibold">Your reel appears here</div>
+            <ol className="flex flex-col gap-3 text-left text-sm text-zinc-300">
+              {['Paste your script in the chat', 'I build the cards + ElevenLabs voice', 'Tweak on the timeline, export'].map((t, i) => (
+                <li key={t} className="flex items-center gap-2.5">
+                  <span className={cn('flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold', i === 0 ? 'bg-primary text-white' : 'bg-secondary')}>
+                    {i + 1}
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ol>
+          </div>
+        ) : project ? (
           <div className="relative overflow-hidden rounded-xl shadow-[0_0_0_1px_#27272a,0_30px_60px_rgba(0,0,0,.55)]" style={{ width: w, height: h }}>
             {final && project.finalUrl ? (
               <video ref={video} src={project.finalUrl} className="h-full w-full" playsInline />

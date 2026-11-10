@@ -2,9 +2,11 @@ import type { BrowserWindow } from 'electron'
 import type { ChildProcess } from 'node:child_process'
 import type { RunEvent, RunKind } from '../../shared/types'
 import { loginShell, q } from './shell'
+import { logTopicPick } from './projects'
 
 const COMMANDS: Record<RunKind, (p: string) => string> = {
   make: (p) => `./hyperframes/${q(p)}/make.sh`, // voice (if missing/changed) → build → render
+  voice: (p) => `./hyperframes/${q(p)}/make.sh --no-render`, // ElevenLabs voice → synced build (no terminal)
   build: (p) => `node hyperframes/${q(p)}/build.mjs`,
   render: (p) => `./scripts/render.sh ${q(p)} hf`,
   review: (p) => `./scripts/review.sh ${q(p)}`
@@ -24,12 +26,17 @@ export function startRun(win: BrowserWindow, root: string, kind: RunKind, projec
   send({ runId, type: 'start', kind, project, command })
   const child = loginShell(command, { cwd: root })
   runs.set(runId, child)
-  const out = (b: Buffer): void => send({ runId, type: 'log', text: b.toString() })
+  let log = ''
+  const out = (b: Buffer): void => {
+    log += b.toString()
+    send({ runId, type: 'log', text: b.toString() })
+  }
   child.stdout?.on('data', out)
   child.stderr?.on('data', out)
   child.on('error', (e) => send({ runId, type: 'log', text: `\n${e.message}\n` }))
   child.on('exit', (code) => {
     runs.delete(runId)
+    if (code === 0 && (kind === 'build' || kind === 'voice' || kind === 'make')) logTopicPick(root, project, log)
     send({ runId, type: 'exit', code })
   })
   return runId

@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react'
-import { FileAudio, FileImage, FileVideo, Pause, Play, Search, Upload } from 'lucide-react'
+import { FileAudio, FileImage, FileVideo, Pause, Play, Plus, Search, Upload } from 'lucide-react'
 import type { MediaItem, MediaLibrary } from '../../../../shared/types'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -11,6 +11,7 @@ type Props = {
   project: string | null
   media: MediaLibrary | null
   onImported: () => void
+  onNew: () => void
 }
 
 const drag = (item: MediaItem) => (e: React.DragEvent) => {
@@ -57,12 +58,13 @@ function SoundRow({ item, playing, onPlay }: { item: MediaItem; playing: boolean
 const icon = (k: MediaItem['kind']): JSX.Element =>
   k === 'audio' ? <FileAudio className="h-3.5 w-3.5" /> : k === 'video' ? <FileVideo className="h-3.5 w-3.5" /> : <FileImage className="h-3.5 w-3.5" />
 
-export function MediaBin({ project, media, onImported }: Props): JSX.Element {
+export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Element {
   const [query, setQuery] = useState('')
   const [over, setOver] = useState(false)
   const [playing, setPlaying] = useState<string | null>(null)
   const audio = useRef<HTMLAudioElement | null>(null)
 
+  const chill = media?.stickers.find((s) => s.name === 'chill.png')?.url
   const sfx = useMemo(() => {
     const q = query.trim().toLowerCase()
     const list = media?.sfx ?? []
@@ -92,6 +94,19 @@ export function MediaBin({ project, media, onImported }: Props): JSX.Element {
 
   return (
     <aside aria-label="Media" className="flex w-[280px] shrink-0 flex-col border-r bg-panel">
+      <button
+        onClick={onNew}
+        className="relative mx-2.5 mt-2.5 flex min-h-[92px] items-center gap-2 overflow-hidden rounded-xl border border-primary bg-gradient-to-br from-[#ff4d2e] to-[#c7321a] p-3 text-left text-white shadow-lg hover:brightness-110"
+      >
+        <span className="relative z-10 flex flex-1 flex-col gap-1">
+          <span className="flex items-center gap-1.5 text-base font-bold">
+            <Plus className="h-4 w-4" strokeWidth={3} />
+            New reel
+          </span>
+          <span className="text-xs leading-snug opacity-95">Paste a script — I'll build the cards, voice and timeline.</span>
+        </span>
+        {chill && <img src={chill} alt="" className="-my-3 -mr-2 h-[84px] w-[84px] object-contain" draggable={false} />}
+      </button>
       <div
         onDragOver={(e) => {
           if (e.dataTransfer.types.includes('Files')) {

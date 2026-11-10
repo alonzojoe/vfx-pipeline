@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { RunKind } from '../../../shared/types'
 
 export type Run = { runId: string; kind: RunKind; project: string; command: string; log: string; code?: number | null; done: boolean }
@@ -6,6 +6,8 @@ export type Run = { runId: string; kind: RunKind; project: string; command: stri
 /** Pipeline runs (make / build / render / review) started from the app, with their live logs. */
 export function useRuns(onDone?: (run: Run) => void) {
   const [runs, setRuns] = useState<Run[]>([])
+  const done = useRef(onDone)
+  done.current = onDone
 
   useEffect(
     () =>
@@ -15,13 +17,13 @@ export function useRuns(onDone?: (run: Run) => void) {
           return rs.map((r) => {
             if (r.runId !== e.runId) return r
             if (e.type === 'log') return { ...r, log: (r.log + e.text).slice(-60000) }
-            const done = { ...r, code: e.code, done: true }
-            setTimeout(() => onDone?.(done), 0)
-            return done
+            const finished = { ...r, code: e.code, done: true }
+            setTimeout(() => done.current?.(finished), 0)
+            return finished
           })
         })
       }),
-    [onDone]
+    []
   )
 
   const active = runs.find((r) => !r.done) ?? null

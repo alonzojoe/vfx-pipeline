@@ -29,6 +29,8 @@ export type ProjectSummary = {
   hasVoice: boolean
   hasBuild: boolean
   hasFinal: boolean
+  /** a reel made with "+ New reel" that has no script lines yet */
+  draft: boolean
   updatedAt: number
 }
 
@@ -85,7 +87,7 @@ export type AddedClip = {
   h?: number
 }
 
-export type RunKind = 'make' | 'review' | 'build' | 'render'
+export type RunKind = 'make' | 'voice' | 'review' | 'build' | 'render'
 
 export type RunEvent =
   | { runId: string; type: 'start'; kind: RunKind; project: string; command: string }
@@ -97,6 +99,8 @@ export type ChatEvent =
   | { id: string; type: 'tool'; name: string; detail: string }
   | { id: string; type: 'error'; text: string }
   | { id: string; type: 'done'; ok: boolean; cost?: number }
+  /** a new reel was renamed from its topic (scripts/rename-project.sh printed "renamed a → b") */
+  | { id: string; type: 'renamed'; from: string; to: string }
 
 export type AppInfo = {
   root: string | null
