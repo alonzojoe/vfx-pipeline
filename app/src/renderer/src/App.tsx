@@ -5,6 +5,7 @@ import { MediaBin } from '@/components/editor/MediaBin'
 import { TitleBar } from '@/components/editor/TitleBar'
 import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
+import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { Preview } from '@/components/editor/Preview'
 import { useEffect } from 'react'
 
@@ -12,6 +13,7 @@ export default function App(): JSX.Element {
   const vfx = useVfx()
   const { info, project } = vfx
   const pb = usePlayback(project?.duration ?? 0)
+  useAudioEngine(project, pb.time, pb.playing)
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
