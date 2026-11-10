@@ -1,8 +1,13 @@
 import { app, BrowserWindow, shell } from 'electron'
 import { join } from 'node:path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
+import { registerIpc } from './ipc'
+import { handleVfxProtocol, registerVfxScheme } from './services/protocol'
+import { getRoot } from './services/settings'
 
-function createWindow(): void {
+registerVfxScheme()
+
+function createWindow(): BrowserWindow {
   const win = new BrowserWindow({
     width: 1440,
     height: 900,
@@ -26,14 +31,17 @@ function createWindow(): void {
   })
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) win.loadURL(process.env['ELECTRON_RENDERER_URL'])
   else win.loadFile(join(__dirname, '../renderer/index.html'))
+  return win
 }
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.knowledgebyjoe.vfxstudio')
   app.on('browser-window-created', (_, w) => optimizer.watchWindowShortcuts(w))
-  createWindow()
+  handleVfxProtocol(getRoot)
+  const win = createWindow()
+  registerIpc(win)
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) registerIpc(createWindow())
   })
 })
 
