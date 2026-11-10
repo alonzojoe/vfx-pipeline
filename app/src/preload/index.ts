@@ -23,6 +23,8 @@ const api = {
   chooseRoot: (): Promise<AppInfo> => ipcRenderer.invoke('app:chooseRoot'),
   listProjects: (): Promise<ProjectSummary[]> => ipcRenderer.invoke('projects:list'),
   getProject: (name: string): Promise<ProjectDetail> => ipcRenderer.invoke('projects:get', name),
+  /** + New reel: creates and returns the draft project name (new-reel, new-reel-2, …) */
+  createProject: (): Promise<string> => ipcRenderer.invoke('projects:create'),
   watchProject: (name: string): Promise<void> => ipcRenderer.invoke('projects:watch', name),
   onProjectChanged: (cb: (name: string) => void): (() => void) => on('project:changed', cb),
   setLineReaction: (name: string, line: number, react: string): Promise<void> =>

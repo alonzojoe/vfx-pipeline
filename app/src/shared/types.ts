@@ -29,6 +29,8 @@ export type ProjectSummary = {
   hasVoice: boolean
   hasBuild: boolean
   hasFinal: boolean
+  /** a reel made with "+ New reel" that has no script lines yet */
+  draft: boolean
   updatedAt: number
 }
 
@@ -85,7 +87,7 @@ export type AddedClip = {
   h?: number
 }
 
-export type RunKind = 'make' | 'review' | 'build' | 'render'
+export type RunKind = 'make' | 'voice' | 'review' | 'build' | 'render'
 
 export type RunEvent =
   | { runId: string; type: 'start'; kind: RunKind; project: string; command: string }

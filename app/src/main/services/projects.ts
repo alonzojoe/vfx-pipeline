@@ -1,10 +1,10 @@
-import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, symlinkSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { ProjectDetail, ProjectSummary } from '../../shared/types'
 import { inside, vfxUrl } from './paths'
 import { parseComposition } from './timeline'
 
-type Script = { title?: string; lines?: { text: string; react?: string; cta?: boolean }[] }
+type Script = { title?: string; lines?: { text: string; react?: string; cta?: boolean }[]; [k: string]: unknown }
 
 const readJson = <T>(p: string, fallback: T): T => {
   try {
@@ -39,6 +39,7 @@ function summary(root: string, name: string): ProjectSummary {
     hasVoice: existsSync(join(root, 'input', name, 'voice', 'script.mp3')),
     hasBuild: existsSync(join(dir, 'index.html')),
     hasFinal: !!finalOf(root, name),
+    draft: !script.lines?.length,
     updatedAt: statSync(join(dir, 'script.json')).mtimeMs
   }
 }
@@ -95,4 +96,36 @@ export function gitBranch(root: string): string | null {
   } catch {
     return null
   }
+}
+
+/**
+ * "+ New reel": create and open a draft reel named new-reel (new-reel-2, … if taken), ready for dropped files and a
+ * pasted script. It copies build.mjs + make.sh (+ voice/sfx settings) from the newest finished reel; Claude renames
+ * it from the topic and writes the lines (scripts/rename-project.sh).
+ */
+export function createProject(root: string, base = 'new-reel'): string {
+  let name = base
+  for (let n = 2; ['hyperframes', 'input', 'output'].some((d) => existsSync(join(root, d, name))); n++) name = `${base}-${n}`
+  const tpl = listProjects(root).find((p) => !p.draft && existsSync(join(root, 'hyperframes', p.name, 'build.mjs')))
+  const dir = join(root, 'hyperframes', name)
+  mkdirSync(dir, { recursive: true })
+  mkdirSync(join(root, 'input', name, 'media'), { recursive: true })
+  mkdirSync(join(root, 'output', name), { recursive: true })
+  symlinkSync(`../../input/${name}`, join(dir, 'assets'))
+  symlinkSync('../../input/general', join(dir, 'general'))
+  symlinkSync('../vendor', join(dir, 'vendor'))
+  for (const f of ['meta.json', 'hyperframes.json']) {
+    const t = join(root, 'hyperframes', '_template', f)
+    if (existsSync(t)) writeFileSync(join(dir, f), readFileSync(t, 'utf8').replace(/__PROJECT__/g, name))
+  }
+  let script: Script = { title: 'New reel', lines: [] }
+  if (tpl) {
+    const src = join(root, 'hyperframes', tpl.name)
+    for (const f of ['build.mjs', 'make.sh']) if (existsSync(join(src, f))) copyFileSync(join(src, f), join(dir, f))
+    const t = readJson<Script>(join(src, 'script.json'), {})
+    // keep the voice, sound mix and timing settings; Claude writes the rest
+    script = { ...t, title: 'New reel', background: 'auto', pairs: {}, lines: [] }
+  }
+  writeFileSync(join(dir, 'script.json'), JSON.stringify(script, null, 2) + '\n')
+  return name
 }

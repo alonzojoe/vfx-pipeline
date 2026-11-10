@@ -5,6 +5,7 @@ import { loginShell, q } from './shell'
 
 const COMMANDS: Record<RunKind, (p: string) => string> = {
   make: (p) => `./hyperframes/${q(p)}/make.sh`, // voice (if missing/changed) → build → render
+  voice: (p) => `./hyperframes/${q(p)}/make.sh --no-render`, // ElevenLabs voice → synced build (no terminal)
   build: (p) => `node hyperframes/${q(p)}/build.mjs`,
   render: (p) => `./scripts/render.sh ${q(p)} hf`,
   review: (p) => `./scripts/review.sh ${q(p)}`

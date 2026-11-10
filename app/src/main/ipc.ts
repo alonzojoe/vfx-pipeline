@@ -5,7 +5,7 @@ import type { AppInfo, Overrides, RunKind } from '../shared/types'
 import { importFiles, mediaLibrary } from './services/media'
 import { readOverrides, writeOverrides } from './services/overrides'
 import { inside } from './services/paths'
-import { getProject, gitBranch, listProjects, setLineReaction } from './services/projects'
+import { createProject, getProject, gitBranch, listProjects, setLineReaction } from './services/projects'
 import { getRoot, setRoot } from './services/settings'
 import { hasClaude } from './services/shell'
 import { startRun, stopRun } from './services/runner'
@@ -55,6 +55,7 @@ export function registerIpc(win: BrowserWindow): void {
     return appInfo()
   })
   ipcMain.handle('projects:list', () => listProjects(need()))
+  ipcMain.handle('projects:create', () => createProject(need()))
   ipcMain.handle('projects:get', (_e, name: string) => getProject(need(), name))
   ipcMain.handle('projects:watch', (_e, name: string) => watchProject(win, name))
   ipcMain.handle('projects:setReaction', (_e, name: string, line: number, react: string) => setLineReaction(need(), name, line, react))
