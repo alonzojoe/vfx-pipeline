@@ -257,6 +257,12 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
             )
           })}
 
+          {project?.draft && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center text-sm text-muted-foreground" style={{ top: RULER, left: HEADER }}>
+              The timeline fills in as the reel is built — captions, cards, stickers, voice, sounds
+            </div>
+          )}
+
           {/* playhead */}
           <div
             className="pointer-events-none absolute bottom-0 top-0 z-30 w-0.5 bg-primary"
