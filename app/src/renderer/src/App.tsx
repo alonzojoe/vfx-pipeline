@@ -74,10 +74,18 @@ export default function App(): JSX.Element {
     vfx.setCurrent(to)
   }
   // when the script is in and there's no voice yet, make it with ElevenLabs (make.sh --no-render) — no terminal
-  const onChatDone = async (ok: boolean, newReel: boolean): Promise<void> => {
+  const onChatDone = async (ok: boolean, newReel: boolean, edited: boolean): Promise<void> => {
     const name = currentRef.current
     await vfx.loadProjects()
-    if (!ok || !newReel || !name) return
+    if (!ok || !name) return
+    // a revision on an existing reel: make.sh --no-render rebuilds, and re-makes the voice only if the words changed
+    if (!newReel) {
+      if (edited && !runs.active) {
+        const p = await window.api.getProject(name)
+        if (p.lines.length) runs.start(p.hasVoice ? 'voice' : 'build', name)
+      }
+      return
+    }
     const p = await window.api.getProject(name)
     if (!p.lines.length || runs.active) return
     pendingVoice.current = p.hasVoice ? null : name

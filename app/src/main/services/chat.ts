@@ -69,7 +69,7 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
     ? message
     : isDraft(root, project)
       ? newReelPrompt(project, message)
-      : `[vfx Studio — open project: ${project} (hyperframes/${project})]\n\n${message}`
+      : `[vfx Studio — open project: ${project} (hyperframes/${project}). Joe is asking for a revision. Change script.json / build.mjs / overrides.json with your Edit/Write tools only. Don't build, voice or render: when you finish, the app rebuilds by itself and regenerates the ElevenLabs voice only if the spoken words changed — say so in one line if your change alters the words (it costs voice credits). Don't commit.]\n\n${message}`
   const args = [
     'claude -p',
     q(prompt),

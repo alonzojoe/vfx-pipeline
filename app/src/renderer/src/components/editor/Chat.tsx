@@ -28,8 +28,8 @@ type Props = {
   /** the app's preview build right after the script is in */
   preview: VoiceState
   onRenamed: (to: string) => void
-  /** newReel = this reply was building a "+ New reel" from a pasted script */
-  onDone: (ok: boolean, newReel: boolean) => void
+  /** newReel = this reply was building a "+ New reel"; edited = Claude changed files (→ the app rebuilds) */
+  onDone: (ok: boolean, newReel: boolean, edited: boolean) => void
   /** bumps on every "+ New reel" → fresh conversation */
   newKey: number
 }
@@ -72,6 +72,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
   const [build, setBuild] = useState<Build | null>(null)
   const end = useRef<HTMLDivElement>(null)
   const input = useRef<HTMLTextAreaElement>(null)
+  const edited = useRef(false)
   const buildRef = useRef(build)
   buildRef.current = build
   const cb = useRef({ onRenamed, onDone })
@@ -95,6 +96,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
           cb.current.onRenamed(e.to)
           return
         }
+        if (e.type === 'tool' && /^(Edit|Write|MultiEdit|NotebookEdit)$/.test(e.name)) edited.current = true
         if (e.type === 'tool') {
           const d = e.detail
           setBuild(
@@ -108,7 +110,8 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
         }
         if (e.type === 'done') {
           const b = buildRef.current
-          cb.current.onDone(e.ok, !!b && !b.done)
+          cb.current.onDone(e.ok, !!b && !b.done, edited.current)
+          edited.current = false
           setBuild((x) => x && { ...x, done: true, ok: e.ok })
         }
         setMsgs((ms) => {

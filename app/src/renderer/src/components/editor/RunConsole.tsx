@@ -4,7 +4,7 @@ import type { Run } from '@/hooks/useRuns'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-const LABEL: Record<Run['kind'], string> = { make: 'Make reel', voice: 'ElevenLabs voice', build: 'Rebuild', render: 'Export', review: 'Review' }
+const LABEL: Record<Run['kind'], string> = { make: 'Make reel', voice: 'Voice + rebuild', build: 'Rebuild', render: 'Export', review: 'Review' }
 
 /** Floating log panel for the running / last pipeline command. */
 export function RunConsole({ run, onStop, onOpenReview }: { run: Run | null; onStop: () => void; onOpenReview: () => void }): JSX.Element | null {
