@@ -1,0 +1,11 @@
+{
+  "name": "vfx-hyperframes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "mkdir -p vendor && cp node_modules/gsap/dist/gsap.min.js vendor/gsap.min.js"
+  },
+  "dependencies": {
+    "gsap": "3.15.1"
+  }
+}

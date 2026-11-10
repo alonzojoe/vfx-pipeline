@@ -1,0 +1,346 @@
+{
+  "title": "Banking basics: Debit vs Credit, Checking vs Savings",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (young, energetic American — social-media creator)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.05
+  },
+  "background": "auto",
+  "outro": 1.3,
+  "maxLineGap": 0.38,
+  "maxWordGap": 0.28,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": {
+      "left": "debit",
+      "right": "credit"
+    },
+    "p2": {
+      "left": "checking",
+      "right": "savings"
+    }
+  },
+  "lines": [
+    {
+      "text": "Think you understand banking?",
+      "pair": "p1",
+      "react": "point-at-you",
+      "question": true,
+      "sfx": [
+        "question"
+      ]
+    },
+    {
+      "text": "Here are two things you should know!",
+      "pair": "p1",
+      "react": "come-here",
+      "sfx": [
+        "pop"
+      ],
+      "pause": 0.55
+    },
+    {
+      "text": "A debit card uses money directly from your bank account.",
+      "pair": "p1",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ],
+      "actions": [
+        {
+          "type": "swap",
+          "from": "#debit-bal-old",
+          "to": "#debit-bal-new",
+          "word": "directly",
+          "sfx": "purchase"
+        },
+        {
+          "type": "pop",
+          "el": "#debit-tx",
+          "word": "directly"
+        }
+      ]
+    },
+    {
+      "text": "A credit card lets you borrow money and pay it back later.",
+      "pair": "p1",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ],
+      "pause": 0.5,
+      "actions": [
+        {
+          "type": "swap",
+          "from": "#credit-owe-old",
+          "to": "#credit-owe-new",
+          "word": "borrow",
+          "sfx": "checkout"
+        },
+        {
+          "type": "pop",
+          "el": "#credit-due",
+          "word": "later.",
+          "sfx": "warning"
+        }
+      ]
+    },
+    {
+      "text": "A checking account is for everyday spending, like paying bills and buying groceries.",
+      "pair": "p2",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ],
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#tx-bills",
+          "word": "bills",
+          "sfx": "send"
+        },
+        {
+          "type": "pop",
+          "el": "#tx-groceries",
+          "word": "groceries.",
+          "sfx": "send"
+        }
+      ]
+    },
+    {
+      "text": "A savings account is where you keep money and earn interest.",
+      "pair": "p2",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ],
+      "pause": 0.5,
+      "actions": [
+        {
+          "type": "swap",
+          "from": "#sav-bal-old",
+          "to": "#sav-bal-new",
+          "word": "interest.",
+          "sfx": "reward"
+        },
+        {
+          "type": "pop",
+          "el": "#sav-interest",
+          "word": "interest."
+        }
+      ]
+    },
+    {
+      "text": "Debit means your money.",
+      "pair": "recap",
+      "react": "thumbs-up",
+      "recap": {
+        "term": "Debit",
+        "means": "your money"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Credit means borrowed money.",
+      "pair": "recap",
+      "react": "side-eye",
+      "recap": {
+        "term": "Credit",
+        "means": "borrowed money"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Checking means spending.",
+      "pair": "recap",
+      "react": "smirk-thumb",
+      "recap": {
+        "term": "Checking",
+        "means": "spending"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Savings means keeping money.",
+      "pair": "recap",
+      "react": "chill",
+      "recap": {
+        "term": "Savings",
+        "means": "keeping money"
+      },
+      "sfx": [
+        "check"
+      ],
+      "pause": 0.4
+    },
+    {
+      "text": "Follow for more everyday knowledge!",
+      "pair": "recap",
+      "react": "point-at-you-2",
+      "cta": true,
+      "sfx": [
+        "cta"
+      ]
+    }
+  ],
+  "sfx": {
+    "pop": [
+      {
+        "src": "general/sfx/pop_7e9Is8L.mp3",
+        "volume": 0.47
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop/bloop.mp3",
+        "volume": 0.42
+      },
+      {
+        "src": "general/sfx/pop_7e9Is8L.mp3",
+        "volume": 0.42
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop/thup.mp3",
+        "volume": 0.47
+      },
+      {
+        "src": "general/sfx/earshot/ui_pop/soft.mp3",
+        "volume": 0.42
+      }
+    ],
+    "tap": [
+      {
+        "src": "general/sfx/earshot/pro_pop/tink.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop/boop.mp3",
+        "volume": 0.26
+      }
+    ],
+    "question": {
+      "src": "general/sfx/question-pop.mp3",
+      "volume": 0.62,
+      "layers": [
+        {
+          "src": "general/sfx/uisfx/glass/info.mp3",
+          "volume": 0.18,
+          "offset": 0.04
+        }
+      ]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/face_left.mp3",
+      "volume": 0.32,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/swish/flick.mp3",
+          "volume": 0.18
+        }
+      ]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/face_right.mp3",
+      "volume": 0.36,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/swish/flick.mp3",
+          "volume": 0.18
+        }
+      ]
+    },
+    "purchase": {
+      "src": "general/sfx/uisfx/glass/purchase.mp3",
+      "volume": 0.36
+    },
+    "checkout": {
+      "src": "general/sfx/uisfx/glass/checkout.mp3",
+      "volume": 0.28
+    },
+    "warning": {
+      "src": "general/sfx/uisfx/glass/warning.mp3",
+      "volume": 0.24
+    },
+    "send": [
+      {
+        "src": "general/sfx/uisfx/glass/send.mp3",
+        "volume": 0.26
+      },
+      {
+        "src": "general/sfx/uisfx/soft/send.mp3",
+        "volume": 0.27
+      }
+    ],
+    "reward": {
+      "src": "general/sfx/uisfx/glass/reward.mp3",
+      "volume": 0.42,
+      "layers": [
+        {
+          "src": "general/sfx/ding-sound-effect_2.mp3",
+          "volume": 0.2,
+          "offset": 0.06
+        }
+      ]
+    },
+    "check": [
+      {
+        "src": "general/sfx/uisfx/glass/check.mp3",
+        "volume": 0.46
+      },
+      {
+        "src": "general/sfx/uisfx/soft/check.mp3",
+        "volume": 0.46
+      },
+      {
+        "src": "general/sfx/uisfx/minimal/check.mp3",
+        "volume": 0.5
+      },
+      {
+        "src": "general/sfx/correct.mp3",
+        "volume": 0.42
+      }
+    ],
+    "cta": {
+      "src": "general/sfx/uisfx/glass/achievement.mp3",
+      "volume": 0.48,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/pro_shimmer/m3.mp3",
+          "volume": 0.22,
+          "offset": 0.12
+        }
+      ]
+    },
+    "whoosh": [
+      {
+        "src": "general/sfx/earshot/whoosh_fast/tight.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+        "volume": 0.28
+      }
+    ],
+    "whoosh-big": {
+      "src": "general/sfx/earshot/pro_whoosh_big/swell.mp3",
+      "volume": 0.28
+    },
+    "riser": {
+      "src": "general/sfx/earshot/pro_riser/air_gate.mp3",
+      "volume": 0.2
+    }
+  },
+  "sfxNote": "Sound mix = Joe's own SFX as the lead hits + licensed library (uisfx CC0 / earshot) as variants and quiet layers. Arrays rotate per occurrence; 'layers' play underneath; build.mjs humanizes timing/volume slightly."
+}

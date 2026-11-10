@@ -1,0 +1,255 @@
+{
+ "_about": "Joe's avatar reaction stickers (transparent PNG, bottoms faded, no box edges). tip = fingertip position as fraction of image width/height, dir = pointing direction. Regenerate cutouts from the 2 source sheets, never crop on an even grid. Pointing stickers have their black doodle arrows/emphasis lines REMOVED (originals in _originals-with-doodles/) because the reel draws its own orange arrow \u2014 never use doodle arrows together with the drawn arrow.",
+ "stickers": {
+  "angry-2": {
+   "w": 476,
+   "h": 458,
+   "mood": "angry"
+  },
+  "angry": {
+   "w": 628,
+   "h": 512,
+   "mood": "annoyed"
+  },
+  "boss": {
+   "w": 486,
+   "h": 546,
+   "mood": "arms crossed, crown"
+  },
+  "chill": {
+   "w": 628,
+   "h": 430,
+   "mood": "hands behind head"
+  },
+  "come-here": {
+   "w": 460,
+   "h": 546,
+   "mood": "come here"
+  },
+  "confused": {
+   "w": 608,
+   "h": 506,
+   "mood": "scratching head ???"
+  },
+  "cool-2": {
+   "w": 488,
+   "h": 462,
+   "mood": "sunglasses"
+  },
+  "cool": {
+   "w": 590,
+   "h": 510,
+   "mood": "sunglasses"
+  },
+  "double-thumbs-up": {
+   "w": 494,
+   "h": 454,
+   "mood": "two thumbs up"
+  },
+  "facepalm": {
+   "w": 594,
+   "h": 426,
+   "mood": "facepalm"
+  },
+  "finger-heart": {
+   "w": 568,
+   "h": 502,
+   "mood": "finger heart"
+  },
+  "laugh-2": {
+   "w": 472,
+   "h": 502,
+   "mood": "laughing"
+  },
+  "laugh": {
+   "w": 600,
+   "h": 542,
+   "mood": "laughing HAHA"
+  },
+  "look-away": {
+   "w": 650,
+   "h": 458,
+   "mood": "looking away"
+  },
+  "look-down": {
+   "w": 456,
+   "h": 452,
+   "mood": "looking down"
+  },
+  "look-up-2": {
+   "w": 492,
+   "h": 498,
+   "mood": "looking up-right"
+  },
+  "look-up": {
+   "w": 544,
+   "h": 458,
+   "mood": "looking up, wondering"
+  },
+  "peace": {
+   "w": 630,
+   "h": 504,
+   "mood": "peace signs"
+  },
+  "point-at-you-2": {
+   "w": 474,
+   "h": 502,
+   "mood": "pointing at viewer"
+  },
+  "point-at-you": {
+   "w": 594,
+   "h": 546,
+   "mood": "pointing at viewer"
+  },
+  "point-down-right": {
+   "w": 487,
+   "h": 531,
+   "mood": "points down-right",
+   "doodles_removed": true
+  },
+  "point-down": {
+   "w": 490,
+   "h": 454,
+   "mood": "points down"
+  },
+  "point-left": {
+   "w": 456,
+   "h": 441,
+   "mood": "points left",
+   "tip": [
+    0.081,
+    0.651
+   ],
+   "dir": "left",
+   "doodles_removed": true
+  },
+  "point-right": {
+   "w": 472,
+   "h": 441,
+   "mood": "points right",
+   "tip": [
+    0.917,
+    0.628
+   ],
+   "dir": "right",
+   "doodles_removed": true
+  },
+  "point-up-left": {
+   "w": 524,
+   "h": 429,
+   "mood": "points up-left",
+   "tip": [
+    0.079,
+    0.214
+   ],
+   "dir": "up-left",
+   "doodles_removed": true
+  },
+  "point-up-right": {
+   "w": 448,
+   "h": 429,
+   "mood": "points up-right",
+   "tip": [
+    0.924,
+    0.503
+   ],
+   "dir": "up-right",
+   "doodles_removed": true
+  },
+  "pray": {
+   "w": 596,
+   "h": 504,
+   "mood": "please / hoping"
+  },
+  "shocked-2": {
+   "w": 480,
+   "h": 456,
+   "mood": "shocked hands on cheeks"
+  },
+  "shocked": {
+   "w": 576,
+   "h": 512,
+   "mood": "surprised !!"
+  },
+  "shout": {
+   "w": 586,
+   "h": 426,
+   "mood": "calling out"
+  },
+  "shrug": {
+   "w": 488,
+   "h": 530,
+   "mood": "shrug ??"
+  },
+  "side-eye": {
+   "w": 586,
+   "h": 458,
+   "mood": "side glance"
+  },
+  "side-look-2": {
+   "w": 452,
+   "h": 456,
+   "mood": "looking right"
+  },
+  "side-look-3": {
+   "w": 466,
+   "h": 452,
+   "mood": "looking down-right"
+  },
+  "side-look": {
+   "w": 496,
+   "h": 460,
+   "mood": "looking right"
+  },
+  "sleepy": {
+   "w": 566,
+   "h": 426,
+   "mood": "bored zzz"
+  },
+  "smile-2": {
+   "w": 492,
+   "h": 504,
+   "mood": "big smile"
+  },
+  "smile": {
+   "w": 626,
+   "h": 538,
+   "mood": "happy, friendly"
+  },
+  "smirk-thumb": {
+   "w": 472,
+   "h": 460,
+   "mood": "smirk + thumb"
+  },
+  "sulk": {
+   "w": 478,
+   "h": 456,
+   "mood": "frowning down"
+  },
+  "thinking-2": {
+   "w": 478,
+   "h": 498,
+   "mood": "thinking ?"
+  },
+  "thinking": {
+   "w": 594,
+   "h": 544,
+   "mood": "hand on chin + ?"
+  },
+  "thumbs-up": {
+   "w": 590,
+   "h": 502,
+   "mood": "one thumb up"
+  },
+  "vibing": {
+   "w": 488,
+   "h": 536,
+   "mood": "vibing to music"
+  },
+  "wink-heart": {
+   "w": 554,
+   "h": 426,
+   "mood": "wink + heart"
+  }
+ }
+}

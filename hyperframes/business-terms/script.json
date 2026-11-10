@@ -1,0 +1,431 @@
+{
+  "title": "Business basics: Revenue vs Profit, Assets vs Liabilities",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (young, energetic American — social-media creator)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.05
+  },
+  "background": "auto",
+  "outro": 1.3,
+  "maxLineGap": 0.38,
+  "maxWordGap": 0.28,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": {
+      "left": "revenue",
+      "right": "profit"
+    },
+    "p2": {
+      "left": "assets",
+      "right": "liabilities"
+    }
+  },
+  "lines": [
+    {
+      "text": "This is revenue.",
+      "pair": "p1",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "And this is profit.",
+      "pair": "p1",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "But what's the difference?",
+      "pair": "p1",
+      "react": "thinking",
+      "question": true,
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.5
+    },
+    {
+      "text": "Revenue is the total money a business earns from selling products or services.",
+      "pair": "p1",
+      "focus": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ],
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#rev-products",
+          "word": "products",
+          "sfx": "coin"
+        },
+        {
+          "type": "pop",
+          "el": "#rev-services",
+          "word": "services.",
+          "sfx": "coin"
+        }
+      ]
+    },
+    {
+      "text": "Profit is what's left after subtracting expenses.",
+      "pair": "p1",
+      "focus": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ],
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#pr-exp",
+          "word": "subtracting",
+          "sfx": "minus"
+        }
+      ]
+    },
+    {
+      "text": "For example, if a business earns $10,000 and spends $7,000, its profit is $3,000.",
+      "pair": "p1",
+      "react": "smirk-thumb",
+      "pause": 0.55,
+      "actions": [
+        {
+          "type": "pulse",
+          "el": "#rev-total",
+          "word": "$10,000"
+        },
+        {
+          "type": "pulse",
+          "el": "#pr-exp",
+          "word": "$7,000,"
+        },
+        {
+          "type": "swap",
+          "from": "#pr-old",
+          "to": "#pr-new",
+          "word": "$3,000.",
+          "sfx": "reward"
+        }
+      ]
+    },
+    {
+      "text": "Now, what about assets and liabilities?",
+      "pair": "p2",
+      "react": "look-up",
+      "question": true,
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.5
+    },
+    {
+      "text": "Assets are valuable things a business owns, like cash, buildings, and equipment.",
+      "pair": "p2",
+      "focus": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ],
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#as-cash",
+          "word": "cash,",
+          "sfx": "add"
+        },
+        {
+          "type": "pop",
+          "el": "#as-building",
+          "word": "buildings,",
+          "sfx": "add"
+        },
+        {
+          "type": "pop",
+          "el": "#as-equip",
+          "word": "equipment.",
+          "sfx": "add"
+        },
+        {
+          "type": "pop",
+          "el": "#as-total",
+          "word": "equipment.",
+          "delay": 0.45
+        }
+      ]
+    },
+    {
+      "text": "Liabilities are what a business owes, like loans, unpaid bills, and debts.",
+      "pair": "p2",
+      "focus": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ],
+      "pause": 0.55,
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#li-loan",
+          "word": "loans,",
+          "sfx": "owe"
+        },
+        {
+          "type": "pop",
+          "el": "#li-bills",
+          "word": "bills,",
+          "sfx": "owe"
+        },
+        {
+          "type": "pop",
+          "el": "#li-debt",
+          "word": "debts.",
+          "sfx": "owe"
+        },
+        {
+          "type": "pop",
+          "el": "#li-total",
+          "word": "debts.",
+          "delay": 0.45
+        }
+      ]
+    },
+    {
+      "text": "Revenue is earned.",
+      "pair": "recap",
+      "react": "thumbs-up",
+      "recap": {
+        "term": "Revenue",
+        "means": "earned"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Profit is what's left.",
+      "pair": "recap",
+      "react": "smile-2",
+      "recap": {
+        "term": "Profit",
+        "means": "what's left"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Assets are owned.",
+      "pair": "recap",
+      "react": "cool",
+      "recap": {
+        "term": "Assets",
+        "means": "owned"
+      },
+      "sfx": [
+        "check"
+      ]
+    },
+    {
+      "text": "Liabilities are owed.",
+      "pair": "recap",
+      "react": "side-eye",
+      "recap": {
+        "term": "Liabilities",
+        "means": "owed"
+      },
+      "sfx": [
+        "check"
+      ],
+      "pause": 0.4
+    },
+    {
+      "text": "auto",
+      "pair": "recap",
+      "react": "point-at-you",
+      "cta": true,
+      "sfx": [
+        "cta"
+      ]
+    }
+  ],
+  "sfx": {
+    "pop": [
+      {
+        "src": "general/sfx/pop_7e9Is8L.mp3",
+        "volume": 0.45
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop_in/round.mp3",
+        "volume": 0.42
+      },
+      {
+        "src": "general/sfx/pop_7e9Is8L.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop_in/airy.mp3",
+        "volume": 0.44
+      },
+      {
+        "src": "general/sfx/earshot/ui_pop/soft.mp3",
+        "volume": 0.4
+      }
+    ],
+    "tap": [
+      {
+        "src": "general/sfx/earshot/pro_tap/finger.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/pro_tap/soft.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/pro_tap/glass.mp3",
+        "volume": 0.24
+      }
+    ],
+    "question": {
+      "src": "general/sfx/question-pop.mp3",
+      "volume": 0.62,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/pluck/kalimba_soft.mp3",
+          "volume": 0.16,
+          "offset": 0.05
+        }
+      ]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/face_left.mp3",
+      "volume": 0.32,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/whip.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/face_right.mp3",
+      "volume": 0.36,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/whip.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "coin": [
+      {
+        "src": "general/sfx/uisfx/soft/purchase.mp3",
+        "volume": 0.34
+      },
+      {
+        "src": "general/sfx/uisfx/rubber/purchase.mp3",
+        "volume": 0.32
+      }
+    ],
+    "minus": {
+      "src": "general/sfx/uisfx/soft/remove-from-cart.mp3",
+      "volume": 0.3
+    },
+    "reward": {
+      "src": "general/sfx/uisfx/soft/reward.mp3",
+      "volume": 0.4,
+      "layers": [
+        {
+          "src": "general/sfx/ding-sound-effect_2.mp3",
+          "volume": 0.22,
+          "offset": 0.06
+        }
+      ]
+    },
+    "add": [
+      {
+        "src": "general/sfx/earshot/mallet/marimba.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/mallet/glock.mp3",
+        "volume": 0.26
+      },
+      {
+        "src": "general/sfx/earshot/mallet/celesta.mp3",
+        "volume": 0.28
+      }
+    ],
+    "owe": [
+      {
+        "src": "general/sfx/uisfx/soft/warning.mp3",
+        "volume": 0.24
+      },
+      {
+        "src": "general/sfx/uisfx/rubber/error.mp3",
+        "volume": 0.22
+      },
+      {
+        "src": "general/sfx/uisfx/soft/warning.mp3",
+        "volume": 0.22
+      }
+    ],
+    "check": [
+      {
+        "src": "general/sfx/uisfx/soft/check.mp3",
+        "volume": 0.46
+      },
+      {
+        "src": "general/sfx/correct.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/uisfx/rubber/check.mp3",
+        "volume": 0.44
+      },
+      {
+        "src": "general/sfx/uisfx/minimal/check.mp3",
+        "volume": 0.5
+      }
+    ],
+    "cta": {
+      "src": "general/sfx/uisfx/soft/achievement.mp3",
+      "volume": 0.48,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/pro_shimmer/m3.mp3",
+          "volume": 0.2,
+          "offset": 0.12
+        }
+      ]
+    },
+    "whoosh": [
+      {
+        "src": "general/sfx/earshot/whoosh_fast/crisp.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+        "volume": 0.28
+      }
+    ],
+    "whoosh-big": {
+      "src": "general/sfx/earshot/pro_whoosh_big/tonal.mp3",
+      "volume": 0.26
+    },
+    "riser": {
+      "src": "general/sfx/earshot/pro_riser/roll.mp3",
+      "volume": 0.2
+    }
+  },
+  "sfxNote": "Sound mix = Joe's own SFX as the lead hits + licensed library (uisfx CC0 / earshot) as variants and quiet layers. Palette varied from banking-basics (soft/rubber UI, mallet hits, whip/crisp whooshes) so reels don't sound identical."
+}

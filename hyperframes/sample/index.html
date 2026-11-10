@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #0b0b0f;
+        --ink: #ffffff;
+        --accent: #ff5a1f;
+        --font-display: "Helvetica Neue", Arial, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font-display); }
+      #bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.75)); }
+      #title {
+        position: absolute; left: 80px; right: 80px; bottom: 360px;
+        color: var(--ink); font-size: 120px; font-weight: 800; line-height: 0.95; letter-spacing: -0.03em;
+      }
+      #title .accent { color: var(--accent); }
+      #sub { position: absolute; left: 80px; bottom: 260px; color: var(--ink); font-size: 44px; opacity: 0.85; }
+    </style>
+  </head>
+  <body>
+    <!-- 1080x1920 reel, 6 seconds. Timing lives in data-start / data-duration (seconds). -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1080" data-height="1920">
+      <!-- Put your footage in assets/ and point src at it -->
+      <video id="bg" class="clip" data-start="0" data-duration="6" data-track-index="0"
+             src="assets/clip.mp4" muted playsinline></video>
+      <div id="shade" class="clip" data-start="0" data-duration="6" data-track-index="1"></div>
+      <h1 id="title" class="clip" data-start="0.3" data-duration="5.7" data-track-index="2">
+        Your <span class="accent">reel</span><br />title here
+      </h1>
+      <p id="sub" class="clip" data-start="0.8" data-duration="5.2" data-track-index="3">Made with HyperFrames + GSAP</p>
+    </div>
+    <script>
+      // GSAP timeline must be paused: HyperFrames seeks it frame-by-frame when rendering.
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bg", { scale: 1.15 }, { scale: 1, duration: 6, ease: "none" }, 0)
+        .fromTo("#title", { y: 80, opacity: 0, filter: "blur(10px)" },
+                          { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power4.out" }, 0.3)
+        .fromTo("#sub", { y: 30, opacity: 0 }, { y: 0, opacity: 0.85, duration: 0.5, ease: "power2.out" }, 0.8)
+        .to(["#title", "#sub"], { opacity: 0, y: -40, duration: 0.4, ease: "power2.in", stagger: 0.05 }, 5.4);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

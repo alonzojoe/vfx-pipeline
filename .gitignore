@@ -1,0 +1,20 @@
+# --- Secrets: NEVER commit (ElevenLabs key etc.) ---
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+*.pem
+*.key
+
+node_modules/
+.DS_Store
+output/
+renders/
+.remotion/
+hyperframes/vendor/
+*.log
+.hyperframes/
+
+tools/real-sfx/library_index.json
+tools/real-sfx/config.json

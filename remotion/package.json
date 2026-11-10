@@ -1,0 +1,21 @@
+{
+  "name": "vfx-remotion",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "compositions": "remotion compositions",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.541",
+    "gsap": "3.15.1",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "remotion": "4.0.541"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}

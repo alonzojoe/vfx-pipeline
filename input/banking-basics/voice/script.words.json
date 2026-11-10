@@ -1,0 +1,393 @@
+{
+  "text": "Think you understand banking? Here are two things you should know! A debit card uses money directly from your bank account. A credit card lets you borrow money and pay it back later. A checking account is for everyday spending, like paying bills and buying groceries. A savings account is where you keep money and earn interest. Debit means your money. Credit means borrowed money. Checking means spending. Savings means keeping money. Follow for more everyday knowledge!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 28.143,
+  "words": [
+    {
+      "word": "Think",
+      "start": 0,
+      "end": 0.244
+    },
+    {
+      "word": "you",
+      "start": 0.279,
+      "end": 0.348
+    },
+    {
+      "word": "understand",
+      "start": 0.418,
+      "end": 0.789
+    },
+    {
+      "word": "banking?",
+      "start": 0.859,
+      "end": 1.393
+    },
+    {
+      "word": "Here",
+      "start": 2.171,
+      "end": 2.334
+    },
+    {
+      "word": "are",
+      "start": 2.357,
+      "end": 2.45
+    },
+    {
+      "word": "two",
+      "start": 2.473,
+      "end": 2.589
+    },
+    {
+      "word": "things",
+      "start": 2.659,
+      "end": 2.844
+    },
+    {
+      "word": "you",
+      "start": 2.879,
+      "end": 2.949
+    },
+    {
+      "word": "should",
+      "start": 2.995,
+      "end": 3.17
+    },
+    {
+      "word": "know!",
+      "start": 3.216,
+      "end": 3.564
+    },
+    {
+      "word": "A",
+      "start": 3.924,
+      "end": 4.017
+    },
+    {
+      "word": "debit",
+      "start": 4.098,
+      "end": 4.342
+    },
+    {
+      "word": "card",
+      "start": 4.377,
+      "end": 4.574
+    },
+    {
+      "word": "uses",
+      "start": 4.632,
+      "end": 4.865
+    },
+    {
+      "word": "money",
+      "start": 4.923,
+      "end": 5.097
+    },
+    {
+      "word": "directly",
+      "start": 5.166,
+      "end": 5.619
+    },
+    {
+      "word": "from",
+      "start": 5.654,
+      "end": 5.759
+    },
+    {
+      "word": "your",
+      "start": 5.793,
+      "end": 5.886
+    },
+    {
+      "word": "bank",
+      "start": 5.933,
+      "end": 6.084
+    },
+    {
+      "word": "account.",
+      "start": 6.118,
+      "end": 6.548
+    },
+    {
+      "word": "A",
+      "start": 6.908,
+      "end": 6.978
+    },
+    {
+      "word": "credit",
+      "start": 7.047,
+      "end": 7.314
+    },
+    {
+      "word": "card",
+      "start": 7.349,
+      "end": 7.581
+    },
+    {
+      "word": "lets",
+      "start": 7.628,
+      "end": 7.802
+    },
+    {
+      "word": "you",
+      "start": 7.837,
+      "end": 7.918
+    },
+    {
+      "word": "borrow",
+      "start": 8.011,
+      "end": 8.301
+    },
+    {
+      "word": "money",
+      "start": 8.359,
+      "end": 8.545
+    },
+    {
+      "word": "and",
+      "start": 8.591,
+      "end": 8.673
+    },
+    {
+      "word": "pay",
+      "start": 8.731,
+      "end": 8.882
+    },
+    {
+      "word": "it",
+      "start": 8.928,
+      "end": 8.975
+    },
+    {
+      "word": "back",
+      "start": 9.021,
+      "end": 9.195
+    },
+    {
+      "word": "later.",
+      "start": 9.253,
+      "end": 9.659
+    },
+    {
+      "word": "A",
+      "start": 10.24,
+      "end": 10.321
+    },
+    {
+      "word": "checking",
+      "start": 10.391,
+      "end": 10.704
+    },
+    {
+      "word": "account",
+      "start": 10.751,
+      "end": 11.111
+    },
+    {
+      "word": "is",
+      "start": 11.18,
+      "end": 11.285
+    },
+    {
+      "word": "for",
+      "start": 11.331,
+      "end": 11.424
+    },
+    {
+      "word": "everyday",
+      "start": 11.505,
+      "end": 11.877
+    },
+    {
+      "word": "spending,",
+      "start": 11.935,
+      "end": 12.469
+    },
+    {
+      "word": "like",
+      "start": 12.539,
+      "end": 12.701
+    },
+    {
+      "word": "paying",
+      "start": 12.736,
+      "end": 12.957
+    },
+    {
+      "word": "bills",
+      "start": 13.015,
+      "end": 13.282
+    },
+    {
+      "word": "and",
+      "start": 13.317,
+      "end": 13.386
+    },
+    {
+      "word": "buying",
+      "start": 13.433,
+      "end": 13.63
+    },
+    {
+      "word": "groceries.",
+      "start": 13.665,
+      "end": 14.35
+    },
+    {
+      "word": "A",
+      "start": 14.71,
+      "end": 14.791
+    },
+    {
+      "word": "savings",
+      "start": 14.873,
+      "end": 15.221
+    },
+    {
+      "word": "account",
+      "start": 15.244,
+      "end": 15.534
+    },
+    {
+      "word": "is",
+      "start": 15.581,
+      "end": 15.65
+    },
+    {
+      "word": "where",
+      "start": 15.697,
+      "end": 15.871
+    },
+    {
+      "word": "you",
+      "start": 15.941,
+      "end": 16.045
+    },
+    {
+      "word": "keep",
+      "start": 16.115,
+      "end": 16.301
+    },
+    {
+      "word": "money",
+      "start": 16.359,
+      "end": 16.556
+    },
+    {
+      "word": "and",
+      "start": 16.602,
+      "end": 16.672
+    },
+    {
+      "word": "earn",
+      "start": 16.73,
+      "end": 16.893
+    },
+    {
+      "word": "interest.",
+      "start": 16.951,
+      "end": 17.52
+    },
+    {
+      "word": "Debit",
+      "start": 18.181,
+      "end": 18.483
+    },
+    {
+      "word": "means",
+      "start": 18.518,
+      "end": 18.681
+    },
+    {
+      "word": "your",
+      "start": 18.715,
+      "end": 18.808
+    },
+    {
+      "word": "money.",
+      "start": 18.843,
+      "end": 19.203
+    },
+    {
+      "word": "Credit",
+      "start": 19.621,
+      "end": 19.911
+    },
+    {
+      "word": "means",
+      "start": 19.958,
+      "end": 20.155
+    },
+    {
+      "word": "borrowed",
+      "start": 20.213,
+      "end": 20.538
+    },
+    {
+      "word": "money.",
+      "start": 20.585,
+      "end": 20.968
+    },
+    {
+      "word": "Checking",
+      "start": 21.63,
+      "end": 22.036
+    },
+    {
+      "word": "means",
+      "start": 22.106,
+      "end": 22.454
+    },
+    {
+      "word": "spending.",
+      "start": 22.57,
+      "end": 23.174
+    },
+    {
+      "word": "Savings",
+      "start": 23.835,
+      "end": 24.288
+    },
+    {
+      "word": "means",
+      "start": 24.335,
+      "end": 24.567
+    },
+    {
+      "word": "keeping",
+      "start": 24.637,
+      "end": 24.95
+    },
+    {
+      "word": "money.",
+      "start": 24.996,
+      "end": 25.368
+    },
+    {
+      "word": "Follow",
+      "start": 26.03,
+      "end": 26.378
+    },
+    {
+      "word": "for",
+      "start": 26.436,
+      "end": 26.552
+    },
+    {
+      "word": "more",
+      "start": 26.622,
+      "end": 26.819
+    },
+    {
+      "word": "everyday",
+      "start": 26.9,
+      "end": 27.307
+    },
+    {
+      "word": "knowledge!",
+      "start": 27.365,
+      "end": 28.143
+    }
+  ]
+}

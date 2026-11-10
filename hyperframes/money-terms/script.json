@@ -1,0 +1,171 @@
+{
+  "title": "Invoice vs Receipt / Gross vs Net Pay",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (young, energetic American — social-media creator)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.05
+  },
+  "background": "auto",
+  "outro": 1.2,
+  "pairs": {
+    "p1": {
+      "left": "invoice",
+      "right": "receipt"
+    },
+    "p2": {
+      "left": "gross",
+      "right": "net"
+    }
+  },
+  "lines": [
+    {
+      "text": "Invoice or receipt? Most people mix these up.",
+      "pair": "p1",
+      "react": "point-at-you",
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.6
+    },
+    {
+      "text": "This is an invoice.",
+      "pair": "p1",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "This is a receipt.",
+      "pair": "p1",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "Invoice? You still owe money.",
+      "pair": "p1",
+      "focus": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "left"
+      ]
+    },
+    {
+      "text": "Receipt? You already paid.",
+      "pair": "p1",
+      "focus": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "right"
+      ],
+      "action": "stamp-paid",
+      "actionWord": "paid.",
+      "pause": 0.7
+    },
+    {
+      "text": "Now the one that hurts.",
+      "pair": "p2",
+      "react": "shocked-2",
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.45
+    },
+    {
+      "text": "Gross pay.",
+      "pair": "p2",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "Net pay.",
+      "pair": "p2",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "Gross is what you earn.",
+      "pair": "p2",
+      "focus": "left",
+      "react": "double-thumbs-up",
+      "sfx": [
+        "left"
+      ]
+    },
+    {
+      "text": "Then taxes take their cut.",
+      "pair": "p2",
+      "focus": "left",
+      "react": "angry-2",
+      "action": "deductions",
+      "actionWord": "taxes"
+    },
+    {
+      "text": "Net is what you actually keep.",
+      "pair": "p2",
+      "focus": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "right"
+      ],
+      "action": "deposit",
+      "actionWord": "keep.",
+      "pause": 0.65
+    },
+    {
+      "text": "Save this before payday.",
+      "pair": "p2",
+      "react": "cool",
+      "sfx": [
+        "correct"
+      ]
+    }
+  ],
+  "sfx": {
+    "pop": {
+      "src": "general/sfx/pop_7e9Is8L.mp3",
+      "volume": 0.6
+    },
+    "question": {
+      "src": "general/sfx/question-pop.mp3",
+      "volume": 0.7
+    },
+    "left": {
+      "src": "general/sfx/face_left.mp3",
+      "volume": 0.6
+    },
+    "right": {
+      "src": "general/sfx/face_right.mp3",
+      "volume": 0.6
+    },
+    "correct": {
+      "src": "general/sfx/correct.mp3",
+      "volume": 0.55
+    },
+    "ding": {
+      "src": "general/sfx/ding-sound-effect_2.mp3",
+      "volume": 0.45
+    }
+  },
+  "actionSfx": {
+    "stamp-paid": "ding",
+    "deposit": "ding"
+  },
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook, payoff/reveal, topic switch). Every other gap is capped: between lines maxLineGap, inside a line maxWordGap. The voice is only cut inside silences.",
+  "maxLineGap": 0.38,
+  "maxWordGap": 0.28
+}

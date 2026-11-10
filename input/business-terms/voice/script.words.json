@@ -1,0 +1,473 @@
+{
+  "text": "This is revenue. And this is profit. But what's the difference? Revenue is the total money a business earns from selling products or services. Profit is what's left after subtracting expenses. For example, if a business earns $10,000 and spends $7,000, its profit is $3,000. Now, what about assets and liabilities? Assets are valuable things a business owns, like cash, buildings, and equipment. Liabilities are what a business owes, like loans, unpaid bills, and debts. Revenue is earned. Profit is what's left. Assets are owned. Liabilities are owed. Follow for more money basics!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 42.818,
+  "words": [
+    {
+      "word": "This",
+      "start": 0,
+      "end": 0.221
+    },
+    {
+      "word": "is",
+      "start": 0.279,
+      "end": 0.36
+    },
+    {
+      "word": "revenue.",
+      "start": 0.453,
+      "end": 0.975
+    },
+    {
+      "word": "And",
+      "start": 1.242,
+      "end": 1.37
+    },
+    {
+      "word": "this",
+      "start": 1.416,
+      "end": 1.533
+    },
+    {
+      "word": "is",
+      "start": 1.591,
+      "end": 1.66
+    },
+    {
+      "word": "profit.",
+      "start": 1.718,
+      "end": 2.276
+    },
+    {
+      "word": "But",
+      "start": 3.518,
+      "end": 3.669
+    },
+    {
+      "word": "what's",
+      "start": 3.692,
+      "end": 3.878
+    },
+    {
+      "word": "the",
+      "start": 3.924,
+      "end": 3.994
+    },
+    {
+      "word": "difference?",
+      "start": 4.04,
+      "end": 4.621
+    },
+    {
+      "word": "Revenue",
+      "start": 5.039,
+      "end": 5.457
+    },
+    {
+      "word": "is",
+      "start": 5.503,
+      "end": 5.596
+    },
+    {
+      "word": "the",
+      "start": 5.654,
+      "end": 5.735
+    },
+    {
+      "word": "total",
+      "start": 5.805,
+      "end": 6.153
+    },
+    {
+      "word": "money",
+      "start": 6.211,
+      "end": 6.42
+    },
+    {
+      "word": "a",
+      "start": 6.49,
+      "end": 6.536
+    },
+    {
+      "word": "business",
+      "start": 6.653,
+      "end": 7.024
+    },
+    {
+      "word": "earns",
+      "start": 7.117,
+      "end": 7.419
+    },
+    {
+      "word": "from",
+      "start": 7.477,
+      "end": 7.616
+    },
+    {
+      "word": "selling",
+      "start": 7.674,
+      "end": 7.93
+    },
+    {
+      "word": "products",
+      "start": 7.999,
+      "end": 8.429
+    },
+    {
+      "word": "or",
+      "start": 8.51,
+      "end": 8.696
+    },
+    {
+      "word": "services.",
+      "start": 8.789,
+      "end": 9.485
+    },
+    {
+      "word": "Profit",
+      "start": 10.147,
+      "end": 10.6
+    },
+    {
+      "word": "is",
+      "start": 10.658,
+      "end": 10.739
+    },
+    {
+      "word": "what's",
+      "start": 10.797,
+      "end": 11.018
+    },
+    {
+      "word": "left",
+      "start": 11.099,
+      "end": 11.355
+    },
+    {
+      "word": "after",
+      "start": 11.436,
+      "end": 11.703
+    },
+    {
+      "word": "subtracting",
+      "start": 11.761,
+      "end": 12.365
+    },
+    {
+      "word": "expenses.",
+      "start": 12.434,
+      "end": 13.282
+    },
+    {
+      "word": "For",
+      "start": 13.944,
+      "end": 14.118
+    },
+    {
+      "word": "example,",
+      "start": 14.187,
+      "end": 14.675
+    },
+    {
+      "word": "if",
+      "start": 14.698,
+      "end": 14.791
+    },
+    {
+      "word": "a",
+      "start": 14.849,
+      "end": 14.884
+    },
+    {
+      "word": "business",
+      "start": 14.942,
+      "end": 15.279
+    },
+    {
+      "word": "earns",
+      "start": 15.348,
+      "end": 15.604
+    },
+    {
+      "word": "$10,000",
+      "start": 15.662,
+      "end": 16.73
+    },
+    {
+      "word": "and",
+      "start": 16.962,
+      "end": 17.16
+    },
+    {
+      "word": "spends",
+      "start": 17.218,
+      "end": 17.566
+    },
+    {
+      "word": "$7,000,",
+      "start": 17.682,
+      "end": 18.971
+    },
+    {
+      "word": "its",
+      "start": 19.133,
+      "end": 19.308
+    },
+    {
+      "word": "profit",
+      "start": 19.377,
+      "end": 19.714
+    },
+    {
+      "word": "is",
+      "start": 19.76,
+      "end": 19.83
+    },
+    {
+      "word": "$3,000.",
+      "start": 19.888,
+      "end": 21.084
+    },
+    {
+      "word": "Now,",
+      "start": 21.722,
+      "end": 21.978
+    },
+    {
+      "word": "what",
+      "start": 22.036,
+      "end": 22.21
+    },
+    {
+      "word": "about",
+      "start": 22.245,
+      "end": 22.454
+    },
+    {
+      "word": "assets",
+      "start": 22.524,
+      "end": 22.965
+    },
+    {
+      "word": "and",
+      "start": 23.011,
+      "end": 23.104
+    },
+    {
+      "word": "liabilities?",
+      "start": 23.174,
+      "end": 24.033
+    },
+    {
+      "word": "Assets",
+      "start": 24.59,
+      "end": 24.985
+    },
+    {
+      "word": "are",
+      "start": 25.031,
+      "end": 25.159
+    },
+    {
+      "word": "valuable",
+      "start": 25.229,
+      "end": 25.705
+    },
+    {
+      "word": "things",
+      "start": 25.728,
+      "end": 25.937
+    },
+    {
+      "word": "a",
+      "start": 25.972,
+      "end": 26.007
+    },
+    {
+      "word": "business",
+      "start": 26.076,
+      "end": 26.413
+    },
+    {
+      "word": "owns,",
+      "start": 26.483,
+      "end": 26.784
+    },
+    {
+      "word": "like",
+      "start": 26.808,
+      "end": 27.051
+    },
+    {
+      "word": "cash,",
+      "start": 27.168,
+      "end": 27.702
+    },
+    {
+      "word": "buildings,",
+      "start": 27.783,
+      "end": 28.247
+    },
+    {
+      "word": "and",
+      "start": 28.27,
+      "end": 28.363
+    },
+    {
+      "word": "equipment.",
+      "start": 28.41,
+      "end": 28.955
+    },
+    {
+      "word": "Liabilities",
+      "start": 29.501,
+      "end": 30.14
+    },
+    {
+      "word": "are",
+      "start": 30.198,
+      "end": 30.325
+    },
+    {
+      "word": "what",
+      "start": 30.349,
+      "end": 30.476
+    },
+    {
+      "word": "a",
+      "start": 30.511,
+      "end": 30.534
+    },
+    {
+      "word": "business",
+      "start": 30.616,
+      "end": 30.999
+    },
+    {
+      "word": "owes,",
+      "start": 31.045,
+      "end": 31.452
+    },
+    {
+      "word": "like",
+      "start": 31.568,
+      "end": 31.73
+    },
+    {
+      "word": "loans,",
+      "start": 31.8,
+      "end": 32.334
+    },
+    {
+      "word": "unpaid",
+      "start": 32.555,
+      "end": 32.915
+    },
+    {
+      "word": "bills,",
+      "start": 32.973,
+      "end": 33.333
+    },
+    {
+      "word": "and",
+      "start": 33.391,
+      "end": 33.565
+    },
+    {
+      "word": "debts.",
+      "start": 33.635,
+      "end": 34.099
+    },
+    {
+      "word": "Revenue",
+      "start": 34.738,
+      "end": 35.121
+    },
+    {
+      "word": "is",
+      "start": 35.156,
+      "end": 35.225
+    },
+    {
+      "word": "earned.",
+      "start": 35.272,
+      "end": 35.666
+    },
+    {
+      "word": "Profit",
+      "start": 35.98,
+      "end": 36.375
+    },
+    {
+      "word": "is",
+      "start": 36.409,
+      "end": 36.479
+    },
+    {
+      "word": "what's",
+      "start": 36.537,
+      "end": 36.746
+    },
+    {
+      "word": "left.",
+      "start": 36.816,
+      "end": 37.303
+    },
+    {
+      "word": "Assets",
+      "start": 37.617,
+      "end": 38.058
+    },
+    {
+      "word": "are",
+      "start": 38.104,
+      "end": 38.232
+    },
+    {
+      "word": "owned.",
+      "start": 38.279,
+      "end": 38.708
+    },
+    {
+      "word": "Liabilities",
+      "start": 39.068,
+      "end": 39.753
+    },
+    {
+      "word": "are",
+      "start": 39.8,
+      "end": 39.916
+    },
+    {
+      "word": "owed.",
+      "start": 39.962,
+      "end": 40.345
+    },
+    {
+      "word": "Follow",
+      "start": 40.926,
+      "end": 41.228
+    },
+    {
+      "word": "for",
+      "start": 41.286,
+      "end": 41.402
+    },
+    {
+      "word": "more",
+      "start": 41.471,
+      "end": 41.669
+    },
+    {
+      "word": "money",
+      "start": 41.715,
+      "end": 41.901
+    },
+    {
+      "word": "basics!",
+      "start": 41.971,
+      "end": 42.818
+    }
+  ]
+}
