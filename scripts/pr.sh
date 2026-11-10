@@ -10,7 +10,8 @@ BASE=main
 HEAD="$(git branch --show-current)"
 [ "$HEAD" != "$BASE" ] || { echo "✗ you're on $BASE — switch to develop first"; exit 1; }
 command -v gh >/dev/null || { echo "✗ GitHub CLI missing: brew install gh && gh auth login"; exit 1; }
-[ -z "$(git status --porcelain)" ] || { echo "✗ uncommitted changes — commit them first (/commit or ./scripts/ship.sh)"; exit 1; }
+# only commits go into the PR; uncommitted work (e.g. a reel in progress) stays on your Mac untouched
+[ -z "$(git status --porcelain)" ] || echo "• note: uncommitted changes stay local and are NOT in this PR (commit them first if they should be)"
 TITLE="${1:-$(git log -1 --format=%s "$HEAD")}"
 MERGE=1; [ "${2:-}" = "--no-merge" ] && MERGE=0
 
