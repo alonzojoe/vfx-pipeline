@@ -4,10 +4,31 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { MediaBin } from '@/components/editor/MediaBin'
 import { TitleBar } from '@/components/editor/TitleBar'
 import { useVfx } from '@/hooks/useVfx'
+import { usePlayback } from '@/hooks/usePlayback'
+import { Preview } from '@/components/editor/Preview'
+import { useEffect } from 'react'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
   const { info, project } = vfx
+  const pb = usePlayback(project?.duration ?? 0)
+
+  // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent): void => {
+      const t = e.target as HTMLElement
+      if (t.closest('input, textarea, select, [contenteditable]')) return
+      if (e.code === 'Space') {
+        e.preventDefault()
+        pb.toggle()
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        pb.setTime(pb.time + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / 30))
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [pb])
 
   if (info && !info.root) {
     return (
@@ -36,7 +57,7 @@ export default function App(): JSX.Element {
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
-          <main className="flex min-w-0 flex-1 flex-col bg-background" aria-label="Preview" />
+          <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
           <aside className="w-[340px] shrink-0 border-l bg-panel" aria-label="Chat and inspector" />
         </div>
         <section className="h-[300px] shrink-0 border-t bg-panel" aria-label="Timeline" />
