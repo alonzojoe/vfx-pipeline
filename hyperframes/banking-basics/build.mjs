@@ -8,6 +8,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { applyOverrides } from "../../scripts/overrides.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const S = JSON.parse(readFileSync(join(HERE, "script.json"), "utf8"));
@@ -402,6 +403,9 @@ sfxCues.sort((a, b) => a.at - b.at).forEach((c) => {
   });
 });
 
+// timeline edits from vfx Studio (overrides.json): moved clips + dropped media
+const OV = applyOverrides(HERE, { els, fx, audio, tl, total });
+
 // ---------- html ----------
 const html = `<!doctype html>
 <html lang="en" data-resolution="portrait">
@@ -547,4 +551,4 @@ const html = `<!doctype html>
 </html>
 `;
 writeFileSync(join(HERE, "index.html"), html);
-console.log(`✓ index.html  ${total.toFixed(1)}s  bg: ${BG || "none"}  ${hasVoice ? "(synced to voice)" : "(ESTIMATED timing, no voice yet)"}  · ${lines.length} lines · ${sfxCues.length} sfx`);
+console.log(`✓ index.html  ${total.toFixed(1)}s  bg: ${BG || "none"}  ${hasVoice ? "(synced to voice)" : "(ESTIMATED timing, no voice yet)"}  · ${lines.length} lines · ${sfxCues.length} sfx${OV.moved || OV.added ? `  · overrides: ${OV.moved} moved, ${OV.added} added` : ""}`);
