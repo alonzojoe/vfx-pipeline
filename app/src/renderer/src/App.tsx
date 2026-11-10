@@ -2,7 +2,7 @@ import { FolderOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { MediaBin } from '@/components/editor/MediaBin'
-import { TitleBar } from '@/components/editor/TitleBar'
+import { TitleBar, type Stages } from '@/components/editor/TitleBar'
 import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
@@ -22,7 +22,12 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const runs = useRuns(vfx.reload)
+  const runs = useRuns((run) => {
+    vfx.reload()
+    vfx.loadProjects()
+    // Export = render, then the review runs by itself
+    if (run.kind === 'render' && run.code === 0) runs.start('review', run.project)
+  })
   const rebuild = (): void => {
     if (vfx.current && !runs.active) runs.start('build', vfx.current)
   }
@@ -33,6 +38,25 @@ export default function App(): JSX.Element {
     setSelectedId(id)
     if (id) setTab('inspector')
   }
+  const summary = vfx.projects.find((p) => p.name === vfx.current) ?? null
+  const active = runs.active?.project === vfx.current ? runs.active?.kind : undefined
+  const stages: Stages = {
+    script: summary?.draft ? 'todo' : summary ? 'done' : 'todo',
+    voice: active === 'voice' || active === 'make' ? 'doing' : project?.hasVoice ? 'done' : 'todo',
+    build: active === 'build' ? 'doing' : project?.hasBuild && !summary?.draft ? 'done' : 'todo',
+    render: active === 'render' ? 'doing' : project?.hasFinal ? 'done' : 'todo'
+  }
+
+  /** + New reel: create new-reel (new-reel-2…), open it and focus the chat for the script */
+  const newReel = async (): Promise<void> => {
+    const name = await window.api.createProject()
+    await vfx.loadProjects()
+    vfx.setCurrent(name)
+    setSelectedId(null)
+    pb.setTime(0)
+    setTab('chat')
+  }
+
   const setReaction = async (line: number, sticker: string): Promise<void> => {
     if (!vfx.current) return
     await window.api.setLineReaction(vfx.current, line, sticker)
@@ -73,13 +97,14 @@ export default function App(): JSX.Element {
     <TooltipProvider delayDuration={300}>
       <div className="relative flex h-full flex-col">
         <TitleBar
-          project={vfx.current ?? undefined}
-          projects={vfx.projects.map((p) => p.name)}
-          status={{ voice: !!project?.hasVoice, build: !!project?.hasBuild, render: !!project?.hasFinal }}
-          onProject={vfx.setCurrent}
+          project={summary}
+          projects={vfx.projects}
+          stages={stages}
           busy={runs.active?.kind ?? null}
+          onProject={vfx.setCurrent}
+          onNew={newReel}
           onReview={() => vfx.current && runs.start('review', vfx.current)}
-          onMake={() => vfx.current && runs.start('make', vfx.current)}
+          onExport={() => vfx.current && runs.start('render', vfx.current)}
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
