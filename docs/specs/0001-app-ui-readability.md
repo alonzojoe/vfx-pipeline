@@ -1,6 +1,6 @@
 # Spec 0001 — vfx Studio: readable UI, Poppins, dark scrollbars
 
-Status: in progress · Branch: `develop` · Area: `app/` (renderer only)
+Status: done · Branch: `develop` · Area: `app/` (renderer only)
 
 ## Problem
 - Text across the app is small (10–13 px) and the muted gray is low-contrast on the dark panels, so labels,
@@ -30,7 +30,7 @@ Status: in progress · Branch: `develop` · Area: `app/` (renderer only)
 - Layout changes, new features, light theme. The reel's own fonts (Patrick Hand / Fredoka) are untouched.
 
 ## Acceptance
-- [ ] Screenshot of the app: every panel in Poppins, no light scrollbars or white gutters anywhere.
-- [ ] No text smaller than 12 px except the timeline ruler (11 px).
-- [ ] `npm run typecheck && npm test && npm run build` pass.
-- [ ] One commit per step: `docs:` spec → `style:` Poppins → `style:` scrollbars → `style:` readability.
+- [x] Screenshot of the app: every panel in Poppins, no light scrollbars or white gutters anywhere.
+- [x] No text smaller than 12 px except the timeline ruler (11 px).
+- [x] `npm run typecheck && npm test && npm run build` pass.
+- [x] One commit per step: `docs:` spec → `style:` Poppins → `style:` scrollbars → `style:` readability.
