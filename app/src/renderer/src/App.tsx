@@ -12,6 +12,8 @@ import { Timeline } from '@/components/editor/Timeline'
 import { RunConsole } from '@/components/editor/RunConsole'
 import { useRuns } from '@/hooks/useRuns'
 import { useEdits } from '@/hooks/useEdits'
+import { RightPanel } from '@/components/editor/RightPanel'
+import { Inspector } from '@/components/editor/Inspector'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -24,6 +26,17 @@ export default function App(): JSX.Element {
     if (vfx.current && !runs.active) runs.start('build', vfx.current)
   }
   const edits = useEdits(project, vfx.patch, rebuild)
+  const [tab, setTab] = useState('chat')
+  const selected = project?.clips.find((c) => c.id === selectedId) ?? null
+  const select = (id: string | null): void => {
+    setSelectedId(id)
+    if (id) setTab('inspector')
+  }
+  const setReaction = async (line: number, sticker: string): Promise<void> => {
+    if (!vfx.current) return
+    await window.api.setLineReaction(vfx.current, line, sticker)
+    rebuild()
+  }
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
@@ -71,7 +84,25 @@ export default function App(): JSX.Element {
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
           <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
-          <aside className="w-[340px] shrink-0 border-l bg-panel" aria-label="Chat and inspector" />
+          <RightPanel
+            tab={tab}
+            onTab={setTab}
+            chat={<p className="p-4 text-muted-foreground">Chat with Claude Code — coming in the next step.</p>}
+            inspector={
+              <Inspector
+                project={project}
+                media={vfx.media}
+                clip={selected}
+                onMove={edits.move}
+                onUpdate={edits.update}
+                onDelete={(c) => {
+                  edits.remove(c)
+                  setSelectedId(null)
+                }}
+                onReaction={setReaction}
+              />
+            }
+          />
         </div>
         <Timeline
           project={project}
@@ -79,7 +110,7 @@ export default function App(): JSX.Element {
           playing={pb.playing}
           selectedId={selectedId}
           onSeek={pb.setTime}
-          onSelect={setSelectedId}
+          onSelect={select}
           onMove={edits.move}
           onDropMedia={edits.dropMedia}
           onDelete={edits.remove}

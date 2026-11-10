@@ -17,6 +17,8 @@ export type Clip = {
   volume?: number
   /** true when the clip was added from the media bin (lives in overrides.json) */
   added?: boolean
+  /** added image/video position on the 1080×1920 frame */
+  box?: { x: number; y: number; w: number; h: number }
   /** line index in script.json (captions/avatar), when known */
   line?: number
 }

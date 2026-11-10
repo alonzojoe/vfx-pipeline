@@ -66,7 +66,13 @@ export function parseComposition(html: string): ParsedComposition {
       })
     } else if (id.startsWith('media-')) {
       const src = decodeURIComponent(a.src ?? '')
+      const px = (k: string): number | undefined => {
+        const v = new RegExp(`(?:^|;)\\s*${k}:\\s*(-?[\\d.]+)px`).exec(a.style ?? '')?.[1]
+        return v === undefined ? undefined : Number(v)
+      }
+      const box = a.style ? { x: px('left') ?? 140, y: px('top') ?? 520, w: px('width') ?? 800, h: px('height') ?? 800 } : undefined
       push('media', fileName(src), {
+        box,
         src,
         added: true,
         mediaStart: Number(a['data-media-start'] ?? 0),

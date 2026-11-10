@@ -14,7 +14,7 @@ const html = `
 <audio id="voice-1" src="assets/voice/script.mp3" data-start="0.1" data-media-start="0.04" data-duration="5" data-volume="1"></audio>
 <audio id="sfx-3-question-l1" src="general/sfx/x.mp3" data-start="2" data-duration="0.5" data-volume="0.16"></audio>
 <audio id="sfx-4-pop" src="general/sfx/pop.mp3" data-start="2.1" data-duration="0.4" data-volume="0.4"></audio>
-<img id="media-1" class="clip" src="assets/media/logo.png" data-start="3" data-duration="2" />
+<img id="media-1" class="clip" src="assets/media/logo.png" style="position:absolute;left:100px;top:520px;width:800px;height:600px" data-start="3" data-duration="2" />
 </div>`
 
 const p = parseComposition(html)
@@ -32,5 +32,6 @@ assert.equal(by('voice-1').mediaStart, 0.04)
 assert.equal(by('sfx-3-question-l1').label, 'question layer')
 assert.equal(by('sfx-4-pop').label, 'pop')
 assert.equal(by('media-1').track, 'media')
+assert.deepEqual(by('media-1').box, { x: 100, y: 520, w: 800, h: 600 })
 assert.ok(!p.clips.some((c) => c.id === 'channel-badge'))
 console.log('timeline.test ✓', p.clips.length, 'clips')
