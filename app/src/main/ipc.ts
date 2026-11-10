@@ -9,6 +9,7 @@ import { getProject, gitBranch, listProjects, setLineReaction } from './services
 import { getRoot, setRoot } from './services/settings'
 import { hasClaude } from './services/shell'
 import { startRun, stopRun } from './services/runner'
+import { sendChat, stopChat } from './services/chat'
 
 const need = (): string => {
   const r = getRoot()
@@ -63,6 +64,10 @@ export function registerIpc(win: BrowserWindow): void {
   ipcMain.handle('overrides:set', (_e, project: string, o: Overrides) => writeOverrides(need(), project, o))
   ipcMain.handle('run:start', (_e, kind: RunKind, project: string) => startRun(win, need(), kind, project))
   ipcMain.handle('run:stop', (_e, runId: string) => stopRun(runId))
+  ipcMain.handle('chat:send', (_e, message: string, project: string | null, fresh: boolean) =>
+    sendChat(win, need(), message, project, fresh)
+  )
+  ipcMain.handle('chat:stop', () => stopChat())
   ipcMain.handle('shell:open', (_e, rel: string) => shell.openPath(inside(need(), rel)))
   ipcMain.handle('shell:reveal', (_e, rel: string) => shell.showItemInFolder(inside(need(), rel)))
 }

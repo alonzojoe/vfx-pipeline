@@ -14,6 +14,7 @@ import { useRuns } from '@/hooks/useRuns'
 import { useEdits } from '@/hooks/useEdits'
 import { RightPanel } from '@/components/editor/RightPanel'
 import { Inspector } from '@/components/editor/Inspector'
+import { Chat } from '@/components/editor/Chat'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -87,7 +88,7 @@ export default function App(): JSX.Element {
           <RightPanel
             tab={tab}
             onTab={setTab}
-            chat={<p className="p-4 text-muted-foreground">Chat with Claude Code — coming in the next step.</p>}
+            chat={<Chat project={vfx.current} available={!!info?.claudeAvailable} />}
             inspector={
               <Inspector
                 project={project}
