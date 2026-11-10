@@ -1,6 +1,6 @@
 # Spec 0003 — vfx Studio: New reel flow (paste a script → reel, no terminal)
 
-Status: in progress · Branch: `develop` · Design: Claude Design canvas "vfx-pipeline Studio UI" → "New reel flow"
+Status: done (voice step verified up to the ElevenLabs call; needs the .env key on the Mac) · Branch: `develop` · Design: Claude Design canvas "vfx-pipeline Studio UI" → "New reel flow"
 (0002 is reserved for the code-review fixes.)
 
 ## Problem
@@ -15,7 +15,8 @@ then running `MAKE-REEL.command` in Terminal for the ElevenLabs voice.
    Files can be dropped in right away. Preview shows "Your reel appears here"; timeline is empty.
 3. The chat opens focused: "Created new-reel · paste your script". Joe pastes his script (or a topic).
 4. Claude (chat) **auto-renames** the reel from the topic first (`./scripts/rename-project.sh new-reel <slug>`),
-   then writes `script.json` + the cards (Joe's words verbatim, BRAND.md rules, CTA auto) and builds a preview.
+   then writes `script.json` + the cards (Joe's words verbatim, BRAND.md rules, CTA auto) and the TOPICS row.
+   The app then builds the preview itself (headless Claude can't be trusted to run builds).
    The app follows the rename and switches to the new folder.
 5. When the script is in and there's no voice yet, the app **generates the ElevenLabs voice by itself**
    (`make.sh --no-render`: voice → synced build). A checklist in the chat shows each step; the stepper in the
@@ -37,8 +38,8 @@ then running `MAKE-REEL.command` in Terminal for the ElevenLabs voice.
 "Look first" frames checkpoint, export pack (captions/hashtags), script-check warnings — next specs.
 
 ## Acceptance
-- [ ] + New reel creates and opens `new-reel` (or `new-reel-N`) with empty preview/timeline; drops land in it.
-- [ ] Pasting a script renames the reel from its topic and the app switches to the renamed folder.
-- [ ] The voice is generated from the app (no Terminal), then the timeline shows captions/cards/avatar/voice.
-- [ ] Export renders `<slug>-FINAL.mp4` and runs the review.
-- [ ] `npm run typecheck && npm test && npm run build` pass; one commit per step, `type: message`, no attribution.
+- [x] + New reel creates and opens `new-reel` (or `new-reel-N`) with empty preview/timeline; drops land in it.
+- [x] Pasting a script renames the reel from its topic and the app switches to the renamed folder.
+- [x] The voice is generated from the app (no Terminal), then the timeline shows captions/cards/avatar/voice.
+- [x] Export renders `<slug>-FINAL.mp4` and runs the review.
+- [x] `npm run typecheck && npm test && npm run build` pass; one commit per step, `type: message`, no attribution.
