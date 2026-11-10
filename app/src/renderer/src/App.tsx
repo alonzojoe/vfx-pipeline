@@ -107,7 +107,7 @@ export default function App(): JSX.Element {
           onExport={() => vfx.current && runs.start('render', vfx.current)}
         />
         <div className="flex min-h-0 flex-1">
-          <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
+          <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} onNew={newReel} />
           <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
           <RightPanel
             tab={tab}
