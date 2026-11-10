@@ -9,6 +9,8 @@ import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { Preview } from '@/components/editor/Preview'
 import { useEffect, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
+import { RunConsole } from '@/components/editor/RunConsole'
+import { useRuns } from '@/hooks/useRuns'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -16,6 +18,7 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const runs = useRuns(vfx.reload)
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
@@ -49,15 +52,16 @@ export default function App(): JSX.Element {
 
   return (
     <TooltipProvider delayDuration={300}>
-      <div className="flex h-full flex-col">
+      <div className="relative flex h-full flex-col">
         <TitleBar
           project={vfx.current ?? undefined}
           projects={vfx.projects.map((p) => p.name)}
           branch={info?.branch ?? undefined}
           status={{ voice: !!project?.hasVoice, build: !!project?.hasBuild, render: !!project?.hasFinal }}
           onProject={vfx.setCurrent}
-          onReview={() => {}}
-          onMake={() => {}}
+          busy={runs.active?.kind ?? null}
+          onReview={() => vfx.current && runs.start('review', vfx.current)}
+          onMake={() => vfx.current && runs.start('make', vfx.current)}
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} />
@@ -72,6 +76,7 @@ export default function App(): JSX.Element {
           onSeek={pb.setTime}
           onSelect={setSelectedId}
         />
+        <RunConsole run={runs.last} onStop={runs.stop} onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)} />
       </div>
     </TooltipProvider>
   )

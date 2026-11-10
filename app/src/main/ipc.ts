@@ -1,13 +1,14 @@
 import { BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import { existsSync, watch, type FSWatcher } from 'node:fs'
 import { join } from 'node:path'
-import type { AppInfo, Overrides } from '../shared/types'
+import type { AppInfo, Overrides, RunKind } from '../shared/types'
 import { importFiles, mediaLibrary } from './services/media'
 import { readOverrides, writeOverrides } from './services/overrides'
 import { inside } from './services/paths'
 import { getProject, gitBranch, listProjects, setLineReaction } from './services/projects'
 import { getRoot, setRoot } from './services/settings'
 import { hasClaude } from './services/shell'
+import { startRun, stopRun } from './services/runner'
 
 const need = (): string => {
   const r = getRoot()
@@ -60,6 +61,8 @@ export function registerIpc(win: BrowserWindow): void {
   ipcMain.handle('media:import', (_e, project: string, files: string[]) => importFiles(need(), project, files))
   ipcMain.handle('overrides:get', (_e, project: string) => readOverrides(need(), project))
   ipcMain.handle('overrides:set', (_e, project: string, o: Overrides) => writeOverrides(need(), project, o))
+  ipcMain.handle('run:start', (_e, kind: RunKind, project: string) => startRun(win, need(), kind, project))
+  ipcMain.handle('run:stop', (_e, runId: string) => stopRun(runId))
   ipcMain.handle('shell:open', (_e, rel: string) => shell.openPath(inside(need(), rel)))
   ipcMain.handle('shell:reveal', (_e, rel: string) => shell.showItemInFolder(inside(need(), rel)))
 }
