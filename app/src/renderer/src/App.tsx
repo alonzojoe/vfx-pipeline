@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
 import { RunConsole } from '@/components/editor/RunConsole'
 import { useRuns } from '@/hooks/useRuns'
+import { useEdits } from '@/hooks/useEdits'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -19,6 +20,10 @@ export default function App(): JSX.Element {
   useAudioEngine(project, pb.time, pb.playing)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const runs = useRuns(vfx.reload)
+  const rebuild = (): void => {
+    if (vfx.current && !runs.active) runs.start('build', vfx.current)
+  }
+  const edits = useEdits(project, vfx.patch, rebuild)
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
@@ -75,6 +80,9 @@ export default function App(): JSX.Element {
           selectedId={selectedId}
           onSeek={pb.setTime}
           onSelect={setSelectedId}
+          onMove={edits.move}
+          onDropMedia={edits.dropMedia}
+          onDelete={edits.remove}
         />
         <RunConsole run={runs.last} onStop={runs.stop} onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)} />
       </div>

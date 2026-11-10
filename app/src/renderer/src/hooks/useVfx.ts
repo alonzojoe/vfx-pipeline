@@ -48,5 +48,8 @@ export function useVfx() {
     if (i.root) await loadProjects()
   }, [loadProjects])
 
-  return { info, projects, current, setCurrent, project, media, error, reload, loadProjects, chooseRoot, setMedia }
+  /** optimistic local edit of the open project (the rebuild then replaces it with the real result) */
+  const patch = useCallback((fn: (p: ProjectDetail) => ProjectDetail) => setProject((p) => (p ? fn(p) : p)), [])
+
+  return { info, projects, current, setCurrent, project, media, error, reload, loadProjects, chooseRoot, setMedia, patch }
 }
