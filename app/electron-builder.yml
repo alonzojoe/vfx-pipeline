@@ -1,0 +1,21 @@
+appId: com.knowledgebyjoe.vfxstudio
+productName: vfx Studio
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+mac:
+  category: public.app-category.video
+  icon: build/icon.png
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+  # Not signed/notarized (personal use): first launch = right-click the app → Open.
+  identity: null
+  hardenedRuntime: false
+  darkModeSupport: true
+dmg:
+  artifactName: ${productName}-${version}-${arch}.${ext}
+npmRebuild: false
