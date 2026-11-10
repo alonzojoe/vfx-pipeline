@@ -7,14 +7,14 @@ import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { Preview } from '@/components/editor/Preview'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
 import { RunConsole } from '@/components/editor/RunConsole'
 import { useRuns } from '@/hooks/useRuns'
 import { useEdits } from '@/hooks/useEdits'
 import { RightPanel } from '@/components/editor/RightPanel'
 import { Inspector } from '@/components/editor/Inspector'
-import { Chat } from '@/components/editor/Chat'
+import { Chat, type VoiceState } from '@/components/editor/Chat'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
@@ -48,6 +48,7 @@ export default function App(): JSX.Element {
   }
 
   /** + New reel: create new-reel (new-reel-2…), open it and focus the chat for the script */
+  const [newKey, setNewKey] = useState(0)
   const newReel = async (): Promise<void> => {
     const name = await window.api.createProject()
     await vfx.loadProjects()
@@ -55,7 +56,27 @@ export default function App(): JSX.Element {
     setSelectedId(null)
     pb.setTime(0)
     setTab('chat')
+    setNewKey((k) => k + 1)
   }
+
+  // the chat renames the new reel from its topic → follow it
+  const currentRef = useRef(vfx.current)
+  currentRef.current = vfx.current
+  const onRenamed = async (to: string): Promise<void> => {
+    currentRef.current = to
+    await vfx.loadProjects()
+    vfx.setCurrent(to)
+  }
+  // when the script is in and there's no voice yet, make it with ElevenLabs (make.sh --no-render) — no terminal
+  const onChatDone = async (ok: boolean): Promise<void> => {
+    const name = currentRef.current
+    await vfx.loadProjects()
+    if (!ok || !name) return
+    const p = await window.api.getProject(name)
+    if (p.lines.length && !p.hasVoice && !runs.active) runs.start('voice', name)
+  }
+  const lastVoice = [...runs.runs].reverse().find((r) => r.kind === 'voice' && r.project === vfx.current)
+  const voice: VoiceState = lastVoice && !lastVoice.done ? 'doing' : lastVoice?.done && lastVoice.code !== 0 ? 'failed' : project?.hasVoice ? 'done' : 'todo'
 
   const setReaction = async (line: number, sticker: string): Promise<void> => {
     if (!vfx.current) return
@@ -112,7 +133,17 @@ export default function App(): JSX.Element {
           <RightPanel
             tab={tab}
             onTab={setTab}
-            chat={<Chat project={vfx.current} available={!!info?.claudeAvailable} />}
+            chat={
+              <Chat
+                project={vfx.current}
+                available={!!info?.claudeAvailable}
+                draft={!!summary?.draft}
+                voice={voice}
+                onRenamed={onRenamed}
+                onDone={onChatDone}
+                newKey={newKey}
+              />
+            }
             inspector={
               <Inspector
                 project={project}

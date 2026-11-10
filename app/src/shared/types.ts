@@ -99,6 +99,8 @@ export type ChatEvent =
   | { id: string; type: 'tool'; name: string; detail: string }
   | { id: string; type: 'error'; text: string }
   | { id: string; type: 'done'; ok: boolean; cost?: number }
+  /** a new reel was renamed from its topic (scripts/rename-project.sh printed "renamed a → b") */
+  | { id: string; type: 'renamed'; from: string; to: string }
 
 export type AppInfo = {
   root: string | null
