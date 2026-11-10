@@ -1,0 +1,36 @@
+{
+  "name": "vfx-studio",
+  "productName": "vfx Studio",
+  "version": "0.1.0",
+  "description": "Desktop editor for the Knowledge by Joe reel pipeline (HyperFrames + GSAP + ElevenLabs).",
+  "author": "Joe (Knowledge by Joe)",
+  "private": true,
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "dist:mac": "npm run build && electron-builder --mac --arm64 --x64",
+    "dist:mac:arm64": "npm run build && electron-builder --mac --arm64",
+    "dist:mac:x64": "npm run build && electron-builder --mac --x64",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "3.0.2",
+    "@electron-toolkit/utils": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.3.4",
+    "electron": "33.4.11",
+    "electron-builder": "25.1.8",
+    "electron-vite": "2.3.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.6.3",
+    "vite": "5.4.21"
+  }
+}
