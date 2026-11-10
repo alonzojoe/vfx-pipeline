@@ -14,7 +14,8 @@
     "dist:mac": "npm run build && electron-builder --mac --arm64 --x64",
     "dist:mac:arm64": "npm run build && electron-builder --mac --arm64",
     "dist:mac:x64": "npm run build && electron-builder --mac --x64",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "test": "tsx src/main/services/timeline.test.ts"
   },
   "dependencies": {
     "@electron-toolkit/preload": "3.0.2",
@@ -45,6 +46,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.19.2",
     "typescript": "5.6.3",
     "vite": "5.4.21"
   }
