@@ -112,6 +112,9 @@ export default function App(): JSX.Element {
       if (e.code === 'Space') {
         e.preventDefault()
         pb.toggle()
+      } else if (e.key === 'Home' || e.key === 'End') {
+        e.preventDefault()
+        pb.setTime(e.key === 'Home' ? 0 : (project?.duration ?? 0))
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault()
         pb.setTime(pb.time + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / 30))
@@ -119,7 +122,7 @@ export default function App(): JSX.Element {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [pb])
+  }, [pb, project?.duration])
 
   if (info && !info.root) {
     return (
