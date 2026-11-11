@@ -20,7 +20,7 @@ export default function App(): JSX.Element {
   const vfx = useVfx()
   const { info, project } = vfx
   const pb = usePlayback(project?.duration ?? 0)
-  useAudioEngine(project, pb.time, pb.playing)
+  useAudioEngine(project, pb.time, pb.playing, pb.seekId)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // new reel: after the chat writes the script → preview build → ElevenLabs voice (no terminal)
   const pendingVoice = useRef<string | null>(null)

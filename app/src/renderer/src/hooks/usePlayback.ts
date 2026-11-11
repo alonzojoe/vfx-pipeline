@@ -5,10 +5,18 @@ import { clamp } from '@/lib/time'
 export function usePlayback(duration: number) {
   const [time, setTimeState] = useState(0)
   const [playing, setPlaying] = useState(false)
+  /** bumps on every jump (buttons, keys, scrubbing) — not on normal playback — so audio can re-sync */
+  const [seekId, setSeekId] = useState(0)
   const raf = useRef(0)
   const last = useRef(0)
 
-  const setTime = useCallback((t: number) => setTimeState(clamp(t, 0, duration || 0)), [duration])
+  const setTime = useCallback(
+    (t: number) => {
+      setTimeState(clamp(t, 0, duration || 0))
+      setSeekId((n) => n + 1)
+    },
+    [duration]
+  )
 
   useEffect(() => {
     if (!playing) return
@@ -37,5 +45,5 @@ export function usePlayback(duration: number) {
     })
   }, [duration])
 
-  return { time, setTime, playing, setPlaying, toggle }
+  return { time, setTime, playing, setPlaying, toggle, seekId }
 }
