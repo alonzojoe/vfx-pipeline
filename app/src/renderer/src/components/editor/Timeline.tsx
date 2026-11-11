@@ -137,7 +137,7 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
 
   return (
     <section aria-label="Timeline" className="flex h-[300px] shrink-0 flex-col border-t bg-panel">
-      <div className="flex h-10 shrink-0 items-center gap-2 border-b border-[#1f1f23] px-3">
+      <div className="flex h-10 shrink-0 items-center gap-2 border-b border-subtle px-3">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -172,13 +172,13 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
       <div ref={scroller} className="relative min-h-0 flex-1 overflow-auto">
         <div className="relative" style={{ width: width + HEADER }}>
           {/* ruler */}
-          <div className="sticky top-0 z-20 flex border-b border-[#1f1f23] bg-panel" style={{ height: RULER }}>
-            <div className="sticky left-0 z-10 shrink-0 border-r border-[#1f1f23] bg-panel" style={{ width: HEADER }} />
+          <div className="sticky top-0 z-20 flex border-b border-subtle bg-panel" style={{ height: RULER }}>
+            <div className="sticky left-0 z-10 shrink-0 border-r border-subtle bg-panel" style={{ width: HEADER }} />
             <div className="relative cursor-col-resize" style={{ width }} onPointerDown={scrub}>
               {ticks.out.map((s) => (
                 <span
                   key={s}
-                  className="absolute top-0 h-full border-l border-zinc-800 pl-1 font-mono text-[11px] leading-6 text-zinc-400"
+                  className="absolute top-0 h-full border-l border-border pl-1 font-mono text-[11px] leading-6 text-muted-foreground"
                   style={{ left: s * pps }}
                 >
                   {Number.isInteger(s) ? `${s}s` : ''}
@@ -192,16 +192,16 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
             const T = TRACK[kind]
             const rowH = rows > 1 ? Math.max(22, T.h - 6) : T.h
             return (
-              <div key={kind} className="flex border-t border-[#1a1a1d]" style={{ height: rowH * rows }}>
+              <div key={kind} className="flex border-t border-subtle" style={{ height: rowH * rows }}>
                 <div
-                  className="sticky left-0 z-10 flex shrink-0 items-center gap-2 border-r border-[#1f1f23] bg-panel px-3 font-medium text-zinc-300"
+                  className="sticky left-0 z-10 flex shrink-0 items-center gap-2 border-r border-subtle bg-panel px-3 font-medium text-foreground"
                   style={{ width: HEADER }}
                 >
                   <span className="h-2 w-2 rounded-sm" style={{ background: T.dot }} />
                   {T.name}
                 </div>
                 <div
-                  className={cn('relative', kind === 'media' && 'bg-[repeating-linear-gradient(90deg,transparent,transparent_23px,#16161a_23px,#16161a_24px)]')}
+                  className={cn('relative', kind === 'media' && 'bg-[repeating-linear-gradient(90deg,transparent,transparent_23px,var(--lane-stripe)_23px,var(--lane-stripe)_24px)]')}
                   style={{ width }}
                   onPointerDown={scrub}
                   onDragOver={(e) => {
@@ -230,7 +230,7 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
                           if ((e.key === 'Backspace' || e.key === 'Delete') && c.added) onDelete?.(c)
                         }}
                         className={cn(
-                          'absolute flex items-center gap-1 overflow-hidden whitespace-nowrap rounded-md border px-1.5 text-xs font-medium text-zinc-50',
+                          'absolute flex items-center gap-1 overflow-hidden whitespace-nowrap rounded-md border px-1.5 text-xs font-medium text-foreground',
                           T.bg,
                           selectedId === c.id ? 'border-primary ring-1 ring-primary' : 'border-white/5 hover:border-white/25',
                           MOVABLE.has(c.track) && onMove ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',

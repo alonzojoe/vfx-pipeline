@@ -71,7 +71,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
 
   return (
     <main aria-label="Preview" className="flex min-w-0 flex-1 flex-col bg-background">
-      <div className="flex h-10 shrink-0 items-center gap-3 border-b border-[#1f1f23] px-3.5 text-xs text-muted-foreground">
+      <div className="flex h-10 shrink-0 items-center gap-3 border-b border-subtle px-3.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">Preview</span>
         <span>1080 × 1920 · 30 fps</span>
         <div className="flex-1" />
@@ -90,11 +90,11 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
       <div ref={box} className="relative flex min-h-0 flex-1 items-center justify-center">
         {project?.draft ? (
           <div
-            className="flex flex-col items-center justify-center gap-5 rounded-xl border-2 border-dashed border-zinc-700 p-6 text-center"
+            className="flex flex-col items-center justify-center gap-5 rounded-xl border-2 border-dashed border-input p-6 text-center"
             style={{ width: w, height: h }}
           >
             <div className="text-[15px] font-semibold">Your reel appears here</div>
-            <ol className="flex flex-col gap-3 text-left text-sm text-zinc-300">
+            <ol className="flex flex-col gap-3 text-left text-sm text-foreground">
               {['Paste your script in the chat', 'I build the cards + ElevenLabs voice', 'Tweak on the timeline, export'].map((t, i) => (
                 <li key={t} className="flex items-center gap-2.5">
                   <span className={cn('flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold', i === 0 ? 'bg-primary text-white' : 'bg-secondary')}>
@@ -106,7 +106,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
             </ol>
           </div>
         ) : project ? (
-          <div className="relative overflow-hidden rounded-xl shadow-[0_0_0_1px_#27272a,0_30px_60px_rgba(0,0,0,.55)]" style={{ width: w, height: h }}>
+          <div className="relative overflow-hidden rounded-xl shadow-[0_0_0_1px_hsl(var(--border)),0_30px_60px_rgba(0,0,0,.35)]" style={{ width: w, height: h }}>
             {final && project.finalUrl ? (
               <video ref={video} src={project.finalUrl} className="h-full w-full" playsInline />
             ) : (
@@ -133,7 +133,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
         )}
       </div>
 
-      <div className="flex h-[50px] shrink-0 items-center justify-center gap-3 border-t border-[#1f1f23]">
+      <div className="flex h-[50px] shrink-0 items-center justify-center gap-3 border-t border-subtle">
         <Button variant="ghost" size="icon" aria-label="Go to start" title="Start (Home)" onClick={() => onTime(0)} disabled={!project}>
           <SkipBack />
         </Button>
@@ -144,7 +144,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
           aria-label={playing ? 'Pause' : 'Play'}
           onClick={onToggle}
           disabled={!project}
-          className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-foreground text-background hover:bg-white disabled:opacity-40"
+          className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-foreground text-background hover:opacity-90 disabled:opacity-40"
         >
           {playing ? <Pause className="h-3.5 w-3.5 fill-current" /> : <Play className="ml-0.5 h-3.5 w-3.5 fill-current" />}
         </button>
@@ -154,7 +154,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
         <Button variant="ghost" size="icon" aria-label="Go to end" title="End (End)" onClick={() => onTime(project?.duration ?? 0)} disabled={!project}>
           <SkipForward />
         </Button>
-        <span className="tabular font-mono text-xs text-zinc-300">
+        <span className="tabular font-mono text-xs text-foreground">
           {fmt(time)} <span className="text-muted-foreground">/ {fmt(project?.duration ?? 0)}</span>
         </span>
       </div>

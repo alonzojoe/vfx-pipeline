@@ -3,6 +3,7 @@ import { ChevronDown, ClipboardCheck, Download, Folder, Plus } from 'lucide-reac
 import type { ProjectSummary } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { ThemeSwitch } from './ThemeSwitch'
 
 export type StageState = 'done' | 'doing' | 'todo'
 export type Stages = { script: StageState; voice: StageState; build: StageState; render: StageState }
@@ -59,7 +60,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="flex h-8 items-center gap-2 rounded-lg border border-input bg-[#1c1c1f] px-2.5 text-sm hover:bg-[#232327]"
+        className="flex h-8 items-center gap-2 rounded-lg border border-input bg-surface-2 px-2.5 text-sm hover:bg-surface-3"
       >
         <Folder className="h-3.5 w-3.5 text-muted-foreground" />
         <span className="max-w-[220px] truncate">{project?.name ?? 'No reel'}</span>
@@ -73,7 +74,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
               setOpen(false)
               onNew()
             }}
-            className="flex w-full items-center gap-2.5 rounded-lg bg-primary/10 p-2.5 text-left text-sm font-semibold text-[#ff8a73] hover:bg-primary/20"
+            className="flex w-full items-center gap-2.5 rounded-lg bg-primary/10 p-2.5 text-left text-sm font-semibold text-primary hover:bg-primary/20"
           >
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-white">
               <Plus className="h-4 w-4" />
@@ -110,7 +111,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
 export function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport }: Props): JSX.Element {
   const ready = !!project && !project.draft
   return (
-    <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-[#141416] pl-[84px] pr-3">
+    <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-titlebar pl-[84px] pr-3">
       <div className="flex items-center gap-2">
         <span className="flex h-[22px] w-[22px] items-center justify-center rounded-md bg-primary">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
@@ -130,6 +131,8 @@ export function TitleBar({ project, projects, stages, busy, onProject, onNew, on
         <Stage label="Build" state={stages.build} />
         <Stage label="Render" state={stages.render} />
       </div>
+
+      <ThemeSwitch />
 
       <Button variant="outline" className="no-drag" onClick={onReview} disabled={!ready || !!busy}>
         <ClipboardCheck />

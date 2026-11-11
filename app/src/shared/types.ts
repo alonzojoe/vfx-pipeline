@@ -107,3 +107,7 @@ export type AppInfo = {
   branch: string | null
   claudeAvailable: boolean
 }
+
+/** App appearance: follow macOS, or force light/dark. Saved in the app's settings.json. */
+export type ThemeSource = 'system' | 'light' | 'dark'
+export type ThemeState = { source: ThemeSource; dark: boolean }

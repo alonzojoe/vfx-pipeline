@@ -9,8 +9,26 @@ import type {
   ProjectDetail,
   ProjectSummary,
   RunEvent,
-  RunKind
+  RunKind,
+  ThemeSource,
+  ThemeState
 } from '../shared/types'
+
+// Theme before first paint: ask main for the saved theme synchronously, then tag <html> the moment the parser
+// creates it (the preload runs before it exists). CSS reads html.dark / html.light — no flash, any platform.
+const applyTheme = (dark: boolean): void => {
+  document.documentElement.classList.toggle('dark', dark)
+  document.documentElement.classList.toggle('light', !dark)
+}
+const initialTheme = ipcRenderer.sendSync('theme:initial') as ThemeState
+if (document.documentElement) applyTheme(initialTheme.dark)
+else
+  new MutationObserver((_, obs) => {
+    if (!document.documentElement) return
+    applyTheme(initialTheme.dark)
+    obs.disconnect()
+  }).observe(document, { childList: true })
+ipcRenderer.on('theme:changed', (_e, t: ThemeState) => applyTheme(t.dark))
 
 const on = <T>(channel: string, cb: (payload: T) => void): (() => void) => {
   const fn = (_: unknown, payload: T): void => cb(payload)
@@ -19,6 +37,9 @@ const on = <T>(channel: string, cb: (payload: T) => void): (() => void) => {
 }
 
 const api = {
+  getTheme: (): Promise<ThemeState> => ipcRenderer.invoke('theme:get'),
+  setTheme: (source: ThemeSource): Promise<ThemeState> => ipcRenderer.invoke('theme:set', source),
+  onThemeChanged: (cb: (t: ThemeState) => void): (() => void) => on('theme:changed', cb),
   info: (): Promise<AppInfo> => ipcRenderer.invoke('app:info'),
   chooseRoot: (): Promise<AppInfo> => ipcRenderer.invoke('app:chooseRoot'),
   listProjects: (): Promise<ProjectSummary[]> => ipcRenderer.invoke('projects:list'),

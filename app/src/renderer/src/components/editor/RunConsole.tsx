@@ -72,7 +72,7 @@ export function RunConsole({
         )}
       </div>
       {open && (
-        <pre ref={pre} className={cn('max-h-[260px] overflow-auto whitespace-pre-wrap p-3 font-mono text-xs leading-relaxed text-zinc-300')}>
+        <pre ref={pre} className={cn('max-h-[260px] overflow-auto whitespace-pre-wrap p-3 font-mono text-xs leading-relaxed text-foreground')}>
           {run.log || 'Starting…'}
         </pre>
       )}

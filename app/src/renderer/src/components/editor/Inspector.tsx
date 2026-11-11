@@ -79,9 +79,9 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
       <div className="flex flex-col gap-4 p-4">
         <div className="flex items-center gap-3">
           {isImage ? (
-            <img src={vfxUrlOf(clip.src!)} alt="" className="h-[52px] w-[52px] rounded-lg bg-[#1c1c1f] object-contain" />
+            <img src={vfxUrlOf(clip.src!)} alt="" className="h-[52px] w-[52px] rounded-lg bg-surface-2 object-contain" />
           ) : (
-            <span className="flex h-[52px] w-[52px] items-center justify-center rounded-lg bg-[#1c1c1f] text-xs text-muted-foreground">
+            <span className="flex h-[52px] w-[52px] items-center justify-center rounded-lg bg-surface-2 text-xs text-muted-foreground">
               {TRACK_NAME[clip.track]}
             </span>
           )}
@@ -90,7 +90,7 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
               {TRACK_NAME[clip.track]} · {clip.label || clip.id}
             </div>
             {line && <div className="truncate text-xs text-muted-foreground">Line {clip.line! + 1} · “{line.text}”</div>}
-            <div className="font-mono text-xs text-zinc-500">{clip.id}</div>
+            <div className="font-mono text-xs text-foreground0">{clip.id}</div>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
                     aria-label={`Use ${name}`}
                     onClick={() => onReaction(clip.line!, name)}
                     className={cn(
-                      'rounded-md border border-transparent bg-[#1c1c1f] p-1 hover:border-primary/60',
+                      'rounded-md border border-transparent bg-surface-2 p-1 hover:border-primary/60',
                       name === clip.label && 'border-primary'
                     )}
                   >

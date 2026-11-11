@@ -2,31 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-/* vfx Studio — dark zinc (shadcn) + Knowledge by Joe orange (#ff4d2e) as the primary */
+/* vfx Studio themes — shadcn zinc + Knowledge by Joe orange (#ff4d2e) as the primary.
+   The preload tags <html> with .dark / .light before the first paint (from the saved System / Light / Dark choice,
+   applied with Electron's nativeTheme), so the right theme shows from the first frame. */
 @layer base {
-  :root,
-  .dark {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --panel: 240 5% 97%;
+    --titlebar: 240 5% 94%;
+    --surface: 0 0% 100%; /* inputs, list rows */
+    --surface-2: 240 5% 96%; /* tiles, buttons */
+    --surface-3: 240 5% 92%; /* hover */
+    --subtle: 240 6% 91%; /* hairlines between sections */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+    --primary: 9 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 92%;
+    --secondary-foreground: 240 10% 4%;
+    --muted: 240 5% 94%;
+    --muted-foreground: 240 4% 36%; /* ≥ 4.5:1 on the panels */
+    --accent: 240 5% 92%;
+    --accent-foreground: 240 10% 4%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 86%;
+    --input: 240 6% 84%;
+    --ring: 9 100% 59%;
+    --radius: 0.6rem;
+    --scroll-thumb: #c4c4cc;
+    --scroll-thumb-hover: #a1a1aa;
+    --wave: #16a34a;
+    --track-captions: #e4e4e7;
+    --track-cards: #dbe5ff;
+    --track-avatar: #ffe1d9;
+    --track-fx: #fdecc8;
+    --track-voice: #dcfce7;
+    --track-sfx: #ede5ff;
+    --track-bg: #e9e9ec;
+    --track-media: #d5f3f8;
+    --lane-stripe: #ededf0;
+  }
+
+  :root.dark {
     --background: 240 8% 5%; /* #0b0b0d */
     --foreground: 0 0% 98%;
     --panel: 240 5% 7%; /* #111113 */
+    --titlebar: 240 5% 8%; /* #141416 */
+    --surface: 240 6% 10%; /* #17171a */
+    --surface-2: 240 5% 12%; /* #1c1c1f */
+    --surface-3: 240 5% 15%; /* #232327 */
+    --subtle: 240 6% 13%; /* #1f1f23 */
     --card: 240 5% 7%;
     --card-foreground: 0 0% 98%;
     --popover: 240 6% 8%;
     --popover-foreground: 0 0% 98%;
-    --primary: 9 100% 59%; /* #ff4d2e brand orange */
-    --primary-foreground: 0 0% 100%;
     --secondary: 240 4% 14%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 4% 11%;
-    --muted-foreground: 240 5% 72%; /* ≥ 4.5:1 on the panels */
+    --muted-foreground: 240 5% 72%;
     --accent: 240 4% 15%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
     --border: 240 4% 16%; /* #27272a */
     --input: 240 4% 20%;
-    --ring: 9 100% 59%;
-    --radius: 0.6rem;
+    --scroll-thumb: #3f3f46;
+    --scroll-thumb-hover: #52525b;
+    --wave: #4ade80;
+    --track-captions: #27272a;
+    --track-cards: #1b2a55;
+    --track-avatar: #45201a;
+    --track-fx: #3d2c0b;
+    --track-voice: #0f3324;
+    --track-sfx: #2d1f52;
+    --track-bg: #1f1f23;
+    --track-media: #123c45;
+    --lane-stripe: #16161a;
   }
 }
 
@@ -35,7 +89,10 @@
     @apply border-border;
   }
   html {
-    color-scheme: dark; /* native controls + scrollbars render dark */
+    color-scheme: light; /* native controls + scrollbars follow the theme */
+  }
+  html.dark {
+    color-scheme: dark;
   }
   html,
   body,
@@ -69,16 +126,14 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #3f3f46;
+  background-color: var(--scroll-thumb);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-::-webkit-scrollbar-thumb:hover {
-  background-color: #52525b;
-}
+::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
-  background-color: #71717a;
+  background-color: var(--scroll-thumb-hover);
 }
 
 @layer utilities {

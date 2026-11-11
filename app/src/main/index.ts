@@ -1,9 +1,10 @@
-import { app, BrowserWindow, shell } from 'electron'
+import { app, BrowserWindow, nativeTheme, shell } from 'electron'
 import { join } from 'node:path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { registerIpc } from './ipc'
 import { handleVfxProtocol, registerVfxScheme } from './services/protocol'
-import { getRoot } from './services/settings'
+import { getRoot, getTheme } from './services/settings'
+import { windowBackground } from './services/theme'
 
 registerVfxScheme()
 
@@ -15,7 +16,7 @@ function createWindow(): BrowserWindow {
     minHeight: 700,
     show: false,
     title: 'vfx Studio',
-    backgroundColor: '#0b0b0d',
+    backgroundColor: windowBackground(),
     titleBarStyle: 'hiddenInset',
     trafficLightPosition: { x: 16, y: 18 },
     webPreferences: {
@@ -37,6 +38,8 @@ function createWindow(): BrowserWindow {
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.knowledgebyjoe.vfxstudio')
   app.on('browser-window-created', (_, w) => optimizer.watchWindowShortcuts(w))
+  // apply the saved theme BEFORE the window exists: CSS (prefers-color-scheme) is right from the first frame
+  nativeTheme.themeSource = getTheme()
   handleVfxProtocol(getRoot)
   const win = createWindow()
   registerIpc(win)

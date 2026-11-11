@@ -1,12 +1,13 @@
-import { BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { BrowserWindow, dialog, ipcMain, nativeTheme, shell } from 'electron'
 import { existsSync, watch, type FSWatcher } from 'node:fs'
 import { join } from 'node:path'
-import type { AppInfo, Overrides, RunKind } from '../shared/types'
+import type { AppInfo, Overrides, RunKind, ThemeSource } from '../shared/types'
 import { importFiles, mediaLibrary } from './services/media'
 import { readOverrides, writeOverrides } from './services/overrides'
 import { inside } from './services/paths'
 import { createProject, getProject, gitBranch, listProjects, setLineReaction } from './services/projects'
-import { getRoot, setRoot } from './services/settings'
+import { getRoot, getTheme, setRoot, setTheme } from './services/settings'
+import { themeState, windowBackground } from './services/theme'
 import { hasClaude } from './services/shell'
 import { startRun, stopRun } from './services/runner'
 import { sendChat, stopChat } from './services/chat'
@@ -42,6 +43,20 @@ export async function appInfo(): Promise<AppInfo> {
 }
 
 export function registerIpc(win: BrowserWindow): void {
+  ipcMain.on('theme:initial', (e) => (e.returnValue = themeState())) // sync, read by the preload before first paint
+  ipcMain.handle('theme:get', () => themeState())
+  ipcMain.handle('theme:set', (_e, source: ThemeSource) => {
+    setTheme(source)
+    nativeTheme.themeSource = getTheme()
+    return themeState()
+  })
+  // macOS appearance changed (or themeSource did): keep the window background in step and tell the UI
+  nativeTheme.on('updated', () => {
+    if (win.isDestroyed()) return
+    win.setBackgroundColor(windowBackground())
+    win.webContents.send('theme:changed', themeState())
+  })
+
   ipcMain.handle('app:info', () => appInfo())
   ipcMain.handle('app:chooseRoot', async () => {
     const r = await dialog.showOpenDialog(win, {
