@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Pause, Play, SkipBack, SkipForward } from 'lucide-react'
+import { FastForward, Pause, Play, Rewind, SkipBack, SkipForward } from 'lucide-react'
 import type { ProjectDetail } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
@@ -134,8 +134,11 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
       </div>
 
       <div className="flex h-[50px] shrink-0 items-center justify-center gap-3 border-t border-[#1f1f23]">
-        <Button variant="ghost" size="icon" aria-label="Back 1 second" onClick={() => onTime(time - 1)}>
+        <Button variant="ghost" size="icon" aria-label="Go to start" title="Start (Home)" onClick={() => onTime(0)} disabled={!project}>
           <SkipBack />
+        </Button>
+        <Button variant="ghost" size="icon" aria-label="Back 1 second" title="Back 1s (⇧←)" onClick={() => onTime(time - 1)} disabled={!project}>
+          <Rewind />
         </Button>
         <button
           aria-label={playing ? 'Pause' : 'Play'}
@@ -145,7 +148,10 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
         >
           {playing ? <Pause className="h-3.5 w-3.5 fill-current" /> : <Play className="ml-0.5 h-3.5 w-3.5 fill-current" />}
         </button>
-        <Button variant="ghost" size="icon" aria-label="Forward 1 second" onClick={() => onTime(time + 1)}>
+        <Button variant="ghost" size="icon" aria-label="Forward 1 second" title="Forward 1s (⇧→)" onClick={() => onTime(time + 1)} disabled={!project}>
+          <FastForward />
+        </Button>
+        <Button variant="ghost" size="icon" aria-label="Go to end" title="End (End)" onClick={() => onTime(project?.duration ?? 0)} disabled={!project}>
           <SkipForward />
         </Button>
         <span className="tabular font-mono text-xs text-zinc-300">
