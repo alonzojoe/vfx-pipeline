@@ -13,7 +13,11 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
 | **Export / Review** (title bar) | Export renders `<p>-FINAL.mp4` and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
 
-Keys: <kbd>Space</kbd> play/pause · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
+**Appearance:** the System / Light / Dark switch in the title bar. Saved in the app's `settings.json` (userData,
+next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
+by the preload before the first paint — no flash on launch. System follows macOS live.
+
+Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
 
 ## How edits are saved
 
