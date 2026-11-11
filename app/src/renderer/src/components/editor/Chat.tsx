@@ -45,9 +45,9 @@ function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; pr
     ['Timeline synced to the voice', voice === 'done', false]
   ]
   return (
-    <div className="flex flex-col gap-2 rounded-xl border bg-[#17171a] p-3">
+    <div className="flex flex-col gap-2 rounded-xl border bg-surface p-3">
       {steps.map(([label, ok, doing]) => (
-        <div key={label} className={cn('flex items-center gap-2 text-sm', ok ? 'text-zinc-200' : doing ? 'text-foreground' : 'text-muted-foreground')}>
+        <div key={label} className={cn('flex items-center gap-2 text-sm', ok ? 'text-foreground' : doing ? 'text-foreground' : 'text-muted-foreground')}>
           <span
             className={cn(
               'flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full',
@@ -149,7 +149,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
         <p className="text-muted-foreground">
           Chat runs Claude Code on this Mac inside your vfx folder (your own Claude login — no API key here). Install it once in Terminal:
         </p>
-        <pre className="select-text rounded-lg border bg-[#17171a] p-3 font-mono text-xs">npm install -g @anthropic-ai/claude-code{'\n'}claude</pre>
+        <pre className="select-text rounded-lg border bg-surface p-3 font-mono text-xs">npm install -g @anthropic-ai/claude-code{'\n'}claude</pre>
         <p className="text-muted-foreground">Sign in when it asks, then reopen vfx Studio.</p>
       </div>
     )
@@ -166,7 +166,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
               </span>
               <div className="flex flex-col gap-2 leading-relaxed">
                 <div className="font-semibold">Created {project} · paste your script</div>
-                <p className="text-zinc-300">
+                <p className="text-foreground">
                   Paste it like you always do (with the [0–3s] parts, or just the lines). I'll name the reel from the topic, keep your words, add the
                   cards with your name, pick stickers and sounds — then the app makes the voice with ElevenLabs and builds the timeline.
                 </p>
@@ -187,7 +187,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
                     setText(s)
                     input.current?.focus()
                   }}
-                  className="rounded-lg border border-[#2a2a2e] bg-[#17171a] px-3 py-2 text-left text-xs text-zinc-300 hover:border-primary/60"
+                  className="rounded-lg border border-border bg-surface px-3 py-2 text-left text-xs text-foreground hover:border-primary/60"
                 >
                   {s}
                 </button>
@@ -209,7 +209,7 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
                     p.kind === 'tool' ? (
                       <div key={j} className="flex items-center gap-1.5 truncate font-mono text-xs text-muted-foreground">
                         <Wrench className="h-3 w-3 shrink-0" />
-                        <span className="text-zinc-400">{p.name}</span>
+                        <span className="text-muted-foreground">{p.name}</span>
                         <span className="truncate">{p.text}</span>
                       </div>
                     ) : (
@@ -236,8 +236,8 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
           <div ref={end} />
         </div>
       </ScrollArea>
-      <div className="border-t border-[#1f1f23] p-2.5">
-        <div className={cn('rounded-xl border bg-[#17171a] p-2', draft && msgs.length === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-input')}>
+      <div className="border-t border-subtle p-2.5">
+        <div className={cn('rounded-xl border bg-surface p-2', draft && msgs.length === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-input')}>
           <Textarea
             ref={input}
             value={text}

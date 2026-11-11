@@ -25,7 +25,7 @@ function Thumb({ item }: { item: MediaItem }): JSX.Element {
       draggable
       onDragStart={drag(item)}
       title={`${item.name} — drag onto the timeline`}
-      className="group flex cursor-grab flex-col items-center gap-1 rounded-lg border border-[#2a2a2e] bg-[#1c1c1f] p-1.5 hover:border-primary/60 active:cursor-grabbing"
+      className="group flex cursor-grab flex-col items-center gap-1 rounded-lg border border-border bg-surface-2 p-1.5 hover:border-primary/60 active:cursor-grabbing"
     >
       <img src={item.url} alt={item.name} loading="lazy" draggable={false} className="h-[62px] w-full object-contain" />
       <span className="max-w-full truncate text-xs text-muted-foreground">{item.name.replace(/\.\w+$/, '')}</span>
@@ -38,7 +38,7 @@ function SoundRow({ item, playing, onPlay }: { item: MediaItem; playing: boolean
     <div
       draggable
       onDragStart={drag(item)}
-      className="flex cursor-grab items-center gap-2 rounded-lg border border-[#232327] bg-[#17171a] px-2 py-1.5 hover:border-primary/60"
+      className="flex cursor-grab items-center gap-2 rounded-lg border border-border bg-surface px-2 py-1.5 hover:border-primary/60"
     >
       <button
         aria-label={`${playing ? 'Stop' : 'Play'} ${item.name}`}
@@ -117,7 +117,7 @@ export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Elem
         onDragLeave={() => setOver(false)}
         onDrop={onDrop}
         className={cn(
-          'm-2.5 flex flex-col items-center gap-1.5 rounded-xl border-[1.5px] border-dashed border-zinc-700 bg-[#141416] p-3.5 text-center transition-colors',
+          'm-2.5 flex flex-col items-center gap-1.5 rounded-xl border-[1.5px] border-dashed border-input bg-titlebar p-3.5 text-center transition-colors',
           over && 'border-primary bg-primary/10'
         )}
       >
@@ -162,7 +162,7 @@ export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Elem
           <ScrollArea className="h-full px-2.5 pb-2.5">
             <div className="grid grid-cols-2 gap-2">
               {media?.backgrounds.map((b) => (
-                <div key={b.path} className="overflow-hidden rounded-lg border border-[#2a2a2e]">
+                <div key={b.path} className="overflow-hidden rounded-lg border border-border">
                   <img src={b.url} alt={b.name} className="h-28 w-full object-cover" />
                   <div className="truncate px-2 py-1 text-xs text-muted-foreground">{b.name}</div>
                 </div>
@@ -186,7 +186,7 @@ export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Elem
                       key={f.path}
                       draggable
                       onDragStart={drag(f)}
-                      className="flex cursor-grab items-center gap-2 rounded-lg border border-[#232327] bg-[#17171a] px-2 py-1.5 hover:border-primary/60"
+                      className="flex cursor-grab items-center gap-2 rounded-lg border border-border bg-surface px-2 py-1.5 hover:border-primary/60"
                     >
                       {f.kind === 'image' ? <img src={f.url} alt="" className="h-8 w-8 rounded object-cover" /> : icon(f.kind)}
                       <span className="truncate">{f.name}</span>

@@ -7,7 +7,7 @@ export function RightPanel({ tab, onTab, chat, inspector }: Props): JSX.Element 
   return (
     <aside aria-label="Chat and inspector" className="flex w-[340px] shrink-0 flex-col border-l bg-panel">
       <Tabs value={tab} onValueChange={onTab} className="flex min-h-0 flex-1 flex-col">
-        <div className="border-b border-[#1f1f23] p-2.5">
+        <div className="border-b border-subtle p-2.5">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="chat">Chat</TabsTrigger>
             <TabsTrigger value="inspector">Inspector</TabsTrigger>
