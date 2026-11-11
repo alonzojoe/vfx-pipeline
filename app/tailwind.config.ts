@@ -1,7 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-const path = require('node:path')
+import path from 'node:path'
+import type { Config } from 'tailwindcss'
+import animate from 'tailwindcss-animate'
 
-module.exports = {
+export default {
   darkMode: ['class'],
   content: [path.join(__dirname, 'src/renderer/index.html'), path.join(__dirname, 'src/renderer/src/**/*.{ts,tsx}')],
   theme: {
@@ -38,5 +39,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
-}
+  plugins: [animate]
+} satisfies Config

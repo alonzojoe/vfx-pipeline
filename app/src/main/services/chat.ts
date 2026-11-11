@@ -44,6 +44,21 @@ const ALLOWED = [
   'Bash(git commit:*)'
 ]
 
+/** The parts of Claude Code's `--output-format stream-json` lines that the app reads. */
+type StreamPart =
+  | { type: 'text'; text?: string }
+  | { type: 'tool_use'; name: string; input?: Record<string, unknown> }
+  | { type: 'tool_result'; content?: string | { text?: string }[] }
+type StreamMessage = {
+  type: 'system' | 'assistant' | 'user' | 'result'
+  session_id?: string
+  message?: { content?: StreamPart[] }
+  is_error?: boolean
+  result?: string
+  subtype?: string
+  total_cost_usd?: number
+}
+
 let child: ChildProcess | null = null
 let sessionId: string | null = null
 let n = 0
@@ -89,9 +104,9 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
       const line = buf.slice(0, i).trim()
       buf = buf.slice(i + 1)
       if (!line) continue
-      let m: Record<string, any>
+      let m: StreamMessage
       try {
-        m = JSON.parse(line)
+        m = JSON.parse(line) as StreamMessage
       } catch {
         continue
       }
@@ -104,9 +119,10 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
       } else if (m.type === 'user') {
         // tool output: follow a new reel's auto-rename
         for (const part of m.message?.content ?? []) {
-          const text = typeof part.content === 'string' ? part.content : (part.content ?? []).map((c: { text?: string }) => c.text ?? '').join('')
-          const r = /renamed ([\w.-]+) → ([\w.-]+)/.exec(text ?? '')
-          if (part.type === 'tool_result' && r) send({ id, type: 'renamed', from: r[1], to: r[2] })
+          if (part.type !== 'tool_result') continue
+          const text = typeof part.content === 'string' ? part.content : (part.content ?? []).map((c) => c.text ?? '').join('')
+          const r = /renamed ([\w.-]+) → ([\w.-]+)/.exec(text)
+          if (r) send({ id, type: 'renamed', from: r[1], to: r[2] })
         }
       } else if (m.type === 'result') {
         if (m.is_error) send({ id, type: 'error', text: String(m.result ?? m.subtype ?? 'Claude Code stopped') })
