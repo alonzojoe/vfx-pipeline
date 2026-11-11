@@ -74,4 +74,7 @@ src/renderer/src/
   hooks/             useVfx, usePlayback, useAudioEngine, useEdits, useRuns
 ```
 
-Checks before committing: `npm run typecheck && npm test && npm run build`.
+Config (all TypeScript): `electron.vite.config.ts` (Vite + PostCSS/Tailwind), `tailwind.config.ts`,
+`electron-builder.yml`, `scripts/ensure-deps.ts` (installs new packages before `dev`/`build`; needs Node ≥ 22.6).
+
+Checks before committing: `npm run typecheck && npm test && npm run build`. The app is TypeScript-only — no `.js` files.
