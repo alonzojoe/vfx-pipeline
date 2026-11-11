@@ -7,8 +7,9 @@ const AUDIBLE = new Set(['voice', 'sfx', 'media'])
 /**
  * Plays the reel's sound while previewing: every voice / SFX / added-audio clip is scheduled with Web Audio
  * at its timeline position (with its media offset and volume), exactly like the render mixes them.
+ * Re-scheduled on play and on every jump, so the voice always follows the playhead.
  */
-export function useAudioEngine(project: ProjectDetail | null, time: number, playing: boolean): void {
+export function useAudioEngine(project: ProjectDetail | null, time: number, playing: boolean, seekId: number): void {
   const ctx = useRef<AudioContext | null>(null)
   const buffers = useRef(new Map<string, Promise<AudioBuffer | null>>())
   const live = useRef<AudioScheduledSourceNode[]>([])
@@ -74,5 +75,6 @@ export function useAudioEngine(project: ProjectDetail | null, time: number, play
       cancelled = true
       stop()
     }
-  }, [playing, project])
+    // a jump while playing (start/end/±1s buttons, keys, scrubbing) stops the old sounds and re-schedules from there
+  }, [playing, project, seekId])
 }
