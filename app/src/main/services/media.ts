@@ -1,5 +1,5 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { basename, extname, join, relative } from 'node:path'
+import { basename, extname, isAbsolute, join, relative } from 'node:path'
 import type { MediaItem, MediaKind, MediaLibrary } from '../../shared/types'
 import { inside, vfxUrl } from './paths'
 
@@ -53,12 +53,23 @@ export function mediaLibrary(root: string, project?: string): MediaLibrary {
   }
 }
 
+const MAX_IMPORT = 2 * 1024 ** 3 // 2 GB
+
+/** A dropped file the app will copy: an absolute path to an image/audio/video, not inside a hidden folder. */
+const importable = (f: string): boolean =>
+  isAbsolute(f) &&
+  kindOf(f) !== 'other' &&
+  !f.split(/[\\/]+/).some((p) => p.startsWith('.')) &&
+  existsSync(f) &&
+  statSync(f).isFile() &&
+  statSync(f).size <= MAX_IMPORT
+
 /** Copy dropped files into input/<project>/media/ (never overwrites: name-2.ext, name-3.ext…). */
 export function importFiles(root: string, project: string, files: string[]): MediaItem[] {
   const dest = inside(root, `input/${project}/media`)
   mkdirSync(dest, { recursive: true })
   return files
-    .filter((f) => existsSync(f) && statSync(f).isFile() && kindOf(f) !== 'other')
+    .filter(importable)
     .map((f) => {
       const ext = extname(f)
       const stem = basename(f, ext).replace(/[^\w.-]+/g, '-')
