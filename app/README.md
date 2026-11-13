@@ -61,7 +61,7 @@ src/main/            Electron main process
   index.ts           window (hiddenInset title bar), vfx:// protocol, IPC
   ipc.ts             all IPC handlers + file watching (reloads after builds/chat edits)
   services/
-    protocol.ts      vfx://root/<path> → files in the vfx folder (Range support) + preview bridge injection
+    protocol.ts      vfx://root/<path> → hyperframes/, input/, output/ only (no dotfiles, Range support) + preview bridge
     previewBridge.ts script injected into index.html so the app can seek the composition
     timeline.ts      index.html → timeline clips (tested: npm test)
     projects.ts      list/read projects, swap a line's reaction, git branch
