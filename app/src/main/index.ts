@@ -1,6 +1,7 @@
 import { app, BrowserWindow, nativeTheme, shell } from 'electron'
 import { join } from 'node:path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
+import { followMacAppearance } from './dockIcon'
 import { registerIpc } from './ipc'
 import { handleVfxProtocol, registerVfxScheme } from './services/protocol'
 import { getRoot, getTheme } from './services/settings'
@@ -45,6 +46,7 @@ app.whenReady().then(() => {
   // apply the saved theme BEFORE the window exists: CSS (prefers-color-scheme) is right from the first frame
   nativeTheme.themeSource = getTheme()
   handleVfxProtocol(getRoot)
+  followMacAppearance()
   let win: BrowserWindow | null = createWindow()
   registerIpc(() => win) // once — handlers always talk to the current window
   app.on('activate', () => {
