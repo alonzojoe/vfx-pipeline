@@ -1,5 +1,4 @@
 import { contextBridge, ipcRenderer, webUtils } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
 import type {
   AppInfo,
   ChatEvent,
@@ -56,7 +55,7 @@ const api = {
   pathForFile: (file: File): string => webUtils.getPathForFile(file),
   getOverrides: (project: string): Promise<Overrides> => ipcRenderer.invoke('overrides:get', project),
   setOverrides: (project: string, o: Overrides): Promise<void> => ipcRenderer.invoke('overrides:set', project, o),
-  openPath: (rel: string): Promise<string> => ipcRenderer.invoke('shell:open', rel),
+  /** show a file under output/ or hyperframes/ in Finder */
   reveal: (rel: string): Promise<void> => ipcRenderer.invoke('shell:reveal', rel),
   run: (kind: RunKind, project: string): Promise<string> => ipcRenderer.invoke('run:start', kind, project),
   stopRun: (runId: string): Promise<void> => ipcRenderer.invoke('run:stop', runId),
@@ -69,5 +68,4 @@ const api = {
 
 export type VfxApi = typeof api
 
-contextBridge.exposeInMainWorld('electron', electronAPI)
 contextBridge.exposeInMainWorld('api', api)

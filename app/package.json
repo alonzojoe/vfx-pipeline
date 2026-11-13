@@ -15,7 +15,7 @@
     "dist:mac:arm64": "npm run build && electron-builder --mac --arm64",
     "dist:mac:x64": "npm run build && electron-builder --mac --x64",
     "postinstall": "electron-builder install-app-deps",
-    "test": "tsx src/main/services/timeline.test.ts",
+    "test": "tsx src/main/services/timeline.test.ts && tsx src/main/services/paths.test.ts",
     "predev": "node --experimental-strip-types --no-warnings scripts/ensure-deps.ts",
     "prebuild": "node --experimental-strip-types --no-warnings scripts/ensure-deps.ts"
   },

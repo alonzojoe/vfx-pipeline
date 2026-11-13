@@ -43,6 +43,8 @@ const ALLOWED = [
   'Bash(git add:*)',
   'Bash(git commit:*)'
 ]
+/** Never, whatever the prompt says: the ElevenLabs key, pushing, the PR script. */
+const DENIED = ['Read(./.env)', 'Read(**/.env)', 'Read(**/.env.*)', 'Edit(**/.env)', 'Edit(**/.env.*)', 'Write(**/.env)', 'Bash(git push:*)', 'Bash(./scripts/pr.sh:*)']
 
 /** The parts of Claude Code's `--output-format stream-json` lines that the app reads. */
 type StreamPart =
@@ -91,6 +93,7 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
     '--output-format stream-json --verbose',
     '--permission-mode acceptEdits',
     `--allowedTools ${ALLOWED.map(q).join(' ')}`,
+    `--disallowedTools ${DENIED.map(q).join(' ')}`,
     sessionId ? `--resume ${q(sessionId)}` : ''
   ].join(' ')
   const proc = loginShell(args, { cwd: root })

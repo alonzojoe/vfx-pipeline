@@ -58,7 +58,8 @@ function ctaOf(root: string, name: string): string | null {
 
 export function getProject(root: string, name: string): ProjectDetail {
   const dir = inside(root, `hyperframes/${name}`)
-  const html = existsSync(join(dir, 'index.html')) ? readFileSync(join(dir, 'index.html'), 'utf8') : ''
+  const index = join(dir, 'index.html')
+  const html = existsSync(index) ? readFileSync(index, 'utf8') : ''
   const parsed = parseComposition(html)
   // composition paths are relative to hyperframes/<p>/ (assets → input/<p>, general → input/general)
   const toRoot = (src: string): string =>
@@ -74,6 +75,7 @@ export function getProject(root: string, name: string): ProjectDetail {
     cta: ctaOf(root, name),
     clips: parsed.clips,
     compositionUrl: vfxUrl(`hyperframes/${name}/index.html`),
+    builtAt: html ? statSync(index).mtimeMs : 0,
     finalUrl: final ? vfxUrl(final) : null,
     voiceUrl: existsSync(join(root, voice)) ? vfxUrl(voice) : null,
     lines: (script.lines ?? []).map((l) => ({ text: l.text, react: l.react }))

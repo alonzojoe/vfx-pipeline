@@ -41,6 +41,8 @@ export type ProjectDetail = ProjectSummary & {
   clips: Clip[]
   /** vfx:// URL of the HyperFrames composition */
   compositionUrl: string
+  /** when index.html was last built (ms) — the preview reloads when it changes */
+  builtAt: number
   /** vfx:// URL of the rendered FINAL mp4, if any */
   finalUrl: string | null
   /** vfx:// URL of the voice take, if any */

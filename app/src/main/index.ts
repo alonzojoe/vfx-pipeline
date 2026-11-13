@@ -21,14 +21,18 @@ function createWindow(): BrowserWindow {
     trafficLightPosition: { x: 16, y: 18 },
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
+      sandbox: true,
       contextIsolation: true
     }
   })
   win.on('ready-to-show', () => win.show())
+  // links open in the browser (https only); the window itself never navigates away from the app
   win.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url)
+    if (/^https:\/\//i.test(url)) shell.openExternal(url)
     return { action: 'deny' }
+  })
+  win.webContents.on('will-navigate', (e, url) => {
+    if (url !== win.webContents.getURL()) e.preventDefault()
   })
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) win.loadURL(process.env['ELECTRON_RENDERER_URL'])
   else win.loadFile(join(__dirname, '../renderer/index.html'))
@@ -41,10 +45,10 @@ app.whenReady().then(() => {
   // apply the saved theme BEFORE the window exists: CSS (prefers-color-scheme) is right from the first frame
   nativeTheme.themeSource = getTheme()
   handleVfxProtocol(getRoot)
-  const win = createWindow()
-  registerIpc(win)
+  let win: BrowserWindow | null = createWindow()
+  registerIpc(() => win) // once — handlers always talk to the current window
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) registerIpc(createWindow())
+    if (BrowserWindow.getAllWindows().length === 0) win = createWindow()
   })
 })
 
