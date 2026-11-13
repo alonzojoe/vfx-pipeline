@@ -9,7 +9,7 @@ files:
 mac:
   category: public.app-category.video
   icon: build/icon.png # classic icon (.icns) for macOS 11–15
-  # macOS 26+: Icon Composer icon (light / dark / tinted) compiled by `npm run icon` into build/mac-resources
+  # macOS 26+: Icon Composer icon (follows Icon & widget style) compiled by `npm run icon` into build/mac-resources
   extraResources:
     - from: build/mac-resources
       to: .

@@ -21,11 +21,11 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
 by the preload before the first paint — no flash on launch. System follows macOS live.
 
-**App icon:** <img src="../docs/screenshots/icons.png" alt="vfx Studio icon, light and dark" width="256" align="right">
-follows macOS light/dark. On macOS 26+ it's an Icon Composer icon (`build/AppIcon.icon`: light, dark and tinted
-layers) that `npm run icon` compiles into `Assets.car` during `npm run dist:mac` — this needs **Xcode 26** (`actool`);
-without it the build still works with the classic icon. On older macOS, in `npm run dev`, or without Xcode, the app
-swaps the Dock icon itself when macOS switches appearance (`src/main/dockIcon.ts`, `build/icon.png` / `icon-dark.png`).
+**App icon:** <img src="../docs/screenshots/icons.png" alt="vfx Studio icon, default and dark style" width="256" align="right">
+on macOS 26 Tahoe+ it follows **System Settings → Appearance → Icon & widget style** (Default, Dark, Clear, Tinted) —
+switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an Icon Composer icon
+(`build/AppIcon.icon`) that `npm run icon` compiles into `Assets.car` during `npm run dist:mac`; this needs
+**Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
 
 Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
 
@@ -69,7 +69,6 @@ time: right-click the app → **Open**. If macOS says it's damaged: `xattr -cr "
 ```
 src/main/            Electron main process
   index.ts           window (hiddenInset title bar), vfx:// protocol, IPC
-  dockIcon.ts        Dock icon follows macOS light/dark (where Assets.car doesn't already)
   ipc.ts             all IPC handlers + file watching (reloads after builds/chat edits)
   services/
     protocol.ts      vfx://root/<path> → hyperframes/, input/, output/ only (no dotfiles, Range support) + preview bridge
