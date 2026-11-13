@@ -26,5 +26,6 @@
 - **Before committing code:** app → `npm run typecheck && npm run build` in `app/`; reels → `npx hyperframes lint <p>`
   from `hyperframes/`. Don't commit something that doesn't build.
 - **Fast path:** `/plan <task>` → `/ship` (or `./scripts/ship.sh "type: message" <paths>` per step) → `/commit` to
-  split leftover changes. `ship.sh` runs only the checks for what you touched and refuses `.env` and bad messages.
-- Push only when Joe asks.
+  split leftover changes. `ship.sh` runs only the checks for what you touched and refuses `.env` and bad messages;
+  with no paths it stages tracked files only, so new files (a new reel) must be named.
+- Push only when Joe asks. PR + merge into main: `./scripts/pr.sh "<title>"` (push → PR → merge, develop is kept).

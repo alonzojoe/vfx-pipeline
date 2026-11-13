@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fast check + commit for one logical step.
-#   ./scripts/ship.sh "feat: add timeline zoom"            # stage everything changed, check what it touches, commit
-#   ./scripts/ship.sh "fix: arrow lands on card" app/src     # only these paths
+#   ./scripts/ship.sh "feat: add timeline zoom"            # stage changed TRACKED files, check what they touch, commit
+#   ./scripts/ship.sh "fix: arrow lands on card" app/src     # only these paths (new files: name them here)
 # Checks run only for the areas you touched: app/ → typecheck + tests (+ build with SHIP_BUILD=1);
 # hyperframes/<p>/ → build.mjs + hyperframes lint. Never adds Claude attribution. Message must be "type: message".
 set -euo pipefail
@@ -9,8 +9,10 @@ cd "$(dirname "$0")/.."
 MSG="${1:-}"; shift || true
 [[ "$MSG" =~ ^(feat|fix|chore|config|style|perf|refactor|docs|test):\ .+ ]] || {
   echo "✗ message must look like 'feat: …' (types: feat fix chore config style perf refactor docs test)"; exit 1; }
+[ "${#MSG}" -le 72 ] || { echo "✗ message is ${#MSG} chars — keep it ≤ 72"; exit 1; }
 
-if [ $# -gt 0 ]; then git add -A -- "$@"; else git add -A; fi
+# no paths = tracked files only, so a reel in progress (new, untracked folders) never sneaks into a commit
+if [ $# -gt 0 ]; then git add -A -- "$@"; else git add -u; fi
 git reset -q -- .env '*.env' 2>/dev/null || true
 FILES="$(git diff --cached --name-only)"
 [ -n "$FILES" ] || { echo "✗ nothing staged"; exit 1; }
