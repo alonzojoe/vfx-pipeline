@@ -26,6 +26,7 @@ on macOS 26 Tahoe+ it follows **System Settings → Appearance → Icon & widget
 switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an Icon Composer icon
 (`build/AppIcon.icon`) that `npm run icon` compiles into `Assets.car` during `npm run dist:mac`; this needs
 **Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
+In `npm run dev` the Dock shows that classic icon too (dev runs inside Electron's own app bundle).
 
 Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
 
