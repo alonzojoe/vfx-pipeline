@@ -14,6 +14,8 @@ const readJson = <T>(p: string, fallback: T): T => {
   }
 }
 
+const mtime = (p: string): number => (existsSync(p) ? statSync(p).mtimeMs : 0)
+
 const finalOf = (root: string, name: string): string | null => {
   const dir = join(root, 'output', name)
   if (!existsSync(dir)) return null
@@ -68,6 +70,9 @@ export function getProject(root: string, name: string): ProjectDetail {
   const script = readJson<Script>(join(dir, 'script.json'), {})
   const final = finalOf(root, name)
   const voice = `input/${name}/voice/script.mp3`
+  const builtAt = html ? statSync(index).mtimeMs : 0
+  const inputs = [join(dir, 'script.json'), join(dir, 'overrides.json'), join(root, voice), join(root, `input/${name}/voice/script.words.json`)]
+  const voiceMissing = existsSync(join(root, voice)) && !parsed.clips.some((c) => c.track === 'voice')
   return {
     ...summary(root, name),
     duration: parsed.duration,
@@ -75,7 +80,8 @@ export function getProject(root: string, name: string): ProjectDetail {
     cta: ctaOf(root, name),
     clips: parsed.clips,
     compositionUrl: vfxUrl(`hyperframes/${name}/index.html`),
-    builtAt: html ? statSync(index).mtimeMs : 0,
+    builtAt,
+    stale: !!html && (voiceMissing || Math.max(...inputs.map(mtime)) > builtAt + 1000),
     finalUrl: final ? vfxUrl(final) : null,
     voiceUrl: existsSync(join(root, voice)) ? vfxUrl(voice) : null,
     lines: (script.lines ?? []).map((l) => ({ text: l.text, react: l.react }))

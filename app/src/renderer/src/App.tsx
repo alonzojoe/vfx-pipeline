@@ -50,6 +50,13 @@ export default function App(): JSX.Element {
       runs.start('build', p)
     }
   })
+  // opening a reel whose preview is out of date (e.g. the voice was re-made but never built in) → build it once
+  const checked = useRef(new Set<string>())
+  useEffect(() => {
+    if (!project || checked.current.has(project.name)) return
+    checked.current.add(project.name)
+    if (project.stale && !project.draft && !runs.active) runs.start('build', project.name)
+  }, [project, runs])
   const rebuild = (): void => {
     if (!vfx.current) return
     if (runs.active) pendingBuild.current = vfx.current
