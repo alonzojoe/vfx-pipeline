@@ -36,6 +36,13 @@ export default {
         }
       },
       borderRadius: { lg: 'var(--radius)', md: 'calc(var(--radius) - 2px)', sm: 'calc(var(--radius) - 4px)' },
+      // px, not rem: the root is 14px (the layout was designed on it), which made text-xs 10.5px
+      fontSize: {
+        xs: ['12px', '16px'],
+        sm: ['13px', '18px'],
+        base: ['14px', '20px'],
+        lg: ['16px', '22px']
+      },
       fontFamily: {
         sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
         mono: ['SF Mono', 'ui-monospace', 'Menlo', 'monospace']
