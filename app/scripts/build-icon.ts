@@ -1,8 +1,8 @@
-// Runs before electron-builder (`npm run dist:mac`): compiles build/AppIcon.icon (Icon Composer: light, dark and
-// tinted variants) into build/mac-resources/Assets.car, which electron-builder copies into Contents/Resources.
-// macOS 26+ reads it through CFBundleIconName and switches the icon with the system's light/dark/tinted style;
-// older macOS keeps using build/icon.png (.icns). Needs Xcode 26 (actool) — without it the build still works,
-// just with the classic icon (the dock icon still follows light/dark at runtime, see src/main/dockIcon.ts).
+// Runs before electron-builder (`npm run dist:mac`): compiles build/AppIcon.icon (Icon Composer: default, dark,
+// clear and tinted styles) into build/mac-resources/Assets.car, which electron-builder copies into Contents/Resources.
+// macOS 26+ reads it through CFBundleIconName and shows the style the user picked in System Settings → Appearance →
+// Icon & widget style (Light/Dark mode alone doesn't change it). Older macOS keeps the classic build/icon.png (.icns).
+// Needs Xcode 26 (actool) — without it the build still works with the classic icon.
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
@@ -34,7 +34,7 @@ try {
     ],
     { stdio: ['ignore', 'pipe', 'pipe'] }
   )
-  console.log('✓ icon: Assets.car built (light / dark / tinted on macOS 26+)')
+  console.log('✓ icon: Assets.car built (Icon & widget style on macOS 26+)')
 } catch (e) {
   const err = e as { stdout?: Buffer; stderr?: Buffer; message: string }
   const why = (err.stderr?.toString() || err.stdout?.toString() || err.message).trim().split('\n').slice(-3).join(' ')
