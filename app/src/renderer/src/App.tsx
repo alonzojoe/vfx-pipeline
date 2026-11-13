@@ -22,6 +22,15 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing, pb.seekId)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  // switching reels: stop and go back to the start — the old position (and the voice scheduled from it) belongs to
+  // the other reel, and may even be past this one's end
+  const pbRef = useRef(pb)
+  pbRef.current = pb
+  useEffect(() => {
+    pbRef.current.setPlaying(false)
+    pbRef.current.setTime(0)
+    setSelectedId(null)
+  }, [vfx.current])
   // new reel: after the chat writes the script → preview build → ElevenLabs voice (no terminal)
   const pendingVoice = useRef<string | null>(null)
   // a timeline edit made while another run was busy: build it as soon as that run ends
@@ -196,7 +205,6 @@ export default function App(): JSX.Element {
         <Timeline
           project={project}
           time={pb.time}
-          playing={pb.playing}
           selectedId={selectedId}
           onSeek={pb.setTime}
           onSelect={select}
