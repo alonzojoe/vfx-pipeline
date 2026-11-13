@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import type { AddedClip, Clip, MediaItem, ProjectDetail } from '../../../shared/types'
 import { vfxUrlOf } from '@/lib/vfx'
 
@@ -28,9 +28,17 @@ export function useEdits(
   rebuild: () => void
 ) {
   const name = project?.name
+  // edits read overrides.json, change it and write it back — run them one at a time so two quick drags
+  // can't both read the old file and the second write drop the first move
+  const queue = useRef<Promise<unknown>>(Promise.resolve())
+  const serial = <A extends unknown[]>(fn: (...a: A) => Promise<void>) => (...a: A): Promise<void> => {
+    const next = queue.current.then(() => fn(...a))
+    queue.current = next.catch(() => {})
+    return next
+  }
 
   const move = useCallback(
-    async (clip: Clip, start: number) => {
+    serial(async (clip: Clip, start: number) => {
       if (!name || !project) return
       const o = await window.api.getOverrides(name)
       const d = r3(start - clip.start)
@@ -44,12 +52,12 @@ export function useEdits(
       await window.api.setOverrides(name, o)
       patch((p) => ({ ...p, clips: p.clips.map((c) => (ids.includes(c.id) ? { ...c, start: r3(c.start + d) } : c)) }))
       rebuild()
-    },
+    }),
     [name, project, patch, rebuild]
   )
 
   const dropMedia = useCallback(
-    async (item: MediaItem, t: number) => {
+    serial(async (item: MediaItem, t: number) => {
       if (!name || !project || item.kind === 'other') return
       const o = await window.api.getOverrides(name)
       const next = 1 + Math.max(0, ...o.added.map((a) => Number(/^media-(\d+)$/.exec(a.id)?.[1] ?? 0)))
@@ -69,31 +77,31 @@ export function useEdits(
         clips: [...p.clips, { id: added.id, track: 'media', start: added.start, duration: added.duration, label: item.name, src: item.path, added: true, volume: added.volume }]
       }))
       rebuild()
-    },
+    }),
     [name, project, patch, rebuild]
   )
 
   const update = useCallback(
-    async (clip: Clip, changes: Partial<AddedClip>) => {
+    serial(async (clip: Clip, changes: Partial<AddedClip>) => {
       if (!name || !clip.added) return
       const o = await window.api.getOverrides(name)
       o.added = o.added.map((a) => (a.id === clip.id ? { ...a, ...changes } : a))
       await window.api.setOverrides(name, o)
       patch((p) => ({ ...p, clips: p.clips.map((c) => (c.id === clip.id ? { ...c, ...changes } : c)) }))
       rebuild()
-    },
+    }),
     [name, patch, rebuild]
   )
 
   const remove = useCallback(
-    async (clip: Clip) => {
+    serial(async (clip: Clip) => {
       if (!name || !clip.added) return
       const o = await window.api.getOverrides(name)
       o.added = o.added.filter((a) => a.id !== clip.id)
       await window.api.setOverrides(name, o)
       patch((p) => ({ ...p, clips: p.clips.filter((c) => c.id !== clip.id) }))
       rebuild()
-    },
+    }),
     [name, patch, rebuild]
   )
 

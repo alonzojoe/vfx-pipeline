@@ -39,11 +39,11 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
     return () => ro.disconnect()
   }, [])
 
-  // reload the composition whenever the project is rebuilt
+  // reload the composition whenever the project is rebuilt (a timeline move changes only builtAt)
   useEffect(() => {
     setReady(false)
     setNonce((n) => n + 1)
-  }, [project?.compositionUrl, project?.duration, project?.clips.length])
+  }, [project?.compositionUrl, project?.builtAt])
 
   useEffect(() => {
     const onMsg = (e: MessageEvent): void => {

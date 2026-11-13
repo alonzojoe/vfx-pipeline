@@ -24,18 +24,27 @@ export default function App(): JSX.Element {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // new reel: after the chat writes the script → preview build → ElevenLabs voice (no terminal)
   const pendingVoice = useRef<string | null>(null)
+  // a timeline edit made while another run was busy: build it as soon as that run ends
+  const pendingBuild = useRef<string | null>(null)
   const runs = useRuns((run) => {
     vfx.reload()
     vfx.loadProjects()
     // Export = render, then the review runs by itself
-    if (run.kind === 'render' && run.code === 0) runs.start('review', run.project)
+    if (run.kind === 'render' && run.code === 0) return void runs.start('review', run.project)
     if (run.kind === 'build' && run.project === pendingVoice.current) {
       pendingVoice.current = null
-      if (run.code === 0) runs.start('voice', run.project)
+      if (run.code === 0) return void runs.start('voice', run.project)
+    }
+    if (pendingBuild.current) {
+      const p = pendingBuild.current
+      pendingBuild.current = null
+      runs.start('build', p)
     }
   })
   const rebuild = (): void => {
-    if (vfx.current && !runs.active) runs.start('build', vfx.current)
+    if (!vfx.current) return
+    if (runs.active) pendingBuild.current = vfx.current
+    else runs.start('build', vfx.current)
   }
   const edits = useEdits(project, vfx.patch, rebuild)
   const [tab, setTab] = useState('chat')
