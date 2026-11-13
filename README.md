@@ -25,6 +25,18 @@ vfx/
 
 You never copy footage into the engine folders. Each project reads straight from `input/<project>/` and `input/general/` through links.
 
+## vfx Studio (Mac app)
+
+A CapCut-style editor on top of this pipeline: media bin, frame-accurate preview, timeline, and a Claude Code chat
+that turns a pasted script into a reel (cards + ElevenLabs voice) — no Terminal. Light, dark or follow macOS.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/editor-dark.png">
+  <img alt="vfx Studio editor: media bin, reel preview, chat and timeline" src="docs/screenshots/editor-light.png">
+</picture>
+
+Run it: `cd app && npm install && npm run dev` · build the dmgs: `npm run dist:mac`. Details in [`app/README.md`](app/README.md).
+
 ## Setup (once)
 
 ```bash
