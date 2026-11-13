@@ -28,7 +28,6 @@ const RULER = 24
 type Props = {
   project: ProjectDetail | null
   time: number
-  playing: boolean
   selectedId: string | null
   onSeek: (t: number) => void
   onSelect: (id: string | null) => void
@@ -39,7 +38,7 @@ type Props = {
   onDelete?: (clip: Clip) => void
 }
 
-export function Timeline({ project, time, playing, selectedId, onSeek, onSelect, onMove, onDropMedia, onDelete }: Props): JSX.Element {
+export function Timeline({ project, time, selectedId, onSeek, onSelect, onMove, onDropMedia, onDelete }: Props): JSX.Element {
   const [pps, setPps] = useState(48) // pixels per second
   const [snap, setSnap] = useState(true)
   const [drag, setDrag] = useState<{ id: string; dx: number } | null>(null)
@@ -85,13 +84,13 @@ export function Timeline({ project, time, playing, selectedId, onSeek, onSelect,
     return clamp(x / pps, 0, duration)
   }
 
-  // keep the playhead in view while playing
+  // keep the playhead in view — while playing and after jumps (Home/End, ±1s, switching reels)
   useEffect(() => {
     const el = scroller.current
-    if (!el || !playing) return
+    if (!el) return
     const x = HEADER + time * pps
-    if (x > el.scrollLeft + el.clientWidth - 80 || x < el.scrollLeft + HEADER) el.scrollLeft = x - HEADER - 40
-  }, [time, playing, pps])
+    if (x > el.scrollLeft + el.clientWidth - 80 || x < el.scrollLeft + HEADER) el.scrollLeft = Math.max(0, x - HEADER - 40)
+  }, [time, pps])
 
   const scrub = (e: React.PointerEvent): void => {
     if (e.button !== 0) return

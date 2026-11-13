@@ -43,6 +43,8 @@ export type ProjectDetail = ProjectSummary & {
   compositionUrl: string
   /** when index.html was last built (ms) — the preview reloads when it changes */
   builtAt: number
+  /** index.html is older than its script / voice / timeline edits, or is missing the voice that exists → rebuild */
+  stale: boolean
   /** vfx:// URL of the rendered FINAL mp4, if any */
   finalUrl: string | null
   /** vfx:// URL of the voice take, if any */
