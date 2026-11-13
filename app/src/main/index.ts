@@ -1,10 +1,11 @@
-import { app, BrowserWindow, nativeTheme, shell } from 'electron'
+import { app, BrowserWindow, nativeImage, nativeTheme, shell } from 'electron'
 import { join } from 'node:path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { registerIpc } from './ipc'
 import { handleVfxProtocol, registerVfxScheme } from './services/protocol'
 import { getRoot, getTheme } from './services/settings'
 import { windowBackground } from './services/theme'
+import devIcon from '../../build/icon.png?asset'
 
 registerVfxScheme()
 
@@ -45,6 +46,9 @@ app.whenReady().then(() => {
   // apply the saved theme BEFORE the window exists: CSS (prefers-color-scheme) is right from the first frame
   nativeTheme.themeSource = getTheme()
   handleVfxProtocol(getRoot)
+  // `npm run dev` runs inside Electron's own bundle → macOS would show Electron's icon. The built app has its own
+  // (Assets.car on macOS 26+ follows Icon & widget style), so only dev gets this static one.
+  if (!app.isPackaged) app.dock?.setIcon(nativeImage.createFromPath(devIcon))
   let win: BrowserWindow | null = createWindow()
   registerIpc(() => win) // once — handlers always talk to the current window
   app.on('activate', () => {
