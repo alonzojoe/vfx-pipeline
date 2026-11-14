@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronDown, ClipboardCheck, Download, Folder, Plus } from 'lucide-react'
-import type { ProjectSummary } from '../../../../shared/types'
+import type { Fps, ProjectSummary } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ThemeSwitch } from './ThemeSwitch'
+import { FpsSwitch } from './FpsSwitch'
 
 export type StageState = 'done' | 'doing' | 'todo'
 export type Stages = { script: StageState; voice: StageState; build: StageState; render: StageState }
@@ -17,6 +18,8 @@ type Props = {
   onNew: () => void
   onReview: () => void
   onExport: () => void
+  fps: Fps
+  onFps: (f: Fps) => void
 }
 
 function Stage({ label, state }: { label: string; state: StageState }): JSX.Element {
@@ -108,7 +111,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
   )
 }
 
-export function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport }: Props): JSX.Element {
+export function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport, fps, onFps }: Props): JSX.Element {
   const ready = !!project && !project.draft
   return (
     <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-titlebar pl-[84px] pr-3">
@@ -138,6 +141,7 @@ export function TitleBar({ project, projects, stages, busy, onProject, onNew, on
         <ClipboardCheck />
         Review
       </Button>
+      <FpsSwitch fps={fps} onFps={onFps} disabled={busy === 'render' || busy === 'make'} />
       <Button variant="outline" className="no-drag" onClick={onExport} disabled={!ready || !!busy}>
         <Download />
         {busy === 'render' ? 'Exporting…' : 'Export'}
