@@ -63,7 +63,7 @@ Nothing gets published (or sent to Joe as "final") until this passes.
       `TOPICS.md` logs it (`bg: … · cta: <type>`).
 
 ## Export
-- [ ] 1080×1920, 30 fps, H.264 + AAC, 15–60s (REPORT.md checks these).
+- [ ] 1080×1920, 30 or 60 fps (the app's switch / `FPS=60`), H.264 + AAC, 15–60s (REPORT.md checks these).
 - [ ] After `finalize.sh`: `output/<project>/` holds exactly ONE video, `<project>-FINAL.mp4` (+ its review folder).
 
 ## Known past bugs (don't repeat)

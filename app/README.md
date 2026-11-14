@@ -15,7 +15,7 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a new script, ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
 | **+ New reel** (title bar, media bin tile, reel picker) | Creates and opens `new-reel` right away (drop files into it), then you paste a script in the chat: Claude renames the reel from the topic, writes the script + cards, the app builds the preview and makes the **ElevenLabs voice by itself** — no Terminal. |
 | **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
-| **Export / Review** (title bar) | Export renders `<p>-FINAL.mp4` and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
+| **Export / Review** (title bar) | Export renders `<p>-FINAL.mp4` at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
 
 **Appearance:** the System / Light / Dark switch in the title bar. Saved in the app's `settings.json` (userData,
 next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
