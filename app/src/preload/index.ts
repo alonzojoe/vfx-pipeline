@@ -2,6 +2,7 @@ import { contextBridge, ipcRenderer, webUtils } from 'electron'
 import type {
   AppInfo,
   ChatEvent,
+  Fps,
   MediaItem,
   MediaLibrary,
   Overrides,
@@ -36,6 +37,9 @@ const on = <T>(channel: string, cb: (payload: T) => void): (() => void) => {
 }
 
 const api = {
+  /** export frame rate (30 / 60), saved across restarts */
+  getFps: (): Promise<Fps> => ipcRenderer.invoke('fps:get'),
+  setFps: (fps: Fps): Promise<Fps> => ipcRenderer.invoke('fps:set', fps),
   getTheme: (): Promise<ThemeState> => ipcRenderer.invoke('theme:get'),
   setTheme: (source: ThemeSource): Promise<ThemeState> => ipcRenderer.invoke('theme:set', source),
   onThemeChanged: (cb: (t: ThemeState) => void): (() => void) => on('theme:changed', cb),

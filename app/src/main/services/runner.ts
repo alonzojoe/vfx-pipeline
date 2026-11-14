@@ -3,12 +3,14 @@ import type { ChildProcess } from 'node:child_process'
 import type { RunEvent, RunKind } from '../../shared/types'
 import { loginShell, q } from './shell'
 import { logTopicPick } from './projects'
+import { getFps } from './settings'
 
 const COMMANDS: Record<RunKind, (p: string) => string> = {
-  make: (p) => `./hyperframes/${q(p)}/make.sh`, // voice (if missing/changed) → build → render
+  // FPS = the export frame rate chosen next to Export (render.sh passes it to HyperFrames)
+  make: (p) => `FPS=${getFps()} ./hyperframes/${q(p)}/make.sh`, // voice (if missing/changed) → build → render
   voice: (p) => `./hyperframes/${q(p)}/make.sh --no-render`, // ElevenLabs voice → synced build (no terminal)
   build: (p) => `node hyperframes/${q(p)}/build.mjs`,
-  render: (p) => `./scripts/render.sh ${q(p)} hf`,
+  render: (p) => `FPS=${getFps()} ./scripts/render.sh ${q(p)} hf`,
   review: (p) => `./scripts/review.sh ${q(p)}`
 }
 

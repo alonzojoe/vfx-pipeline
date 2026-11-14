@@ -1,12 +1,12 @@
 import { BrowserWindow, dialog, ipcMain, nativeTheme, shell } from 'electron'
 import { existsSync, watch, type FSWatcher } from 'node:fs'
 import { join } from 'node:path'
-import type { AppInfo, Overrides, RunKind, ThemeSource } from '../shared/types'
+import type { AppInfo, Fps, Overrides, RunKind, ThemeSource } from '../shared/types'
 import { importFiles, mediaLibrary } from './services/media'
 import { readOverrides, writeOverrides } from './services/overrides'
 import { inside, projectName } from './services/paths'
 import { createProject, getProject, gitBranch, listProjects, setLineReaction } from './services/projects'
-import { getRoot, getTheme, setRoot, setTheme } from './services/settings'
+import { getFps, getRoot, getTheme, setFps, setRoot, setTheme } from './services/settings'
 import { themeState, windowBackground } from './services/theme'
 import { hasClaude } from './services/shell'
 import { startRun, stopRun } from './services/runner'
@@ -80,6 +80,9 @@ export function registerIpc(win: () => BrowserWindow | null): void {
     w.setBackgroundColor(windowBackground())
     w.webContents.send('theme:changed', themeState())
   })
+
+  ipcMain.handle('fps:get', () => getFps())
+  ipcMain.handle('fps:set', (_e, fps: Fps) => setFps(fps))
 
   ipcMain.handle('app:info', () => appInfo())
   ipcMain.handle('app:chooseRoot', async () => {

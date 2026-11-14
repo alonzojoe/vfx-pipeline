@@ -113,5 +113,8 @@ export type AppInfo = {
 }
 
 /** App appearance: follow macOS, or force light/dark. Saved in the app's settings.json. */
+/** Export frame rate (HyperFrames renders either; 30 is the default). */
+export type Fps = 30 | 60
+
 export type ThemeSource = 'system' | 'light' | 'dark'
 export type ThemeState = { source: ThemeSource; dark: boolean }

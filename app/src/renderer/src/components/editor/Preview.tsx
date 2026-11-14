@@ -15,10 +15,12 @@ type Props = {
   playing: boolean
   onTime: (t: number) => void
   onToggle: () => void
+  /** export frame rate — shown on the canvas */
+  fps: number
 }
 
 /** The reel itself: the HyperFrames composition in an iframe, seeked frame-accurately to the playhead. */
-export function Preview({ project, time, playing, onTime, onToggle }: Props): JSX.Element {
+export function Preview({ project, time, playing, onTime, onToggle, fps }: Props): JSX.Element {
   const box = useRef<HTMLDivElement>(null)
   const frame = useRef<HTMLIFrameElement>(null)
   const video = useRef<HTMLVideoElement>(null)
@@ -73,7 +75,7 @@ export function Preview({ project, time, playing, onTime, onToggle }: Props): JS
     <main aria-label="Preview" className="flex min-w-0 flex-1 flex-col bg-background">
       <div className="flex h-10 shrink-0 items-center gap-3 border-b border-subtle px-3.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">Preview</span>
-        <span>1080 × 1920 · 30 fps</span>
+        <span>1080 × 1920 · {fps} fps</span>
         <div className="flex-1" />
         {project?.finalUrl && (
           <label className="flex items-center gap-2">
