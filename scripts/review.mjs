@@ -29,7 +29,7 @@ const v = probe.streams.find((s) => s.codec_type === "video"), a = probe.streams
 const dur = Number(probe.format.duration);
 const [fn, fd] = (v?.r_frame_rate || "0/1").split("/").map(Number); const fps = fd ? fn / fd : 0;
 check(v?.width === 1080 && v?.height === 1920, "Resolution 1080×1920 (9:16)", `${v?.width}×${v?.height}`);
-check(Math.abs(fps - 30) < 0.1 ? true : "warn", "Frame rate 30 fps", fps.toFixed(2));
+check([30, 60].some((f) => Math.abs(fps - f) < 0.1) ? true : "warn", "Frame rate 30 or 60 fps", fps.toFixed(2));
 check(v?.codec_name === "h264", "Video codec H.264", v?.codec_name);
 check(!!a && a.codec_name === "aac", "Audio track AAC", a ? a.codec_name : "MISSING");
 check(dur >= 15 && dur <= 60 ? true : "warn", "Length 15–60s (Shorts/Reels)", `${dur.toFixed(1)}s`);

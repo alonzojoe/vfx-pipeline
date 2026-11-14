@@ -3,6 +3,7 @@
 #   ./scripts/render.sh halloween            # whichever engine the project has (HyperFrames first)
 #   ./scripts/render.sh halloween remotion
 #   ./scripts/render.sh halloween hf -q draft          # extra args go to the engine's CLI
+#   FPS=60 ./scripts/render.sh halloween               # 30 (default) or 60 fps — HyperFrames; the app's 30/60 switch sets it
 source "$(dirname "$0")/_project.sh"
 [ $# -ge 1 ] || { echo "usage: render.sh <name> [hf|remotion] [engine args...]"; exit 1; }
 NAME="$(slugify "$1")"; shift
@@ -14,6 +15,8 @@ if [ "$ENGINE" = auto ]; then
 fi
 mkdir -p "$ROOT/output/$NAME"
 STAMP="$(date +%Y%m%d-%H%M%S)"
+FPS="${FPS:-30}"
+case "$FPS" in 30|60) ;; *) echo "FPS must be 30 or 60 (got $FPS)"; exit 1;; esac
 
 
 # Loudness: normalize every render to YouTube's -14 LUFS / -1.5 dBTP (2-pass loudnorm, video stream copied)
@@ -44,7 +47,8 @@ keep_only(){
 render_hf(){
   has_hf "$NAME" || { echo "hyperframes/$NAME doesn't exist"; return 1; }
   OUT="$ROOT/output/$NAME/$NAME-hf-$STAMP.mp4"
-  (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" "$@")
+  echo "  frame rate: $FPS fps"
+  (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" "$@")
   normalize "$OUT"
   keep_only "$OUT"
   echo "→ output/$NAME/$(basename "$OUT")"
