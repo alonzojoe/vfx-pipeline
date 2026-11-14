@@ -6,6 +6,7 @@ import { TitleBar, type Stages } from '@/components/editor/TitleBar'
 import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
+import { useFps } from '@/hooks/useFps'
 import { Preview } from '@/components/editor/Preview'
 import { useEffect, useRef, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
@@ -21,6 +22,7 @@ export default function App(): JSX.Element {
   const { info, project } = vfx
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.time, pb.playing, pb.seekId)
+  const { fps, setFps } = useFps()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // switching reels: stop and go back to the start — the old position (and the voice scheduled from it) belongs to
   // the other reel, and may even be past this one's end
@@ -142,12 +144,12 @@ export default function App(): JSX.Element {
         pb.setTime(e.key === 'Home' ? 0 : (project?.duration ?? 0))
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault()
-        pb.setTime(pb.time + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / 30))
+        pb.setTime(pb.time + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / fps))
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [pb, project?.duration])
+  }, [pb, project?.duration, fps])
 
   if (info && !info.root) {
     return (
@@ -174,10 +176,12 @@ export default function App(): JSX.Element {
           onNew={newReel}
           onReview={() => vfx.current && runs.start('review', vfx.current)}
           onExport={() => vfx.current && runs.start('render', vfx.current)}
+          fps={fps}
+          onFps={setFps}
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} onNew={newReel} />
-          <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} />
+          <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} fps={fps} />
           <RightPanel
             tab={tab}
             onTab={setTab}

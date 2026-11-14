@@ -1,10 +1,10 @@
 import { app } from 'electron'
-import type { ThemeSource } from '../../shared/types'
+import type { Fps, ThemeSource } from '../../shared/types'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 
-type Settings = { root?: string; theme?: ThemeSource }
+type Settings = { root?: string; theme?: ThemeSource; fps?: Fps }
 
 const file = (): string => join(app.getPath('userData'), 'settings.json')
 
@@ -46,4 +46,17 @@ export const getTheme = (): ThemeSource => {
 
 export function setTheme(theme: ThemeSource): void {
   if (THEMES.includes(theme)) write({ theme })
+}
+
+const FPS: Fps[] = [30, 60]
+
+/** Saved export frame rate (default 30). */
+export const getFps = (): Fps => {
+  const f = read().fps
+  return f && FPS.includes(f) ? f : 30
+}
+
+export function setFps(fps: Fps): Fps {
+  if (FPS.includes(fps)) write({ fps })
+  return getFps()
 }
