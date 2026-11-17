@@ -145,9 +145,9 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
   if (!available) {
     return (
       <div className="flex flex-col gap-3 p-4 text-sm leading-relaxed">
-        <div className="font-semibold">Connect Claude Code</div>
+        <div className="font-semibold">Connect the chat</div>
         <p className="text-muted-foreground">
-          Chat runs Claude Code on this Mac inside your vfx folder (your own Claude login — no API key here). Install it once in Terminal:
+          The chat runs the Claude Code CLI on this Mac inside your vfx folder (your own Claude login — no API key here). Install it once in Terminal:
         </p>
         <pre className="select-text rounded-lg border bg-surface p-3 font-mono text-xs">npm install -g @anthropic-ai/claude-code{'\n'}claude</pre>
         <p className="text-muted-foreground">Sign in when it asks, then reopen vfx Studio.</p>
@@ -177,7 +177,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
           {msgs.length === 0 && !draft && (
             <div className="flex flex-col gap-2">
               <p className="text-muted-foreground">
-                Talk to Claude Code about <span className="text-foreground">{project ?? 'your reels'}</span>. It follows BRAND.md, REVIEW.md and your
+                Talk to vfx Studio about <span className="text-foreground">{project ?? 'your reels'}</span>. It follows BRAND.md, REVIEW.md and your
                 .claude rules, edits the files and commits like in the terminal.
               </p>
               {STARTERS.map((s) => (
@@ -230,7 +230,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
           {build && <BuildChecklist b={build} voice={voice} preview={preview} />}
           {busy && msgs[msgs.length - 1]?.role === 'user' && (
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Loader2 className="h-3 w-3 animate-spin text-primary" /> starting Claude Code…
+              <Loader2 className="h-3 w-3 animate-spin text-primary" /> starting…
             </div>
           )}
           <div ref={end} />
@@ -249,7 +249,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               }
             }}
             rows={3}
-            aria-label="Message Claude Code"
+            aria-label="Message vfx Studio"
             placeholder={draft ? 'Paste your script here…' : 'Paste a new script, or ask for a change…'}
             className="min-h-0 resize-none border-0 p-1 shadow-none focus-visible:ring-0"
           />
@@ -266,7 +266,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               <Plus />
               New chat
             </Button>
-            <span className="truncate text-xs text-muted-foreground">Claude Code · vfx folder</span>
+            <span className="truncate text-xs text-muted-foreground">vfx Studio · vfx folder</span>
             <div className="flex-1" />
             {busy ? (
               <Button size="icon-sm" variant="secondary" aria-label="Stop" onClick={() => window.api.stopChat().then(() => setBusy(false))}>
