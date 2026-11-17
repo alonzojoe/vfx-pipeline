@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { Clip, ProjectDetail } from '../../../shared/types'
+import type { Clock } from './usePlayback'
 import { vfxUrlOf } from '@/lib/vfx'
 
 const AUDIBLE = new Set(['voice', 'sfx', 'media'])
@@ -9,12 +10,10 @@ const AUDIBLE = new Set(['voice', 'sfx', 'media'])
  * at its timeline position (with its media offset and volume), exactly like the render mixes them.
  * Re-scheduled on play and on every jump, so the voice always follows the playhead.
  */
-export function useAudioEngine(project: ProjectDetail | null, time: number, playing: boolean, seekId: number): void {
+export function useAudioEngine(project: ProjectDetail | null, clock: Clock, playing: boolean, seekId: number): void {
   const ctx = useRef<AudioContext | null>(null)
   const buffers = useRef(new Map<string, Promise<AudioBuffer | null>>())
   const live = useRef<AudioScheduledSourceNode[]>([])
-  const timeRef = useRef(time)
-  timeRef.current = time
 
   const load = (src: string): Promise<AudioBuffer | null> => {
     if (!ctx.current) ctx.current = new AudioContext()
@@ -51,7 +50,7 @@ export function useAudioEngine(project: ProjectDetail | null, time: number, play
     const ac = ctx.current
     ac.resume()
     let cancelled = false
-    const from = timeRef.current
+    const from = clock.get()
     const t0 = ac.currentTime + 0.05
     const clips: Clip[] = project.clips.filter(
       (c) => c.src && AUDIBLE.has(c.track) && /\.(mp3|wav|m4a|aac)$/i.test(c.src) && c.start + c.duration > from
@@ -76,5 +75,5 @@ export function useAudioEngine(project: ProjectDetail | null, time: number, play
       stop()
     }
     // a jump while playing (start/end/±1s buttons, keys, scrubbing) stops the old sounds and re-schedules from there
-  }, [playing, project, seekId])
+  }, [playing, project, seekId, clock])
 }

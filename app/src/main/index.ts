@@ -8,6 +8,9 @@ import { windowBackground } from './services/theme'
 import devIcon from '../../build/icon.png?asset'
 
 registerVfxScheme()
+// menu items ("About / Hide / Quit vfx Studio") and the About panel use this name; the bold menu-bar title comes from
+// the app bundle (electron-builder sets it; `npm run dev` gets it from scripts/dev-app-name.ts)
+app.setName('vfx Studio')
 
 function createWindow(): BrowserWindow {
   const win = new BrowserWindow({

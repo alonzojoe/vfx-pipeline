@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { memo, useMemo, useRef, useState } from 'react'
 import { FileAudio, FileImage, FileVideo, Pause, Play, Plus, Search, Upload } from 'lucide-react'
 import type { MediaItem, MediaLibrary } from '../../../../shared/types'
 import { Input } from '@/components/ui/input'
@@ -58,7 +58,7 @@ function SoundRow({ item, playing, onPlay }: { item: MediaItem; playing: boolean
 const icon = (k: MediaItem['kind']): JSX.Element =>
   k === 'audio' ? <FileAudio className="h-3.5 w-3.5" /> : k === 'video' ? <FileVideo className="h-3.5 w-3.5" /> : <FileImage className="h-3.5 w-3.5" />
 
-export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Element {
+export const MediaBin = memo(function MediaBin({ project, media, onImported, onNew }: Props): JSX.Element {
   const [query, setQuery] = useState('')
   const [over, setOver] = useState(false)
   const [playing, setPlaying] = useState<string | null>(null)
@@ -202,4 +202,4 @@ export function MediaBin({ project, media, onImported, onNew }: Props): JSX.Elem
       </Tabs>
     </aside>
   )
-}
+})
