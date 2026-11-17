@@ -9,13 +9,13 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | Panel | What it does |
 |---|---|
 | **Media bin** (left) | Joe's stickers, the SFX library (search 1,000+ sounds, play to audition), backgrounds and the project's own files. **Drop files from Finder** → copied to `input/<project>/media/`. Drag anything onto the timeline. |
-| **Preview** (center) | The real HyperFrames composition, seeked frame-accurately to the playhead, with voice + SFX playing in sync. Safe-zone overlay (REVIEW.md zones). "Rendered" switch plays the FINAL mp4. |
+| **Preview** (center) | The real HyperFrames composition, seeked frame-accurately to the playhead, with voice + SFX playing in sync. Safe-zone overlay (REVIEW.md zones). "Rendered" switch plays the FINAL mp4. Full-screen button (right of the controls) fills the screen; <kbd>Esc</kbd> returns. |
 | **Timeline** (bottom) | Captions, Cards, Avatar, FX, Media, Voice (waveform), SFX, Background. Click/drag the ruler to scrub, drag clips to move them (snaps to words), drop media to add it, ⌫ removes media you added, zoom slider. |
 | **Inspector** (right) | Start/duration of the selected clip, position + volume of added media, and a sticker picker that swaps the reaction for that script line. |
 | **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a new script, ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
 | **+ New reel** (title bar, media bin tile, reel picker) | Creates and opens `new-reel` right away (drop files into it), then you paste a script in the chat: Claude renames the reel from the topic, writes the script + cards, the app builds the preview and makes the **ElevenLabs voice by itself** — no Terminal. |
 | **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
-| **Export / Review** (title bar) | Export renders `<p>-FINAL.mp4` at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
+| **Export / Review** (title bar) | Export renders `<p>-final_edit.mp4` or `<p>-final-edit.mp4` (random name, small H.264, same 1080×1920) at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
 
 **Appearance:** the System / Light / Dark switch in the title bar. Saved in the app's `settings.json` (userData,
 next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
@@ -28,7 +28,7 @@ switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an
 **Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
 In `npm run dev` the Dock shows that classic icon too (dev runs inside Electron's own app bundle).
 
-Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
+Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second · <kbd>Esc</kbd> leave full screen.
 
 ## How edits are saved
 

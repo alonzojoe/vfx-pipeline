@@ -144,7 +144,11 @@ export default function App(): JSX.Element {
     setSelectedId(null)
   })
   const openReview = useStable(() => vfx.current && window.api.reveal(`output/${vfx.current}/review`))
-  const showVideo = useStable((p: string) => window.api.reveal(`output/${p}/${p}-FINAL.mp4`))
+  // the finished video's name varies (…-final_edit.mp4 / …-final-edit.mp4), so ask the project which one exists
+  const showVideo = useStable(async (p: string) => {
+    const { finalUrl } = await window.api.getProject(p)
+    window.api.reveal(finalUrl ? decodeURIComponent(finalUrl.replace('vfx://root/', '')) : `output/${p}`)
+  })
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {

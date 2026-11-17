@@ -1,5 +1,5 @@
 import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react'
-import { FastForward, Pause, Play, Rewind, SkipBack, SkipForward } from 'lucide-react'
+import { FastForward, Pause, Play, Rewind, SkipBack, SkipForward, Maximize, Minimize } from 'lucide-react'
 import type { ProjectDetail } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
@@ -19,6 +19,11 @@ type Props = {
   onToggle: () => void
   /** export frame rate — shown on the canvas */
   fps: number
+}
+
+/** Leave full screen if anything is in it (no-op otherwise). */
+const exitFullscreen = (): void => {
+  if (document.fullscreenElement) document.exitFullscreen().catch((e) => console.warn('exit full screen failed:', e))
 }
 
 /** Seeks the composition (or the FINAL video) to the playhead on every frame. Renders nothing. */
@@ -58,6 +63,8 @@ function TimeReadout({ clock, duration }: { clock: Clock; duration: number }): J
 /** The reel itself: the HyperFrames composition in an iframe, seeked frame-accurately to the playhead. */
 export const Preview = memo(function Preview({ project, clock, playing, onTime, onToggle, fps }: Props): JSX.Element {
   const box = useRef<HTMLDivElement>(null)
+  const panel = useRef<HTMLElement>(null)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const frame = useRef<HTMLIFrameElement>(null)
   const video = useRef<HTMLVideoElement>(null)
   const [scale, setScale] = useState(0.25)
@@ -91,11 +98,30 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
     return () => window.removeEventListener('message', onMsg)
   }, [])
 
+  // fullscreen: the preview panel (reel + controls) fills the screen; Escape (or the button) brings it back.
+  // Chromium usually handles Esc itself — the listener is a backup in case Electron doesn't.
+  useEffect(() => {
+    const onChange = (): void => setIsFullscreen(document.fullscreenElement === panel.current)
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') exitFullscreen()
+    }
+    document.addEventListener('fullscreenchange', onChange)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('fullscreenchange', onChange)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [])
+  const toggleFullscreen = (): void => {
+    if (document.fullscreenElement) exitFullscreen()
+    else panel.current?.requestFullscreen().catch((e) => console.warn('full screen refused:', e))
+  }
+
   const w = W * scale
   const h = H * scale
 
   return (
-    <main aria-label="Preview" className="flex min-w-0 flex-1 flex-col bg-background">
+    <main ref={panel} aria-label="Preview" className="flex min-w-0 flex-1 flex-col bg-background">
       <FollowPlayhead clock={clock} frame={frame} video={video} ready={ready} final={final} playing={playing} />
       <div className="flex h-10 shrink-0 items-center gap-3 border-b border-subtle px-3.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">Preview</span>
@@ -159,7 +185,7 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
         )}
       </div>
 
-      <div className="flex h-[50px] shrink-0 items-center justify-center gap-3 border-t border-subtle">
+      <div className="relative flex h-[50px] shrink-0 items-center justify-center gap-3 border-t border-subtle">
         <Button variant="ghost" size="icon" aria-label="Go to start" title="Start (Home)" onClick={() => onTime(0)} disabled={!project}>
           <SkipBack />
         </Button>
@@ -181,6 +207,17 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
           <SkipForward />
         </Button>
         <TimeReadout clock={clock} duration={project?.duration ?? 0} />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-3"
+          aria-label={isFullscreen ? 'Exit full screen' : 'Full screen'}
+          title={isFullscreen ? 'Exit full screen (Esc)' : 'Full screen'}
+          onClick={toggleFullscreen}
+          disabled={!project}
+        >
+          {isFullscreen ? <Minimize /> : <Maximize />}
+        </Button>
       </div>
     </main>
   )
