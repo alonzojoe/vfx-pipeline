@@ -21,6 +21,11 @@ type Props = {
   fps: number
 }
 
+/** Leave full screen if anything is in it (no-op otherwise). */
+const exitFullscreen = (): void => {
+  if (document.fullscreenElement) document.exitFullscreen().catch((e) => console.warn('exit full screen failed:', e))
+}
+
 /** Seeks the composition (or the FINAL video) to the playhead on every frame. Renders nothing. */
 function FollowPlayhead(props: {
   clock: Clock
@@ -59,7 +64,7 @@ function TimeReadout({ clock, duration }: { clock: Clock; duration: number }): J
 export const Preview = memo(function Preview({ project, clock, playing, onTime, onToggle, fps }: Props): JSX.Element {
   const box = useRef<HTMLDivElement>(null)
   const panel = useRef<HTMLElement>(null)
-  const [full, setFull] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const frame = useRef<HTMLIFrameElement>(null)
   const video = useRef<HTMLVideoElement>(null)
   const [scale, setScale] = useState(0.25)
@@ -93,11 +98,12 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
     return () => window.removeEventListener('message', onMsg)
   }, [])
 
-  // fullscreen: the preview panel (reel + controls) fills the screen; Escape (or the button) brings it back
+  // fullscreen: the preview panel (reel + controls) fills the screen; Escape (or the button) brings it back.
+  // Chromium usually handles Esc itself — the listener is a backup in case Electron doesn't.
   useEffect(() => {
-    const onChange = (): void => setFull(document.fullscreenElement === panel.current)
+    const onChange = (): void => setIsFullscreen(document.fullscreenElement === panel.current)
     const onKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen().catch(() => {})
+      if (e.key === 'Escape') exitFullscreen()
     }
     document.addEventListener('fullscreenchange', onChange)
     window.addEventListener('keydown', onKey)
@@ -106,9 +112,9 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
       window.removeEventListener('keydown', onKey)
     }
   }, [])
-  const toggleFull = (): void => {
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
-    else panel.current?.requestFullscreen().catch(() => {})
+  const toggleFullscreen = (): void => {
+    if (document.fullscreenElement) exitFullscreen()
+    else panel.current?.requestFullscreen().catch((e) => console.warn('full screen refused:', e))
   }
 
   const w = W * scale
@@ -205,12 +211,12 @@ export const Preview = memo(function Preview({ project, clock, playing, onTime, 
           variant="ghost"
           size="icon"
           className="absolute right-3"
-          aria-label={full ? 'Exit full screen' : 'Full screen'}
-          title={full ? 'Exit full screen (Esc)' : 'Full screen'}
-          onClick={toggleFull}
+          aria-label={isFullscreen ? 'Exit full screen' : 'Full screen'}
+          title={isFullscreen ? 'Exit full screen (Esc)' : 'Full screen'}
+          onClick={toggleFullscreen}
           disabled={!project}
         >
-          {full ? <Minimize /> : <Maximize />}
+          {isFullscreen ? <Minimize /> : <Maximize />}
         </Button>
       </div>
     </main>
