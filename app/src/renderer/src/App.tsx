@@ -1,4 +1,5 @@
 import { FolderOpen } from 'lucide-react'
+import type { Clip } from '../../shared/types'
 import { Button } from '@/components/ui/button'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { MediaBin } from '@/components/editor/MediaBin'
@@ -16,12 +17,13 @@ import { useEdits } from '@/hooks/useEdits'
 import { RightPanel } from '@/components/editor/RightPanel'
 import { Inspector } from '@/components/editor/Inspector'
 import { Chat, type VoiceState } from '@/components/editor/Chat'
+import { useStable } from '@/hooks/useStable'
 
 export default function App(): JSX.Element {
   const vfx = useVfx()
   const { info, project } = vfx
   const pb = usePlayback(project?.duration ?? 0)
-  useAudioEngine(project, pb.time, pb.playing, pb.seekId)
+  useAudioEngine(project, pb.clock, pb.playing, pb.seekId)
   const { fps, setFps } = useFps()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // switching reels: stop and go back to the start — the old position (and the voice scheduled from it) belongs to
@@ -29,7 +31,7 @@ export default function App(): JSX.Element {
   const pbRef = useRef(pb)
   pbRef.current = pb
   useEffect(() => {
-    pbRef.current.setPlaying(false)
+    pbRef.current.stop()
     pbRef.current.setTime(0)
     setSelectedId(null)
   }, [vfx.current])
@@ -65,12 +67,17 @@ export default function App(): JSX.Element {
     else runs.start('build', vfx.current)
   }
   const edits = useEdits(project, vfx.patch, rebuild)
+  // stable callbacks for the memo()'d panels — they re-render only when what they show changes
+  const move = useStable(edits.move)
+  const update = useStable(edits.update)
+  const remove = useStable(edits.remove)
+  const dropMedia = useStable(edits.dropMedia)
   const [tab, setTab] = useState('chat')
   const selected = project?.clips.find((c) => c.id === selectedId) ?? null
-  const select = (id: string | null): void => {
+  const select = useStable((id: string | null): void => {
     setSelectedId(id)
     if (id) setTab('inspector')
-  }
+  })
   const summary = vfx.projects.find((p) => p.name === vfx.current) ?? null
   const active = runs.active?.project === vfx.current ? runs.active?.kind : undefined
   const stages: Stages = {
@@ -82,7 +89,7 @@ export default function App(): JSX.Element {
 
   /** + New reel: create new-reel (new-reel-2…), open it and focus the chat for the script */
   const [newKey, setNewKey] = useState(0)
-  const newReel = async (): Promise<void> => {
+  const newReel = useStable(async (): Promise<void> => {
     const name = await window.api.createProject()
     await vfx.loadProjects()
     vfx.setCurrent(name)
@@ -90,18 +97,18 @@ export default function App(): JSX.Element {
     pb.setTime(0)
     setTab('chat')
     setNewKey((k) => k + 1)
-  }
+  })
 
   // the chat renames the new reel from its topic → follow it
   const currentRef = useRef(vfx.current)
   currentRef.current = vfx.current
-  const onRenamed = async (to: string): Promise<void> => {
+  const onRenamed = useStable(async (to: string): Promise<void> => {
     currentRef.current = to
     await vfx.loadProjects()
     vfx.setCurrent(to)
-  }
+  })
   // when the script is in and there's no voice yet, make it with ElevenLabs (make.sh --no-render) — no terminal
-  const onChatDone = async (ok: boolean, newReel: boolean, edited: boolean): Promise<void> => {
+  const onChatDone = useStable(async (ok: boolean, newReel: boolean, edited: boolean): Promise<void> => {
     const name = currentRef.current
     await vfx.loadProjects()
     if (!ok || !name) return
@@ -117,7 +124,7 @@ export default function App(): JSX.Element {
     if (!p.lines.length || runs.active) return
     pendingVoice.current = p.hasVoice ? null : name
     runs.start('build', name)
-  }
+  })
   const stateOf = (kind: 'voice' | 'build', done: boolean): VoiceState => {
     const r = [...runs.runs].reverse().find((x) => x.kind === kind && x.project === vfx.current)
     return r && !r.done ? 'doing' : r?.done && r.code !== 0 ? 'failed' : r?.done || done ? 'done' : 'todo'
@@ -125,11 +132,19 @@ export default function App(): JSX.Element {
   const voice = stateOf('voice', !!project?.hasVoice)
   const preview = stateOf('build', false)
 
-  const setReaction = async (line: number, sticker: string): Promise<void> => {
+  const setReaction = useStable(async (line: number, sticker: string): Promise<void> => {
     if (!vfx.current) return
     await window.api.setLineReaction(vfx.current, line, sticker)
     rebuild()
-  }
+  })
+  const onReview = useStable(() => vfx.current && runs.start('review', vfx.current))
+  const onExport = useStable(() => vfx.current && runs.start('render', vfx.current))
+  const onDeleteClip = useStable((c: Clip) => {
+    remove(c)
+    setSelectedId(null)
+  })
+  const openReview = useStable(() => vfx.current && window.api.reveal(`output/${vfx.current}/review`))
+  const showVideo = useStable((p: string) => window.api.reveal(`output/${p}/${p}-FINAL.mp4`))
 
   // space = play/pause, ←/→ = 1 frame (⇧ = 1 second), unless typing
   useEffect(() => {
@@ -144,7 +159,7 @@ export default function App(): JSX.Element {
         pb.setTime(e.key === 'Home' ? 0 : (project?.duration ?? 0))
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault()
-        pb.setTime(pb.time + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / fps))
+        pb.setTime(pb.clock.get() + (e.key === 'ArrowLeft' ? -1 : 1) * (e.shiftKey ? 1 : 1 / fps))
       }
     }
     window.addEventListener('keydown', onKey)
@@ -174,14 +189,14 @@ export default function App(): JSX.Element {
           busy={runs.active?.kind ?? null}
           onProject={vfx.setCurrent}
           onNew={newReel}
-          onReview={() => vfx.current && runs.start('review', vfx.current)}
-          onExport={() => vfx.current && runs.start('render', vfx.current)}
+          onReview={onReview}
+          onExport={onExport}
           fps={fps}
           onFps={setFps}
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} onNew={newReel} />
-          <Preview project={project} time={pb.time} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} fps={fps} />
+          <Preview project={project} clock={pb.clock} playing={pb.playing} onTime={pb.setTime} onToggle={pb.toggle} fps={fps} />
           <RightPanel
             tab={tab}
             onTab={setTab}
@@ -202,12 +217,9 @@ export default function App(): JSX.Element {
                 project={project}
                 media={vfx.media}
                 clip={selected}
-                onMove={edits.move}
-                onUpdate={edits.update}
-                onDelete={(c) => {
-                  edits.remove(c)
-                  setSelectedId(null)
-                }}
+                onMove={move}
+                onUpdate={update}
+                onDelete={onDeleteClip}
                 onReaction={setReaction}
               />
             }
@@ -215,19 +227,19 @@ export default function App(): JSX.Element {
         </div>
         <Timeline
           project={project}
-          time={pb.time}
+          clock={pb.clock}
           selectedId={selectedId}
           onSeek={pb.setTime}
           onSelect={select}
-          onMove={edits.move}
-          onDropMedia={edits.dropMedia}
-          onDelete={edits.remove}
+          onMove={move}
+          onDropMedia={dropMedia}
+          onDelete={remove}
         />
         <RunConsole
           run={runs.last}
           onStop={runs.stop}
-          onOpenReview={() => vfx.current && window.api.reveal(`output/${vfx.current}/review`)}
-          onShowVideo={(p) => window.api.reveal(`output/${p}/${p}-FINAL.mp4`)}
+          onOpenReview={openReview}
+          onShowVideo={showVideo}
         />
       </div>
     </TooltipProvider>

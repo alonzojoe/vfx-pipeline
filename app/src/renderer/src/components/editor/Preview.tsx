@@ -1,17 +1,19 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { memo, useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react'
 import { FastForward, Pause, Play, Rewind, SkipBack, SkipForward } from 'lucide-react'
 import type { ProjectDetail } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { fmt } from '@/lib/time'
 import { cn } from '@/lib/utils'
+import { useTime, type Clock } from '@/hooks/usePlayback'
 
 const W = 1080
 const H = 1920
 
 type Props = {
   project: ProjectDetail | null
-  time: number
+  /** the playhead — only the small parts below that show it subscribe, so playback doesn't re-render the panel */
+  clock: Clock
   playing: boolean
   onTime: (t: number) => void
   onToggle: () => void
@@ -19,8 +21,42 @@ type Props = {
   fps: number
 }
 
+/** Seeks the composition (or the FINAL video) to the playhead on every frame. Renders nothing. */
+function FollowPlayhead(props: {
+  clock: Clock
+  frame: RefObject<HTMLIFrameElement>
+  video: RefObject<HTMLVideoElement>
+  ready: boolean
+  final: boolean
+  playing: boolean
+}): null {
+  const { clock, frame, video, ready, final, playing } = props
+  const time = useTime(clock)
+  useEffect(() => {
+    if (ready && !final) frame.current?.contentWindow?.postMessage({ type: 'vfx:seek', t: time }, '*')
+  }, [frame, time, ready, final])
+  // Final mp4 mode follows the same clock
+  useEffect(() => {
+    const v = video.current
+    if (!final || !v) return
+    if (playing && v.paused) v.play().catch(() => {})
+    if (!playing && !v.paused) v.pause()
+    if (Math.abs(v.currentTime - time) > (playing ? 0.25 : 0.01)) v.currentTime = time
+  }, [video, final, playing, time])
+  return null
+}
+
+function TimeReadout({ clock, duration }: { clock: Clock; duration: number }): JSX.Element {
+  const time = useTime(clock)
+  return (
+    <span className="tabular font-mono text-xs text-foreground">
+      {fmt(time)} <span className="text-muted-foreground">/ {fmt(duration)}</span>
+    </span>
+  )
+}
+
 /** The reel itself: the HyperFrames composition in an iframe, seeked frame-accurately to the playhead. */
-export function Preview({ project, time, playing, onTime, onToggle, fps }: Props): JSX.Element {
+export const Preview = memo(function Preview({ project, clock, playing, onTime, onToggle, fps }: Props): JSX.Element {
   const box = useRef<HTMLDivElement>(null)
   const frame = useRef<HTMLIFrameElement>(null)
   const video = useRef<HTMLVideoElement>(null)
@@ -55,24 +91,12 @@ export function Preview({ project, time, playing, onTime, onToggle, fps }: Props
     return () => window.removeEventListener('message', onMsg)
   }, [])
 
-  useEffect(() => {
-    if (ready && !final) frame.current?.contentWindow?.postMessage({ type: 'vfx:seek', t: time }, '*')
-  }, [time, ready, final])
-
-  // Final mp4 mode follows the same clock
-  useEffect(() => {
-    const v = video.current
-    if (!final || !v) return
-    if (playing && v.paused) v.play().catch(() => {})
-    if (!playing && !v.paused) v.pause()
-    if (Math.abs(v.currentTime - time) > (playing ? 0.25 : 0.01)) v.currentTime = time
-  }, [final, playing, time])
-
   const w = W * scale
   const h = H * scale
 
   return (
     <main aria-label="Preview" className="flex min-w-0 flex-1 flex-col bg-background">
+      <FollowPlayhead clock={clock} frame={frame} video={video} ready={ready} final={final} playing={playing} />
       <div className="flex h-10 shrink-0 items-center gap-3 border-b border-subtle px-3.5 text-xs text-muted-foreground">
         <span className="font-semibold text-foreground">Preview</span>
         <span>1080 × 1920 · {fps} fps</span>
@@ -139,7 +163,7 @@ export function Preview({ project, time, playing, onTime, onToggle, fps }: Props
         <Button variant="ghost" size="icon" aria-label="Go to start" title="Start (Home)" onClick={() => onTime(0)} disabled={!project}>
           <SkipBack />
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Back 1 second" title="Back 1s (⇧←)" onClick={() => onTime(time - 1)} disabled={!project}>
+        <Button variant="ghost" size="icon" aria-label="Back 1 second" title="Back 1s (⇧←)" onClick={() => onTime(clock.get() - 1)} disabled={!project}>
           <Rewind />
         </Button>
         <button
@@ -150,16 +174,14 @@ export function Preview({ project, time, playing, onTime, onToggle, fps }: Props
         >
           {playing ? <Pause className="h-3.5 w-3.5 fill-current" /> : <Play className="ml-0.5 h-3.5 w-3.5 fill-current" />}
         </button>
-        <Button variant="ghost" size="icon" aria-label="Forward 1 second" title="Forward 1s (⇧→)" onClick={() => onTime(time + 1)} disabled={!project}>
+        <Button variant="ghost" size="icon" aria-label="Forward 1 second" title="Forward 1s (⇧→)" onClick={() => onTime(clock.get() + 1)} disabled={!project}>
           <FastForward />
         </Button>
         <Button variant="ghost" size="icon" aria-label="Go to end" title="End (End)" onClick={() => onTime(project?.duration ?? 0)} disabled={!project}>
           <SkipForward />
         </Button>
-        <span className="tabular font-mono text-xs text-foreground">
-          {fmt(time)} <span className="text-muted-foreground">/ {fmt(project?.duration ?? 0)}</span>
-        </span>
+        <TimeReadout clock={clock} duration={project?.duration ?? 0} />
       </div>
     </main>
   )
-}
+})
