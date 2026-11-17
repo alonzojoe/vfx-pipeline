@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { ChevronDown, ClipboardCheck, Download, Folder, Plus } from 'lucide-react'
 import type { Fps, ProjectSummary } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
@@ -111,7 +111,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
   )
 }
 
-export function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport, fps, onFps }: Props): JSX.Element {
+export const TitleBar = memo(function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport, fps, onFps }: Props): JSX.Element {
   const ready = !!project && !project.draft
   return (
     <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-titlebar pl-[84px] pr-3">
@@ -152,4 +152,4 @@ export function TitleBar({ project, projects, stages, busy, onProject, onNew, on
       </Button>
     </header>
   )
-}
+})

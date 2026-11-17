@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { MousePointerClick, Trash2 } from 'lucide-react'
 import type { AddedClip, Clip, MediaLibrary, ProjectDetail } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
@@ -48,7 +48,7 @@ function Num({ label, value, step = 0.01, disabled, onCommit }: { label: string;
   )
 }
 
-export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, onReaction }: Props): JSX.Element {
+export const Inspector = memo(function Inspector({ project, media, clip, onMove, onUpdate, onDelete, onReaction }: Props): JSX.Element {
   if (!project) return <p className="p-4 text-muted-foreground">No project open.</p>
   if (!clip) {
     return (
@@ -158,7 +158,7 @@ export function Inspector({ project, media, clip, onMove, onUpdate, onDelete, on
       </div>
     </ScrollArea>
   )
-}
+})
 
 function AddedBox({ clip, onUpdate }: { clip: Clip; onUpdate: Props['onUpdate'] }): JSX.Element {
   const [box, setBox] = useState(clip.box ?? { x: 140, y: 520, w: 800, h: 800 })

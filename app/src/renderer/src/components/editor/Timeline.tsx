@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import { Magnet, Minus, Plus, Trash2 } from 'lucide-react'
 import { TRACK_ORDER, type Clip, type MediaItem, type ProjectDetail, type TrackKind } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
@@ -9,6 +9,7 @@ import { Waveform } from './Waveform'
 import { clamp, MEDIA_MIME } from '@/lib/time'
 import { vfxUrlOf } from '@/lib/vfx'
 import { cn } from '@/lib/utils'
+import { useTime, type Clock } from '@/hooks/usePlayback'
 
 const TRACK: Record<TrackKind, { name: string; h: number; bg: string; dot: string }> = {
   captions: { name: 'Captions', h: 32, bg: 'bg-track-captions', dot: '#a1a1aa' },
@@ -27,7 +28,8 @@ const RULER = 24
 
 type Props = {
   project: ProjectDetail | null
-  time: number
+  /** the playhead — only <Playhead> subscribes, so clips and waveforms don't re-render while playing */
+  clock: Clock
   selectedId: string | null
   onSeek: (t: number) => void
   onSelect: (id: string | null) => void
@@ -38,7 +40,23 @@ type Props = {
   onDelete?: (clip: Clip) => void
 }
 
-export function Timeline({ project, time, selectedId, onSeek, onSelect, onMove, onDropMedia, onDelete }: Props): JSX.Element {
+/** The playhead line; keeps itself in view while playing and after jumps (Home/End, ±1s, switching reels). */
+function Playhead({ clock, pps, scroller }: { clock: Clock; pps: number; scroller: RefObject<HTMLDivElement> }): JSX.Element {
+  const time = useTime(clock)
+  const x = HEADER + time * pps
+  useEffect(() => {
+    const el = scroller.current
+    if (!el) return
+    if (x > el.scrollLeft + el.clientWidth - 80 || x < el.scrollLeft + HEADER) el.scrollLeft = Math.max(0, x - HEADER - 40)
+  }, [x, scroller])
+  return (
+    <div className="pointer-events-none absolute bottom-0 top-0 z-30 w-0.5 bg-primary" style={{ left: x - 1 }} aria-hidden="true">
+      <span className="absolute -left-[6px] top-0 h-3 w-3.5 rounded-b-md rounded-t-sm bg-primary" />
+    </div>
+  )
+}
+
+export const Timeline = memo(function Timeline({ project, clock, selectedId, onSeek, onSelect, onMove, onDropMedia, onDelete }: Props): JSX.Element {
   const [pps, setPps] = useState(48) // pixels per second
   const [snap, setSnap] = useState(true)
   const [drag, setDrag] = useState<{ id: string; dx: number } | null>(null)
@@ -83,14 +101,6 @@ export function Timeline({ project, time, selectedId, onSeek, onSelect, onMove, 
     const x = clientX - el.getBoundingClientRect().left + el.scrollLeft - HEADER
     return clamp(x / pps, 0, duration)
   }
-
-  // keep the playhead in view — while playing and after jumps (Home/End, ±1s, switching reels)
-  useEffect(() => {
-    const el = scroller.current
-    if (!el) return
-    const x = HEADER + time * pps
-    if (x > el.scrollLeft + el.clientWidth - 80 || x < el.scrollLeft + HEADER) el.scrollLeft = Math.max(0, x - HEADER - 40)
-  }, [time, pps])
 
   const scrub = (e: React.PointerEvent): void => {
     if (e.button !== 0) return
@@ -262,16 +272,9 @@ export function Timeline({ project, time, selectedId, onSeek, onSelect, onMove, 
             </div>
           )}
 
-          {/* playhead */}
-          <div
-            className="pointer-events-none absolute bottom-0 top-0 z-30 w-0.5 bg-primary"
-            style={{ left: HEADER + time * pps - 1 }}
-            aria-hidden="true"
-          >
-            <span className="absolute -left-[6px] top-0 h-3 w-3.5 rounded-b-md rounded-t-sm bg-primary" />
-          </div>
+          <Playhead clock={clock} pps={pps} scroller={scroller} />
         </div>
       </div>
     </section>
   )
-}
+})
