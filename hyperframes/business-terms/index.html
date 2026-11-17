@@ -15,11 +15,13 @@
       #root { position: relative; width: 100%; height: 100%; font-family: "Fredoka", sans-serif; color: var(--ink); }
 
       .bg { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; object-position: 50% 0; transform-origin: 50% 40%; z-index: 0; }
-      .caption { position: absolute; left: 50px; right: 50px; top: 200px; height: 130px; text-align: center;
-                 font: 100px/130px "Patrick Hand", cursive; color: var(--ink); z-index: 20; }
+      .caption { position: absolute; left: 50px; right: 50px; top: 908px; height: 110px; text-align: center;
+                 font: 80px/110px "Patrick Hand", cursive; color: var(--ink); z-index: 20;
+                 /* paper-coloured halo: the arrow from the fingertip passes cleanly behind the words */
+                 text-shadow: 0 0 6px var(--paper), 0 0 6px var(--paper), 0 0 10px var(--paper), 0 0 10px var(--paper); }
 
-      .card-wrap { position: absolute; top: 370px; width: 460px; height: 650px; transform-origin: 50% 70%; z-index: 2; }
-      .card-label { height: 90px; text-align: center; font: 74px/90px "Patrick Hand", cursive; }
+      .card-wrap { position: absolute; top: 200px; width: 460px; height: 672px; transform-origin: 50% 70%; z-index: 2; }
+      .card-label { height: 112px; text-align: center; font: 74px/96px "Patrick Hand", cursive; padding-bottom: 16px; box-sizing: border-box; }
       .card { position: relative; width: 460px; height: 560px; border: 5px solid var(--ink); border-radius: 30px;
               box-shadow: 10px 10px 0 var(--ink); overflow: hidden; background: #f3f4f6; }
 
@@ -192,13 +194,13 @@
       </div>
       <div id="li-total" class="tot-box red later"><div class="lbl">Total Joe owes</div><div class="amt neg">$42,000</div></div>
     </div></div></div>
-      <div id="recap-1" class="clip recap-tile" style="left:60px;top:410px" data-start="32.98" data-duration="8.979" data-track-index="3">
+      <div id="recap-1" class="clip recap-tile" style="left:60px;top:240px" data-start="32.98" data-duration="8.979" data-track-index="3">
       <div class="rt-term">Revenue</div><div class="rt-eq">= earned</div><div class="rt-check">✓</div></div>
-      <div id="recap-2" class="clip recap-tile" style="left:560px;top:410px" data-start="34.3" data-duration="7.659" data-track-index="3">
+      <div id="recap-2" class="clip recap-tile" style="left:560px;top:240px" data-start="34.3" data-duration="7.659" data-track-index="3">
       <div class="rt-term">Profit</div><div class="rt-eq">= what's left</div><div class="rt-check">✓</div></div>
-      <div id="recap-3" class="clip recap-tile" style="left:60px;top:710px" data-start="35.91" data-duration="6.049" data-track-index="3">
+      <div id="recap-3" class="clip recap-tile" style="left:60px;top:540px" data-start="35.91" data-duration="6.049" data-track-index="3">
       <div class="rt-term">Assets</div><div class="rt-eq">= owned</div><div class="rt-check">✓</div></div>
-      <div id="recap-4" class="clip recap-tile" style="left:560px;top:710px" data-start="37.242" data-duration="4.717" data-track-index="3">
+      <div id="recap-4" class="clip recap-tile" style="left:560px;top:540px" data-start="37.242" data-duration="4.717" data-track-index="3">
       <div class="rt-term" style="font-size:72px">Liabilities</div><div class="rt-eq">= owed</div><div class="rt-check">✓</div></div>
       <div id="cap-1" class="clip caption" data-start="0" data-duration="1.38" data-track-index="4">This is revenue.</div>
       <div id="cap-2" class="clip caption" data-start="1.38" data-duration="0.621" data-track-index="4">And this is</div>
@@ -240,20 +242,20 @@
       <div id="cap-38" class="clip caption" data-start="37.242" data-duration="1.561" data-track-index="4">Liabilities are owed.</div>
       <div id="cap-39" class="clip caption" data-start="38.803" data-duration="0.666" data-track-index="4">Hit like if</div>
       <div id="cap-40" class="clip caption" data-start="39.469" data-duration="2.49" data-track-index="4">this made sense!</div>
-      <img id="react-1" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1050px;width:574.1px;height:470px" data-start="0" data-duration="1.38" data-track-index="5" />
-      <img id="react-2" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1050px;width:490.8px;height:470px" data-start="1.38" data-duration="1.576" data-track-index="5" />
-      <img id="react-3" class="clip reaction" src="general/my%20different%20reactions/thinking.png" alt="" style="left:283.4px;top:1050px;width:513.2px;height:470px" data-start="2.956" data-duration="1.603" data-track-index="5" />
-      <img id="react-4" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1050px;width:574.1px;height:470px" data-start="4.559" data-duration="4.71" data-track-index="5" />
-      <img id="react-5" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1050px;width:490.8px;height:470px" data-start="9.269" data-duration="3.294" data-track-index="5" />
-      <img id="react-6" class="clip reaction" src="general/my%20different%20reactions/smirk-thumb.png" alt="" style="left:298.9px;top:1050px;width:482.3px;height:470px" data-start="12.563" data-duration="7.783" data-track-index="5" />
-      <img id="react-7" class="clip reaction" src="general/my%20different%20reactions/look-up.png" alt="" style="left:260.9px;top:1050px;width:558.3px;height:470px" data-start="20.346" data-duration="2.787" data-track-index="5" />
-      <img id="react-8" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1050px;width:574.1px;height:470px" data-start="23.133" data-duration="5.036" data-track-index="5" />
-      <img id="react-9" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1050px;width:490.8px;height:470px" data-start="28.169" data-duration="4.811" data-track-index="5" />
-      <img id="react-10" class="clip reaction" src="general/my%20different%20reactions/thumbs-up.png" alt="" style="left:263.8px;top:1050px;width:552.4px;height:470px" data-start="32.98" data-duration="1.32" data-track-index="5" />
-      <img id="react-11" class="clip reaction" src="general/my%20different%20reactions/smile-2.png" alt="" style="left:310.6px;top:1050px;width:458.8px;height:470px" data-start="34.3" data-duration="1.61" data-track-index="5" />
-      <img id="react-12" class="clip reaction" src="general/my%20different%20reactions/cool.png" alt="" style="left:268.1px;top:1050px;width:543.7px;height:470px" data-start="35.91" data-duration="1.332" data-track-index="5" />
-      <img id="react-13" class="clip reaction" src="general/my%20different%20reactions/side-eye.png" alt="" style="left:239.3px;top:1050px;width:601.4px;height:470px" data-start="37.242" data-duration="1.561" data-track-index="5" />
-      <img id="react-14" class="clip reaction" src="general/my%20different%20reactions/point-at-you.png" alt="" style="left:284.3px;top:1050px;width:511.3px;height:470px" data-start="38.803" data-duration="3.156" data-track-index="5" />
+      <img id="react-1" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1080px;width:574.1px;height:470px" data-start="0" data-duration="1.38" data-track-index="5" />
+      <img id="react-2" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1080px;width:490.8px;height:470px" data-start="1.38" data-duration="1.576" data-track-index="5" />
+      <img id="react-3" class="clip reaction" src="general/my%20different%20reactions/thinking.png" alt="" style="left:283.4px;top:1080px;width:513.2px;height:470px" data-start="2.956" data-duration="1.603" data-track-index="5" />
+      <img id="react-4" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1080px;width:574.1px;height:470px" data-start="4.559" data-duration="4.71" data-track-index="5" />
+      <img id="react-5" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1080px;width:490.8px;height:470px" data-start="9.269" data-duration="3.294" data-track-index="5" />
+      <img id="react-6" class="clip reaction" src="general/my%20different%20reactions/smirk-thumb.png" alt="" style="left:298.9px;top:1080px;width:482.3px;height:470px" data-start="12.563" data-duration="7.783" data-track-index="5" />
+      <img id="react-7" class="clip reaction" src="general/my%20different%20reactions/look-up.png" alt="" style="left:260.9px;top:1080px;width:558.3px;height:470px" data-start="20.346" data-duration="2.787" data-track-index="5" />
+      <img id="react-8" class="clip reaction" src="general/my%20different%20reactions/point-up-left.png" alt="" style="left:383px;top:1080px;width:574.1px;height:470px" data-start="23.133" data-duration="5.036" data-track-index="5" />
+      <img id="react-9" class="clip reaction" src="general/my%20different%20reactions/point-up-right.png" alt="" style="left:164.6px;top:1080px;width:490.8px;height:470px" data-start="28.169" data-duration="4.811" data-track-index="5" />
+      <img id="react-10" class="clip reaction" src="general/my%20different%20reactions/thumbs-up.png" alt="" style="left:263.8px;top:1080px;width:552.4px;height:470px" data-start="32.98" data-duration="1.32" data-track-index="5" />
+      <img id="react-11" class="clip reaction" src="general/my%20different%20reactions/smile-2.png" alt="" style="left:310.6px;top:1080px;width:458.8px;height:470px" data-start="34.3" data-duration="1.61" data-track-index="5" />
+      <img id="react-12" class="clip reaction" src="general/my%20different%20reactions/cool.png" alt="" style="left:268.1px;top:1080px;width:543.7px;height:470px" data-start="35.91" data-duration="1.332" data-track-index="5" />
+      <img id="react-13" class="clip reaction" src="general/my%20different%20reactions/side-eye.png" alt="" style="left:239.3px;top:1080px;width:601.4px;height:470px" data-start="37.242" data-duration="1.561" data-track-index="5" />
+      <img id="react-14" class="clip reaction" src="general/my%20different%20reactions/point-at-you.png" alt="" style="left:284.3px;top:1080px;width:511.3px;height:470px" data-start="38.803" data-duration="3.156" data-track-index="5" />
       <div id="q-2_956-0" class="clip qmark" style="left:250px;top:1120px" data-start="2.956" data-duration="1.603" data-track-index="7">?</div>
       <div id="q-2_956-1" class="clip qmark" style="left:800px;top:1090px" data-start="3.076" data-duration="1.483" data-track-index="7">?</div>
       <div id="q-2_956-2" class="clip qmark" style="left:880px;top:1300px" data-start="3.196" data-duration="1.363" data-track-index="7">?</div>
@@ -261,31 +263,31 @@
       <div id="q-20_346-1" class="clip qmark" style="left:800px;top:1090px" data-start="20.466" data-duration="2.667" data-track-index="7">?</div>
       <div id="q-20_346-2" class="clip qmark" style="left:880px;top:1300px" data-start="20.586" data-duration="2.547" data-track-index="7">?</div>
       <svg id="arrow-1" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="0.18" data-duration="1.15" data-track-index="8">
-        <path id="arrow-1-p" d="M410.3,1128.6 Q410.2,1101.3 290,1034" stroke-dasharray="156.1" stroke-dashoffset="156.1" />
-        <g transform="translate(290,1034) rotate(-150.8)"><path id="arrow-1-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+        <path id="arrow-1-p" d="M410.3,1158.6 Q410.2,1042.3 290,886" stroke-dasharray="303" stroke-dashoffset="303" />
+        <g transform="translate(290,886) rotate(-127.6)"><path id="arrow-1-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
       <svg id="arrow-2" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="1.56" data-duration="1.346" data-track-index="8">
-        <path id="arrow-2-p" d="M636.1,1264.4 Q653.1,1169.2 790,1034" stroke-dasharray="280.9" stroke-dashoffset="280.9" />
-        <g transform="translate(790,1034) rotate(-44.6)"><path id="arrow-2-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+        <path id="arrow-2-p" d="M636.1,1294.4 Q653.1,1110.2 790,886" stroke-dasharray="440.2" stroke-dashoffset="440.2" />
+        <g transform="translate(790,886) rotate(-58.6)"><path id="arrow-2-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
       <svg id="arrow-4" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="4.739" data-duration="4.48" data-track-index="8">
-        <path id="arrow-4-p" d="M410.3,1128.6 Q410.2,1101.3 290,1034" stroke-dasharray="156.1" stroke-dashoffset="156.1" />
-        <g transform="translate(290,1034) rotate(-150.8)"><path id="arrow-4-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+        <path id="arrow-4-p" d="M410.3,1158.6 Q410.2,1042.3 290,886" stroke-dasharray="303" stroke-dashoffset="303" />
+        <g transform="translate(290,886) rotate(-127.6)"><path id="arrow-4-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
       <svg id="arrow-5" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="9.449" data-duration="3.064" data-track-index="8">
-        <path id="arrow-5-p" d="M636.1,1264.4 Q653.1,1169.2 790,1034" stroke-dasharray="280.9" stroke-dashoffset="280.9" />
-        <g transform="translate(790,1034) rotate(-44.6)"><path id="arrow-5-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+        <path id="arrow-5-p" d="M636.1,1294.4 Q653.1,1110.2 790,886" stroke-dasharray="440.2" stroke-dashoffset="440.2" />
+        <g transform="translate(790,886) rotate(-58.6)"><path id="arrow-5-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
       <svg id="arrow-8" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="23.313" data-duration="4.806" data-track-index="8">
-        <path id="arrow-8-p" d="M410.3,1128.6 Q410.2,1101.3 290,1034" stroke-dasharray="156.1" stroke-dashoffset="156.1" />
-        <g transform="translate(290,1034) rotate(-150.8)"><path id="arrow-8-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+        <path id="arrow-8-p" d="M410.3,1158.6 Q410.2,1042.3 290,886" stroke-dasharray="303" stroke-dashoffset="303" />
+        <g transform="translate(290,886) rotate(-127.6)"><path id="arrow-8-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
       <svg id="arrow-9" class="clip arrow" width="1080" height="1920" viewBox="0 0 1080 1920" data-start="28.349" data-duration="4.581" data-track-index="8">
-        <path id="arrow-9-p" d="M636.1,1264.4 Q653.1,1169.2 790,1034" stroke-dasharray="280.9" stroke-dashoffset="280.9" />
-        <g transform="translate(790,1034) rotate(-44.6)"><path id="arrow-9-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
-      <svg id="spark-0" class="clip spark" style="left:180px;top:1105px" width="60" height="60" viewBox="-30 -30 60 60" data-start="38.953" data-duration="3.006" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-1" class="clip spark" style="left:125px;top:1285px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.003" data-duration="2.956" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-2" class="clip spark" style="left:210px;top:1445px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.053" data-duration="2.906" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-3" class="clip spark" style="left:840px;top:1105px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.103" data-duration="2.856" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-4" class="clip spark" style="left:895px;top:1285px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.153" data-duration="2.806" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-5" class="clip spark" style="left:810px;top:1445px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.203" data-duration="2.756" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-6" class="clip spark" style="left:310px;top:1005px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.253" data-duration="2.706" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
-      <svg id="spark-7" class="clip spark" style="left:720px;top:1000px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.303" data-duration="2.656" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+        <path id="arrow-9-p" d="M636.1,1294.4 Q653.1,1110.2 790,886" stroke-dasharray="440.2" stroke-dashoffset="440.2" />
+        <g transform="translate(790,886) rotate(-58.6)"><path id="arrow-9-h" d="M-34,-22 L4,0 L-34,22" /></g></svg>
+      <svg id="spark-0" class="clip spark" style="left:180px;top:1135px" width="60" height="60" viewBox="-30 -30 60 60" data-start="38.953" data-duration="3.006" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-1" class="clip spark" style="left:125px;top:1315px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.003" data-duration="2.956" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-2" class="clip spark" style="left:210px;top:1475px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.053" data-duration="2.906" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-3" class="clip spark" style="left:840px;top:1135px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.103" data-duration="2.856" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-4" class="clip spark" style="left:895px;top:1315px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.153" data-duration="2.806" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-5" class="clip spark" style="left:810px;top:1475px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.203" data-duration="2.756" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-6" class="clip spark" style="left:310px;top:1035px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.253" data-duration="2.706" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
+      <svg id="spark-7" class="clip spark" style="left:720px;top:1030px" width="60" height="60" viewBox="-30 -30 60 60" data-start="39.303" data-duration="2.656" data-track-index="9"><path d="M0,-28 C4,-6 6,-4 28,0 C6,4 4,6 0,28 C-4,6 -6,4 -28,0 C-6,-4 -4,-6 0,-28Z" /></svg>
       <div id="channel-badge" class="clip channel-badge" data-start="0" data-duration="41.959" data-track-index="20"><span class="cb-handle"><span class="cb-ink">@knowledgeby</span><span class="cb-hot">joe</span></span><svg id="cta-icon" class="cta-icon" viewBox="-40 -40 80 80" width="84" height="84"><rect x="-35" y="-6" width="15" height="38" rx="3" /><path d="M-14,32 H17 Q25,32 27,24 L33,0 Q35,-12 24,-12 H9 L12,-25 Q14,-37 3,-37 Q-2,-37 -4,-31 L-14,-8 Z" /></svg></div>
       <audio id="voice-1" src="assets/voice/script.mp3" data-start="0" data-media-start="0" data-duration="1.16" data-volume="1" data-fade-in="0" data-fade-out="0.03" data-track-index="10"></audio>
       <audio id="voice-2" src="assets/voice/script.mp3" data-start="1.4" data-media-start="1.681" data-duration="1.336" data-volume="1" data-fade-in="0.02" data-fade-out="0.03" data-track-index="10"></audio>

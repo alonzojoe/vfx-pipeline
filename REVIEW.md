@@ -69,6 +69,8 @@ Nothing gets published (or sent to Joe as "final") until this passes.
 ## Known past bugs (don't repeat)
 | Bug | Cause | Fix |
 |---|---|---|
+| Card title touching the card ("Salary": the y tail on the border) | Label row = font line-height, no gap | Label row 96px + 16px gap (`labelH: 112`) |
+| Eyes jump from the caption (top) down to the cards and Joe | Caption at y 200 | Caption in the middle, between the cards and Joe (y ≈908); cards from y 200 so titles stay out of the top app UI |
 | Doubled arrow (black ↗ + orange) | Sticker art had a doodle arrow | Doodles removed from pointing stickers; only the drawn arrow is allowed |
 | Orange border covering "Receipt" label | Focus ring around the card | Rings removed; the arrow alone points |
 | Voice stutter at 19–21s | Per-line voice clips padded ±0.1s replayed the next word | One continuous take; cut only at explicit pauses, in the silence midpoint |
