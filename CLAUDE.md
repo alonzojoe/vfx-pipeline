@@ -14,7 +14,7 @@ Reels are 1080x1920 (9:16) by default.
 - `output/<project>/` — renders, named `<project>-<engine>-<timestamp>.mp4`.
 - `hyperframes/<project>/index.html` — HyperFrames edit. `assets/` → input/<project>, `general/` → input/general, `vendor/` → local GSAP.
 - `remotion/src/projects/<project>/{index,Reel}.tsx` — Remotion edit, auto-registered (composition id = project name). Files: `staticFile("<project>/x.mp4")`, `staticFile("general/music/x.mp3")` (via symlinks in remotion/public).
-- Reaction stickers (Joe's avatar, transparent PNG): `input/general/my different reactions/<name>.png` — e.g. smile, laugh, thinking, confused, shocked, cool, facepalm, thumbs-up, double-thumbs-up, point-up-left, point-up-right, point-left, point-right, shrug, peace… (the 3 source sheets live there too). In HTML use `general/my%20different%20reactions/<name>.png`.
+- Reaction stickers (Joe's avatar, transparent PNG): `input/general/my different reactions/<name>.png` — e.g. smile, laugh, thinking, confused, shocked-2 (never `shocked`: it was cropped and is deleted), cool, facepalm, thumbs-up, double-thumbs-up, point-up-left, point-up-right, point-left, point-right, shrug, peace… (the 3 source sheets live there too). In HTML use `general/my%20different%20reactions/<name>.png`.
 - SFX: `input/general/sfx/` (pop, question-pop, face_left, face_right, correct, ding). Fonts: `input/general/fonts/` (Patrick Hand, Fredoka).
 - Explainer reel pattern: `hyperframes/money-terms/` — script.json → build.mjs (syncs to ElevenLabs word timings) → make.sh (voice + build + render).
 - Templates: `hyperframes/_template/`, `remotion/src/_template/`. Never edit `vendor/` or `public/` by hand.

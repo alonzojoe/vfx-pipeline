@@ -1,5 +1,5 @@
 {
- "_about": "Joe's avatar reaction stickers (transparent PNG, bottoms faded, no box edges). tip = fingertip position as fraction of image width/height, dir = pointing direction. Regenerate cutouts from the 2 source sheets, never crop on an even grid. Pointing stickers have their black doodle arrows/emphasis lines REMOVED (originals in _originals-with-doodles/) because the reel draws its own orange arrow \u2014 never use doodle arrows together with the drawn arrow.",
+ "_about": "Joe's avatar reaction stickers (transparent PNG, bottoms faded, no box edges). tip = fingertip position as fraction of image width/height, dir = pointing direction. Regenerate cutouts from the 2 source sheets, never crop on an even grid. Pointing stickers have their black doodle arrows/emphasis lines REMOVED (originals in _originals-with-doodles/) because the reel draws its own orange arrow — never use doodle arrows together with the drawn arrow.",
  "stickers": {
   "angry-2": {
    "w": 476,
@@ -164,12 +164,7 @@
   "shocked-2": {
    "w": 480,
    "h": 456,
-   "mood": "shocked hands on cheeks"
-  },
-  "shocked": {
-   "w": 576,
-   "h": 512,
-   "mood": "surprised !!"
+   "mood": "shocked / surprised, hands on cheeks"
   },
   "shout": {
    "w": 586,

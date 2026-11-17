@@ -74,7 +74,7 @@ No other colors for brand elements. No gradients except inside mock bank cards.
   |---|---|
   | Hook / question | `thinking`, `thinking-2`, `confused`, `look-up`, `point-at-you` |
   | Explaining a card | `point-up-left`, `point-up-right` (+ the orange arrow) |
-  | Worked example / punchline | `smirk-thumb`, `side-eye`, `shocked`, `laugh` |
+  | Worked example / punchline | `smirk-thumb`, `side-eye`, `shocked-2`, `laugh` |
   | Recap | `thumbs-up`, `smile-2`, `cool`, `chill`, `side-eye` |
   | CTA | `point-at-you`, `point-at-you-2` |
 - Stickers pop in with an elastic squash; no drop-shadow, no boxy edges, no doodle arrows (one orange arrow only).
