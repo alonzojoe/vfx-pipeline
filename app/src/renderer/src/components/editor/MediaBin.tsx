@@ -144,7 +144,7 @@ export const MediaBin = memo(function MediaBin({ project, media, onImported, onN
           </ScrollArea>
         </TabsContent>
 
-        <TabsContent value="sfx" className="flex min-h-0 flex-1 flex-col gap-2">
+        <TabsContent value="sfx" className="flex min-h-0 flex-1 flex-col gap-2 data-[state=inactive]:hidden">
           <div className="relative mx-2.5">
             <Search className="pointer-events-none absolute left-2.5 top-2 h-3.5 w-3.5 text-muted-foreground" />
             <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={`Search ${media?.sfx.length ?? 0} sounds…`} className="pl-8" />
