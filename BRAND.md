@@ -59,12 +59,12 @@ No other colors for brand elements. No gradients except inside mock bank cards.
 ## 5. The look (layout, 1080×1920)
 - Paper background from `input/general/background/` — a different one than the previous reel (`TOPICS.md`).
 - Top to bottom, one reading band: **cards → caption → Joe → handle** (the eyes never jump to the top edge).
-- Two cards side by side (wrapper top 150, cards ≈262–822): white, 30px rounded corners, 5px ink border,
+- Two cards side by side (wrapper top 200, cards ≈312–872; titles stay below the top 200px app UI): white, 30px rounded corners, 5px ink border,
   **10px hard ink shadow** (paper cut-out look). Label above each card in Patrick Hand with a 16px gap — the
   tails of y/g/p never touch the card. No rings/borders around the active card.
-- Caption **in the middle** (y ≈868–978, between the cards and Joe), one line, 1–3 words at a time, synced to the
+- Caption **in the middle** (y ≈908–1018, between the cards and Joe), one line, 1–3 words at a time, synced to the
   voice; a soft paper halo lets the orange arrow pass behind the words.
-- Joe's sticker under the caption (y ≈1062–1532, same size as before). Handle fixed at y ≈1635, every frame.
+- Joe's sticker under the caption (y ≈1080–1550, same size as before). Handle fixed at y ≈1635, every frame.
 - Platform safe zones stay clear: top 200px, bottom 350px, right 120px.
 
 ## 6. Joe's avatar (the host)

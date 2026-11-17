@@ -77,11 +77,11 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 
 // ---------- layout ----------
 const L = {
-  captionTop: 868,        // caption in the middle: between the cards and the avatar — eyes stay in one band
-  cardTop: 150,            // wrapper top (label 112px + card 560px) — cards ≈150–822
+  captionTop: 908,        // caption in the middle: between the cards and the avatar — eyes stay in one band
+  cardTop: 200,            // wrapper top (label 112px + card 560px) — titles stay below the top 200px app UI (tabs)
   cardW: 460, cardH: 560, labelH: 112,   // label row 96px + 16px gap so y/g/p tails never touch the card
   slots: { left: 60, right: 560 },
-  charTop: 1062, charW: 620, charH: 470,   // sticker ≈1062–1532 (same size as before)
+  charTop: 1080, charW: 620, charH: 470,   // sticker ≈1080–1550 (same size as before)
   badgeTop: 1635, badgeH: 84,             // channel handle ≈1635–1719: as low as possible while staying above Reels/Shorts caption UI
   charShift: 130,          // how far the sticker slides toward the side it points from
 };
