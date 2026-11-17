@@ -1,0 +1,443 @@
+{
+  "text": "Say my shop makes $10,000. Why do I only keep $3,000? This is gross profit. And this is net profit. What's the difference? Gross profit is what's left after subtracting the cost of making or buying what you sell. Net profit is what's left after ALL business expenses. Now, accounts payable versus accounts receivable! Accounts payable is money your business owes. Accounts receivable is money customers owe your business. Remember: Payable means you pay. Receivable means you receive! Learned something? Like this video and follow for more!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 40.031,
+  "words": [
+    {
+      "word": "Say",
+      "start": 0,
+      "end": 0.255
+    },
+    {
+      "word": "my",
+      "start": 0.325,
+      "end": 0.418
+    },
+    {
+      "word": "shop",
+      "start": 0.488,
+      "end": 0.708
+    },
+    {
+      "word": "makes",
+      "start": 0.755,
+      "end": 0.929
+    },
+    {
+      "word": "$10,000.",
+      "start": 0.987,
+      "end": 2.113
+    },
+    {
+      "word": "Why",
+      "start": 2.531,
+      "end": 2.694
+    },
+    {
+      "word": "do",
+      "start": 2.728,
+      "end": 2.786
+    },
+    {
+      "word": "I",
+      "start": 2.844,
+      "end": 2.868
+    },
+    {
+      "word": "only",
+      "start": 2.914,
+      "end": 3.065
+    },
+    {
+      "word": "keep",
+      "start": 3.123,
+      "end": 3.32
+    },
+    {
+      "word": "$3,000?",
+      "start": 3.367,
+      "end": 4.493
+    },
+    {
+      "word": "This",
+      "start": 4.725,
+      "end": 4.899
+    },
+    {
+      "word": "is",
+      "start": 4.946,
+      "end": 5.016
+    },
+    {
+      "word": "gross",
+      "start": 5.097,
+      "end": 5.457
+    },
+    {
+      "word": "profit.",
+      "start": 5.503,
+      "end": 6.06
+    },
+    {
+      "word": "And",
+      "start": 6.478,
+      "end": 6.629
+    },
+    {
+      "word": "this",
+      "start": 6.711,
+      "end": 6.861
+    },
+    {
+      "word": "is",
+      "start": 6.92,
+      "end": 7.012
+    },
+    {
+      "word": "net",
+      "start": 7.129,
+      "end": 7.326
+    },
+    {
+      "word": "profit.",
+      "start": 7.384,
+      "end": 7.906
+    },
+    {
+      "word": "What's",
+      "start": 8.069,
+      "end": 8.301
+    },
+    {
+      "word": "the",
+      "start": 8.348,
+      "end": 8.417
+    },
+    {
+      "word": "difference?",
+      "start": 8.464,
+      "end": 8.986
+    },
+    {
+      "word": "Gross",
+      "start": 9.648,
+      "end": 9.973
+    },
+    {
+      "word": "profit",
+      "start": 10.043,
+      "end": 10.391
+    },
+    {
+      "word": "is",
+      "start": 10.437,
+      "end": 10.507
+    },
+    {
+      "word": "what's",
+      "start": 10.565,
+      "end": 10.786
+    },
+    {
+      "word": "left",
+      "start": 10.879,
+      "end": 11.238
+    },
+    {
+      "word": "after",
+      "start": 11.552,
+      "end": 11.842
+    },
+    {
+      "word": "subtracting",
+      "start": 11.9,
+      "end": 12.411
+    },
+    {
+      "word": "the",
+      "start": 12.446,
+      "end": 12.516
+    },
+    {
+      "word": "cost",
+      "start": 12.574,
+      "end": 12.887
+    },
+    {
+      "word": "of",
+      "start": 12.934,
+      "end": 13.003
+    },
+    {
+      "word": "making",
+      "start": 13.096,
+      "end": 13.375
+    },
+    {
+      "word": "or",
+      "start": 13.444,
+      "end": 13.526
+    },
+    {
+      "word": "buying",
+      "start": 13.595,
+      "end": 13.839
+    },
+    {
+      "word": "what",
+      "start": 13.874,
+      "end": 13.99
+    },
+    {
+      "word": "you",
+      "start": 14.036,
+      "end": 14.106
+    },
+    {
+      "word": "sell.",
+      "start": 14.187,
+      "end": 14.629
+    },
+    {
+      "word": "Net",
+      "start": 15.406,
+      "end": 15.615
+    },
+    {
+      "word": "profit",
+      "start": 15.662,
+      "end": 16.08
+    },
+    {
+      "word": "is",
+      "start": 16.277,
+      "end": 16.428
+    },
+    {
+      "word": "what's",
+      "start": 16.497,
+      "end": 16.706
+    },
+    {
+      "word": "left",
+      "start": 16.765,
+      "end": 16.962
+    },
+    {
+      "word": "after",
+      "start": 17.008,
+      "end": 17.229
+    },
+    {
+      "word": "ALL",
+      "start": 17.345,
+      "end": 17.566
+    },
+    {
+      "word": "business",
+      "start": 17.635,
+      "end": 17.984
+    },
+    {
+      "word": "expenses.",
+      "start": 18.03,
+      "end": 18.761
+    },
+    {
+      "word": "Now,",
+      "start": 19.423,
+      "end": 19.772
+    },
+    {
+      "word": "accounts",
+      "start": 20.085,
+      "end": 20.503
+    },
+    {
+      "word": "payable",
+      "start": 20.561,
+      "end": 21.107
+    },
+    {
+      "word": "versus",
+      "start": 21.223,
+      "end": 21.559
+    },
+    {
+      "word": "accounts",
+      "start": 21.606,
+      "end": 21.931
+    },
+    {
+      "word": "receivable!",
+      "start": 21.989,
+      "end": 22.744
+    },
+    {
+      "word": "Accounts",
+      "start": 23.649,
+      "end": 24.044
+    },
+    {
+      "word": "payable",
+      "start": 24.09,
+      "end": 24.45
+    },
+    {
+      "word": "is",
+      "start": 24.497,
+      "end": 24.578
+    },
+    {
+      "word": "money",
+      "start": 24.659,
+      "end": 24.857
+    },
+    {
+      "word": "your",
+      "start": 24.915,
+      "end": 25.066
+    },
+    {
+      "word": "business",
+      "start": 25.124,
+      "end": 25.495
+    },
+    {
+      "word": "owes.",
+      "start": 25.553,
+      "end": 26.018
+    },
+    {
+      "word": "Accounts",
+      "start": 26.679,
+      "end": 27.051
+    },
+    {
+      "word": "receivable",
+      "start": 27.097,
+      "end": 27.806
+    },
+    {
+      "word": "is",
+      "start": 27.968,
+      "end": 28.131
+    },
+    {
+      "word": "money",
+      "start": 28.224,
+      "end": 28.421
+    },
+    {
+      "word": "customers",
+      "start": 28.491,
+      "end": 29.001
+    },
+    {
+      "word": "owe",
+      "start": 29.118,
+      "end": 29.327
+    },
+    {
+      "word": "your",
+      "start": 29.385,
+      "end": 29.489
+    },
+    {
+      "word": "business.",
+      "start": 29.535,
+      "end": 30.139
+    },
+    {
+      "word": "Remember:",
+      "start": 30.801,
+      "end": 31.393
+    },
+    {
+      "word": "Payable",
+      "start": 31.753,
+      "end": 32.171
+    },
+    {
+      "word": "means",
+      "start": 32.206,
+      "end": 32.484
+    },
+    {
+      "word": "you",
+      "start": 32.624,
+      "end": 32.763
+    },
+    {
+      "word": "pay.",
+      "start": 32.844,
+      "end": 33.262
+    },
+    {
+      "word": "Receivable",
+      "start": 33.924,
+      "end": 34.504
+    },
+    {
+      "word": "means",
+      "start": 34.551,
+      "end": 34.76
+    },
+    {
+      "word": "you",
+      "start": 34.806,
+      "end": 34.876
+    },
+    {
+      "word": "receive!",
+      "start": 34.957,
+      "end": 35.584
+    },
+    {
+      "word": "Learned",
+      "start": 36.49,
+      "end": 36.757
+    },
+    {
+      "word": "something?",
+      "start": 36.792,
+      "end": 37.291
+    },
+    {
+      "word": "Like",
+      "start": 37.953,
+      "end": 38.138
+    },
+    {
+      "word": "this",
+      "start": 38.173,
+      "end": 38.312
+    },
+    {
+      "word": "video",
+      "start": 38.382,
+      "end": 38.684
+    },
+    {
+      "word": "and",
+      "start": 38.742,
+      "end": 38.823
+    },
+    {
+      "word": "follow",
+      "start": 38.893,
+      "end": 39.183
+    },
+    {
+      "word": "for",
+      "start": 39.241,
+      "end": 39.357
+    },
+    {
+      "word": "more!",
+      "start": 39.404,
+      "end": 40.031
+    }
+  ]
+}
