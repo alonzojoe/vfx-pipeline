@@ -1,7 +1,14 @@
 # vfx — code-based video editor
 
-Two rendering engines + GSAP for motion + FFmpeg for the heavy lifting on raw footage.
-Everything is per project, and reels are 1080×1920 (9:16) by default.
+The pipeline behind **Knowledge by Joe** ([@knowledgebyjoe](https://www.youtube.com/@knowledgebyjoe)): 30–45 second
+explainer reels — big ideas, simple explanations — written as code, voiced with ElevenLabs and rendered to MP4.
+Two rendering engines + GSAP for motion + FFmpeg for the heavy lifting, plus **vfx Studio**, a Mac app to make
+reels without the terminal. Everything is per project, and reels are 1080×1920 (9:16) by default.
+
+**What a reel is:** paste a script → `script.json` (lines, cards, Joe's reaction stickers, actions, recap, CTA) →
+`build.mjs` syncs every caption and animation to the ElevenLabs word timings → HyperFrames renders →
+`<project>-final_edit.mp4` (or `-final-edit.mp4`), full HD at ~5 MB, reviewed against `REVIEW.md` before posting.
+Brand rules (fonts, colors, layout, sound, CTA rotation) live in `BRAND.md`; every topic is logged in `TOPICS.md`.
 
 ```
 vfx/
@@ -13,11 +20,12 @@ vfx/
 │   │   └── my different reactions/ …   (add any folders you like)
 │   └── <project>/               # that project's footage, music, images
 ├── output/
-│   └── <project>/               # renders: <project>-hf-20261109-1230.mp4, <project>-remotion-….mp4
+│   └── <project>/               # ONE video: <project>-final_edit.mp4 or -final-edit.mp4 (+ review/)
 ├── hyperframes/
 │   ├── _template/               # starter for new projects
 │   └── <project>/index.html     # the HyperFrames edit
 │         assets/  → input/<project>     general/ → input/general
+├── app/                         # vfx Studio — the Mac app (Electron + React + TypeScript)
 ├── remotion/
 │   └── src/projects/<project>/  # the Remotion edit (index.tsx + Reel.tsx), auto-registered
 └── scripts/                     # project commands + FFmpeg helpers
@@ -27,8 +35,14 @@ You never copy footage into the engine folders. Each project reads straight from
 
 ## vfx Studio (Mac app)
 
-A CapCut-style editor on top of this pipeline: media bin, frame-accurate preview, timeline, and a Claude Code chat
-that turns a pasted script into a reel (cards + ElevenLabs voice) — no Terminal. Light, dark or follow macOS.
+A CapCut-style editor on top of this pipeline — no Terminal needed:
+
+- **+ New reel → paste a script** in the chat: it writes the reel, names it from the topic, builds the cards and makes
+  the ElevenLabs voice. Ask for revisions in the same chat.
+- **Media bin** (stickers, 1,194 SFX, backgrounds, your files), **frame-accurate preview** with voice + SFX in sync
+  (full screen, Esc to exit), **timeline** you can drag clips on (snaps to words).
+- **Export** at **30 or 60 fps** → small full-HD MP4 → automatic review (loudness, dead air, every frame).
+- Light / dark / follow macOS; the app icon follows Tahoe's Icon & widget style.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/editor-dark.png">
@@ -55,10 +69,13 @@ cd ~/Desktop/vfx
 ./scripts/preview.sh halloween            # live preview (HyperFrames studio)
 ./scripts/preview.sh halloween remotion   # Remotion Studio
 ./scripts/check.sh halloween              # lint a HyperFrames project
-./scripts/render.sh halloween             # → output/halloween/halloween-hf-<timestamp>.mp4
+./scripts/render.sh halloween             # → output/halloween/halloween-final_edit.mp4 (or -final-edit), full HD, small
 ./scripts/render.sh halloween remotion
-./scripts/render.sh halloween both
-./scripts/render.sh halloween hf -q delivery    # extra args go to the engine (single-engine renders)
+FPS=60 ./scripts/render.sh halloween      # 60 fps (default 30) · CRF=18 for a bigger, closer file
+./scripts/render.sh halloween hf -q delivery    # extra args go to the engine
+./scripts/review.sh halloween             # REPORT.md + contact sheet before posting
+
+# explainer reels: hyperframes/<reel>/make.sh  → voice (if the words changed) + build + render
 ```
 
 Referencing files in an edit:
