@@ -16,7 +16,7 @@ export function RunConsole({
   run: Run | null
   onStop: () => void
   onOpenReview: () => void
-  /** reveal output/<p>/<p>-FINAL.mp4 in Finder */
+  /** reveal the finished video (output/<p>/<p>-final_edit.mp4 or -final-edit.mp4) in Finder */
   onShowVideo: (project: string) => void
 }): JSX.Element | null {
   const [open, setOpen] = useState(true)
