@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { ArrowUp, Check, Loader2, Plus, Sparkles, Square, Wrench } from 'lucide-react'
 import type { ChatEvent } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
@@ -65,7 +65,7 @@ function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; pr
   )
 }
 
-export function Chat({ project, available, draft, voice, preview, onRenamed, onDone, newKey }: Props): JSX.Element {
+export const Chat = memo(function Chat({ project, available, draft, voice, preview, onRenamed, onDone, newKey }: Props): JSX.Element {
   const [msgs, setMsgs] = useState<Msg[]>([])
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
@@ -282,4 +282,4 @@ export function Chat({ project, available, draft, voice, preview, onRenamed, onD
       </div>
     </>
   )
-}
+})
