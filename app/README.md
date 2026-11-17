@@ -9,7 +9,7 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | Panel | What it does |
 |---|---|
 | **Media bin** (left) | Joe's stickers, the SFX library (search 1,000+ sounds, play to audition), backgrounds and the project's own files. **Drop files from Finder** → copied to `input/<project>/media/`. Drag anything onto the timeline. |
-| **Preview** (center) | The real HyperFrames composition, seeked frame-accurately to the playhead, with voice + SFX playing in sync. Safe-zone overlay (REVIEW.md zones). "Rendered" switch plays the FINAL mp4. |
+| **Preview** (center) | The real HyperFrames composition, seeked frame-accurately to the playhead, with voice + SFX playing in sync. Safe-zone overlay (REVIEW.md zones). "Rendered" switch plays the FINAL mp4. Full-screen button (right of the controls) fills the screen; <kbd>Esc</kbd> returns. |
 | **Timeline** (bottom) | Captions, Cards, Avatar, FX, Media, Voice (waveform), SFX, Background. Click/drag the ruler to scrub, drag clips to move them (snaps to words), drop media to add it, ⌫ removes media you added, zoom slider. |
 | **Inspector** (right) | Start/duration of the selected clip, position + volume of added media, and a sticker picker that swaps the reaction for that script line. |
 | **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a new script, ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
@@ -28,7 +28,7 @@ switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an
 **Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
 In `npm run dev` the Dock shows that classic icon too (dev runs inside Electron's own app bundle).
 
-Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second.
+Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second · <kbd>Esc</kbd> leave full screen.
 
 ## How edits are saved
 
