@@ -51,17 +51,20 @@ Banner / cover photo: skipped for now (Joe: not important yet).
 No other colors for brand elements. No gradients except inside mock bank cards.
 
 ## 4. Fonts (only these two — files in `input/general/fonts/`)
-- **Patrick Hand** (handwritten) — everything "Joe says": captions 100px, card labels 74px, recap terms 88px
+- **Patrick Hand** (handwritten) — everything "Joe says": captions 80px, card labels 74px, recap terms 88px
   (72px for long words), "?" marks 140px, the handle 70px.
 - **Fredoka** 600/700 — everything "on a screen": mock-UI text, numbers, balances, recap meanings.
 - Never use system/default fonts, never a third font.
 
 ## 5. The look (layout, 1080×1920)
 - Paper background from `input/general/background/` — a different one than the previous reel (`TOPICS.md`).
-- Caption on top (y 200), one line, 1–3 words at a time, synced to the voice.
-- Two cards side by side (top 370): white, 30px rounded corners, 5px ink border, **10px hard ink shadow**
-  (paper cut-out look). Label above each card in Patrick Hand. No rings/borders around the active card.
-- Joe's sticker under the cards (y ≈1050–1520). Handle fixed at y ≈1635, every frame.
+- Top to bottom, one reading band: **cards → caption → Joe → handle** (the eyes never jump to the top edge).
+- Two cards side by side (wrapper top 150, cards ≈262–822): white, 30px rounded corners, 5px ink border,
+  **10px hard ink shadow** (paper cut-out look). Label above each card in Patrick Hand with a 16px gap — the
+  tails of y/g/p never touch the card. No rings/borders around the active card.
+- Caption **in the middle** (y ≈868–978, between the cards and Joe), one line, 1–3 words at a time, synced to the
+  voice; a soft paper halo lets the orange arrow pass behind the words.
+- Joe's sticker under the caption (y ≈1062–1532, same size as before). Handle fixed at y ≈1635, every frame.
 - Platform safe zones stay clear: top 200px, bottom 350px, right 120px.
 
 ## 6. Joe's avatar (the host)
