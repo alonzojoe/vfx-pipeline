@@ -80,9 +80,14 @@ YouTube pays for original, authored content and refuses "content that looks like
   "burst" lines, rings or borders.
 - Pauses: `pause` in script.json = total silence after that line (important beats only); every other gap is capped.
 - Loudness: `render.sh` normalizes renders to −14 LUFS / −1.5 dBTP (set NO_NORMALIZE=1 to skip).
+- **Small files, still full HD:** `render.sh` re-encodes every render as H.264 CRF 23 at the same 1080×1920 and fps
+  (~5 MB instead of ~22 MB for a 40s reel, no visible difference). `CRF=18` for a bigger, closer file.
+- **Output name (every output):** `<project>-final_edit.mp4` or `<project>-final-edit.mp4`, picked at random on each
+  render (`final_name` in `scripts/_project.sh`), e.g. `money-terms-final_edit.mp4`. Older reels may still have
+  `<project>-FINAL.mp4`; the app and `finalize.sh` accept all three.
 - **One video per project, always.** `output/<project>/` (e.g. `output/money-terms/`) must contain exactly ONE video:
-  `<project>-FINAL.mp4` (+ its `review/` folder). `render.sh` enforces it — every render replaces `<project>-FINAL.mp4`
-  and deletes any other video and old review folder there (`both` engines is blocked; `KEEP_OLD=1` only for a
+  `<project>-final_edit.mp4` / `-final-edit.mp4` (+ its `review/` folder). `render.sh` enforces it — every render
+  replaces it and deletes any other video and old review folder there (`both` engines is blocked; `KEEP_OLD=1` only for a
   deliberate A/B test, then clean up). `./scripts/finalize.sh <project> [video]` does the same by hand. Never leave old
   versions, previews or `-v2` files lying around; after each revision re-run `./scripts/review.sh <project>`.
 
