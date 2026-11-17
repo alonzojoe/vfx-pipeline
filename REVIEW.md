@@ -14,7 +14,7 @@ Nothing gets published (or sent to Joe as "final") until this passes.
 2. Look at `contact.jpg` and `beats.jpg` frame by frame and tick the checklist below.
 3. Listen once start to finish with headphones (seams, SFX levels, stutters).
 4. Fix → re-render → re-run `review.sh` until everything passes.
-5. Finalize: `./scripts/finalize.sh <project>` — keeps ONLY the approved video as `output/<project>/<project>-FINAL.mp4`,
+5. Finalize: `./scripts/finalize.sh <project>` — keeps ONLY the approved video as `output/<project>/<project>-final_edit.mp4` (or `-final-edit.mp4`),
    deletes every other render and old review folder in that project's output (one video per project, no confusion),
    and re-runs the review on the final.
 
@@ -64,7 +64,8 @@ Nothing gets published (or sent to Joe as "final") until this passes.
 
 ## Export
 - [ ] 1080×1920, 30 or 60 fps (the app's switch / `FPS=60`), H.264 + AAC, 15–60s (REPORT.md checks these).
-- [ ] After `finalize.sh`: `output/<project>/` holds exactly ONE video, `<project>-FINAL.mp4` (+ its review folder).
+- [ ] After `finalize.sh`: `output/<project>/` holds exactly ONE video, `<project>-final_edit.mp4` or
+      `<project>-final-edit.mp4` (+ its review folder) — still 1080×1920, ~5 MB per 40s.
 
 ## Known past bugs (don't repeat)
 | Bug | Cause | Fix |

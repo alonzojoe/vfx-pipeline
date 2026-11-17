@@ -20,7 +20,9 @@ const finalOf = (root: string, name: string): string | null => {
   const dir = join(root, 'output', name)
   if (!existsSync(dir)) return null
   const mp4 = readdirSync(dir).filter((f) => f.endsWith('.mp4'))
-  const pick = mp4.find((f) => f === `${name}-FINAL.mp4`) ?? mp4[0]
+  // render.sh names it <name>-final_edit.mp4 or <name>-final-edit.mp4 (random); older reels have <name>-FINAL.mp4
+  const finals = [`${name}-final_edit.mp4`, `${name}-final-edit.mp4`, `${name}-FINAL.mp4`]
+  const pick = mp4.find((f) => finals.includes(f)) ?? mp4[0]
   return pick ? `output/${name}/${pick}` : null
 }
 

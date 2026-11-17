@@ -104,4 +104,4 @@ No other colors for brand elements. No gradients except inside mock bank cards.
 - Doubled arrows, rings around cards, text on text, floating doodles, leftover elements after their beat.
 - The same background, hook or CTA wording as the previous reel.
 - Unlicensed music/SFX. Advice instead of education. Generic names in mock UIs.
-- More than one video in `output/<topic>/` (only `<topic>-FINAL.mp4`).
+- More than one video in `output/<topic>/` (only `<topic>-final_edit.mp4` / `<topic>-final-edit.mp4`).

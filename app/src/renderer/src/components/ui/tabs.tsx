@@ -35,7 +35,13 @@ const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content ref={ref} className={cn('mt-2 focus-visible:outline-none', className)} {...props} />
+  <TabsPrimitive.Content
+    ref={ref}
+    // inactive panels keep the `hidden` attribute, but a `flex`/`grid` class would beat it and leave an empty panel taking
+    // up space (the media bin's tabs floated mid-panel) — hide them explicitly, after the caller's classes
+    className={cn('mt-2 focus-visible:outline-none', className, 'data-[state=inactive]:hidden')}
+    {...props}
+  />
 ))
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
