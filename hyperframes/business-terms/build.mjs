@@ -77,11 +77,11 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 
 // ---------- layout ----------
 const L = {
-  captionTop: 200,
-  cardTop: 370,            // wrapper top (label 90px + card 560px)
-  cardW: 460, cardH: 560, labelH: 90,
+  captionTop: 908,        // caption in the middle: between the cards and the avatar — eyes stay in one band
+  cardTop: 200,            // wrapper top (label 112px + card 560px) — titles stay below the top 200px app UI (tabs)
+  cardW: 460, cardH: 560, labelH: 112,   // label row 96px + 16px gap so y/g/p tails never touch the card
   slots: { left: 60, right: 560 },
-  charTop: 1050, charW: 620, charH: 470,   // sticker ends ≈1520
+  charTop: 1080, charW: 620, charH: 470,   // sticker ≈1080–1550 (same size as before)
   badgeTop: 1635, badgeH: 84,             // channel handle ≈1635–1719: as low as possible while staying above Reels/Shorts caption UI
   charShift: 130,          // how far the sticker slides toward the side it points from
 };
@@ -274,7 +274,7 @@ if (recapLines.length) cue("whoosh-big", recapLines[0].start - 0.12);
 const ctaLine = lines.find((l) => l.cta);
 if (ctaLine && recapLines.length) tl.push(`tl.to(${JSON.stringify(recapLines.map((_, m) => `#recap-${m + 1}`))}, {opacity:1, scale:1, duration:0.3}, ${ctaLine.start});`);
 
-// captions at the top: 1–3 word chunks, break on punctuation
+// captions in the middle (between cards and avatar): 1–3 word chunks, break on punctuation
 let ci = 0;
 lines.forEach((l) => {
   const chunks = []; let cur = [];
@@ -472,11 +472,13 @@ const html = `<!doctype html>
       #root { position: relative; width: 100%; height: 100%; font-family: "Fredoka", sans-serif; color: var(--ink); }
 
       .bg { position: absolute; left: 0; top: 0; width: ${W}px; height: ${H}px; object-fit: cover; object-position: 50% 0; transform-origin: 50% 40%; z-index: 0; }
-      .caption { position: absolute; left: 50px; right: 50px; top: ${L.captionTop}px; height: 130px; text-align: center;
-                 font: 100px/130px "Patrick Hand", cursive; color: var(--ink); z-index: 20; }
+      .caption { position: absolute; left: 50px; right: 50px; top: ${L.captionTop}px; height: 110px; text-align: center;
+                 font: 80px/110px "Patrick Hand", cursive; color: var(--ink); z-index: 20;
+                 /* paper-coloured halo: the arrow from the fingertip passes cleanly behind the words */
+                 text-shadow: 0 0 6px var(--paper), 0 0 6px var(--paper), 0 0 10px var(--paper), 0 0 10px var(--paper); }
 
       .card-wrap { position: absolute; top: ${L.cardTop}px; width: ${L.cardW}px; height: ${L.labelH + L.cardH}px; transform-origin: 50% 70%; z-index: 2; }
-      .card-label { height: ${L.labelH}px; text-align: center; font: 74px/${L.labelH}px "Patrick Hand", cursive; }
+      .card-label { height: ${L.labelH}px; text-align: center; font: 74px/96px "Patrick Hand", cursive; padding-bottom: 16px; box-sizing: border-box; }
       .card { position: relative; width: ${L.cardW}px; height: ${L.cardH}px; border: 5px solid var(--ink); border-radius: 30px;
               box-shadow: 10px 10px 0 var(--ink); overflow: hidden; background: #f3f4f6; }
 
