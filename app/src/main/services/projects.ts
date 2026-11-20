@@ -110,8 +110,9 @@ export function gitBranch(root: string): string | null {
 
 /**
  * "+ New reel": create and open a draft reel named new-reel (new-reel-2, … if taken), ready for dropped files and a
- * pasted script. It copies build.mjs + make.sh (+ voice/sfx settings) from the newest finished reel; Claude renames
- * it from the topic and writes the lines (scripts/rename-project.sh).
+ * pasted script. build.mjs + make.sh come from hyperframes/_template (the current two-comparison builder, so a new reel
+ * never inherits an older reel's hand-made cards); voice/sfx settings come from the newest finished reel. Claude renames
+ * it from the topic and writes the lines + cards (scripts/rename-project.sh).
  */
 export function createProject(root: string, base = 'new-reel'): string {
   let name = base
@@ -129,12 +130,15 @@ export function createProject(root: string, base = 'new-reel'): string {
     if (existsSync(t)) writeFileSync(join(dir, f), readFileSync(t, 'utf8').replace(/__PROJECT__/g, name))
   }
   let script: Script = { title: 'New reel', lines: [] }
+  for (const f of ['build.mjs', 'make.sh']) {
+    const t = join(root, 'hyperframes', '_template', f)
+    const src = existsSync(t) ? t : tpl ? join(root, 'hyperframes', tpl.name, f) : null
+    if (src && existsSync(src)) copyFileSync(src, join(dir, f))
+  }
   if (tpl) {
-    const src = join(root, 'hyperframes', tpl.name)
-    for (const f of ['build.mjs', 'make.sh']) if (existsSync(join(src, f))) copyFileSync(join(src, f), join(dir, f))
-    const t = readJson<Script>(join(src, 'script.json'), {})
+    const t = readJson<Script>(join(root, 'hyperframes', tpl.name, 'script.json'), {})
     // keep the voice, sound mix and timing settings; Claude writes the rest
-    script = { ...t, title: 'New reel', background: 'auto', pairs: {}, lines: [] }
+    script = { ...t, title: 'New reel', background: 'auto', pairs: {}, cards: {}, lines: [] }
   }
   writeFileSync(join(dir, 'script.json'), JSON.stringify(script, null, 2) + '\n')
   return name
