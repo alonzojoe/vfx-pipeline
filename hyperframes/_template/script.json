@@ -1,18 +1,18 @@
 {
   "title": "New reel",
   "voice": {
-    "id": "PGoKnSD4gKn2aS99wOR2",
-    "name": "Brian S",
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
     "model": "eleven_multilingual_v2",
     "stability": 0.38,
     "similarity": 0.8,
     "style": 0.35,
-    "speed": 1.05
+    "speed": 1.12
   },
   "background": "auto",
-  "outro": 1.3,
-  "maxLineGap": 0.38,
-  "maxWordGap": 0.28,
+  "outro": 1.0,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
   "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
   "pairs": {},
   "cards": {},
