@@ -20,6 +20,10 @@ if [ "$ENGINE" = both ] || [ "$ENGINE" = hf ]; then
     for f in index.html meta.json hyperframes.json; do
       sed "s/__PROJECT__/$NAME/g" "$ROOT/hyperframes/_template/$f" > "$D/$f"
     done
+    # the reel builder (two-comparison cards from script.json) — same files the app's "+ New reel" uses
+    for f in build.mjs make.sh; do
+      [ -f "$ROOT/hyperframes/_template/$f" ] && cp "$ROOT/hyperframes/_template/$f" "$D/$f" && chmod +x "$D/$f"
+    done
     ln -s "../../input/$NAME" "$D/assets"      # assets/  -> input/<name>
     ln -s "../../input/general" "$D/general"   # general/ -> input/general
     ln -s "../vendor" "$D/vendor"              # local GSAP
