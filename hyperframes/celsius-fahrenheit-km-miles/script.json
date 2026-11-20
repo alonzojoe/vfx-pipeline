@@ -1,12 +1,12 @@
 {
   "title": "Celsius vs Fahrenheit + Kilometers vs Miles",
   "voice": {
-    "id": "cjVigY5qzO86Huf0OWal",
-    "name": "Eric (ElevenLabs default — American, smooth, friendly narrator; works on the free plan)",
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
     "model": "eleven_multilingual_v2",
-    "stability": 0.45,
+    "stability": 0.38,
     "similarity": 0.8,
-    "style": 0.3,
+    "style": 0.35,
     "speed": 1.12
   },
   "background": "auto",
