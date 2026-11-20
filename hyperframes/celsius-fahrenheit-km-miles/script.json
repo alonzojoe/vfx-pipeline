@@ -1,0 +1,396 @@
+{
+  "title": "Celsius vs Fahrenheit + Kilometers vs Miles",
+  "voice": {
+    "id": "PGoKnSD4gKn2aS99wOR2",
+    "name": "Brian S",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.05
+  },
+  "background": "auto",
+  "outro": 1.3,
+  "maxLineGap": 0.38,
+  "maxWordGap": 0.28,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": {
+      "left": "celsius",
+      "right": "fahrenheit"
+    },
+    "p2": {
+      "left": "km",
+      "right": "mile"
+    }
+  },
+  "cards": {
+    "celsius": {
+      "label": "Celsius",
+      "big": "°C",
+      "sub": "most of the world",
+      "color": "blue",
+      "facts": [
+        [
+          "Water freezes",
+          "0°C"
+        ],
+        [
+          "Water boils",
+          "100°C"
+        ]
+      ]
+    },
+    "fahrenheit": {
+      "label": "Fahrenheit",
+      "big": "°F",
+      "sub": "mainly the U.S.",
+      "color": "orange",
+      "facts": [
+        [
+          "Water freezes",
+          "32°F"
+        ],
+        [
+          "Water boils",
+          "212°F"
+        ]
+      ]
+    },
+    "km": {
+      "label": "Kilometer",
+      "big": "km",
+      "sub": "metric system",
+      "color": "green",
+      "facts": [
+        [
+          "Equals",
+          "1,000 m"
+        ],
+        [
+          "In miles",
+          "≈ 0.62 mi"
+        ],
+        [
+          "A 5K race",
+          "≈ 3.1 mi"
+        ]
+      ]
+    },
+    "mile": {
+      "label": "Mile",
+      "big": "mi",
+      "sub": "imperial system",
+      "color": "blue",
+      "facts": [
+        [
+          "In kilometers",
+          "≈ 1.61 km"
+        ],
+        [
+          "Equals",
+          "5,280 ft"
+        ]
+      ]
+    }
+  },
+  "lines": [
+    {
+      "text": "This is Celsius.",
+      "pair": "p1",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "This is Fahrenheit.",
+      "pair": "p1",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "What's the difference?",
+      "pair": "p1",
+      "react": "thinking",
+      "question": true,
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.45
+    },
+    {
+      "text": "Celsius measures temperature using degrees based on water's freezing and boiling points.",
+      "pair": "p1",
+      "focus": "left",
+      "react": "point-up-left",
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#celsius-f1",
+          "word": "freezing",
+          "sfx": "tap"
+        },
+        {
+          "type": "pop",
+          "el": "#celsius-f2",
+          "word": "boiling",
+          "sfx": "tap"
+        }
+      ]
+    },
+    {
+      "text": "Fahrenheit uses a different temperature scale.",
+      "pair": "p1",
+      "focus": "right",
+      "react": "point-up-right"
+    },
+    {
+      "text": "Water boils at 100 degrees Celsius, which is 212 Fahrenheit.",
+      "pair": "p1",
+      "react": "shocked-2",
+      "pause": 0.45,
+      "actions": [
+        {
+          "type": "pulse",
+          "el": "#celsius-f2",
+          "word": "100",
+          "sfx": "tap"
+        },
+        {
+          "type": "pulse",
+          "el": "#fahrenheit-f2",
+          "word": "212",
+          "sfx": "tap"
+        }
+      ]
+    },
+    {
+      "text": "This is kilometers.",
+      "pair": "p2",
+      "show": "left",
+      "react": "point-up-left",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "This is miles.",
+      "pair": "p2",
+      "show": "right",
+      "react": "point-up-right",
+      "sfx": [
+        "pop"
+      ]
+    },
+    {
+      "text": "What's the difference?",
+      "pair": "p2",
+      "react": "confused",
+      "question": true,
+      "sfx": [
+        "question"
+      ],
+      "pause": 0.4
+    },
+    {
+      "text": "A kilometer is a metric unit equal to 1,000 meters.",
+      "pair": "p2",
+      "focus": "left",
+      "react": "point-up-left",
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#km-f1",
+          "word": "1,000",
+          "sfx": "tap"
+        },
+        {
+          "type": "pop",
+          "el": "#km-f2",
+          "word": "meters.",
+          "sfx": "tap",
+          "delay": 0.3
+        }
+      ]
+    },
+    {
+      "text": "A mile is a longer unit of distance equal to about 1.61 kilometers.",
+      "pair": "p2",
+      "focus": "right",
+      "react": "point-up-right",
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#mile-f1",
+          "word": "1.61",
+          "sfx": "tap"
+        },
+        {
+          "type": "pop",
+          "el": "#mile-f2",
+          "word": "kilometers.",
+          "sfx": "tap",
+          "delay": 0.3
+        }
+      ]
+    },
+    {
+      "text": "So a 5K race is about 3.1 miles.",
+      "pair": "p2",
+      "focus": "left",
+      "react": "point-up-left",
+      "actions": [
+        {
+          "type": "pop",
+          "el": "#km-f3",
+          "word": "3.1",
+          "sfx": "tap"
+        }
+      ]
+    },
+    {
+      "text": "Honestly, I always mix these up when I travel.",
+      "pair": "p2",
+      "react": "laugh",
+      "pause": 0.3
+    },
+    {
+      "text": "My trick: multiply miles by 1.6 to get kilometers.",
+      "pair": "tip",
+      "react": "smirk-thumb",
+      "recap": {
+        "term": "Joe's tip",
+        "means": "miles × 1.6 ≈ km"
+      },
+      "sfx": [
+        "check"
+      ],
+      "pause": 0.35
+    },
+    {
+      "text": "auto",
+      "cta": true,
+      "pair": "tip",
+      "react": "point-at-you",
+      "sfx": [
+        "cta"
+      ]
+    }
+  ],
+  "sfx": {
+    "pop": [
+      {
+        "src": "general/sfx/earshot/pro_pop/boop.mp3",
+        "volume": 0.42
+      },
+      {
+        "src": "general/sfx/earshot/ui_pop/soft.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop/bloop.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/earshot/pop/2.mp3",
+        "volume": 0.38
+      }
+    ],
+    "tap": [
+      {
+        "src": "general/sfx/earshot/tap/glass.mp3",
+        "volume": 0.26
+      },
+      {
+        "src": "general/sfx/earshot/tap/soft.mp3",
+        "volume": 0.28
+      },
+      {
+        "src": "general/sfx/uisfx/organic/select.mp3",
+        "volume": 0.26
+      }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/pluck/kalimba.mp3",
+      "volume": 0.4,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/drip/bubble.mp3",
+          "volume": 0.18,
+          "offset": 0.05
+        }
+      ]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/bright.mp3",
+      "volume": 0.26,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/soft.mp3",
+      "volume": 0.28,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/organic/check.mp3",
+      "volume": 0.46,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/mallet/marimba.mp3",
+          "volume": 0.22,
+          "offset": 0.04
+        }
+      ]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/organic/achievement.mp3",
+      "volume": 0.46,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/pro_notify/ding_2045.mp3",
+          "volume": 0.2,
+          "offset": 0.06
+        },
+        {
+          "src": "general/sfx/earshot/shimmer/m4.mp3",
+          "volume": 0.18,
+          "offset": 0.12
+        }
+      ]
+    },
+    "whoosh": [
+      {
+        "src": "general/sfx/earshot/swipe/paper.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/swipe/glide.mp3",
+        "volume": 0.28
+      }
+    ],
+    "whoosh-big": {
+      "src": "general/sfx/earshot/whoosh_big/swell.mp3",
+      "volume": 0.26
+    },
+    "riser": {
+      "src": "general/sfx/earshot/pro_riser/roll.mp3",
+      "volume": 0.2
+    }
+  },
+  "sfxNote": "Library sounds only (uisfx CC0 'organic' + earshot renders) — no downloaded SFX of unknown origin, so no Content ID risk. Varied from accounting-terms: kalimba question, bright/soft swishes, glass/soft taps, marimba check, paper/glide swipes, swell whoosh, roll riser."
+}
