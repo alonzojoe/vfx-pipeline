@@ -1,8 +1,8 @@
 {
   "title": "New reel",
   "voice": {
-    "id": "JBFqnCBsd6RMkjVDRZzb",
-    "name": "George (ElevenLabs default — British, warm storyteller, narration; works on the free plan)",
+    "id": "cjVigY5qzO86Huf0OWal",
+    "name": "Eric (ElevenLabs default — American, smooth, friendly narrator; works on the free plan)",
     "model": "eleven_multilingual_v2",
     "stability": 0.45,
     "similarity": 0.8,
