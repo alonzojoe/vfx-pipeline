@@ -1,18 +1,18 @@
 {
   "title": "Celsius vs Fahrenheit + Kilometers vs Miles",
   "voice": {
-    "id": "PGoKnSD4gKn2aS99wOR2",
-    "name": "Brian S",
+    "id": "nPczCjzI2devNBz1zQrb",
+    "name": "Brian (ElevenLabs default — American, deep, narration; works on the free plan)",
     "model": "eleven_multilingual_v2",
-    "stability": 0.38,
+    "stability": 0.5,
     "similarity": 0.8,
-    "style": 0.35,
-    "speed": 1.05
+    "style": 0.2,
+    "speed": 1.15
   },
   "background": "auto",
-  "outro": 1.3,
-  "maxLineGap": 0.38,
-  "maxWordGap": 0.28,
+  "outro": 1.0,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
   "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
   "pairs": {
     "p1": {
@@ -121,7 +121,7 @@
       "sfx": [
         "question"
       ],
-      "pause": 0.45
+      "pause": 0.32
     },
     {
       "text": "Celsius measures temperature using degrees based on water's freezing and boiling points.",
@@ -153,7 +153,7 @@
       "text": "Water boils at 100 degrees Celsius, which is 212 Fahrenheit.",
       "pair": "p1",
       "react": "shocked-2",
-      "pause": 0.45,
+      "pause": 0.32,
       "actions": [
         {
           "type": "pulse",
@@ -195,7 +195,7 @@
       "sfx": [
         "question"
       ],
-      "pause": 0.4
+      "pause": 0.32
     },
     {
       "text": "A kilometer is a metric unit equal to 1,000 meters.",
@@ -270,7 +270,7 @@
       "sfx": [
         "check"
       ],
-      "pause": 0.35
+      "pause": 0.32
     },
     {
       "text": "auto",

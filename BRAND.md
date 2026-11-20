@@ -105,8 +105,10 @@ No other colors for brand elements. No gradients except inside mock bank cards.
 - End → yellow sparkles **around** the sticker (never on the face), handle pulses on the CTA.
 
 ## 9. Sound
-- Voice: ElevenLabs **Brian S** (`PGoKnSD4gKn2aS99wOR2`) from the two-comparison format on (older reels: Liam) —
-  settings in each `script.json`; new reels copy them from the newest reel. Future upgrade: Joe's own voice
+- Voice: ElevenLabs **Brian** (`nPczCjzI2devNBz1zQrb`, a default voice: American, deep, narration — works on the
+  free plan) at speed 1.15, stability 0.5, style 0.2 (calm, quick) from the two-comparison format on (older reels: Liam).
+  Library voices (e.g. Brian S) need a paid ElevenLabs plan, and so do commercial rights (YPP). New reels take the
+  voice from `hyperframes/_template/script.json`. Future upgrade: Joe's own voice
   (recording or his own ElevenLabs voice clone) — strongest proof of a real creator for YPP.
 - **New reels use library sounds only** (uisfx CC0 + earshot renders, `input/general/sfx/LICENSES.md`): Joe's 6
   downloaded SFX have unknown sources (Content ID risk for YPP), so they stay only in the older reels.
