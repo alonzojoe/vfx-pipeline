@@ -5,7 +5,7 @@ should match the newest reel in `hyperframes/`. It also keeps the channel YPP-sa
 (Joe, his face, his scripts, his editing), not template-farm content.
 
 **Name:** Knowledge by Joe · **Handle:** @knowledgebyjoe (same on YouTube, TikTok, Facebook)
-**Bio / tagline (all socials):** "Big ideas. Simple explanations. Learn something new in 30 seconds."
+**Bio / tagline (all socials):** "Quick comparisons. Easy explanations. Learn something new every day."
 **Profile picture (all socials):** Joe's `chill` sticker (hands behind head, eyes closed, smiling) on white, in a circle.
 Every reel's look should feel like that picture: Joe's illustrated face, white/paper, black ink lines.
 Banner / cover photo: skipped for now (Joe: not important yet).
@@ -13,28 +13,39 @@ Banner / cover photo: skipped for now (Joe: not important yet).
 ---
 
 ## 1. Topics — what we talk about
-- Big ideas people mix up or never learned, explained simply: personal finance, business, banking (our run so far:
-  invoice vs receipt, gross vs net pay, debit vs credit, checking vs savings, revenue vs profit, assets vs liabilities),
-  and — per the YouTube description — science, technology, history and human behavior too.
-- Always **education, never advice**. No "you should buy/invest…". Facts and numbers double-checked.
-- Never repeat a topic; log every reel in `TOPICS.md` and change the format/hook/background from the last one.
+- **General knowledge, two quick comparisons per reel**: things people mix up — science (Celsius vs Fahrenheit),
+  measurement (kilometers vs miles), money (debit vs credit), tech, health terms, history, language, everyday life.
+  Our earlier run (invoice vs receipt, gross vs net, revenue vs profit…) was money-only; now any field.
+- Always **education, never advice**. No "you should buy/invest/take…". Facts and numbers double-checked.
+- Never repeat a topic or a pair; log every reel in `TOPICS.md`.
 
-## 2. How we write (scripts)
-- Short, catchy lines (3–9 words). Spoken like a friend explaining, not a textbook.
-- **Hook in the first 2 seconds.** Our hook styles (rotate them):
-  - "This is X. And this is Y. But what's the difference?"
-  - A question: "Think you understand banking?" / "Invoice or receipt?"
-  - A "most people get this wrong" line.
-- Two X-vs-Y pairs per reel, each card explained in one sentence.
-- A **worked example with real numbers** shown on the cards ($10,000 − $7,000 = $3,000). Math must add up.
-- **2×2 recap** ("Revenue is earned. Profit is what's left…") then a **CTA, randomized per reel**:
-  **follow** ("Follow for more big ideas!"), **like** ("Like this video if you learned something!") or
-  **save** ("Save this video so you don't forget!"). Never the same CTA type as the previous reel.
-  In script.json write the CTA line as `{"text": "auto", "cta": true}` — build.mjs picks the type + wording
-  (force one with `"ctaType": "save"`), and an icon pops beside the handle (+ follow · 👍 thumbs-up like · bookmark save).
-  Log it in `TOPICS.md` as `cta: <type>` in the Background column.
-- Pauses only on the big beats (after the hook question, topic switch, into the recap, before the CTA).
-- Length 25–35s.
+## 2. The format — two comparisons, straight to the point
+The spine is fixed; everything around it changes per reel (YouTube's July 2026 rule demonetizes "generic, highly
+repetitive, or template-based" videos — a reel where only the nouns change is exactly that).
+
+Per comparison (×2):
+1. **"This is X." → "This is Y."** — each card pops in as it's named (`show` left/right).
+2. **A difference question** — "What's the difference?" (cards wiggle, "?" marks).
+3. **One line about X, one line about Y** — short, plain, correct (`focus` + orange arrow).
+4. **One real example with numbers** — "Water boils at 100°C, which is 212°F." / "A 5K race is about 3.1 miles."
+   The numbers are on the cards and pulse/pop as they're said. Math and facts double-checked.
+
+Then:
+5. **One line from Joe** — his own take, a personal moment or a memory trick ("I always mix these up when I travel" →
+   "Joe's tip: miles × 1.6 ≈ km" tile). This is the "own perspective" YouTube looks for.
+6. **CTA, randomized per reel**: **follow** ("Follow for more everyday knowledge!"), **like** or **save**. Never the
+   same CTA type as the previous reel. In script.json: `{"text": "auto", "cta": true}` — build.mjs picks the type +
+   wording (force one with `"ctaType": "save"`) and an icon pops beside the handle. Log `cta: <type>` in `TOPICS.md`.
+
+What changes every reel (never the same as the previous one — check `TOPICS.md`):
+- **Hook**: "This is X. This is Y." / a question ("Celsius or Fahrenheit?") / a surprising number ("Water boils at
+  212 degrees?!") / "Most people get this wrong".
+- **Question wording**: "What's the difference?" / "So which is which?" / "How are they different?"
+- **Look**: card colours + symbols, background, stickers, Joe's line, ending, CTA, SFX palette.
+
+Writing: short lines spoken like a friend, not a textbook; pauses only on big beats (after the question, at the
+topic switch, before the CTA). Length 25–35s. Cards come from `cards` in script.json (big symbol/value, one sub
+line, 1–3 checked facts) — no hand-made HTML needed; a mock UI is still allowed for money topics (§7).
 
 ## 3. Colors
 | Token | Hex | Used for |
@@ -94,14 +105,17 @@ No other colors for brand elements. No gradients except inside mock bank cards.
 - End → yellow sparkles **around** the sticker (never on the face), handle pulses on the CTA.
 
 ## 9. Sound
-- Voice: ElevenLabs **Liam** (energetic, young) — settings in each `script.json`. Future upgrade: Joe's own voice
+- Voice: ElevenLabs **Brian S** (`PGoKnSD4gKn2aS99wOR2`) from the two-comparison format on (older reels: Liam) —
+  settings in each `script.json`; new reels copy them from the newest reel. Future upgrade: Joe's own voice
   (recording or his own ElevenLabs voice clone) — strongest proof of a real creator for YPP.
-- Joe's own SFX lead (pop, question-pop, face_left/right, ding, correct); library sounds as variants + quiet layers.
-  Whoosh on scene changes, riser into the CTA, rotate variants so nothing repeats twice in a row.
+- **New reels use library sounds only** (uisfx CC0 + earshot renders, `input/general/sfx/LICENSES.md`): Joe's 6
+  downloaded SFX have unknown sources (Content ID risk for YPP), so they stay only in the older reels.
+  Whoosh on scene changes, riser into the CTA, rotate variants so nothing repeats twice in a row; pick a different
+  uisfx style / earshot family than the previous reel.
 - SFX always under the voice. Final mix −14 LUFS / −1.5 dBTP.
 
 ## 10. Never
 - Doubled arrows, rings around cards, text on text, floating doodles, leftover elements after their beat.
-- The same background, hook or CTA wording as the previous reel.
+- The same background, hook, question wording or CTA type as the previous reel. A reel where only the nouns changed.
 - Unlicensed music/SFX. Advice instead of education. Generic names in mock UIs.
 - More than one video in `output/<topic>/` (only `<topic>-final_edit.mp4` / `<topic>-final-edit.mp4`).

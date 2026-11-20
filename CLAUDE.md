@@ -35,17 +35,22 @@ Reels are 1080x1920 (9:16) by default.
 YouTube pays for original, authored content and refuses "content that looks like it's made with a template" or
 "gives the impression of mass production" (inauthentic content policy, clarified Jul 2026). So:
 - **New topic every video** — log it in `TOPICS.md` and never repeat a topic or pair.
-- **Vary the format**, don't only swap nouns: rotate "X vs Y", myth vs fact, "3 mistakes", mini-story, quiz/guess,
-  "what I'd do". Change hook, card style, ending and CTA between uploads.
-- **Add Joe's own angle** in each video: a personal example, opinion, or "here's what I do" line — not a generic summary.
+- **Fixed spine, varied reel**: every reel is two comparisons (BRAND.md §2), so never let it become "only the nouns
+  change" — that's what the July 2026 "generic, repetitive, template-based" wording targets. Change the hook, the
+  question wording, card colours/symbols, stickers, background, ending and CTA vs the previous reel (`TOPICS.md`).
+- **A real example per comparison** (numbers on the cards, checked) — knowledge, not just definitions.
+- **Add Joe's own angle** in each video: one line with his take, a personal moment or a memory trick ("Joe's tip").
 - **Education, not advice**: finance/health/legal = explain terms & concepts only. Never "you should buy/invest/take…".
   YouTube demonetizes AI personas presented as human experts giving such advice.
 - **Audio rights**: only SFX/music with a provable license — use the library below (see `input/general/sfx/LICENSES.md`).
-  Joe's 6 original downloaded SFX have unknown sources → replace them before monetizing. ElevenLabs needs a paid plan.
+  New reels use library sounds only; Joe's 6 downloaded SFX (unknown sources) stay only in older reels.
+  ElevenLabs needs a paid plan (commercial rights for the voice).
 - **No copied assets** from reference videos — reference = inspiration for pacing/format only.
 - **Disclosure**: "altered or synthetic content" toggle is required only for realistic content that could mislead;
   cartoon avatar + AI voice explainer doesn't need it, but turning it on never hurts.
-- Prefer also making a long-form (3–8 min) version of strong topics — Shorts pay far less per view.
+- Prefer also making a long-form (3–8 min) version of strong topics — Shorts pay far less per view, and long-form
+  watch hours are what qualify. From Feb 1, 2027 new applicants need 1,000 subs + 8,000 watch hours (365 days) or
+  20M Shorts views (90 days); Shorts ad revenue then needs 10M Shorts views in the last 90 days (YouTube blog, Aug 2026).
 
 ## Sound effects library (`input/general/sfx/`, 1,194 sounds — licenses in `LICENSES.md`)
 - `uisfx/<style>/<cue>.mp3` — 936 **CC0** UI sounds (78 cues × 12 styles: arcade, cinematic, dreamy, glass, mechanical,
@@ -98,13 +103,17 @@ YouTube pays for original, authored content and refuses "content that looks like
 - Config: `input/general/brand/brand.json` (`parts` = colored pieces of the handle). build.mjs renders it as
   `.channel-badge` — overlay classes must be unique (a reused `.brand` class once broke the card logos).
 
-## Explainer building blocks (copy the newest project's build.mjs + make.sh: `hyperframes/business-terms/`)
+## Explainer building blocks (builder: `hyperframes/_template/build.mjs` + `make.sh`; reference reel: `hyperframes/celsius-fahrenheit-km-miles/`)
+- `new-project.sh` and the app's "+ New reel" copy the builder from `_template/`; improve it there (and in the reel you're on).
+- `cards` in script.json: `{label, big, sub, color (blue|orange|green|red|ink), facts: [[label, value], …]}` → fact
+  rows `#<key>-f1…` (pop/pulse them on the spoken word; unrevealed ones pop on the card's focus line). `{label, html}`
+  still makes a hand-made mock UI. A single `recap` line = one big centered "Joe's tip" tile.
 - `script.json` lines: `pair` + `show`/`focus` (cards + one orange arrow), `react` (sticker), `question: true` (wiggle + "?"),
   `pause` (important beats only), `sfx: [...]`, `recap: {term, means}` (2x2 tick tiles), `cta: true` (handle pulses).
 - Generic `actions`: `{type:"pop", el:"#id", word, sfx}` reveals a hidden `.later` element on a word;
   `{type:"swap", from:"#a", to:"#b", word, sfx}` changes a value (balances, amounts) on a word.
 - End sparkles sit around the sticker (never over the face).
-- Rotate the SFX style per video (money-terms: Joe's originals → banking-basics: uisfx/glass + earshot pops).
+- Rotate the SFX style per video (accounting-terms: uisfx dreamy/minimal → celsius-fahrenheit-km-miles: uisfx organic).
 
 - Actions in script.json (per line): `pop` (show a hidden `.later` element on a word), `swap` (value A → value B),
   `pulse` (bump + yellow highlight on something already visible, e.g. a number the voice says), optional `delay` (s).
@@ -117,15 +126,15 @@ YouTube pays for original, authored content and refuses "content that looks like
   and make.sh compares the resolved text so the voice stays in sync. Log `cta: <type>` in TOPICS.md. See BRAND.md §2.
 
 ## Sound mix (not machine-made) — every reel
-- Joe's own SFX (`pop_7e9Is8L`, `question-pop`, `face_left`, `face_right`, `ding-sound-effect_2`, `correct`) are the LEAD hits;
-  the library (uisfx CC0 styles + earshot renders) supplies variants and quiet layers underneath.
+- New reels: library sounds only (uisfx CC0 styles + earshot renders), lead hits and layers alike. Older reels used
+  Joe's own downloaded SFX (`pop_7e9Is8L`, `question-pop`, `face_left`, `face_right`, `ding-sound-effect_2`, `correct`).
 - In `script.json` a cue can be an ARRAY of variants (rotated per occurrence, never the same sample twice in a row)
   and each variant can have `layers: [{src, volume, offset}]`. build.mjs adds 0–20ms timing drift and ±7% level per hit,
   and reads real durations with ffprobe.
-- Arrow draw = Joe's face_left/face_right swoosh + quiet earshot flick; arrow lands = soft tap; scene/card swaps = whoosh;
+- Arrow draw = a swish (+ quiet whoosh layer); arrow lands = soft tap; scene/card swaps = whoosh;
   recap entry = big whoosh; riser ends right as the CTA starts; CTA = achievement + shimmer.
 - SFX must sit UNDER the voice (adds ≤ ~2 dB at its onset). Rotate the uisfx style / earshot family between videos.
-- Note: Joe's 6 originals have unknown sources (Content ID risk for YPP) — he chose to keep them in the mix.
+- Note: Joe's 6 originals have unknown sources (Content ID risk for YPP) — kept in the older reels only.
 
 ## Joe's name in every mock UI — every reel
 - Any bank card, account, app screen, invoice, pay stub, receipt, chat or form drawn in a reel uses Joe's name —
