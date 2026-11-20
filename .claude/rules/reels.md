@@ -1,6 +1,8 @@
 # Reel rules (short version — the full rules live in the root docs)
 
 - Read `BRAND.md` before every reel (topics, script style, colors, fonts, avatar, motion, sound, randomized CTA).
+- Format: two comparisons per reel ("This is X. This is Y." → question → one line each → a real example), one line in
+  Joe's own voice, CTA. Vary the hook, question wording and look vs the previous reel — never "only the nouns change".
 - Read `REVIEW.md` before calling a reel done; `./scripts/review.sh <project>` and look at every frame.
 - Log every reel in `TOPICS.md` (topic, format, hook, voice, `bg: … · cta: …`). Never repeat a topic, background or
   CTA type back to back.
