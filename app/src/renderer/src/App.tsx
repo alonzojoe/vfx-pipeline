@@ -54,12 +54,15 @@ export default function App(): JSX.Element {
       runs.start('build', p)
     }
   })
-  // opening a reel whose preview is out of date (e.g. the voice was re-made but never built in) → build it once
+  // opening a reel: no voice yet (script written outside the chat, or the voice step failed) → make it with ElevenLabs
+  // (make.sh --no-render also builds); preview out of date (voice re-made but never built in) → build it once
   const checked = useRef(new Set<string>())
   useEffect(() => {
-    if (!project || checked.current.has(project.name)) return
+    if (!project || project.draft || checked.current.has(project.name)) return
     checked.current.add(project.name)
-    if (project.stale && !project.draft && !runs.active) runs.start('build', project.name)
+    if (runs.active) return
+    if (!project.hasVoice && project.lines.length) runs.start('voice', project.name)
+    else if (project.stale) runs.start('build', project.name)
   }, [project, runs])
   const rebuild = (): void => {
     if (!vfx.current) return
@@ -116,7 +119,7 @@ export default function App(): JSX.Element {
     if (!newReel) {
       if (edited && !runs.active) {
         const p = await window.api.getProject(name)
-        if (p.lines.length) runs.start(p.hasVoice ? 'voice' : 'build', name)
+        if (p.lines.length) runs.start('voice', name) // make.sh --no-render: makes a missing voice, re-voices only if the words changed
       }
       return
     }

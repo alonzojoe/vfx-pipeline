@@ -111,7 +111,7 @@ export function gitBranch(root: string): string | null {
 /**
  * "+ New reel": create and open a draft reel named new-reel (new-reel-2, … if taken), ready for dropped files and a
  * pasted script. build.mjs + make.sh come from hyperframes/_template (the current two-comparison builder, so a new reel
- * never inherits an older reel's hand-made cards); voice/sfx settings come from the newest finished reel. Claude renames
+ * never inherits an older reel's hand-made cards), and so do the voice/sfx settings (_template/script.json). Claude renames
  * it from the topic and writes the lines + cards (scripts/rename-project.sh).
  */
 export function createProject(root: string, base = 'new-reel'): string {
@@ -135,11 +135,11 @@ export function createProject(root: string, base = 'new-reel'): string {
     const src = existsSync(t) ? t : tpl ? join(root, 'hyperframes', tpl.name, f) : null
     if (src && existsSync(src)) copyFileSync(src, join(dir, f))
   }
-  if (tpl) {
-    const t = readJson<Script>(join(root, 'hyperframes', tpl.name, 'script.json'), {})
-    // keep the voice, sound mix and timing settings; Claude writes the rest
-    script = { ...t, title: 'New reel', background: 'auto', pairs: {}, cards: {}, lines: [] }
-  }
+  // voice (Brian S), timing and a library-only sound mix from the template; else the newest reel's settings
+  const settings = [join(root, 'hyperframes', '_template', 'script.json'), tpl && join(root, 'hyperframes', tpl.name, 'script.json')].find(
+    (f): f is string => !!f && existsSync(f)
+  )
+  if (settings) script = { ...readJson<Script>(settings, {}), title: 'New reel', background: 'auto', pairs: {}, cards: {}, lines: [] }
   writeFileSync(join(dir, 'script.json'), JSON.stringify(script, null, 2) + '\n')
   return name
 }

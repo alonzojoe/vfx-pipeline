@@ -1,0 +1,131 @@
+{
+  "title": "New reel",
+  "voice": {
+    "id": "PGoKnSD4gKn2aS99wOR2",
+    "name": "Brian S",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.05
+  },
+  "background": "auto",
+  "outro": 1.3,
+  "maxLineGap": 0.38,
+  "maxWordGap": 0.28,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {},
+  "cards": {},
+  "lines": [],
+  "sfx": {
+    "pop": [
+      {
+        "src": "general/sfx/earshot/pro_pop/boop.mp3",
+        "volume": 0.42
+      },
+      {
+        "src": "general/sfx/earshot/ui_pop/soft.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/earshot/pro_pop/bloop.mp3",
+        "volume": 0.4
+      },
+      {
+        "src": "general/sfx/earshot/pop/2.mp3",
+        "volume": 0.38
+      }
+    ],
+    "tap": [
+      {
+        "src": "general/sfx/earshot/tap/glass.mp3",
+        "volume": 0.26
+      },
+      {
+        "src": "general/sfx/earshot/tap/soft.mp3",
+        "volume": 0.28
+      },
+      {
+        "src": "general/sfx/uisfx/organic/select.mp3",
+        "volume": 0.26
+      }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/pluck/kalimba.mp3",
+      "volume": 0.4,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/drip/bubble.mp3",
+          "volume": 0.18,
+          "offset": 0.05
+        }
+      ]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/bright.mp3",
+      "volume": 0.26,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/soft.mp3",
+      "volume": 0.28,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/whoosh_fast/sleeve.mp3",
+          "volume": 0.14
+        }
+      ]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/organic/check.mp3",
+      "volume": 0.46,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/mallet/marimba.mp3",
+          "volume": 0.22,
+          "offset": 0.04
+        }
+      ]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/organic/achievement.mp3",
+      "volume": 0.46,
+      "layers": [
+        {
+          "src": "general/sfx/earshot/pro_notify/ding_2045.mp3",
+          "volume": 0.2,
+          "offset": 0.06
+        },
+        {
+          "src": "general/sfx/earshot/shimmer/m4.mp3",
+          "volume": 0.18,
+          "offset": 0.12
+        }
+      ]
+    },
+    "whoosh": [
+      {
+        "src": "general/sfx/earshot/swipe/paper.mp3",
+        "volume": 0.3
+      },
+      {
+        "src": "general/sfx/earshot/swipe/glide.mp3",
+        "volume": 0.28
+      }
+    ],
+    "whoosh-big": {
+      "src": "general/sfx/earshot/whoosh_big/swell.mp3",
+      "volume": 0.26
+    },
+    "riser": {
+      "src": "general/sfx/earshot/pro_riser/roll.mp3",
+      "volume": 0.2
+    }
+  },
+  "sfxNote": "Starter mix — library sounds only (uisfx CC0 + earshot). Swap the uisfx style / earshot families so this reel doesn't sound like the previous one (see its script.json)."
+}
