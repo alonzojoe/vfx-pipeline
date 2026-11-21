@@ -71,7 +71,7 @@ cd ~/Desktop/vfx
 ./scripts/check.sh halloween              # lint a HyperFrames project
 ./scripts/render.sh halloween             # → output/halloween/halloween-final_edit.mp4 (or -final-edit), full HD, small
 ./scripts/render.sh halloween remotion
-FPS=60 ./scripts/render.sh halloween      # 60 fps (default 30) · CRF=18 for a bigger, closer file
+FPS=60 ./scripts/render.sh halloween      # 60 fps (default 30) · CRF=20 for a bigger, closer file · VERBOSE=1 full log
 ./scripts/render.sh halloween hf -q delivery    # extra args go to the engine
 ./scripts/review.sh halloween             # REPORT.md + contact sheet before posting
 

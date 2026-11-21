@@ -35,14 +35,14 @@ check(!!a && a.codec_name === "aac", "Audio track AAC", a ? a.codec_name : "MISS
 check(dur >= 15 && dur <= 60 ? true : "warn", "Length 15–60s (Shorts/Reels)", `${dur.toFixed(1)}s`);
 
 // ---- loudness
-const lr = sh("ffmpeg", ["-hide_banner", "-nostats", "-i", video, "-af", "ebur128=peak=true", "-f", "null", "-"]).stderr;
+const lr = sh("ffmpeg", ["-hide_banner", "-nostats", "-i", video, "-vn", "-af", "ebur128=peak=true", "-f", "null", "-"]).stderr;
 const I = Number((lr.match(/I:\s+(-?[\d.]+) LUFS/g) || []).pop()?.match(/-?[\d.]+/)?.[0]);
 const TP = Number((lr.match(/Peak:\s+(-?[\d.]+) dBFS/g) || []).pop()?.match(/-?[\d.]+/)?.[0]);
 check(Number.isFinite(I) ? (Math.abs(I + 14) <= 2 ? true : "warn") : "warn", "Loudness ≈ −14 LUFS (YouTube target)", Number.isFinite(I) ? `${I} LUFS` : "n/a");
 check(Number.isFinite(TP) ? (TP <= -1 ? true : "warn") : "warn", "True peak ≤ −1 dBTP (no distortion)", Number.isFinite(TP) ? `${TP} dBTP` : "n/a");
 
 // ---- silent gaps (dead air)
-const sd = sh("ffmpeg", ["-hide_banner", "-nostats", "-i", video, "-af", "silencedetect=n=-40dB:d=0.8", "-f", "null", "-"]).stderr;
+const sd = sh("ffmpeg", ["-hide_banner", "-nostats", "-i", video, "-vn", "-af", "silencedetect=n=-40dB:d=0.8", "-f", "null", "-"]).stderr;
 const starts = [...sd.matchAll(/silence_start: (-?[\d.]+)/g)].map((m) => Number(m[1]));
 const ends = [...sd.matchAll(/silence_end: ([\d.]+) \| silence_duration: ([\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
 const gaps = starts.map((s, i) => [s, ends[i]?.[1] ?? dur - s]).filter(([s, d]) => s > 0.3 && s + d < dur - 0.3);

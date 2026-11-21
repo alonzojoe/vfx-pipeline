@@ -85,8 +85,12 @@ YouTube pays for original, authored content and refuses "content that looks like
   "burst" lines, rings or borders.
 - Pauses: `pause` in script.json = total silence after that line (important beats only); every other gap is capped.
 - Loudness: `render.sh` normalizes renders to −14 LUFS / −1.5 dBTP (set NO_NORMALIZE=1 to skip).
-- **Small files, still full HD:** `render.sh` re-encodes every render as H.264 CRF 23 at the same 1080×1920 and fps
-  (~5 MB instead of ~22 MB for a 40s reel, no visible difference). `CRF=18` for a bigger, closer file.
+- **Small files, still full HD, one encode:** HyperFrames encodes straight at H.264 CRF 25, same 1080×1920 and fps
+  (~5.5 MB per 40s reel, same quality as the old CRF 23 re-encode); `render.sh` then only copies the video and fixes the
+  loudness — no second encode. `CRF=20 ./scripts/render.sh <p>` for a bigger, closer file.
+- **Quiet export log:** `render.sh` shows "progress: 45% Rendering frames" lines (`scripts/render-progress.mjs`) and
+  errors only; the full engine log is in `$TMPDIR/vfx-render-<project>.log` (printed on failure), `VERBOSE=1` shows all.
+  The app turns those lines into a progress bar; its log stays behind "Show details".
 - **Output name (every output):** `<project>-final_edit.mp4` or `<project>-final-edit.mp4`, picked at random on each
   render (`final_name` in `scripts/_project.sh`), e.g. `money-terms-final_edit.mp4`. Older reels may still have
   `<project>-FINAL.mp4`; the app and `finalize.sh` accept all three.

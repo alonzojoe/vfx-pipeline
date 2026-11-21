@@ -8,5 +8,5 @@
   CTA type back to back.
 - Mock UIs always use Joe's name ("Joe's Account", "Joe's Shop", "JOE" on cards).
 - Exactly one video per `output/<project>/`: `<project>-final_edit.mp4` or `<project>-final-edit.mp4` (random per
-  render; full HD 1080×1920, small H.264 CRF 23).
+  render; full HD 1080×1920, small H.264 CRF 25 encoded once by HyperFrames).
 - The ElevenLabs key lives in `.env`; never print, read or commit it.
