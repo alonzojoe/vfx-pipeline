@@ -66,15 +66,17 @@ render_hf(){
   has_hf "$NAME" || { echo "hyperframes/$NAME doesn't exist"; return 1; }
   OUT="$ROOT/output/$NAME/$NAME-hf-$STAMP.mp4"
   LOG="${TMPDIR:-/tmp}/vfx-render-$NAME.log"
+  local q=(--crf "${CRF:-$HF_CRF}") a
+  for a in "$@"; do case "$a" in -q|--quality|--quality=*|--crf|--crf=*|--video-bitrate*) q=();; esac; done
   echo "Exporting $NAME · 1080×1920 · $FPS fps"
   if [ "${VERBOSE:-0}" = 1 ]; then
-    (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" "$@") || return 1
+    (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" ${q[@]+"${q[@]}"} "$@") || return 1
   else
-    if ! (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" "$@" 2>&1 | node "$ROOT/scripts/render-progress.mjs" "$LOG"); then
+    if ! (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" ${q[@]+"${q[@]}"} "$@" 2>&1 | node "$ROOT/scripts/render-progress.mjs" "$LOG"); then
       echo "✖ render failed — last lines of $LOG:"; tail -n 25 "$LOG"; return 1
     fi
   fi
-  finish "$OUT"
+  finish "$OUT" 1
   keep_only "$OUT"
   echo "→ output/$NAME/$(basename "$OUT")"
 }
