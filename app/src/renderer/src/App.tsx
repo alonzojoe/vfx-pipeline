@@ -128,6 +128,13 @@ export default function App(): JSX.Element {
     pendingVoice.current = p.hasVoice ? null : name
     runs.start('build', name)
   })
+  // Stop on the new-reel checklist: the chat, the preview/voice run it started, and the voice that would follow
+  const stopNewReel = useStable((): void => {
+    pendingVoice.current = null
+    pendingBuild.current = null
+    window.api.stopChat()
+    if (runs.active && runs.active.project === currentRef.current) runs.stop()
+  })
   const stateOf = (kind: 'voice' | 'build', done: boolean): VoiceState => {
     const r = [...runs.runs].reverse().find((x) => x.kind === kind && x.project === vfx.current)
     return r && !r.done ? 'doing' : r?.done && r.code !== 0 ? 'failed' : r?.done || done ? 'done' : 'todo'
@@ -216,6 +223,7 @@ export default function App(): JSX.Element {
                 preview={preview}
                 onRenamed={onRenamed}
                 onDone={onChatDone}
+                onStop={stopNewReel}
                 newKey={newKey}
               />
             }
