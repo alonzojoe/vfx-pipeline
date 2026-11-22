@@ -1,0 +1,130 @@
+{
+  "title": "Bridge vs Overpass + Tunnel vs Underpass",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.12
+  },
+  "background": "auto",
+  "outro": 1,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": { "left": "bridge", "right": "overpass" },
+    "p2": { "left": "tunnel", "right": "underpass" }
+  },
+  "artNote": "Each card's art is an animated SVG scene (420x260): .draw paths sketch in, 'motion' loops the cars/water while the card is on screen.",
+  "cards": {
+    "bridge": {
+      "label": "Bridge",
+      "color": "green",
+      "facts": [["Crosses", "water"], ["Longest", "≈165 km"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect x='0' y='226' width='420' height='34' fill='#9cc8ff'/><g id='br-wave'><path d='M-80,232 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0' fill='none' stroke='#2f6bff' stroke-width='5' stroke-linecap='round'/></g><path d='M0,104 H44 L64,260 H0 Z' fill='#d7c29a' stroke='#161616' stroke-width='5'/><path d='M420,104 H376 L356,260 H420 Z' fill='#d7c29a' stroke='#161616' stroke-width='5'/><path class='draw' pathLength='1' style='stroke:#16a34a;stroke-width:9' d='M60,230 Q210,40 360,230'/><path class='draw' pathLength='1' d='M135,110 V159 M210,110 V135 M285,110 V159'/><rect x='0' y='104' width='420' height='12' fill='#161616'/><path class='draw' pathLength='1' style='stroke-width:4' d='M0,92 H420'/><g id='br-car'><g transform='translate(-70,75)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#ff4d2e' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g></svg>",
+      "motion": [
+        { "el": "#br-car", "x": 560, "dur": 2.6 },
+        { "el": "#br-wave", "x": 80, "dur": 1.2 }
+      ]
+    },
+    "overpass": {
+      "label": "Overpass",
+      "color": "ink",
+      "facts": [["Crosses", "a road"], ["Also a", "bridge"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect x='0' y='240' width='420' height='20' fill='#9bd17d'/><rect x='0' y='194' width='420' height='46' fill='#7d7d7d'/><path d='M0,217 H420' stroke='#fff' stroke-width='4' stroke-dasharray='18 14'/><g id='op-car2'><g transform='translate(-70,203)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#2f6bff' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g><rect x='96' y='114' width='26' height='80' fill='#cfcfcf' stroke='#161616' stroke-width='5'/><rect x='298' y='114' width='26' height='80' fill='#cfcfcf' stroke='#161616' stroke-width='5'/><rect x='0' y='100' width='420' height='16' fill='#161616'/><path class='draw' pathLength='1' style='stroke-width:4' d='M0,88 H420'/><g id='op-car1'><g transform='translate(490,71) scale(-1,1)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#ff4d2e' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g></svg>",
+      "motion": [
+        { "el": "#op-car1", "x": -560, "dur": 2.4 },
+        { "el": "#op-car2", "x": 560, "dur": 2, "delay": 0.5 }
+      ]
+    },
+    "tunnel": {
+      "label": "Tunnel",
+      "color": "red",
+      "facts": [["Goes through", "a hill"], ["Longest rail", "57 km"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect x='0' y='236' width='420' height='24' fill='#9bd17d'/><path d='M20,228 C90,228 110,50 210,50 C310,50 330,228 400,228 Z' fill='#c9a27e'/><path class='draw' pathLength='1' d='M20,228 C90,228 110,50 210,50 C310,50 330,228 400,228'/><rect x='0' y='228' width='420' height='10' fill='#555'/><g id='tn-car'><g transform='translate(-70,199)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#2f6bff' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g><rect x='100' y='168' width='220' height='60' fill='#c9a27e'/><path d='M130,205 H290' stroke='#fff' stroke-width='4' stroke-dasharray='10 10' opacity='0.8'/><path d='M70,228 V205 Q70,176 100,176 Q130,176 130,205 V228 Z' fill='#2b1d14'/><path d='M290,228 V205 Q290,176 320,176 Q350,176 350,205 V228 Z' fill='#2b1d14'/></svg>",
+      "motion": [
+        { "el": "#tn-car", "x": 560, "dur": 2.8 }
+      ]
+    },
+    "underpass": {
+      "label": "Underpass",
+      "color": "blue",
+      "facts": [["Goes under", "a road"], ["Length", "short"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect x='0' y='236' width='420' height='24' fill='#9bd17d'/><path d='M160,236 V176 Q160,140 210,140 Q260,140 260,176 V236 Z' fill='#3a3a3a'/><g id='up-car2'><g transform='translate(-70,207)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#ff4d2e' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g><path fill-rule='evenodd' d='M0,110 H420 V236 H0 Z M160,236 V176 Q160,140 210,140 Q260,140 260,176 V236 Z' fill='#c9a27e'/><path class='draw' pathLength='1' d='M160,236 V176 Q160,140 210,140 Q260,140 260,176 V236'/><rect x='0' y='100' width='420' height='12' fill='#555'/><path class='draw' pathLength='1' style='stroke-width:4' d='M0,90 H420'/><g id='up-car1'><g transform='translate(490,71) scale(-1,1)'><rect x='0' y='0' width='56' height='20' rx='6' fill='#2f6bff' stroke='#161616' stroke-width='4'/><path d='M12,0 L20,-12 H38 L46,0' fill='#dff0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='14' cy='22' r='7' fill='#161616'/><circle cx='42' cy='22' r='7' fill='#161616'/></g></g></svg>",
+      "motion": [
+        { "el": "#up-car1", "x": -560, "dur": 2.2 },
+        { "el": "#up-car2", "x": 560, "dur": 2.6, "delay": 0.4 }
+      ]
+    }
+  },
+  "lines": [
+    { "text": "Every overpass is a bridge. But not every bridge is an overpass.", "pair": "intro", "react": "side-look-2", "sfx": ["question"], "pause": 0.3 },
+    { "text": "This is a bridge.", "pair": "p1", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is an overpass.", "pair": "p1", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "Which is which?", "pair": "p1", "react": "shrug", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "A bridge crosses water or a valley.", "pair": "p1", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#bridge-f1", "word": "water", "sfx": "tap" }] },
+    { "text": "An overpass crosses another road.", "pair": "p1", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#overpass-f1", "word": "road.", "sfx": "tap" }] },
+    { "text": "Trivia: the longest bridge, in China, is about 165 kilometers!", "pair": "p1", "react": "shocked-2", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#bridge-f2", "word": "165", "sfx": "tap" }] },
+    { "text": "This is a tunnel.", "pair": "p2", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is an underpass.", "pair": "p2", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "Spot the difference?", "pair": "p2", "react": "confused", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "A tunnel goes through a hill, or under water.", "pair": "p2", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#tunnel-f1", "word": "hill,", "sfx": "tap" }] },
+    { "text": "An underpass is a short way under a road.", "pair": "p2", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#underpass-f1", "word": "road.", "sfx": "tap" }] },
+    { "text": "Trivia: the longest train tunnel runs 57 kilometers under the Alps.", "pair": "p2", "react": "look-up", "pause": 0.35,
+      "actions": [{ "type": "pop", "el": "#tunnel-f2", "word": "57", "sfx": "tap" }] },
+    { "text": "My trick: over the road, overpass. Under the road, underpass.", "pair": "tip", "react": "cool",
+      "recap": { "term": "Joe's tip", "means": "over or under the road?" }, "sfx": ["check"], "pause": 0.35 },
+    { "text": "auto", "cta": true, "pair": "tip", "react": "point-at-you", "sfx": ["cta"] }
+  ],
+  "sfx": {
+    "pop": [
+      { "src": "general/sfx/earshot/pro_pop_in/airy.mp3", "volume": 0.4 },
+      { "src": "general/sfx/earshot/ui_pop/blip.mp3", "volume": 0.38 },
+      { "src": "general/sfx/earshot/pro_pop_in/double.mp3", "volume": 0.38 },
+      { "src": "general/sfx/earshot/ui_pop/wide.mp3", "volume": 0.36 }
+    ],
+    "tap": [
+      { "src": "general/sfx/earshot/pro_tap/glass.mp3", "volume": 0.26 },
+      { "src": "general/sfx/uisfx/glass/select.mp3", "volume": 0.26 },
+      { "src": "general/sfx/earshot/toggle/micro.mp3", "volume": 0.28 }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/mallet/celesta.mp3", "volume": 0.38,
+      "layers": [{ "src": "general/sfx/earshot/drip/plink.mp3", "volume": 0.16, "offset": 0.05 }]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/zing.mp3", "volume": 0.24,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/crisp.mp3", "volume": 0.14 }]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/blade.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/crisp.mp3", "volume": 0.14 }]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/glass/check.mp3", "volume": 0.46,
+      "layers": [{ "src": "general/sfx/earshot/mallet/glock.mp3", "volume": 0.2, "offset": 0.04 }]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/glass/achievement.mp3", "volume": 0.46,
+      "layers": [
+        { "src": "general/sfx/earshot/notify/m2.mp3", "volume": 0.2, "offset": 0.06 },
+        { "src": "general/sfx/earshot/shimmer/m1.mp3", "volume": 0.18, "offset": 0.12 }
+      ]
+    },
+    "whoosh": [
+      { "src": "general/sfx/earshot/swipe/velvet.mp3", "volume": 0.3 },
+      { "src": "general/sfx/earshot/swipe/cloth.mp3", "volume": 0.28 }
+    ],
+    "whoosh-big": { "src": "general/sfx/earshot/whoosh_big/gust.mp3", "volume": 0.26 },
+    "riser": { "src": "general/sfx/earshot/riser/air.mp3", "volume": 0.2 }
+  },
+  "sfxNote": "Library sounds only (uisfx CC0 'glass' + earshot renders). Varied from celsius-fahrenheit-km-miles (organic/kalimba) and cash-flow-net-worth (soft/zen): pro_pop_in/ui_pop blips, glass taps + toggle micro, celesta question, zing/blade swishes, glock check, velvet/cloth swipes, gust whoosh, air riser, notify + shimmer on the CTA."
+}

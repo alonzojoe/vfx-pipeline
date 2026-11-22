@@ -1,0 +1,538 @@
+{
+  "text": "Lake or pond? Most people just guess. This is a lake. This is a pond. What's the difference? A lake is deep, so its bottom stays dark. A pond is shallow. Sun hits the whole bottom. But Walden Pond is over 100 feet deep. So it's really a lake! This is a river. This is a stream. So where's the line? A river is big, fed by smaller streams. A stream is small and shallow. The Mississippi starts as a stream you can walk across. Then it runs over 2,300 miles! Tip: a river is just a stream that grew up. Like and follow for more!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 37.802,
+  "words": [
+    {
+      "word": "Lake",
+      "start": 0,
+      "end": 0.29
+    },
+    {
+      "word": "or",
+      "start": 0.313,
+      "end": 0.395
+    },
+    {
+      "word": "pond?",
+      "start": 0.453,
+      "end": 0.964
+    },
+    {
+      "word": "Most",
+      "start": 1.683,
+      "end": 1.881
+    },
+    {
+      "word": "people",
+      "start": 1.916,
+      "end": 2.125
+    },
+    {
+      "word": "just",
+      "start": 2.171,
+      "end": 2.322
+    },
+    {
+      "word": "guess.",
+      "start": 2.368,
+      "end": 2.659
+    },
+    {
+      "word": "This",
+      "start": 2.682,
+      "end": 2.856
+    },
+    {
+      "word": "is",
+      "start": 2.902,
+      "end": 2.984
+    },
+    {
+      "word": "a",
+      "start": 3.03,
+      "end": 3.065
+    },
+    {
+      "word": "lake.",
+      "start": 3.111,
+      "end": 3.506
+    },
+    {
+      "word": "This",
+      "start": 4.354,
+      "end": 4.667
+    },
+    {
+      "word": "is",
+      "start": 4.748,
+      "end": 4.899
+    },
+    {
+      "word": "a",
+      "start": 4.946,
+      "end": 4.981
+    },
+    {
+      "word": "pond.",
+      "start": 5.085,
+      "end": 5.666
+    },
+    {
+      "word": "What's",
+      "start": 6.385,
+      "end": 6.618
+    },
+    {
+      "word": "the",
+      "start": 6.653,
+      "end": 6.722
+    },
+    {
+      "word": "difference?",
+      "start": 6.757,
+      "end": 7.303
+    },
+    {
+      "word": "A",
+      "start": 7.419,
+      "end": 7.488
+    },
+    {
+      "word": "lake",
+      "start": 7.546,
+      "end": 7.721
+    },
+    {
+      "word": "is",
+      "start": 7.755,
+      "end": 7.837
+    },
+    {
+      "word": "deep,",
+      "start": 7.906,
+      "end": 8.162
+    },
+    {
+      "word": "so",
+      "start": 8.185,
+      "end": 8.29
+    },
+    {
+      "word": "its",
+      "start": 8.348,
+      "end": 8.452
+    },
+    {
+      "word": "bottom",
+      "start": 8.499,
+      "end": 8.754
+    },
+    {
+      "word": "stays",
+      "start": 8.8,
+      "end": 9.044
+    },
+    {
+      "word": "dark.",
+      "start": 9.091,
+      "end": 9.509
+    },
+    {
+      "word": "A",
+      "start": 10.136,
+      "end": 10.194
+    },
+    {
+      "word": "pond",
+      "start": 10.263,
+      "end": 10.53
+    },
+    {
+      "word": "is",
+      "start": 10.577,
+      "end": 10.646
+    },
+    {
+      "word": "shallow.",
+      "start": 10.693,
+      "end": 11.355
+    },
+    {
+      "word": "Sun",
+      "start": 11.981,
+      "end": 12.225
+    },
+    {
+      "word": "hits",
+      "start": 12.272,
+      "end": 12.457
+    },
+    {
+      "word": "the",
+      "start": 12.492,
+      "end": 12.562
+    },
+    {
+      "word": "whole",
+      "start": 12.597,
+      "end": 12.794
+    },
+    {
+      "word": "bottom.",
+      "start": 12.829,
+      "end": 13.293
+    },
+    {
+      "word": "But",
+      "start": 13.584,
+      "end": 13.735
+    },
+    {
+      "word": "Walden",
+      "start": 13.781,
+      "end": 14.06
+    },
+    {
+      "word": "Pond",
+      "start": 14.106,
+      "end": 14.385
+    },
+    {
+      "word": "is",
+      "start": 14.454,
+      "end": 14.559
+    },
+    {
+      "word": "over",
+      "start": 14.617,
+      "end": 14.826
+    },
+    {
+      "word": "100",
+      "start": 14.907,
+      "end": 15.279
+    },
+    {
+      "word": "feet",
+      "start": 15.337,
+      "end": 15.499
+    },
+    {
+      "word": "deep.",
+      "start": 15.546,
+      "end": 15.906
+    },
+    {
+      "word": "So",
+      "start": 16.533,
+      "end": 16.66
+    },
+    {
+      "word": "it's",
+      "start": 16.707,
+      "end": 16.835
+    },
+    {
+      "word": "really",
+      "start": 16.916,
+      "end": 17.172
+    },
+    {
+      "word": "a",
+      "start": 17.218,
+      "end": 17.241
+    },
+    {
+      "word": "lake!",
+      "start": 17.288,
+      "end": 17.717
+    },
+    {
+      "word": "This",
+      "start": 18.716,
+      "end": 18.89
+    },
+    {
+      "word": "is",
+      "start": 18.936,
+      "end": 19.018
+    },
+    {
+      "word": "a",
+      "start": 19.064,
+      "end": 19.099
+    },
+    {
+      "word": "river.",
+      "start": 19.215,
+      "end": 19.644
+    },
+    {
+      "word": "This",
+      "start": 19.935,
+      "end": 20.097
+    },
+    {
+      "word": "is",
+      "start": 20.132,
+      "end": 20.213
+    },
+    {
+      "word": "a",
+      "start": 20.26,
+      "end": 20.295
+    },
+    {
+      "word": "stream.",
+      "start": 20.329,
+      "end": 20.805
+    },
+    {
+      "word": "So",
+      "start": 21.432,
+      "end": 21.548
+    },
+    {
+      "word": "where's",
+      "start": 21.595,
+      "end": 21.85
+    },
+    {
+      "word": "the",
+      "start": 21.897,
+      "end": 21.966
+    },
+    {
+      "word": "line?",
+      "start": 22.013,
+      "end": 22.396
+    },
+    {
+      "word": "A",
+      "start": 22.791,
+      "end": 22.872
+    },
+    {
+      "word": "river",
+      "start": 22.953,
+      "end": 23.174
+    },
+    {
+      "word": "is",
+      "start": 23.232,
+      "end": 23.313
+    },
+    {
+      "word": "big,",
+      "start": 23.383,
+      "end": 23.789
+    },
+    {
+      "word": "fed",
+      "start": 23.929,
+      "end": 24.114
+    },
+    {
+      "word": "by",
+      "start": 24.161,
+      "end": 24.265
+    },
+    {
+      "word": "smaller",
+      "start": 24.335,
+      "end": 24.637
+    },
+    {
+      "word": "streams.",
+      "start": 24.683,
+      "end": 25.217
+    },
+    {
+      "word": "A",
+      "start": 25.751,
+      "end": 25.821
+    },
+    {
+      "word": "stream",
+      "start": 25.879,
+      "end": 26.158
+    },
+    {
+      "word": "is",
+      "start": 26.216,
+      "end": 26.343
+    },
+    {
+      "word": "small",
+      "start": 26.494,
+      "end": 26.854
+    },
+    {
+      "word": "and",
+      "start": 26.912,
+      "end": 27.028
+    },
+    {
+      "word": "shallow.",
+      "start": 27.086,
+      "end": 27.609
+    },
+    {
+      "word": "The",
+      "start": 27.899,
+      "end": 28.004
+    },
+    {
+      "word": "Mississippi",
+      "start": 28.05,
+      "end": 28.503
+    },
+    {
+      "word": "starts",
+      "start": 28.561,
+      "end": 28.816
+    },
+    {
+      "word": "as",
+      "start": 28.851,
+      "end": 28.921
+    },
+    {
+      "word": "a",
+      "start": 28.967,
+      "end": 28.99
+    },
+    {
+      "word": "stream",
+      "start": 29.037,
+      "end": 29.316
+    },
+    {
+      "word": "you",
+      "start": 29.362,
+      "end": 29.432
+    },
+    {
+      "word": "can",
+      "start": 29.466,
+      "end": 29.571
+    },
+    {
+      "word": "walk",
+      "start": 29.617,
+      "end": 29.792
+    },
+    {
+      "word": "across.",
+      "start": 29.838,
+      "end": 30.314
+    },
+    {
+      "word": "Then",
+      "start": 30.651,
+      "end": 30.813
+    },
+    {
+      "word": "it",
+      "start": 30.86,
+      "end": 30.918
+    },
+    {
+      "word": "runs",
+      "start": 30.953,
+      "end": 31.138
+    },
+    {
+      "word": "over",
+      "start": 31.185,
+      "end": 31.359
+    },
+    {
+      "word": "2,300",
+      "start": 31.429,
+      "end": 32.079
+    },
+    {
+      "word": "miles!",
+      "start": 32.125,
+      "end": 32.601
+    },
+    {
+      "word": "Tip:",
+      "start": 33.228,
+      "end": 33.634
+    },
+    {
+      "word": "a",
+      "start": 34.168,
+      "end": 34.226
+    },
+    {
+      "word": "river",
+      "start": 34.331,
+      "end": 34.551
+    },
+    {
+      "word": "is",
+      "start": 34.621,
+      "end": 34.714
+    },
+    {
+      "word": "just",
+      "start": 34.784,
+      "end": 34.981
+    },
+    {
+      "word": "a",
+      "start": 35.027,
+      "end": 35.062
+    },
+    {
+      "word": "stream",
+      "start": 35.109,
+      "end": 35.387
+    },
+    {
+      "word": "that",
+      "start": 35.434,
+      "end": 35.55
+    },
+    {
+      "word": "grew",
+      "start": 35.596,
+      "end": 35.782
+    },
+    {
+      "word": "up.",
+      "start": 35.84,
+      "end": 36.119
+    },
+    {
+      "word": "Like",
+      "start": 36.456,
+      "end": 36.653
+    },
+    {
+      "word": "and",
+      "start": 36.688,
+      "end": 36.757
+    },
+    {
+      "word": "follow",
+      "start": 36.804,
+      "end": 37.059
+    },
+    {
+      "word": "for",
+      "start": 37.106,
+      "end": 37.21
+    },
+    {
+      "word": "more!",
+      "start": 37.257,
+      "end": 37.802
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+{
+  "text": "This is Celsius. This is Fahrenheit. What's the difference? Celsius measures temperature using degrees based on water's freezing and boiling points. Fahrenheit uses a different temperature scale. Water boils at 100 degrees Celsius, which is 212 Fahrenheit. This is kilometers. This is miles. What's the difference? A kilometer is a metric unit equal to 1,000 meters. A mile is a longer unit of distance equal to about 1.61 kilometers. So a 5K race is about 3.1 miles. Honestly, I always mix these up when I travel. My trick: multiply miles by 1.6 to get kilometers. Hit like if this made sense!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 37.663,
+  "words": [
+    {
+      "word": "This",
+      "start": 0,
+      "end": 0.197
+    },
+    {
+      "word": "is",
+      "start": 0.244,
+      "end": 0.325
+    },
+    {
+      "word": "Celsius.",
+      "start": 0.372,
+      "end": 1.08
+    },
+    {
+      "word": "This",
+      "start": 1.3,
+      "end": 1.474
+    },
+    {
+      "word": "is",
+      "start": 1.521,
+      "end": 1.602
+    },
+    {
+      "word": "Fahrenheit.",
+      "start": 1.672,
+      "end": 2.299
+    },
+    {
+      "word": "What's",
+      "start": 3.297,
+      "end": 3.518
+    },
+    {
+      "word": "the",
+      "start": 3.553,
+      "end": 3.622
+    },
+    {
+      "word": "difference?",
+      "start": 3.669,
+      "end": 4.203
+    },
+    {
+      "word": "Celsius",
+      "start": 4.656,
+      "end": 5.074
+    },
+    {
+      "word": "measures",
+      "start": 5.12,
+      "end": 5.41
+    },
+    {
+      "word": "temperature",
+      "start": 5.457,
+      "end": 5.898
+    },
+    {
+      "word": "using",
+      "start": 5.944,
+      "end": 6.142
+    },
+    {
+      "word": "degrees",
+      "start": 6.188,
+      "end": 6.502
+    },
+    {
+      "word": "based",
+      "start": 6.56,
+      "end": 6.792
+    },
+    {
+      "word": "on",
+      "start": 6.827,
+      "end": 6.908
+    },
+    {
+      "word": "water's",
+      "start": 6.978,
+      "end": 7.314
+    },
+    {
+      "word": "freezing",
+      "start": 7.372,
+      "end": 7.721
+    },
+    {
+      "word": "and",
+      "start": 7.779,
+      "end": 7.883
+    },
+    {
+      "word": "boiling",
+      "start": 7.941,
+      "end": 8.255
+    },
+    {
+      "word": "points.",
+      "start": 8.301,
+      "end": 8.754
+    },
+    {
+      "word": "Fahrenheit",
+      "start": 9.288,
+      "end": 9.752
+    },
+    {
+      "word": "uses",
+      "start": 9.799,
+      "end": 10.031
+    },
+    {
+      "word": "a",
+      "start": 10.077,
+      "end": 10.112
+    },
+    {
+      "word": "different",
+      "start": 10.182,
+      "end": 10.495
+    },
+    {
+      "word": "temperature",
+      "start": 10.53,
+      "end": 10.913
+    },
+    {
+      "word": "scale.",
+      "start": 10.948,
+      "end": 11.355
+    },
+    {
+      "word": "Water",
+      "start": 11.981,
+      "end": 12.249
+    },
+    {
+      "word": "boils",
+      "start": 12.295,
+      "end": 12.55
+    },
+    {
+      "word": "at",
+      "start": 12.597,
+      "end": 12.701
+    },
+    {
+      "word": "100",
+      "start": 12.771,
+      "end": 13.131
+    },
+    {
+      "word": "degrees",
+      "start": 13.177,
+      "end": 13.444
+    },
+    {
+      "word": "Celsius,",
+      "start": 13.479,
+      "end": 14.036
+    },
+    {
+      "word": "which",
+      "start": 14.141,
+      "end": 14.327
+    },
+    {
+      "word": "is",
+      "start": 14.373,
+      "end": 14.443
+    },
+    {
+      "word": "212",
+      "start": 14.512,
+      "end": 15.244
+    },
+    {
+      "word": "Fahrenheit.",
+      "start": 15.302,
+      "end": 15.871
+    },
+    {
+      "word": "This",
+      "start": 16.323,
+      "end": 16.486
+    },
+    {
+      "word": "is",
+      "start": 16.532,
+      "end": 16.591
+    },
+    {
+      "word": "kilometers.",
+      "start": 16.637,
+      "end": 17.299
+    },
+    {
+      "word": "This",
+      "start": 17.403,
+      "end": 17.554
+    },
+    {
+      "word": "is",
+      "start": 17.601,
+      "end": 17.67
+    },
+    {
+      "word": "miles.",
+      "start": 17.728,
+      "end": 18.146
+    },
+    {
+      "word": "What's",
+      "start": 18.437,
+      "end": 18.634
+    },
+    {
+      "word": "the",
+      "start": 18.669,
+      "end": 18.738
+    },
+    {
+      "word": "difference?",
+      "start": 18.762,
+      "end": 19.145
+    },
+    {
+      "word": "A",
+      "start": 19.18,
+      "end": 19.226
+    },
+    {
+      "word": "kilometer",
+      "start": 19.284,
+      "end": 19.714
+    },
+    {
+      "word": "is",
+      "start": 19.772,
+      "end": 19.841
+    },
+    {
+      "word": "a",
+      "start": 19.888,
+      "end": 19.911
+    },
+    {
+      "word": "metric",
+      "start": 19.992,
+      "end": 20.294
+    },
+    {
+      "word": "unit",
+      "start": 20.375,
+      "end": 20.573
+    },
+    {
+      "word": "equal",
+      "start": 20.631,
+      "end": 20.863
+    },
+    {
+      "word": "to",
+      "start": 20.909,
+      "end": 20.967
+    },
+    {
+      "word": "1,000",
+      "start": 21.072,
+      "end": 21.676
+    },
+    {
+      "word": "meters.",
+      "start": 21.722,
+      "end": 22.187
+    },
+    {
+      "word": "A",
+      "start": 22.477,
+      "end": 22.535
+    },
+    {
+      "word": "mile",
+      "start": 22.616,
+      "end": 22.872
+    },
+    {
+      "word": "is",
+      "start": 22.918,
+      "end": 22.999
+    },
+    {
+      "word": "a",
+      "start": 23.046,
+      "end": 23.08
+    },
+    {
+      "word": "longer",
+      "start": 23.15,
+      "end": 23.44
+    },
+    {
+      "word": "unit",
+      "start": 23.51,
+      "end": 23.684
+    },
+    {
+      "word": "of",
+      "start": 23.719,
+      "end": 23.765
+    },
+    {
+      "word": "distance",
+      "start": 23.812,
+      "end": 24.149
+    },
+    {
+      "word": "equal",
+      "start": 24.195,
+      "end": 24.404
+    },
+    {
+      "word": "to",
+      "start": 24.45,
+      "end": 24.509
+    },
+    {
+      "word": "about",
+      "start": 24.567,
+      "end": 24.776
+    },
+    {
+      "word": "1.61",
+      "start": 24.834,
+      "end": 25.611
+    },
+    {
+      "word": "kilometers.",
+      "start": 25.693,
+      "end": 26.296
+    },
+    {
+      "word": "So",
+      "start": 26.482,
+      "end": 26.738
+    },
+    {
+      "word": "a",
+      "start": 26.807,
+      "end": 26.854
+    },
+    {
+      "word": "5K",
+      "start": 26.958,
+      "end": 27.225
+    },
+    {
+      "word": "race",
+      "start": 27.365,
+      "end": 27.55
+    },
+    {
+      "word": "is",
+      "start": 27.585,
+      "end": 27.655
+    },
+    {
+      "word": "about",
+      "start": 27.701,
+      "end": 27.933
+    },
+    {
+      "word": "3.1",
+      "start": 28.084,
+      "end": 28.328
+    },
+    {
+      "word": "miles.",
+      "start": 28.375,
+      "end": 28.769
+    },
+    {
+      "word": "Honestly,",
+      "start": 29.396,
+      "end": 29.884
+    },
+    {
+      "word": "I",
+      "start": 30.105,
+      "end": 30.151
+    },
+    {
+      "word": "always",
+      "start": 30.267,
+      "end": 30.546
+    },
+    {
+      "word": "mix",
+      "start": 30.592,
+      "end": 30.72
+    },
+    {
+      "word": "these",
+      "start": 30.766,
+      "end": 30.917
+    },
+    {
+      "word": "up",
+      "start": 30.952,
+      "end": 31.033
+    },
+    {
+      "word": "when",
+      "start": 31.068,
+      "end": 31.161
+    },
+    {
+      "word": "I",
+      "start": 31.196,
+      "end": 31.219
+    },
+    {
+      "word": "travel.",
+      "start": 31.266,
+      "end": 31.695
+    },
+    {
+      "word": "My",
+      "start": 32.229,
+      "end": 32.322
+    },
+    {
+      "word": "trick:",
+      "start": 32.38,
+      "end": 32.717
+    },
+    {
+      "word": "multiply",
+      "start": 33.053,
+      "end": 33.413
+    },
+    {
+      "word": "miles",
+      "start": 33.495,
+      "end": 33.738
+    },
+    {
+      "word": "by",
+      "start": 33.785,
+      "end": 33.901
+    },
+    {
+      "word": "1.6",
+      "start": 33.959,
+      "end": 34.54
+    },
+    {
+      "word": "to",
+      "start": 34.609,
+      "end": 34.667
+    },
+    {
+      "word": "get",
+      "start": 34.714,
+      "end": 34.83
+    },
+    {
+      "word": "kilometers.",
+      "start": 34.876,
+      "end": 35.55
+    },
+    {
+      "word": "Hit",
+      "start": 36.177,
+      "end": 36.339
+    },
+    {
+      "word": "like",
+      "start": 36.386,
+      "end": 36.525
+    },
+    {
+      "word": "if",
+      "start": 36.548,
+      "end": 36.618
+    },
+    {
+      "word": "this",
+      "start": 36.653,
+      "end": 36.792
+    },
+    {
+      "word": "made",
+      "start": 36.85,
+      "end": 37.024
+    },
+    {
+      "word": "sense!",
+      "start": 37.047,
+      "end": 37.663
+    }
+  ]
+}

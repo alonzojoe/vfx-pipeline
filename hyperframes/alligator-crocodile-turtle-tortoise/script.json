@@ -1,0 +1,142 @@
+{
+  "title": "Alligator vs Crocodile + Turtle vs Tortoise",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.12
+  },
+  "background": "auto",
+  "outro": 1,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": { "left": "alligator", "right": "crocodile" },
+    "p2": { "left": "turtle", "right": "tortoise" }
+  },
+  "artNote": "Each card's art is an animated SVG scene (420x260). p1 = heads seen from above, snout down, so the snout reads as a literal U vs V (the orange .draw path traces it); heads bob in the water, ripples drift. p2 = side views: the turtle paddles its flipper underwater, the tortoise plods along on land.",
+  "cards": {
+    "alligator": {
+      "label": "Alligator",
+      "color": "blue",
+      "facts": [["Snout", "U-shaped"], ["Lower teeth", "hidden"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#bfe0ff'/><g id='al-wave' fill='none' stroke='#2f6bff' stroke-width='4' stroke-linecap='round' opacity='0.55'><path d='M-80,70 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/><path d='M-80,150 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/><path d='M-80,228 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/></g><g id='al-head'><path d='M130,-20 L136,175 Q138,232 210,232 Q282,232 284,175 L290,-20 Z' fill='#5b8a3c' stroke='#161616' stroke-width='5' stroke-linejoin='round'/><circle cx='190' cy='96' r='6' fill='#466e2e'/><circle cx='230' cy='96' r='6' fill='#466e2e'/><circle cx='210' cy='130' r='6' fill='#466e2e'/><circle cx='158' cy='40' r='17' fill='#fff' stroke='#161616' stroke-width='4'/><circle cx='162' cy='43' r='7' fill='#161616'/><circle cx='262' cy='40' r='17' fill='#fff' stroke='#161616' stroke-width='4'/><circle cx='258' cy='43' r='7' fill='#161616'/><circle cx='198' cy='212' r='5' fill='#161616'/><circle cx='222' cy='212' r='5' fill='#161616'/><path class='draw' pathLength='1' style='stroke:#ff4d2e;stroke-width:7' d='M118,130 L121,178 Q124,248 210,248 Q296,248 299,178 L302,130'/></g></svg>",
+      "motion": [
+        { "el": "#al-wave", "x": 80, "dur": 1.6 },
+        { "el": "#al-head", "y": 8, "dur": 1.1, "yoyo": true }
+      ]
+    },
+    "crocodile": {
+      "label": "Crocodile",
+      "color": "orange",
+      "facts": [["Snout", "V-shaped"], ["4th lower tooth", "sticks out"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#bfe0ff'/><g id='cr-wave' fill='none' stroke='#2f6bff' stroke-width='4' stroke-linecap='round' opacity='0.55'><path d='M-80,60 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/><path d='M-80,140 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/><path d='M-80,222 q20,-10 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/></g><g id='cr-head'><path d='M178,114 L156,121 L180,128 Z M188,164 L160,176 L190,186 Z M242,114 L264,121 L240,128 Z M232,164 L260,176 L230,186 Z' fill='#fff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><path d='M140,-20 L192,220 Q210,246 228,220 L280,-20 Z' fill='#7f9446' stroke='#161616' stroke-width='5' stroke-linejoin='round'/><circle cx='200' cy='96' r='5' fill='#64763a'/><circle cx='220' cy='96' r='5' fill='#64763a'/><circle cx='210' cy='128' r='5' fill='#64763a'/><circle cx='172' cy='38' r='16' fill='#fff' stroke='#161616' stroke-width='4'/><circle cx='176' cy='41' r='7' fill='#161616'/><circle cx='248' cy='38' r='16' fill='#fff' stroke='#161616' stroke-width='4'/><circle cx='244' cy='41' r='7' fill='#161616'/><circle cx='204' cy='212' r='4' fill='#161616'/><circle cx='216' cy='212' r='4' fill='#161616'/><path class='draw' pathLength='1' style='stroke:#ff4d2e;stroke-width:7' d='M124,104 L198,246 Q210,262 222,246 L296,104'/></g></svg>",
+      "motion": [
+        { "el": "#cr-wave", "x": -80, "dur": 1.4 },
+        { "el": "#cr-head", "y": 8, "dur": 0.9, "yoyo": true, "delay": 0.2 }
+      ]
+    },
+    "turtle": {
+      "label": "Turtle",
+      "color": "green",
+      "facts": [["Lives", "in water"], ["Sea turtle swims", "22 mph"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#bfe0ff'/><path class='draw' pathLength='1' style='stroke:#2f6bff;stroke-width:5' d='M0,24 q35,-14 70,0 t70,0 t70,0 t70,0 t70,0 t70,0'/><path d='M0,236 Q105,222 210,236 T420,236 V260 H0 Z' fill='#f1dca6'/><g id='tu-bub' fill='none' stroke='#2f6bff' stroke-width='3'><circle cx='356' cy='112' r='7'/><circle cx='370' cy='84' r='5'/><circle cx='360' cy='58' r='4'/></g><g id='tu-body'><path d='M138,150 Q112,170 92,172 Q110,156 124,146 Z' fill='#9cc77a' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><g id='tu-flip'><path d='M268,150 Q252,204 196,220 Q232,190 244,150 Z' fill='#9cc77a' stroke='#161616' stroke-width='4' stroke-linejoin='round'/></g><path d='M292,146 Q300,126 326,126 Q352,128 352,142 Q350,156 326,156 Q306,156 292,152 Z' fill='#9cc77a' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='336' cy='137' r='4' fill='#161616'/><path d='M116,150 Q210,176 304,150 Z' fill='#e8d9a8' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><path d='M116,150 Q210,80 304,150 Z' fill='#3f7f4f'/><path d='M170,150 L185,124 Q210,116 235,124 L250,150' fill='none' stroke='#2b5e38' stroke-width='4'/><path class='draw' pathLength='1' d='M116,150 Q210,80 304,150'/></g></svg>",
+      "motion": [
+        { "el": "#tu-body", "y": -12, "dur": 1.3, "yoyo": true },
+        { "el": "#tu-flip", "rot": -25, "dur": 0.65, "yoyo": true, "origin": "100% 0%" },
+        { "el": "#tu-bub", "y": -40, "dur": 1.5 }
+      ]
+    },
+    "tortoise": {
+      "label": "Tortoise",
+      "color": "red",
+      "facts": [["Lives", "on land"], ["Giant tortoise walks", "< 0.5 mph"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#fff4d6'/><circle cx='372' cy='46' r='24' fill='#ffc400' stroke='#161616' stroke-width='4'/><rect x='0' y='214' width='420' height='46' fill='#9bd17d'/><path class='draw' pathLength='1' style='stroke-width:5' d='M0,214 H420'/><path d='M30,214 l6,-14 l6,14 M380,214 l6,-14 l6,14' fill='none' stroke='#16a34a' stroke-width='4' stroke-linejoin='round'/><g id='tt-body'><g id='tt-leg2'><rect x='108' y='176' width='34' height='40' rx='10' fill='#8f9a5a' stroke='#161616' stroke-width='4'/></g><g id='tt-leg1'><rect x='206' y='176' width='34' height='40' rx='10' fill='#8f9a5a' stroke='#161616' stroke-width='4'/></g><g id='tt-head'><path d='M236,178 Q250,150 276,148 Q300,148 302,166 Q300,182 276,182 Q258,184 248,192 Z' fill='#a3ad6b' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><circle cx='284' cy='160' r='4' fill='#161616'/></g><path d='M86,186 Q86,70 170,70 Q254,70 254,186 Z' fill='#b07a3e'/><path d='M140,180 L148,120 L192,120 L200,180 M148,120 L128,92 M192,120 L212,92 M108,140 H148 M192,140 H234' fill='none' stroke='#7a4f24' stroke-width='4'/><path class='draw' pathLength='1' d='M86,186 Q86,70 170,70 Q254,70 254,186'/><rect x='80' y='180' width='180' height='14' rx='7' fill='#8a5a2b' stroke='#161616' stroke-width='4'/></g></svg>",
+      "motion": [
+        { "el": "#tt-body", "x": 50, "dur": 14 },
+        { "el": "#tt-leg1", "rot": 10, "dur": 0.6, "yoyo": true, "origin": "50% 0%" },
+        { "el": "#tt-leg2", "rot": -10, "dur": 0.6, "yoyo": true, "origin": "50% 0%" },
+        { "el": "#tt-head", "y": -4, "dur": 0.6, "yoyo": true }
+      ]
+    }
+  },
+  "lines": [
+    { "text": "One tooth gives a crocodile away.", "pair": "intro", "react": "side-eye", "sfx": ["hook"], "pause": 0.3 },
+    { "text": "This is an alligator.", "pair": "p1", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is a crocodile.", "pair": "p1", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "How are they different?", "pair": "p1", "react": "thinking", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "Alligators have broader, U-shaped snouts.", "pair": "p1", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#alligator-f1", "word": "U-shaped", "sfx": "tap" }] },
+    { "text": "Crocodiles usually have narrower, V-shaped snouts.", "pair": "p1", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#crocodile-f1", "word": "V-shaped", "sfx": "tap" }] },
+    { "text": "With its mouth shut, a crocodile's fourth lower tooth still sticks out.", "pair": "p1", "react": "smirk-thumb",
+      "actions": [{ "type": "pop", "el": "#crocodile-f2", "word": "fourth", "sfx": "tap" }] },
+    { "text": "An alligator hides its lower teeth.", "pair": "p1", "react": "wink-heart", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#alligator-f2", "word": "hides", "sfx": "tap" }] },
+    { "text": "This is a turtle.", "pair": "p2", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is a tortoise.", "pair": "p2", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "So how do you tell them apart?", "pair": "p2", "react": "look-up-2", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "Turtles often live in water.", "pair": "p2", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#turtle-f1", "word": "water.", "sfx": "tap" }] },
+    { "text": "Tortoises are land-dwellers.", "pair": "p2", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#tortoise-f1", "word": "land-dwellers.", "sfx": "tap" }] },
+    { "text": "A sea turtle can swim 22 miles an hour.", "pair": "p2", "react": "cool-2",
+      "actions": [{ "type": "pop", "el": "#turtle-f2", "word": "22", "sfx": "tap" }] },
+    { "text": "A giant tortoise? Under half a mile an hour.", "pair": "p2", "react": "laugh-2", "pause": 0.35,
+      "actions": [{ "type": "pop", "el": "#tortoise-f2", "word": "half", "sfx": "tap" }] },
+    { "text": "At the zoo, I just look for that one tooth.", "pair": "tip", "react": "smile-2",
+      "recap": { "term": "Joe's tip", "means": "tooth out = crocodile" }, "sfx": ["check"], "pause": 0.35 },
+    { "text": "auto", "cta": true, "pair": "tip", "react": "point-at-you-2", "sfx": ["cta"] }
+  ],
+  "sfx": {
+    "hook": {
+      "src": "general/sfx/earshot/knock/snap.mp3", "volume": 0.34,
+      "layers": [{ "src": "general/sfx/earshot/reverse_swell/short.mp3", "volume": 0.14, "offset": 0 }]
+    },
+    "pop": [
+      { "src": "general/sfx/earshot/pro_pop/chirp.mp3", "volume": 0.4 },
+      { "src": "general/sfx/earshot/pro_pop/thup.mp3", "volume": 0.4 },
+      { "src": "general/sfx/earshot/pop/3.mp3", "volume": 0.38 },
+      { "src": "general/sfx/earshot/pro_pop/tink.mp3", "volume": 0.36 }
+    ],
+    "tap": [
+      { "src": "general/sfx/earshot/tap/knuckle.mp3", "volume": 0.26 },
+      { "src": "general/sfx/earshot/pro_tap/finger.mp3", "volume": 0.28 },
+      { "src": "general/sfx/uisfx/rubber/select.mp3", "volume": 0.26 }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/mallet/pluck.mp3", "volume": 0.38,
+      "layers": [{ "src": "general/sfx/earshot/drip/bloop.mp3", "volume": 0.16, "offset": 0.05 }]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/cane.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/tight.mp3", "volume": 0.14 }]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/stick.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/tight.mp3", "volume": 0.14 }]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/rubber/check.mp3", "volume": 0.46,
+      "layers": [{ "src": "general/sfx/earshot/mallet/flourish.mp3", "volume": 0.2, "offset": 0.04 }]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/rubber/achievement.mp3", "volume": 0.46,
+      "layers": [
+        { "src": "general/sfx/earshot/pro_notify/ding_2167.mp3", "volume": 0.2, "offset": 0.06 },
+        { "src": "general/sfx/earshot/pro_shimmer/m2.mp3", "volume": 0.18, "offset": 0.12 }
+      ]
+    },
+    "whoosh": [
+      { "src": "general/sfx/earshot/swipe/flick.mp3", "volume": 0.3 },
+      { "src": "general/sfx/earshot/whoosh_fast/whistle.mp3", "volume": 0.24 }
+    ],
+    "whoosh-big": { "src": "general/sfx/earshot/pro_whoosh_big/windy.mp3", "volume": 0.26 },
+    "riser": { "src": "general/sfx/earshot/riser/swell.mp3", "volume": 0.2 }
+  },
+  "sfxNote": "Library sounds only (uisfx CC0 'rubber' + earshot renders). Varied from overpass-underpass (glass/celesta) and celsius-fahrenheit-km-miles (organic/kalimba): knock snap 'jaw' hook, chirp/thup/tink pops, knuckle/finger taps, mallet pluck + bloop question, cane/stick swishes, flourish check, flick/whistle swipes, windy whoosh, swell riser, ding + shimmer CTA."
+}

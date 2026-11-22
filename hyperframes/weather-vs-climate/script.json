@@ -1,0 +1,165 @@
+{
+  "title": "Weather vs Climate + Season vs Temperature",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.12
+  },
+  "background": "auto",
+  "outro": 1,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": { "left": "weather", "right": "climate" },
+    "p2": { "left": "season", "right": "temperature" }
+  },
+  "artNote": "Hook = surprising-fact intro scene (950x630) that teases pair 2's payoff: a smiling sun with spinning rays, an orange 'closest!' arrow to a tilted Earth (north leaning away), a swinging JAN calendar, a shivering snowman in falling snow, ? marks. p1 cards: weather = clock hand spinning, rain falling, sun peeking from a cloud; climate = 30-year chart, spiky blue daily line + orange average line that draws in, a dot riding it. p2 cards: season = four-season wheel (flower/sun/leaf/snowflake) with a turning hand + tilted Earth 23.4°; temperature = thermometer whose red level rises and falls, hot sun vs cold snowflake. Joe's tip tile = new tall tile with its own scene: grumpy wobbling rain cloud with a jittering lightning bolt (WEATHER) vs a calm sun in sunglasses with spinning rays (CLIMATE).",
+  "intro": {
+    "art": "<svg viewBox='0 0 950 630' width='950' height='630'><rect width='950' height='630' fill='#e6f0ff'/><path d='M0,540 Q240,505 480,535 T950,515 V630 H0 Z' fill='#ffffff' stroke='#161616' stroke-width='5'/><g id='in-rays' stroke='#ffc400' stroke-width='12' stroke-linecap='round'><path d='M302,270 L340,270'/><path d='M269.2,349.2 L296.1,376.1'/><path d='M190,382 L190,420'/><path d='M110.8,349.2 L83.9,376.1'/><path d='M78,270 L40,270'/><path d='M110.8,190.8 L83.9,163.9'/><path d='M190,158 L190,120'/><path d='M269.2,190.8 L296.1,163.9'/></g><circle cx='190' cy='270' r='95' fill='#ffc400' stroke='#161616' stroke-width='5'/><circle cx='160' cy='250' r='9' fill='#161616'/><circle cx='220' cy='250' r='9' fill='#161616'/><path d='M150,292 Q190,328 230,292' fill='none' stroke='#161616' stroke-width='6' stroke-linecap='round'/><path class='draw' pathLength='1' style='stroke:#ff4d2e;stroke-width:8' d='M358,300 H432 M358,300 l14,-12 M358,300 l14,12 M432,300 l-14,-12 M432,300 l-14,12'/><text x='395' y='372' text-anchor='middle' font-family='Patrick Hand' font-size='46' fill='#ff4d2e'>closest!</text><g id='in-earth'><circle cx='520' cy='250' r='75' fill='#4f8dff' stroke='#161616' stroke-width='5'/><path d='M470,222 q25,-25 50,-5 q15,20 -10,30 q-25,5 -40,-25 Z' fill='#16a34a' stroke='#161616' stroke-width='3'/><path d='M535,275 q30,-10 40,15 q-10,25 -40,15 q-15,-15 0,-30 Z' fill='#16a34a' stroke='#161616' stroke-width='3'/><path d='M561,153 L479,347' stroke='#161616' stroke-width='5' stroke-dasharray='12 9' stroke-linecap='round'/><text x='578' y='150' font-family='Fredoka' font-weight='700' font-size='30' fill='#161616'>N</text></g><g id='in-cal'><rect x='465' y='390' width='110' height='80' rx='12' fill='#ffffff' stroke='#161616' stroke-width='4'/><rect x='465' y='390' width='110' height='24' fill='#ff4d2e' stroke='#161616' stroke-width='4'/><text x='520' y='456' text-anchor='middle' font-family='Fredoka' font-weight='700' font-size='36' fill='#161616'>JAN</text></g><g id='in-snowman'><path d='M742,455 L690,420 M858,455 L905,415' stroke='#8a5a2b' stroke-width='6' stroke-linecap='round'/><circle cx='800' cy='470' r='62' fill='#ffffff' stroke='#161616' stroke-width='5'/><circle cx='800' cy='370' r='44' fill='#ffffff' stroke='#161616' stroke-width='5'/><rect x='770' y='282' width='60' height='48' fill='#161616'/><path d='M752,330 H848' stroke='#161616' stroke-width='8' stroke-linecap='round'/><circle cx='786' cy='360' r='5' fill='#161616'/><circle cx='814' cy='360' r='5' fill='#161616'/><path d='M800,372 l28,6 l-28,6 Z' fill='#ff4d2e' stroke='#161616' stroke-width='2'/><path d='M760,408 Q800,425 840,408 L840,422 Q800,440 760,422 Z' fill='#c62828' stroke='#161616' stroke-width='3'/><circle cx='800' cy='450' r='6' fill='#161616'/><circle cx='800' cy='480' r='6' fill='#161616'/></g><g id='in-snow1' fill='#ffffff' stroke='#161616' stroke-width='2.5'><circle cx='660' cy='80' r='7'/><circle cx='760' cy='40' r='6'/><circle cx='880' cy='110' r='8'/><circle cx='930' cy='30' r='6'/><circle cx='700' cy='200' r='7'/></g><g id='in-snow2' fill='#ffffff' stroke='#161616' stroke-width='2.5'><circle cx='720' cy='130' r='6'/><circle cx='830' cy='70' r='7'/><circle cx='900' cy='220' r='6'/><circle cx='650' cy='250' r='8'/><circle cx='790' cy='180' r='6'/></g><g id='in-q1' font-family='Patrick Hand' font-size='110' text-anchor='middle' fill='#ff4d2e' stroke='#161616' stroke-width='3' paint-order='stroke'><text x='650' y='380'>?</text></g><g id='in-q2' font-family='Patrick Hand' font-size='110' text-anchor='middle' fill='#ff4d2e' stroke='#161616' stroke-width='3' paint-order='stroke'><text x='365' y='160'>?</text></g></svg>",
+    "motion": [
+      { "el": "#in-rays", "rot": 45, "dur": 3, "origin": "50% 50%" },
+      { "el": "#in-earth", "y": 8, "dur": 1.2, "yoyo": true },
+      { "el": "#in-cal", "rot": 5, "dur": 0.9, "yoyo": true, "origin": "50% 0%" },
+      { "el": "#in-snowman", "rot": 3, "dur": 0.18, "yoyo": true, "origin": "50% 100%" },
+      { "el": "#in-snow1", "y": 60, "dur": 1.6 },
+      { "el": "#in-snow2", "y": 60, "dur": 1.6, "delay": 0.8 },
+      { "el": "#in-q1", "y": -14, "dur": 0.7, "yoyo": true },
+      { "el": "#in-q2", "y": -14, "dur": 0.7, "yoyo": true, "delay": 0.35 }
+    ]
+  },
+  "cards": {
+    "weather": {
+      "label": "Weather",
+      "color": "blue",
+      "facts": [["Changes", "by the hour"], ["Sahara, 2018", "snow!"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#e3edff'/><g id='wx-sun'><circle cx='300' cy='78' r='38' fill='#ffc400' stroke='#161616' stroke-width='4'/></g><path d='M150,150 q-36,0 -36,-30 q0,-30 34,-32 q6,-40 52,-40 q34,0 48,28 q8,-6 22,-6 q34,0 36,34 q30,4 30,26 q0,20 -28,20 Z' fill='#ffffff'/><path class='draw' pathLength='1' d='M150,150 q-36,0 -36,-30 q0,-30 34,-32 q6,-40 52,-40 q34,0 48,28 q8,-6 22,-6 q34,0 36,34 q30,4 30,26 q0,20 -28,20 Z'/><g id='wx-rain' stroke='#2f6bff' stroke-width='5' stroke-linecap='round'><path d='M160,164 l-6,18 M200,168 l-6,18 M240,164 l-6,18 M280,168 l-6,18 M180,192 l-6,18 M220,196 l-6,18 M260,192 l-6,18'/></g><rect y='228' width='420' height='32' fill='#9bd17d'/><path d='M0,228 H420' stroke='#161616' stroke-width='4'/><circle cx='62' cy='62' r='38' fill='#ffffff' stroke='#161616' stroke-width='5'/><path d='M62,62 L80,62' stroke='#161616' stroke-width='5' stroke-linecap='round'/><g id='wx-hand'><circle cx='62' cy='62' r='30' fill='none'/><path d='M62,64 V36' stroke='#ff4d2e' stroke-width='5' stroke-linecap='round'/></g><circle cx='62' cy='62' r='5' fill='#161616'/></svg>",
+      "motion": [
+        { "el": "#wx-hand", "rot": 360, "dur": 2, "origin": "50% 50%" },
+        { "el": "#wx-sun", "x": 30, "dur": 1.6, "yoyo": true },
+        { "el": "#wx-rain", "y": 22, "dur": 0.45 }
+      ]
+    },
+    "climate": {
+      "label": "Climate",
+      "color": "ink",
+      "facts": [["Average of", "30 years"], ["The Sahara is", "a desert"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#f1efe9'/><path class='draw' pathLength='1' d='M40,24 V214 H404'/><path d='M52,130 L72,82 L92,168 L112,104 L132,176 L152,76 L172,150 L192,112 L212,186 L232,92 L252,158 L272,100 L292,172 L312,86 L332,146 L352,108 L372,166 L392,96' fill='none' stroke='#4f8dff' stroke-width='4' stroke-linejoin='round' stroke-linecap='round'/><path class='draw' pathLength='1' style='stroke:#ff4d2e;stroke-width:9' d='M52,132 C150,124 290,140 392,130'/><g id='cl-dot'><circle cx='52' cy='132' r='11' fill='#ff4d2e' stroke='#161616' stroke-width='4'/></g><text x='340' y='50' text-anchor='middle' font-family='Patrick Hand' font-size='32' fill='#ff4d2e'>average</text><text x='222' y='250' text-anchor='middle' font-family='Patrick Hand' font-size='34' fill='#161616'>30 years</text></svg>",
+      "motion": [
+        { "el": "#cl-dot", "x": 340, "dur": 2.6, "yoyo": true }
+      ]
+    },
+    "season": {
+      "label": "Season",
+      "color": "green",
+      "facts": [["Caused by", "Earth's tilt"], ["Jan: closer to sun by", "5M km"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='260' fill='#e6f5dc'/><path d='M130,130 H30 A100,100 0 0 1 130,30 Z' fill='#ffd1e0' stroke='#161616' stroke-width='3'/><path d='M130,130 V30 A100,100 0 0 1 230,130 Z' fill='#ffe08a' stroke='#161616' stroke-width='3'/><path d='M130,130 H230 A100,100 0 0 1 130,230 Z' fill='#ffb37a' stroke='#161616' stroke-width='3'/><path d='M130,130 V230 A100,100 0 0 1 30,130 Z' fill='#dff1ff' stroke='#161616' stroke-width='3'/><g fill='#ff8fb1' stroke='#161616' stroke-width='2.5'><circle cx='85' cy='73' r='10'/><circle cx='97' cy='85' r='10'/><circle cx='85' cy='97' r='10'/><circle cx='73' cy='85' r='10'/></g><circle cx='85' cy='85' r='7' fill='#ffc400' stroke='#161616' stroke-width='2.5'/><circle cx='175' cy='85' r='18' fill='#ffc400' stroke='#161616' stroke-width='3'/><path d='M160,190 Q160,160 192,158 Q192,190 160,190 Z M160,190 l-8,8' fill='#ff4d2e' stroke='#161616' stroke-width='3' stroke-linecap='round'/><path d='M85,157 V193 M69,166 L101,184 M69,184 L101,166' stroke='#2f6bff' stroke-width='4' stroke-linecap='round'/><path class='draw' pathLength='1' d='M130,30 A100,100 0 1 1 129.9,30'/><g id='ss-hand'><circle cx='130' cy='130' r='80' fill='none'/><path d='M130,130 V58' stroke='#161616' stroke-width='7' stroke-linecap='round'/></g><circle cx='130' cy='130' r='10' fill='#161616'/><g id='ss-earth'><circle cx='330' cy='110' r='52' fill='#4f8dff' stroke='#161616' stroke-width='4'/><path d='M300,96 q20,-20 40,-4 q10,16 -8,24 q-22,4 -32,-20 Z' fill='#16a34a' stroke='#161616' stroke-width='3'/><path d='M360,41 L300,179' stroke='#161616' stroke-width='4' stroke-dasharray='10 8' stroke-linecap='round'/></g><text x='330' y='234' text-anchor='middle' font-family='Fredoka' font-weight='700' font-size='40' fill='#ff4d2e'>23.4°</text></svg>",
+      "motion": [
+        { "el": "#ss-hand", "rot": 360, "dur": 4, "origin": "50% 50%" },
+        { "el": "#ss-earth", "y": 6, "dur": 1.3, "yoyo": true }
+      ]
+    },
+    "temperature": {
+      "label": "Temperature",
+      "color": "red",
+      "facts": [["Measures", "hot or cold"], ["North in January", "temps drop"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><defs><clipPath id='tm-clip'><rect x='188' y='30' width='44' height='190' rx='22'/></clipPath></defs><rect width='420' height='260' fill='#ffeceb'/><rect x='180' y='22' width='60' height='190' rx='30' fill='#ffffff'/><g clip-path='url(#tm-clip)'><g id='tm-merc'><rect x='188' y='120' width='44' height='150' fill='#c62828'/></g></g><path class='draw' pathLength='1' d='M180,190 V52 A30,30 0 0 1 240,52 V190'/><path d='M250,60 h18 M250,90 h12 M250,120 h18 M250,150 h12 M250,180 h18' stroke='#161616' stroke-width='4' stroke-linecap='round'/><circle cx='210' cy='214' r='36' fill='#c62828' stroke='#161616' stroke-width='5'/><g id='tm-sun'><circle cx='340' cy='70' r='28' fill='#ffc400' stroke='#161616' stroke-width='4'/></g><text x='340' y='146' text-anchor='middle' font-family='Patrick Hand' font-size='42' fill='#c62828'>hot</text><g id='tm-flake'><circle cx='85' cy='70' r='30' fill='none'/><path d='M85,44 V96 M62,57 L108,83 M62,83 L108,57' stroke='#2f6bff' stroke-width='6' stroke-linecap='round'/></g><text x='85' y='146' text-anchor='middle' font-family='Patrick Hand' font-size='42' fill='#2f6bff'>cold</text></svg>",
+      "motion": [
+        { "el": "#tm-merc", "y": -60, "dur": 1.4, "yoyo": true },
+        { "el": "#tm-sun", "y": 6, "dur": 1.1, "yoyo": true },
+        { "el": "#tm-flake", "rot": 30, "dur": 1.2, "yoyo": true, "origin": "50% 50%" }
+      ]
+    }
+  },
+  "lines": [
+    { "text": "Earth is closest to the sun in January. So why is it cold?", "pair": "intro", "react": "confused", "sfx": ["hook"], "pause": 0.3 },
+    { "text": "This is weather.", "pair": "p1", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is climate.", "pair": "p1", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "How are they different?", "pair": "p1", "react": "thinking", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "Weather is right now. It changes by the hour.", "pair": "p1", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#weather-f1", "word": "hour.", "sfx": "tap" }] },
+    { "text": "Climate is the average weather over 30 years.", "pair": "p1", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#climate-f1", "word": "30", "sfx": "tap" }] },
+    { "text": "In 2018, it snowed in the Sahara. That's weather.", "pair": "p1", "react": "shocked-2",
+      "actions": [{ "type": "pop", "el": "#weather-f2", "word": "2018,", "sfx": "tap" }] },
+    { "text": "Still a desert? That's climate.", "pair": "p1", "react": "side-eye", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#climate-f2", "word": "desert?", "sfx": "tap" }] },
+    { "text": "This is a season.", "pair": "p2", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is temperature.", "pair": "p2", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "Aren't they the same?", "pair": "p2", "react": "side-look", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "A season is a time of year, caused by Earth's tilt.", "pair": "p2", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#season-f1", "word": "tilt.", "sfx": "tap" }] },
+    { "text": "Temperature is how hot or cold it is.", "pair": "p2", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#temperature-f1", "word": "cold", "sfx": "tap" }] },
+    { "text": "In January, Earth is 5 million kilometers closer to the sun.", "pair": "p2", "focus": "left", "react": "look-up-2",
+      "actions": [{ "type": "pop", "el": "#season-f2", "word": "5", "sfx": "tap" }] },
+    { "text": "But the north tilts away. Temperatures drop.", "pair": "p2", "focus": "right", "react": "smirk-thumb", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#temperature-f2", "word": "drop.", "sfx": "tap" }] },
+    { "text": "My trick: weather is your mood. Climate is your personality.", "pair": "tip", "react": "cool",
+      "recap": {
+        "term": "Joe's tip",
+        "means": "mood vs. personality",
+        "art": "<svg viewBox='0 0 700 300' width='700' height='300'><rect width='700' height='300' fill='#eef4ff'/><rect x='350' width='350' height='300' fill='#fff6d6'/><path d='M350,18 V282' stroke='#161616' stroke-width='4' stroke-dasharray='12 10'/><g id='tp-rain' stroke='#2f6bff' stroke-width='5' stroke-linecap='round'><path d='M110,172 l-6,18 M150,176 l-6,18 M190,172 l-6,18 M230,176 l-6,18'/></g><g id='tp-cloud'><path d='M90,160 q-36,0 -36,-30 q0,-30 34,-32 q6,-40 52,-40 q34,0 48,28 q8,-6 22,-6 q34,0 36,34 q30,4 30,26 q0,20 -28,20 Z' fill='#ffffff'/><path class='draw' pathLength='1' d='M90,160 q-36,0 -36,-30 q0,-30 34,-32 q6,-40 52,-40 q34,0 48,28 q8,-6 22,-6 q34,0 36,34 q30,4 30,26 q0,20 -28,20 Z'/><path d='M125,104 l20,8 M205,104 l-20,8' stroke='#161616' stroke-width='5' stroke-linecap='round'/><circle cx='138' cy='122' r='6' fill='#161616'/><circle cx='192' cy='122' r='6' fill='#161616'/><path d='M145,147 Q165,134 185,147' fill='none' stroke='#161616' stroke-width='5' stroke-linecap='round'/></g><g id='tp-bolt'><path d='M290,150 l-24,40 h18 l-14,36 l36,-48 h-18 l16,-28 Z' fill='#ffc400' stroke='#161616' stroke-width='3' stroke-linejoin='round'/></g><g id='tp-rays' stroke='#ffc400' stroke-width='10' stroke-linecap='round'><path d='M595,125 L620,125'/><path d='M574.5,174.5 L592.2,192.2'/><path d='M525,195 L525,220'/><path d='M475.5,174.5 L457.8,192.2'/><path d='M455,125 L430,125'/><path d='M475.5,75.5 L457.8,57.8'/><path d='M525,55 L525,30'/><path d='M574.5,75.5 L592.2,57.8'/></g><g id='tp-sun'><circle cx='525' cy='125' r='60' fill='#ffc400' stroke='#161616' stroke-width='5'/><path d='M482,112 H568' stroke='#161616' stroke-width='5' stroke-linecap='round'/><path d='M488,112 h32 v14 q-16,12 -32,0 Z M530,112 h32 v14 q-16,12 -32,0 Z' fill='#161616'/><path d='M500,150 Q525,170 550,150' fill='none' stroke='#161616' stroke-width='5' stroke-linecap='round'/></g><text x='175' y='272' text-anchor='middle' font-family='Patrick Hand' font-size='44' fill='#161616'>WEATHER</text><text x='525' y='272' text-anchor='middle' font-family='Patrick Hand' font-size='44' fill='#161616'>CLIMATE</text></svg>",
+        "motion": [
+          { "el": "#tp-cloud", "rot": 6, "dur": 0.5, "yoyo": true, "origin": "50% 50%" },
+          { "el": "#tp-rain", "y": 24, "dur": 0.4 },
+          { "el": "#tp-bolt", "rot": 10, "dur": 0.25, "yoyo": true, "origin": "50% 0%" },
+          { "el": "#tp-rays", "rot": 45, "dur": 3, "origin": "50% 50%" },
+          { "el": "#tp-sun", "y": 5, "dur": 1.4, "yoyo": true }
+        ]
+      },
+      "sfx": ["check"], "pause": 0.35 },
+    { "text": "auto", "cta": true, "pair": "tip", "react": "point-at-you-2", "sfx": ["cta"] }
+  ],
+  "sfx": {
+    "hook": {
+      "src": "general/sfx/earshot/mallet/flourish.mp3", "volume": 0.32,
+      "layers": [{ "src": "general/sfx/earshot/reverse_swell/ring.mp3", "volume": 0.12, "offset": 0 }]
+    },
+    "pop": [
+      { "src": "general/sfx/earshot/pro_pop/chirp.mp3", "volume": 0.38 },
+      { "src": "general/sfx/earshot/pro_pop/tink.mp3", "volume": 0.36 },
+      { "src": "general/sfx/earshot/ui_pop/wide.mp3", "volume": 0.38 },
+      { "src": "general/sfx/earshot/pro_pop_in/deep.mp3", "volume": 0.4 }
+    ],
+    "tap": [
+      { "src": "general/sfx/earshot/pro_tap/finger.mp3", "volume": 0.28 },
+      { "src": "general/sfx/earshot/tap/knuckle.mp3", "volume": 0.26 },
+      { "src": "general/sfx/uisfx/glass/select.mp3", "volume": 0.26 }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/pluck/kalimba_ring.mp3", "volume": 0.36,
+      "layers": [{ "src": "general/sfx/earshot/drip/bloop.mp3", "volume": 0.16, "offset": 0.05 }]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/zing.mp3", "volume": 0.24,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/whistle.mp3", "volume": 0.12 }]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/cane.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/tight.mp3", "volume": 0.12 }]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/glass/check.mp3", "volume": 0.46,
+      "layers": [{ "src": "general/sfx/earshot/mallet/celesta.mp3", "volume": 0.18, "offset": 0.04 }]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/glass/achievement.mp3", "volume": 0.46,
+      "layers": [
+        { "src": "general/sfx/earshot/pro_notify/ding_2167.mp3", "volume": 0.2, "offset": 0.06 },
+        { "src": "general/sfx/earshot/pro_shimmer/m2.mp3", "volume": 0.18, "offset": 0.12 }
+      ]
+    },
+    "whoosh": [
+      { "src": "general/sfx/earshot/swipe/flick.mp3", "volume": 0.3 },
+      { "src": "general/sfx/earshot/swipe/paper.mp3", "volume": 0.3 }
+    ],
+    "whoosh-big": { "src": "general/sfx/earshot/pro_whoosh_big/windy.mp3", "volume": 0.26 },
+    "riser": { "src": "general/sfx/earshot/riser/swell.mp3", "volume": 0.2 }
+  },
+  "sfxNote": "Library sounds only (uisfx CC0 'glass' + earshot renders), varied from lake-pond-river-stream (zen, drip hook, glock question, gust whoosh, air riser): mallet flourish + ring swell hook, chirp/tink/wide/deep pops, finger/knuckle/glass taps, kalimba ring + bloop question, zing/cane swishes with whistle/tight whooshes, glass check + celesta, flick/paper swipes, windy big whoosh for the tip, swell riser, glass achievement + ding + shimmer CTA."
+}

@@ -35,6 +35,8 @@ Rules:
 - `cards` in script.json: `{label, big, sub, color (blue|orange|green|red|ink), facts: [[label, value], …]}` — 1–3
   facts, ids `#<key>-f1…`; reveal them with `pop` on the spoken word (unrevealed facts pop on the focus line).
   A hand-made mock UI is still possible with `{label, html}` (Joe's name in it, BRAND.md §7).
+- Give the hook and cards motion: card `art` (SVG + `.draw` sketch-in paths) with `motion` loops, an `"intro"` scene
+  behind a hook line, and `art` on the Joe's tip tile — vary the drawings per reel (see CLAUDE.md building blocks).
 - Short lines, one `react` sticker per line picked by meaning (BRAND.md §6); pointing stickers on show/focus lines.
 - SFX: library sounds only (uisfx CC0 + earshot); pick a different uisfx style / earshot family than the previous reel.
 - Finish by running `node hyperframes/<project>/build.mjs` and report the printed line (length, bg, cta). Add the

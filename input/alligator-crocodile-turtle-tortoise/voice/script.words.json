@@ -1,0 +1,538 @@
+{
+  "text": "One tooth gives a crocodile away. This is an alligator. This is a crocodile. How are they different? Alligators have broader, U-shaped snouts. Crocodiles usually have narrower, V-shaped snouts. With its mouth shut, a crocodile's fourth lower tooth still sticks out. An alligator hides its lower teeth. This is a turtle. This is a tortoise. So how do you tell them apart? Turtles often live in water. Tortoises are land-dwellers. A sea turtle can swim 22 miles an hour. A giant tortoise? Under half a mile an hour. At the zoo, I just look for that one tooth. Follow so you learn something new every day!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 38.87,
+  "words": [
+    {
+      "word": "One",
+      "start": 0,
+      "end": 0.174
+    },
+    {
+      "word": "tooth",
+      "start": 0.209,
+      "end": 0.43
+    },
+    {
+      "word": "gives",
+      "start": 0.476,
+      "end": 0.673
+    },
+    {
+      "word": "a",
+      "start": 0.72,
+      "end": 0.755
+    },
+    {
+      "word": "crocodile",
+      "start": 0.801,
+      "end": 1.277
+    },
+    {
+      "word": "away.",
+      "start": 1.312,
+      "end": 1.683
+    },
+    {
+      "word": "This",
+      "start": 1.927,
+      "end": 2.101
+    },
+    {
+      "word": "is",
+      "start": 2.148,
+      "end": 2.229
+    },
+    {
+      "word": "an",
+      "start": 2.276,
+      "end": 2.345
+    },
+    {
+      "word": "alligator.",
+      "start": 2.392,
+      "end": 2.984
+    },
+    {
+      "word": "This",
+      "start": 3.204,
+      "end": 3.379
+    },
+    {
+      "word": "is",
+      "start": 3.425,
+      "end": 3.495
+    },
+    {
+      "word": "a",
+      "start": 3.529,
+      "end": 3.553
+    },
+    {
+      "word": "crocodile.",
+      "start": 3.599,
+      "end": 4.214
+    },
+    {
+      "word": "How",
+      "start": 4.841,
+      "end": 4.957
+    },
+    {
+      "word": "are",
+      "start": 4.992,
+      "end": 5.074
+    },
+    {
+      "word": "they",
+      "start": 5.097,
+      "end": 5.201
+    },
+    {
+      "word": "different?",
+      "start": 5.248,
+      "end": 5.77
+    },
+    {
+      "word": "Alligators",
+      "start": 6.304,
+      "end": 6.803
+    },
+    {
+      "word": "have",
+      "start": 6.838,
+      "end": 6.966
+    },
+    {
+      "word": "broader,",
+      "start": 7.012,
+      "end": 7.384
+    },
+    {
+      "word": "U-shaped",
+      "start": 7.43,
+      "end": 7.86
+    },
+    {
+      "word": "snouts.",
+      "start": 7.906,
+      "end": 8.417
+    },
+    {
+      "word": "Crocodiles",
+      "start": 8.707,
+      "end": 9.218
+    },
+    {
+      "word": "usually",
+      "start": 9.288,
+      "end": 9.613
+    },
+    {
+      "word": "have",
+      "start": 9.659,
+      "end": 9.845
+    },
+    {
+      "word": "narrower,",
+      "start": 9.903,
+      "end": 10.472
+    },
+    {
+      "word": "V-shaped",
+      "start": 10.762,
+      "end": 11.285
+    },
+    {
+      "word": "snouts.",
+      "start": 11.331,
+      "end": 11.831
+    },
+    {
+      "word": "With",
+      "start": 12.365,
+      "end": 12.527
+    },
+    {
+      "word": "its",
+      "start": 12.562,
+      "end": 12.678
+    },
+    {
+      "word": "mouth",
+      "start": 12.725,
+      "end": 12.945
+    },
+    {
+      "word": "shut,",
+      "start": 13.015,
+      "end": 13.351
+    },
+    {
+      "word": "a",
+      "start": 13.421,
+      "end": 13.479
+    },
+    {
+      "word": "crocodile's",
+      "start": 13.549,
+      "end": 14.036
+    },
+    {
+      "word": "fourth",
+      "start": 14.106,
+      "end": 14.419
+    },
+    {
+      "word": "lower",
+      "start": 14.57,
+      "end": 14.814
+    },
+    {
+      "word": "tooth",
+      "start": 14.861,
+      "end": 15.104
+    },
+    {
+      "word": "still",
+      "start": 15.255,
+      "end": 15.487
+    },
+    {
+      "word": "sticks",
+      "start": 15.534,
+      "end": 15.789
+    },
+    {
+      "word": "out.",
+      "start": 15.836,
+      "end": 16.138
+    },
+    {
+      "word": "An",
+      "start": 16.857,
+      "end": 16.985
+    },
+    {
+      "word": "alligator",
+      "start": 17.032,
+      "end": 17.45
+    },
+    {
+      "word": "hides",
+      "start": 17.508,
+      "end": 17.763
+    },
+    {
+      "word": "its",
+      "start": 17.798,
+      "end": 17.914
+    },
+    {
+      "word": "lower",
+      "start": 17.972,
+      "end": 18.193
+    },
+    {
+      "word": "teeth.",
+      "start": 18.239,
+      "end": 18.645
+    },
+    {
+      "word": "This",
+      "start": 19.493,
+      "end": 19.667
+    },
+    {
+      "word": "is",
+      "start": 19.713,
+      "end": 19.795
+    },
+    {
+      "word": "a",
+      "start": 19.841,
+      "end": 19.876
+    },
+    {
+      "word": "turtle.",
+      "start": 19.922,
+      "end": 20.34
+    },
+    {
+      "word": "This",
+      "start": 20.631,
+      "end": 20.793
+    },
+    {
+      "word": "is",
+      "start": 20.84,
+      "end": 20.909
+    },
+    {
+      "word": "a",
+      "start": 20.956,
+      "end": 20.991
+    },
+    {
+      "word": "tortoise.",
+      "start": 21.037,
+      "end": 21.583
+    },
+    {
+      "word": "So",
+      "start": 22.303,
+      "end": 22.43
+    },
+    {
+      "word": "how",
+      "start": 22.488,
+      "end": 22.581
+    },
+    {
+      "word": "do",
+      "start": 22.616,
+      "end": 22.662
+    },
+    {
+      "word": "you",
+      "start": 22.697,
+      "end": 22.767
+    },
+    {
+      "word": "tell",
+      "start": 22.813,
+      "end": 22.988
+    },
+    {
+      "word": "them",
+      "start": 23.034,
+      "end": 23.138
+    },
+    {
+      "word": "apart?",
+      "start": 23.185,
+      "end": 23.603
+    },
+    {
+      "word": "Turtles",
+      "start": 23.94,
+      "end": 24.311
+    },
+    {
+      "word": "often",
+      "start": 24.381,
+      "end": 24.625
+    },
+    {
+      "word": "live",
+      "start": 24.671,
+      "end": 24.833
+    },
+    {
+      "word": "in",
+      "start": 24.868,
+      "end": 24.926
+    },
+    {
+      "word": "water.",
+      "start": 24.996,
+      "end": 25.449
+    },
+    {
+      "word": "Tortoises",
+      "start": 26.076,
+      "end": 26.529
+    },
+    {
+      "word": "are",
+      "start": 26.575,
+      "end": 26.703
+    },
+    {
+      "word": "land-dwellers.",
+      "start": 26.749,
+      "end": 27.573
+    },
+    {
+      "word": "A",
+      "start": 27.91,
+      "end": 27.968
+    },
+    {
+      "word": "sea",
+      "start": 28.038,
+      "end": 28.189
+    },
+    {
+      "word": "turtle",
+      "start": 28.235,
+      "end": 28.479
+    },
+    {
+      "word": "can",
+      "start": 28.502,
+      "end": 28.618
+    },
+    {
+      "word": "swim",
+      "start": 28.653,
+      "end": 28.839
+    },
+    {
+      "word": "22",
+      "start": 28.897,
+      "end": 29.234
+    },
+    {
+      "word": "miles",
+      "start": 29.292,
+      "end": 29.524
+    },
+    {
+      "word": "an",
+      "start": 29.559,
+      "end": 29.629
+    },
+    {
+      "word": "hour.",
+      "start": 29.663,
+      "end": 30.035
+    },
+    {
+      "word": "A",
+      "start": 30.569,
+      "end": 30.65
+    },
+    {
+      "word": "giant",
+      "start": 30.755,
+      "end": 31.068
+    },
+    {
+      "word": "tortoise?",
+      "start": 31.103,
+      "end": 31.626
+    },
+    {
+      "word": "Under",
+      "start": 31.765,
+      "end": 32.009
+    },
+    {
+      "word": "half",
+      "start": 32.09,
+      "end": 32.299
+    },
+    {
+      "word": "a",
+      "start": 32.357,
+      "end": 32.38
+    },
+    {
+      "word": "mile",
+      "start": 32.427,
+      "end": 32.636
+    },
+    {
+      "word": "an",
+      "start": 32.67,
+      "end": 32.729
+    },
+    {
+      "word": "hour.",
+      "start": 32.775,
+      "end": 33.146
+    },
+    {
+      "word": "At",
+      "start": 33.681,
+      "end": 33.82
+    },
+    {
+      "word": "the",
+      "start": 33.855,
+      "end": 33.924
+    },
+    {
+      "word": "zoo,",
+      "start": 33.971,
+      "end": 34.342
+    },
+    {
+      "word": "I",
+      "start": 34.458,
+      "end": 34.505
+    },
+    {
+      "word": "just",
+      "start": 34.609,
+      "end": 34.772
+    },
+    {
+      "word": "look",
+      "start": 34.818,
+      "end": 34.981
+    },
+    {
+      "word": "for",
+      "start": 35.027,
+      "end": 35.097
+    },
+    {
+      "word": "that",
+      "start": 35.143,
+      "end": 35.271
+    },
+    {
+      "word": "one",
+      "start": 35.352,
+      "end": 35.573
+    },
+    {
+      "word": "tooth.",
+      "start": 35.608,
+      "end": 36.037
+    },
+    {
+      "word": "Follow",
+      "start": 36.757,
+      "end": 37.071
+    },
+    {
+      "word": "so",
+      "start": 37.117,
+      "end": 37.198
+    },
+    {
+      "word": "you",
+      "start": 37.256,
+      "end": 37.326
+    },
+    {
+      "word": "learn",
+      "start": 37.384,
+      "end": 37.547
+    },
+    {
+      "word": "something",
+      "start": 37.593,
+      "end": 37.883
+    },
+    {
+      "word": "new",
+      "start": 37.941,
+      "end": 38.081
+    },
+    {
+      "word": "every",
+      "start": 38.127,
+      "end": 38.325
+    },
+    {
+      "word": "day!",
+      "start": 38.371,
+      "end": 38.87
+    }
+  ]
+}
