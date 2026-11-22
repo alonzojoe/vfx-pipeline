@@ -36,8 +36,8 @@ YouTube pays for original, authored content and refuses "content that looks like
 "gives the impression of mass production" (inauthentic content policy, clarified Jul 2026). So:
 - **New topic every video** — log it in `TOPICS.md` and never repeat a topic or pair.
 - **Fixed spine, varied reel**: every reel is two comparisons (BRAND.md §2), so never let it become "only the nouns
-  change" — that's what the July 2026 "generic, repetitive, template-based" wording targets. Change the hook, the
-  question wording, card colours/symbols, stickers, background, ending and CTA vs the previous reel (`TOPICS.md`).
+  change" — that's what the July 2026 "generic, repetitive, template-based" wording targets. Change the hook, card
+  colours/symbols/art, stickers, background, ending and CTA vs the previous reel (`TOPICS.md`).
 - **A real example per comparison** (numbers on the cards, checked) — knowledge, not just definitions.
 - **Add Joe's own angle** in each video: one line with his take, a personal moment or a memory trick ("Joe's tip").
 - **Education, not advice**: finance/health/legal = explain terms & concepts only. Never "you should buy/invest/take…".
@@ -145,8 +145,9 @@ YouTube pays for original, authored content and refuses "content that looks like
 - SFX must sit UNDER the voice (adds ≤ ~2 dB at its onset). Rotate the uisfx style / earshot family between videos.
 - Note: Joe's 6 originals have unknown sources (Content ID risk for YPP) — kept in the older reels only.
 
-## Joe's name in every mock UI — every reel
-- Any bank card, account, app screen, invoice, pay stub, receipt, chat or form drawn in a reel uses Joe's name —
+## Joe's name — only in mock UIs, only when the topic needs one
+- Comparison cards (general topics) carry no names — don't spend time adding any. Only when a reel draws something
+  personal — a bank card, account, app screen, invoice, pay stub, receipt, chat or form — it uses Joe's name —
   never "You", "User", "John Doe" or blank: cards print `JOE`, accounts say "Joe's Account" / "Joe's Checking" /
   "Joe's Savings" / "Joe's Credit", balances "Joe owes $…", invoices "Bill to: Joe", pay stubs "Employee: Joe",
   phone/bank apps "Joe's Account". Companies/banks stay fictional (MyBank, Acme Studio/Inc.).

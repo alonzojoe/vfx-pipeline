@@ -12,12 +12,12 @@ Brand rules (fonts, colors, layout, sound, CTA) live in `BRAND.md`; every topic 
 
 ### The format — two comparisons per reel
 Any topic, general knowledge (Celsius vs Fahrenheit, kilometers vs miles, weather vs climate…). Per comparison:
-**"This is X." → "This is Y."** (cards pop in) → **a difference question** → **one line about each** → **a real example
+**"This is X." → "This is Y."** (cards pop in) → **"What's the difference?"** → **one line about each** → **a real example
 with numbers** (the facts pop on the cards as they're said). Then **one line in Joe's own voice** (a take or a memory
 trick, shown as a "Joe's tip" tile) and a **follow or like CTA** (never the same type twice in a row).
 
 To stay monetizable (YouTube's July 2026 "repetitive / template-based" rule) the spine stays fixed but every reel changes
-the hook, the question wording, card colours, stickers, background, SFX style, Joe's line and the CTA — and never
+the hook, card colours, stickers, background, SFX style, Joe's line and the CTA — and never
 repeats a topic or pair from `TOPICS.md`. Education only, never advice. Details: `BRAND.md` §1–2, `CLAUDE.md` (YPP).
 
 **Voice:** ElevenLabs **Liam** at 1.12× (a default voice — works on the free plan). Library voices (e.g. Brian S) and
