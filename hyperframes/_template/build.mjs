@@ -228,6 +228,19 @@ pairIds.forEach((pid, pi) => {
   }
 });
 
+// hook scene: script.json "intro": {art: "<svg viewBox='0 0 950 630'>…", motion: [...]} shows a big animated panel
+// during the "intro" lines, so the first second is motion, not text only (viewers swipe away from a bare caption)
+const introLines = lines.filter((l) => l.pair === "intro");
+if (S.intro?.art && introLines.length) {
+  const start = introLines[0].start, end = introLines[introLines.length - 1].end;
+  els.push(`<div id="intro-scene" class="clip intro-scene" data-start="${start}" data-duration="${r3(end - start)}" data-track-index="1">${S.intro.art}</div>`);
+  tl.push(`tl.fromTo("#intro-scene", {scale:0.7, opacity:0, rotation:-3}, {scale:1, opacity:1, rotation:0, duration:0.4, ease:"back.out(1.8)"}, ${start});`);
+  tl.push(`tl.fromTo("#intro-scene .draw", {strokeDasharray:1, strokeDashoffset:1}, {strokeDashoffset:0, duration:0.7, stagger:0.15, ease:"power2.out"}, ${r3(start + 0.15)});`);
+  for (const m of S.intro.motion || []) tl.push(loopMotion(m, start, end));
+  tl.push(`tl.to("#intro-scene", {scale:0.75, opacity:0, y:-40, duration:0.3, ease:"power2.in"}, ${r3(end - 0.3)});`);
+  cue("whoosh", end - 0.34);
+}
+
 // focus / dim / ring per line
 lines.forEach((l) => {
   const P = S.pairs[l.pair];
@@ -621,7 +634,10 @@ const html = `<!doctype html>
       .g-big { font: 700 150px/1 "Fredoka", sans-serif; color: var(--c); white-space: nowrap; }
       .g-top.art { height: 290px; }
       .g-art svg { display: block; width: 420px; height: 260px; overflow: hidden; }
-      .g-art .draw { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .g-art .draw, .intro-scene .draw { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .intro-scene { position: absolute; left: 60px; top: 230px; width: 960px; height: 640px; border: 5px solid var(--ink); border-radius: 30px;
+                     box-shadow: 10px 10px 0 var(--ink); overflow: hidden; background: #fff; transform-origin: 50% 60%; z-index: 2; }
+      .intro-scene svg { display: block; width: 950px; height: 630px; overflow: hidden; }
       .g-sub { font: 600 27px/1.2 "Fredoka", sans-serif; color: var(--mute); margin-top: 10px; text-align: center; padding: 0 16px; }
       .g-facts { padding: 6px 24px; }
       .g-fact { padding: 10px 8px 8px; border-bottom: 2px solid #f0f0f0; transform-origin: 50% 50%; border-radius: 10px; }
