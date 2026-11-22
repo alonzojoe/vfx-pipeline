@@ -4,6 +4,7 @@ import type { RunEvent, RunKind } from '../../shared/types'
 import { loginShell, q } from './shell'
 import { logTopicPick } from './projects'
 import { getFps } from './settings'
+import { notifyRunEnd } from './notify'
 
 const COMMANDS: Record<RunKind, (p: string) => string> = {
   // FPS = the export frame rate chosen next to Export (render.sh passes it to HyperFrames)
@@ -40,6 +41,7 @@ export function startRun(win: BrowserWindow, root: string, kind: RunKind, projec
     runs.delete(runId)
     if (code === 0 && (kind === 'build' || kind === 'voice' || kind === 'make')) logTopicPick(root, project, log)
     send({ runId, type: 'exit', code })
+    notifyRunEnd(win, root, kind, project, code)
   })
   return runId
 }
