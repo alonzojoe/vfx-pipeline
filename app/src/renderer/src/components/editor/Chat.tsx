@@ -15,7 +15,7 @@ const STARTERS = [
   'Suggest the next 5 topics we haven’t done (check TOPICS.md)'
 ]
 
-type Build = { renamed?: string; script: boolean; cards: boolean; done: boolean; ok: boolean }
+type Build = { renamed?: string; script: boolean; done: boolean; ok: boolean }
 export type VoiceState = 'todo' | 'doing' | 'done' | 'failed'
 
 type Props = {
@@ -38,8 +38,8 @@ type Props = {
 function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; preview: VoiceState }): JSX.Element {
   const steps: [string, boolean, boolean][] = [
     [b.renamed ? `Named ${b.renamed}` : 'Naming the reel from your topic', !!b.renamed, !b.renamed],
-    ['Script → lines, pairs, recap, CTA', b.script, !!b.renamed && !b.script],
-    ['Cards with your name', b.cards, b.script && !b.cards],
+    // the cards live in script.json now, so they're written together with the script (no separate, slow step)
+    ['Script + cards → two comparisons, facts, tip, CTA', b.script, !!b.renamed && !b.script],
     ['Preview built', preview === 'done', b.done && preview === 'doing'],
     ['Voice — ElevenLabs', voice === 'done', b.done && voice === 'doing'],
     ['Timeline synced to the voice', voice === 'done', false]
@@ -103,8 +103,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
             (b) =>
               b && {
                 ...b,
-                script: b.script || (/Write|Edit/.test(e.name) && d.includes('script.json')),
-                cards: b.cards || (/Edit|Write/.test(e.name) && d.includes('build.mjs'))
+                script: b.script || (/Write|Edit/.test(e.name) && d.includes('script.json'))
               }
           )
         }
@@ -138,7 +137,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
     setText('')
     setBusy(true)
     setMsgs((ms) => [...ms, { role: 'user', parts: [{ kind: 'text', text: m }] }])
-    if (draft) setBuild({ script: false, cards: false, done: false, ok: false })
+    if (draft) setBuild({ script: false, done: false, ok: false })
     await window.api.chat(m, project, fresh || msgs.length === 0)
   }
 
@@ -167,8 +166,8 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               <div className="flex flex-col gap-2 leading-relaxed">
                 <div className="font-semibold">Created {project} · paste your script</div>
                 <p className="text-foreground">
-                  Paste it like you always do (with the [0–3s] parts, or just the lines). I'll name the reel from the topic, keep your words, add the
-                  cards with your name, pick stickers and sounds — then the app makes the voice with ElevenLabs and builds the timeline.
+                  Paste it like you always do (with the [0–3s] parts, or just the lines). I'll name the reel from the topic, keep your words, make two
+                  comparisons with fact cards, pick stickers and sounds — then the app makes the voice with ElevenLabs and builds the timeline.
                 </p>
                 <p className="text-xs text-muted-foreground">No script yet? Type a topic, e.g. "revenue vs profit", and I'll write one in your style.</p>
               </div>
