@@ -33,9 +33,10 @@ Per comparison (×2):
 Then:
 5. **One line from Joe** — his own take, a personal moment or a memory trick ("I always mix these up when I travel" →
    "Joe's tip: miles × 1.6 ≈ km" tile). This is the "own perspective" YouTube looks for.
-6. **CTA, randomized per reel**: **follow** ("Follow for more everyday knowledge!"), **like** or **save**. Never the
-   same CTA type as the previous reel. In script.json: `{"text": "auto", "cta": true}` — build.mjs picks the type +
-   wording (force one with `"ctaType": "save"`) and an icon pops beside the handle. Log `cta: <type>` in `TOPICS.md`.
+6. **CTA: follow or like** (no "save" — follows and likes are what grow the channel). **follow** ("Follow for more
+   quick comparisons!") or **like** ("Hit like if this made sense!"), never the same type as the previous reel, wording
+   rotated from 4 variants each. In script.json: `{"text": "auto", "cta": true}` — build.mjs picks the type + wording
+   (force one with `"ctaType": "like"`) and a + / thumbs-up icon pops beside the handle. Log `cta: <type>` in `TOPICS.md`.
 
 What changes every reel (never the same as the previous one — check `TOPICS.md`):
 - **Hook**: "This is X. This is Y." / a question ("Celsius or Fahrenheit?") / a surprising number ("Water boils at

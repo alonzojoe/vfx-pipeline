@@ -59,7 +59,7 @@ Nothing gets published (or sent to Joe as "final") until this passes.
 - [ ] New topic and a different format/hook/background from the last video (`TOPICS.md` updated).
 - [ ] Education, not advice. Facts double-checked (numbers on the cards add up, e.g. 3,000 − 450 − 120 − 80 = 2,350).
 - [ ] Hook in the first 2s, clear payoff, CTA at the end.
-- [ ] CTA type (follow / like / save) differs from the previous reel, its icon pops beside the handle, and
+- [ ] CTA is follow or like (never save), the other type than the previous reel, its icon pops beside the handle, and
       `TOPICS.md` logs it (`bg: … · cta: <type>`).
 
 ## Export
