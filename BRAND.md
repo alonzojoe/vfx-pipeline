@@ -25,7 +25,7 @@ repetitive, or template-based" videos — a reel where only the nouns change is 
 
 Per comparison (×2):
 1. **"This is X." → "This is Y."** — each card pops in as it's named (`show` left/right).
-2. **A difference question** — "What's the difference?" (cards wiggle, "?" marks).
+2. **"What's the difference?"** — always exactly these words, in both comparisons (cards wiggle, "?" marks).
 3. **One line about X, one line about Y** — short, plain, correct (`focus` + orange arrow).
 4. **One real example with numbers** — "Water boils at 100°C, which is 212°F." / "A 5K race is about 3.1 miles."
    The numbers are on the cards and pulse/pop as they're said. Math and facts double-checked.
@@ -41,7 +41,6 @@ Then:
 What changes every reel (never the same as the previous one — check `TOPICS.md`):
 - **Hook**: "This is X. This is Y." / a question ("Celsius or Fahrenheit?") / a surprising number ("Water boils at
   212 degrees?!") / "Most people get this wrong".
-- **Question wording**: "What's the difference?" / "So which is which?" / "How are they different?"
 - **Look**: card colours + symbols, background, stickers, Joe's line, ending, CTA, SFX palette.
 
 Writing: short lines spoken like a friend, not a textbook; pauses only on big beats (after the question, at the
@@ -91,8 +90,10 @@ No other colors for brand elements. No gradients except inside mock bank cards.
   | CTA | `point-at-you`, `point-at-you-2` |
 - Stickers pop in with an elastic squash; no drop-shadow, no boxy edges, no doodle arrows (one orange arrow only).
 
-## 7. Mock UIs
-- Always **Joe's name**: "JOE" on cards, "Joe's Account / Checking / Savings / Credit", "Joe's Shop",
+## 7. Mock UIs — only when the topic needs one
+- Comparison cards are plain data (symbol, sub line, facts) and carry **no names**. A hand-made mock UI only makes sense
+  when the topic is about something personal — a bank card, account, invoice, receipt, pay stub, app screen.
+- In those mock UIs use **Joe's name**: "JOE" on cards, "Joe's Account / Checking / Savings / Credit", "Joe's Shop",
   "Joe owes", "Bill to: Joe", "Employee: Joe", "What Joe keeps". Never "You"/"User"/John Doe.
 - Brands stay fictional: MyBank, Joe's Shop, Acme Studio.
 - Show the idea, don't just label it: balances change, rows pop in on the spoken word, numbers flash when said.
@@ -119,6 +120,6 @@ No other colors for brand elements. No gradients except inside mock bank cards.
 
 ## 10. Never
 - Doubled arrows, rings around cards, text on text, floating doodles, leftover elements after their beat.
-- The same background, hook, question wording or CTA type as the previous reel. A reel where only the nouns changed.
+- The same background, hook or CTA type as the previous reel. Any question other than "What's the difference?". A reel where only the nouns changed.
 - Unlicensed music/SFX. Advice instead of education. Generic names in mock UIs.
 - More than one video in `output/<topic>/` (only `<topic>-final_edit.mp4` / `<topic>-final-edit.mp4`).

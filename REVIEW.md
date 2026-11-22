@@ -31,8 +31,9 @@ Nothing gets published (or sent to Joe as "final") until this passes.
       between y 1000 and 1700.
 - [ ] Channel handle `@knowledgeby` (black) + `joe` (orange) is on EVERY frame (incl. the first = thumbnail), same spot
       (y ≈1635–1719, centered under the sticker), plain text in Patrick Hand: no pill/box/avatar, nothing overlapping it.
-- [ ] Mock UIs use Joe's name, never "You"/"User"/generic: bank cards say JOE, accounts "Joe's Account" /
-      "Joe's Checking" / "Joe's Savings", "Joe owes …", invoices "Bill to: Joe", pay stubs "Employee: Joe".
+- [ ] Cards carry no names; only a mock UI of something personal (bank card, account, invoice, pay stub) uses Joe's
+      name ("JOE", "Joe's Account"), never "You"/"User"/generic.
+- [ ] Both questions are exactly "What's the difference?".
 - [ ] Background fills the frame edge to edge (no strips, borders or letterboxing), and its texture doesn't fight the text.
 - [ ] No leftover elements: a stamp, notification, badge, "?" or sparkle hanging around after its beat ends.
 - [ ] No text on top of other text (floating numbers, badges, captions over card text).
