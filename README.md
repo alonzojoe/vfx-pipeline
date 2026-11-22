@@ -58,6 +58,8 @@ A CapCut-style editor on top of this pipeline — no Terminal needed:
   (full screen, Esc to exit), **timeline** you can drag clips on (snaps to words).
 - **Export** at **30 or 60 fps** with a **progress bar** (Preparing → Rendering frames → Encoding → Balancing loudness;
   the log sits behind "Show details") → small full-HD MP4, encoded once → automatic review (loudness, dead air, every frame).
+- **macOS notifications**: "Reel ready to watch" when a new reel's voice and preview are done, "Export finished" when
+  the video is exported (click it to see the file in Finder) — so you can switch away while it works.
 - Light / dark / follow macOS; the app icon follows Tahoe's Icon & widget style. In `npm run dev` it's named
   **vfx Studio** in the menu bar, Dock and ⌘-Tab (not "Electron").
 
