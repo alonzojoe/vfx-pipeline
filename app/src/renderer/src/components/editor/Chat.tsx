@@ -15,7 +15,7 @@ const STARTERS = [
   'Suggest the next 5 topics we haven’t done (check TOPICS.md)'
 ]
 
-type Build = { renamed?: string; script: boolean; cards: boolean; done: boolean; ok: boolean }
+type Build = { renamed?: string; script: boolean; done: boolean; ok: boolean; stopped?: boolean }
 export type VoiceState = 'todo' | 'doing' | 'done' | 'failed'
 
 type Props = {
@@ -30,22 +30,35 @@ type Props = {
   onRenamed: (to: string) => void
   /** newReel = this reply was building a "+ New reel"; edited = Claude changed files (→ the app rebuilds) */
   onDone: (ok: boolean, newReel: boolean, edited: boolean) => void
+  /** Stop on the new-reel checklist: stops the chat and the preview / voice run it started */
+  onStop: () => void
   /** bumps on every "+ New reel" → fresh conversation */
   newKey: number
 }
 
-/** New-reel checklist shown while Claude builds it and the app makes the voice. */
-function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; preview: VoiceState }): JSX.Element {
+/** New-reel checklist shown while Claude builds it and the app makes the voice — with a Stop button while it works. */
+function BuildChecklist({ b, voice, preview, onStop }: { b: Build; voice: VoiceState; preview: VoiceState; onStop: () => void }): JSX.Element {
+  // the cards live in script.json now, so they're written together with the script (no separate, slow step)
+  const live = !b.stopped
   const steps: [string, boolean, boolean][] = [
-    [b.renamed ? `Named ${b.renamed}` : 'Naming the reel from your topic', !!b.renamed, !b.renamed],
-    ['Script → lines, pairs, recap, CTA', b.script, !!b.renamed && !b.script],
-    ['Cards with your name', b.cards, b.script && !b.cards],
-    ['Preview built', preview === 'done', b.done && preview === 'doing'],
-    ['Voice — ElevenLabs', voice === 'done', b.done && voice === 'doing'],
+    [b.renamed ? `Named ${b.renamed}` : 'Naming the reel from your topic', !!b.renamed, live && !b.renamed],
+    ['Script + cards → two comparisons, facts, tip, CTA', b.script, live && !!b.renamed && !b.script],
+    ['Preview built', preview === 'done', live && b.done && preview === 'doing'],
+    ['Voice — ElevenLabs', voice === 'done', live && b.done && voice === 'doing'],
     ['Timeline synced to the voice', voice === 'done', false]
   ]
+  const working = live && (!b.done || preview === 'doing' || voice === 'doing')
   return (
     <div className="flex flex-col gap-2 rounded-xl border bg-surface p-3">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-semibold text-muted-foreground">{b.stopped ? 'Stopped' : working ? 'Making your reel…' : 'New reel'}</span>
+        {working && (
+          <Button size="sm" variant="outline" className="h-7 gap-1.5 px-2.5 text-xs" onClick={onStop} aria-label="Stop making this reel">
+            <Square className="h-3 w-3 fill-current" />
+            Stop
+          </Button>
+        )}
+      </div>
       {steps.map(([label, ok, doing]) => (
         <div key={label} className={cn('flex items-center gap-2 text-sm', ok ? 'text-foreground' : doing ? 'text-foreground' : 'text-muted-foreground')}>
           <span
@@ -61,11 +74,12 @@ function BuildChecklist({ b, voice, preview }: { b: Build; voice: VoiceState; pr
       ))}
       {preview === 'failed' && <div className="text-sm text-red-300">The preview build failed — see the log; ask me to fix it.</div>}
       {voice === 'failed' && <div className="text-sm text-red-300">The voice step failed — see the log, then press Export or ask me to fix it.</div>}
+      {b.stopped && <div className="text-sm text-muted-foreground">Stopped. Ask me to continue, or paste the script again.</div>}
     </div>
   )
 }
 
-export const Chat = memo(function Chat({ project, available, draft, voice, preview, onRenamed, onDone, newKey }: Props): JSX.Element {
+export const Chat = memo(function Chat({ project, available, draft, voice, preview, onRenamed, onDone, onStop, newKey }: Props): JSX.Element {
   const [msgs, setMsgs] = useState<Msg[]>([])
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
@@ -103,8 +117,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
             (b) =>
               b && {
                 ...b,
-                script: b.script || (/Write|Edit/.test(e.name) && d.includes('script.json')),
-                cards: b.cards || (/Edit|Write/.test(e.name) && d.includes('build.mjs'))
+                script: b.script || (/Write|Edit/.test(e.name) && d.includes('script.json'))
               }
           )
         }
@@ -138,7 +151,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
     setText('')
     setBusy(true)
     setMsgs((ms) => [...ms, { role: 'user', parts: [{ kind: 'text', text: m }] }])
-    if (draft) setBuild({ script: false, cards: false, done: false, ok: false })
+    if (draft) setBuild({ script: false, done: false, ok: false })
     await window.api.chat(m, project, fresh || msgs.length === 0)
   }
 
@@ -167,8 +180,8 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               <div className="flex flex-col gap-2 leading-relaxed">
                 <div className="font-semibold">Created {project} · paste your script</div>
                 <p className="text-foreground">
-                  Paste it like you always do (with the [0–3s] parts, or just the lines). I'll name the reel from the topic, keep your words, add the
-                  cards with your name, pick stickers and sounds — then the app makes the voice with ElevenLabs and builds the timeline.
+                  Paste it like you always do (with the [0–3s] parts, or just the lines). I'll name the reel from the topic, keep your words, make two
+                  comparisons with fact cards, pick stickers and sounds — then the app makes the voice with ElevenLabs and builds the timeline.
                 </p>
                 <p className="text-xs text-muted-foreground">No script yet? Type a topic, e.g. "revenue vs profit", and I'll write one in your style.</p>
               </div>
@@ -227,7 +240,18 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               </div>
             )
           )}
-          {build && <BuildChecklist b={build} voice={voice} preview={preview} />}
+          {build && (
+            <BuildChecklist
+              b={build}
+              voice={voice}
+              preview={preview}
+              onStop={() => {
+                setBuild((b) => b && { ...b, stopped: true })
+                setBusy(false)
+                onStop()
+              }}
+            />
+          )}
           {busy && msgs[msgs.length - 1]?.role === 'user' && (
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <Loader2 className="h-3 w-3 animate-spin text-primary" /> starting…
