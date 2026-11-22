@@ -1,0 +1,603 @@
+{
+  "text": "Earth is closest to the sun in January. So why is it cold? This is weather. This is climate. How are they different? Weather is right now. It changes by the hour. Climate is the average weather over 30 years. In 2018, it snowed in the Sahara. That's weather. Still a desert? That's climate. This is a season. This is temperature. Aren't they the same? A season is a time of year, caused by Earth's tilt. Temperature is how hot or cold it is. In January, Earth is 5 million kilometers closer to the sun. But the north tilts away. Temperatures drop. My trick: weather is your mood. Climate is your personality. Save this video so you don't forget!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 43.421,
+  "words": [
+    {
+      "word": "Earth",
+      "start": 0,
+      "end": 0.232
+    },
+    {
+      "word": "is",
+      "start": 0.279,
+      "end": 0.36
+    },
+    {
+      "word": "closest",
+      "start": 0.406,
+      "end": 0.731
+    },
+    {
+      "word": "to",
+      "start": 0.766,
+      "end": 0.813
+    },
+    {
+      "word": "the",
+      "start": 0.859,
+      "end": 0.929
+    },
+    {
+      "word": "sun",
+      "start": 0.975,
+      "end": 1.126
+    },
+    {
+      "word": "in",
+      "start": 1.173,
+      "end": 1.231
+    },
+    {
+      "word": "January.",
+      "start": 1.277,
+      "end": 1.881
+    },
+    {
+      "word": "So",
+      "start": 2.171,
+      "end": 2.299
+    },
+    {
+      "word": "why",
+      "start": 2.345,
+      "end": 2.485
+    },
+    {
+      "word": "is",
+      "start": 2.531,
+      "end": 2.601
+    },
+    {
+      "word": "it",
+      "start": 2.647,
+      "end": 2.705
+    },
+    {
+      "word": "cold?",
+      "start": 2.752,
+      "end": 3.181
+    },
+    {
+      "word": "This",
+      "start": 3.715,
+      "end": 3.878
+    },
+    {
+      "word": "is",
+      "start": 3.924,
+      "end": 3.994
+    },
+    {
+      "word": "weather.",
+      "start": 4.052,
+      "end": 4.47
+    },
+    {
+      "word": "This",
+      "start": 4.714,
+      "end": 4.876
+    },
+    {
+      "word": "is",
+      "start": 4.923,
+      "end": 4.992
+    },
+    {
+      "word": "climate.",
+      "start": 5.039,
+      "end": 5.55
+    },
+    {
+      "word": "How",
+      "start": 6.084,
+      "end": 6.246
+    },
+    {
+      "word": "are",
+      "start": 6.304,
+      "end": 6.42
+    },
+    {
+      "word": "they",
+      "start": 6.455,
+      "end": 6.594
+    },
+    {
+      "word": "different?",
+      "start": 6.653,
+      "end": 7.175
+    },
+    {
+      "word": "Weather",
+      "start": 7.802,
+      "end": 8.081
+    },
+    {
+      "word": "is",
+      "start": 8.127,
+      "end": 8.197
+    },
+    {
+      "word": "right",
+      "start": 8.255,
+      "end": 8.429
+    },
+    {
+      "word": "now.",
+      "start": 8.464,
+      "end": 8.824
+    },
+    {
+      "word": "It",
+      "start": 9.218,
+      "end": 9.334
+    },
+    {
+      "word": "changes",
+      "start": 9.381,
+      "end": 9.706
+    },
+    {
+      "word": "by",
+      "start": 9.752,
+      "end": 9.834
+    },
+    {
+      "word": "the",
+      "start": 9.88,
+      "end": 9.95
+    },
+    {
+      "word": "hour.",
+      "start": 9.996,
+      "end": 10.426
+    },
+    {
+      "word": "Climate",
+      "start": 11.053,
+      "end": 11.413
+    },
+    {
+      "word": "is",
+      "start": 11.447,
+      "end": 11.529
+    },
+    {
+      "word": "the",
+      "start": 11.575,
+      "end": 11.656
+    },
+    {
+      "word": "average",
+      "start": 11.738,
+      "end": 12.109
+    },
+    {
+      "word": "weather",
+      "start": 12.144,
+      "end": 12.399
+    },
+    {
+      "word": "over",
+      "start": 12.469,
+      "end": 12.643
+    },
+    {
+      "word": "30",
+      "start": 12.725,
+      "end": 12.945
+    },
+    {
+      "word": "years.",
+      "start": 13.003,
+      "end": 13.456
+    },
+    {
+      "word": "In",
+      "start": 13.99,
+      "end": 14.095
+    },
+    {
+      "word": "2018,",
+      "start": 14.153,
+      "end": 14.687
+    },
+    {
+      "word": "it",
+      "start": 14.721,
+      "end": 14.791
+    },
+    {
+      "word": "snowed",
+      "start": 14.849,
+      "end": 15.139
+    },
+    {
+      "word": "in",
+      "start": 15.162,
+      "end": 15.22
+    },
+    {
+      "word": "the",
+      "start": 15.243,
+      "end": 15.313
+    },
+    {
+      "word": "Sahara.",
+      "start": 15.36,
+      "end": 16.021
+    },
+    {
+      "word": "That's",
+      "start": 16.358,
+      "end": 16.579
+    },
+    {
+      "word": "weather.",
+      "start": 16.625,
+      "end": 17.043
+    },
+    {
+      "word": "Still",
+      "start": 17.67,
+      "end": 17.891
+    },
+    {
+      "word": "a",
+      "start": 17.925,
+      "end": 17.949
+    },
+    {
+      "word": "desert?",
+      "start": 17.995,
+      "end": 18.448
+    },
+    {
+      "word": "That's",
+      "start": 19.075,
+      "end": 19.307
+    },
+    {
+      "word": "climate.",
+      "start": 19.365,
+      "end": 19.887
+    },
+    {
+      "word": "This",
+      "start": 20.282,
+      "end": 20.445
+    },
+    {
+      "word": "is",
+      "start": 20.491,
+      "end": 20.561
+    },
+    {
+      "word": "a",
+      "start": 20.607,
+      "end": 20.631
+    },
+    {
+      "word": "season.",
+      "start": 20.689,
+      "end": 21.223
+    },
+    {
+      "word": "This",
+      "start": 21.559,
+      "end": 21.722
+    },
+    {
+      "word": "is",
+      "start": 21.768,
+      "end": 21.85
+    },
+    {
+      "word": "temperature.",
+      "start": 21.908,
+      "end": 22.581
+    },
+    {
+      "word": "Aren't",
+      "start": 23.115,
+      "end": 23.312
+    },
+    {
+      "word": "they",
+      "start": 23.347,
+      "end": 23.475
+    },
+    {
+      "word": "the",
+      "start": 23.533,
+      "end": 23.603
+    },
+    {
+      "word": "same?",
+      "start": 23.649,
+      "end": 24.067
+    },
+    {
+      "word": "A",
+      "start": 24.694,
+      "end": 24.764
+    },
+    {
+      "word": "season",
+      "start": 24.868,
+      "end": 25.158
+    },
+    {
+      "word": "is",
+      "start": 25.205,
+      "end": 25.275
+    },
+    {
+      "word": "a",
+      "start": 25.309,
+      "end": 25.344
+    },
+    {
+      "word": "time",
+      "start": 25.391,
+      "end": 25.588
+    },
+    {
+      "word": "of",
+      "start": 25.623,
+      "end": 25.681
+    },
+    {
+      "word": "year,",
+      "start": 25.751,
+      "end": 26.145
+    },
+    {
+      "word": "caused",
+      "start": 26.285,
+      "end": 26.552
+    },
+    {
+      "word": "by",
+      "start": 26.598,
+      "end": 26.679
+    },
+    {
+      "word": "Earth's",
+      "start": 26.737,
+      "end": 27.004
+    },
+    {
+      "word": "tilt.",
+      "start": 27.039,
+      "end": 27.422
+    },
+    {
+      "word": "Temperature",
+      "start": 27.643,
+      "end": 28.119
+    },
+    {
+      "word": "is",
+      "start": 28.165,
+      "end": 28.235
+    },
+    {
+      "word": "how",
+      "start": 28.281,
+      "end": 28.398
+    },
+    {
+      "word": "hot",
+      "start": 28.467,
+      "end": 28.688
+    },
+    {
+      "word": "or",
+      "start": 28.734,
+      "end": 28.85
+    },
+    {
+      "word": "cold",
+      "start": 28.908,
+      "end": 29.129
+    },
+    {
+      "word": "it",
+      "start": 29.175,
+      "end": 29.245
+    },
+    {
+      "word": "is.",
+      "start": 29.292,
+      "end": 29.628
+    },
+    {
+      "word": "In",
+      "start": 30.255,
+      "end": 30.383
+    },
+    {
+      "word": "January,",
+      "start": 30.453,
+      "end": 31.056
+    },
+    {
+      "word": "Earth",
+      "start": 31.172,
+      "end": 31.37
+    },
+    {
+      "word": "is",
+      "start": 31.416,
+      "end": 31.497
+    },
+    {
+      "word": "5",
+      "start": 31.579,
+      "end": 31.799
+    },
+    {
+      "word": "million",
+      "start": 31.857,
+      "end": 32.113
+    },
+    {
+      "word": "kilometers",
+      "start": 32.159,
+      "end": 32.612
+    },
+    {
+      "word": "closer",
+      "start": 32.658,
+      "end": 32.914
+    },
+    {
+      "word": "to",
+      "start": 32.949,
+      "end": 32.995
+    },
+    {
+      "word": "the",
+      "start": 33.041,
+      "end": 33.111
+    },
+    {
+      "word": "sun.",
+      "start": 33.158,
+      "end": 33.564
+    },
+    {
+      "word": "But",
+      "start": 33.959,
+      "end": 34.086
+    },
+    {
+      "word": "the",
+      "start": 34.121,
+      "end": 34.191
+    },
+    {
+      "word": "north",
+      "start": 34.249,
+      "end": 34.469
+    },
+    {
+      "word": "tilts",
+      "start": 34.516,
+      "end": 34.76
+    },
+    {
+      "word": "away.",
+      "start": 34.795,
+      "end": 35.189
+    },
+    {
+      "word": "Temperatures",
+      "start": 35.48,
+      "end": 35.944
+    },
+    {
+      "word": "drop.",
+      "start": 35.979,
+      "end": 36.362
+    },
+    {
+      "word": "My",
+      "start": 36.989,
+      "end": 37.117
+    },
+    {
+      "word": "trick:",
+      "start": 37.175,
+      "end": 37.569
+    },
+    {
+      "word": "weather",
+      "start": 38.022,
+      "end": 38.336
+    },
+    {
+      "word": "is",
+      "start": 38.405,
+      "end": 38.498
+    },
+    {
+      "word": "your",
+      "start": 38.568,
+      "end": 38.754
+    },
+    {
+      "word": "mood.",
+      "start": 38.812,
+      "end": 39.16
+    },
+    {
+      "word": "Climate",
+      "start": 39.555,
+      "end": 39.903
+    },
+    {
+      "word": "is",
+      "start": 39.949,
+      "end": 40.042
+    },
+    {
+      "word": "your",
+      "start": 40.112,
+      "end": 40.298
+    },
+    {
+      "word": "personality.",
+      "start": 40.356,
+      "end": 41.099
+    },
+    {
+      "word": "Save",
+      "start": 41.633,
+      "end": 41.865
+    },
+    {
+      "word": "this",
+      "start": 41.888,
+      "end": 42.016
+    },
+    {
+      "word": "video",
+      "start": 42.062,
+      "end": 42.306
+    },
+    {
+      "word": "so",
+      "start": 42.364,
+      "end": 42.445
+    },
+    {
+      "word": "you",
+      "start": 42.492,
+      "end": 42.562
+    },
+    {
+      "word": "don't",
+      "start": 42.596,
+      "end": 42.747
+    },
+    {
+      "word": "forget!",
+      "start": 42.794,
+      "end": 43.421
+    }
+  ]
+}

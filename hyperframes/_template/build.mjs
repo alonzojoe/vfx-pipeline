@@ -175,9 +175,12 @@ for (const [key, c] of Object.entries(S.cards || {})) {
     const id = `${key}-f${i + 1}`;
     return `<div id="${id}" class="g-fact${popped.has(`#${id}`) ? " later" : ""}"><span>${esc(k)}</span><b>${esc(v)}</b></div>`;
   });
-  CARDS[key] = { label: c.label, facts: facts.length, html: `
+  // "art": an inline SVG scene (420×260) instead of the big symbol; its .draw paths (pathLength="1") sketch in and
+  // "motion": [{el, x, y, rot, dur, yoyo, origin, delay}] loops parts for as long as the card is on screen
+  const top = c.art ? `<div class="g-art">${c.art}</div>` : `<div class="g-big" style="font-size:${bigSize(c.big || "")}px">${esc(c.big || "")}</div>`;
+  CARDS[key] = { label: c.label, facts: facts.length, art: !!c.art, motion: c.motion || [], html: `
     <div class="gcard" style="--c:${color}">
-      <div class="g-top"><div class="g-big" style="font-size:${bigSize(c.big || "")}px">${esc(c.big || "")}</div>${c.sub ? `<div class="g-sub">${esc(c.sub)}</div>` : ""}</div>
+      <div class="g-top${c.art ? " art" : ""}">${top}${c.sub ? `<div class="g-sub">${esc(c.sub)}</div>` : ""}</div>
       <div class="g-facts">${facts.join("")}</div>
     </div>` };
 }
@@ -187,6 +190,8 @@ for (const p of Object.values(S.pairs || {})) for (const k of [p.left, p.right])
 const els = [], fx = [], audio = [], tl = [];
 const sfxCues = [];
 const cue = (key, at) => sfxCues.push({ key, at: r3(at) });
+// finite yoyo repeat (not -1) so the timeline keeps a real length and stays seekable
+const loopMotion = (m, start, end) => `tl.fromTo("${m.el}", {x:0, y:0, rotation:0${m.origin ? `, transformOrigin:"${m.origin}"` : ""}}, {x:${m.x || 0}, y:${m.y || 0}, rotation:${m.rot || 0}, duration:${m.dur}, ease:"${m.yoyo ? "sine.inOut" : "none"}", yoyo:${!!m.yoyo}, repeat:${Math.ceil((end - start) / m.dur)}}, ${r3(start + (m.delay || 0))});`;
 
 // full-frame paper background (2% overscale hides edge artifacts) with a slow drift
 if (BG) {
@@ -209,6 +214,8 @@ pairIds.forEach((pid, pi) => {
         <div class="card-label"${[...CARDS[key].label].length > 11 ? ' style="font-size:60px"' : ""}>${esc(CARDS[key].label)}</div><div class="card">${CARDS[key].html}</div></div>`);
     tl.push(`tl.fromTo("#${id}", {scale:0.4, opacity:0, y:60, rotation:${side === "left" ? -8 : 8}}, {scale:1, opacity:1, y:0, rotation:0, duration:0.5, ease:"back.out(1.9)"}, ${start});`);
     if (!isLast) tl.push(`tl.to("#${id}", {scale:0.7, opacity:0, x:${side === "left" ? -120 : 120}, duration:0.32, ease:"power2.in"}, ${r3(pairEnd - 0.32)});`);
+    if (CARDS[key].art) tl.push(`tl.fromTo("#${id} .draw", {strokeDasharray:1, strokeDashoffset:1}, {strokeDashoffset:0, duration:0.6, stagger:0.1, ease:"power2.out"}, ${r3(start + 0.2)});`);
+    for (const m of CARDS[key].motion || []) tl.push(loopMotion(m, start, pairEnd));
     // generic cards: facts no action reveals pop in one by one on the card's first "focus" line
     const focusLine = pl.find((l) => l.focus === side);
     for (let i = 1; focusLine && i <= (CARDS[key].facts || 0); i++) {
@@ -220,6 +227,19 @@ pairIds.forEach((pid, pi) => {
     }
   }
 });
+
+// hook scene: script.json "intro": {art: "<svg viewBox='0 0 950 630'>…", motion: [...]} shows a big animated panel
+// during the "intro" lines, so the first second is motion, not text only (viewers swipe away from a bare caption)
+const introLines = lines.filter((l) => l.pair === "intro");
+if (S.intro?.art && introLines.length) {
+  const start = introLines[0].start, end = introLines[introLines.length - 1].end;
+  els.push(`<div id="intro-scene" class="clip intro-scene" data-start="${start}" data-duration="${r3(end - start)}" data-track-index="1">${S.intro.art}</div>`);
+  tl.push(`tl.fromTo("#intro-scene", {scale:0.7, opacity:0, rotation:-3}, {scale:1, opacity:1, rotation:0, duration:0.4, ease:"back.out(1.8)"}, ${start});`);
+  tl.push(`tl.fromTo("#intro-scene .draw", {strokeDasharray:1, strokeDashoffset:1}, {strokeDashoffset:0, duration:0.7, stagger:0.15, ease:"power2.out"}, ${r3(start + 0.15)});`);
+  for (const m of S.intro.motion || []) tl.push(loopMotion(m, start, end));
+  tl.push(`tl.to("#intro-scene", {scale:0.75, opacity:0, y:-40, duration:0.3, ease:"power2.in"}, ${r3(end - 0.3)});`);
+  cue("whoosh", end - 0.34);
+}
 
 // focus / dim / ring per line
 lines.forEach((l) => {
@@ -259,12 +279,18 @@ recapLines.forEach((l, k) => {
   const col = k % 2, row = Math.floor(k / 2);
   // a single tile ("Joe's tip") is one big centered tile; ≤ 2 tiles sit mid-way so the card area isn't half empty
   const solo = recapLines.length === 1;
+  // solo tile with "recap": {art: "<svg viewBox='0 0 700 300'>…", motion: [...]} = a tall tile with an animated scene on top
+  const art = solo && l.recap.art;
   const x = solo ? (W - 800) / 2 : L.slots[col ? "right" : "left"];
-  const y = L.cardTop + 40 + row * 300 + (recapLines.length <= 2 ? 150 : 0);
+  const y = art ? L.cardTop + 40 : L.cardTop + 40 + row * 300 + (recapLines.length <= 2 ? 150 : 0);
   const id = `recap-${k + 1}`;
-  els.push(`<div id="${id}" class="clip recap-tile${solo ? " solo" : ""}" style="left:${x}px;top:${y}px" data-start="${l.start}" data-duration="${r3(total - l.start)}" data-track-index="3">
-      <div class="rt-term"${!solo && l.recap.term.length > 8 ? ' style="font-size:72px"' : ""}>${esc(l.recap.term)}</div><div class="rt-eq">${solo ? "" : "= "}${esc(l.recap.means)}</div><div class="rt-check">✓</div></div>`);
+  els.push(`<div id="${id}" class="clip recap-tile${solo ? " solo" : ""}${art ? " has-art" : ""}" style="left:${x}px;top:${y}px" data-start="${l.start}" data-duration="${r3(total - l.start)}" data-track-index="3">
+      ${art ? `<div class="rt-art">${l.recap.art}</div>` : ""}<div class="rt-term"${!solo && l.recap.term.length > 8 ? ' style="font-size:72px"' : ""}>${esc(l.recap.term)}</div><div class="rt-eq">${solo ? "" : "= "}${esc(l.recap.means)}</div><div class="rt-check">✓</div></div>`);
   tl.push(`tl.fromTo("#${id}", {scale:0.5, opacity:0, rotation:${col ? 6 : -6}}, {scale:1, opacity:1, rotation:0, duration:0.45, ease:"back.out(2)"}, ${l.start});`);
+  if (art) {
+    tl.push(`tl.fromTo("#${id} .draw", {strokeDasharray:1, strokeDashoffset:1}, {strokeDashoffset:0, duration:0.6, stagger:0.12, ease:"power2.out"}, ${r3(l.start + 0.25)});`);
+    for (const m of l.recap.motion || []) tl.push(loopMotion(m, l.start, total));
+  }
   tl.push(`tl.fromTo("#${id} .rt-check", {scale:0}, {scale:1, duration:0.3, ease:"back.out(3)"}, ${r3(l.start + 0.35)});`);
   // the newest tile is the one being said; earlier ones dim slightly
   recapLines.slice(0, k).forEach((_, m) => tl.push(`tl.to("#recap-${m + 1}", {opacity:0.55, scale:0.96, duration:0.3}, ${l.start});`));
@@ -605,6 +631,11 @@ const html = `<!doctype html>
       .recap-tile.solo { width: 800px; height: 330px; padding: 44px 48px; }
       .solo .rt-term { font-size: 104px; } .solo .rt-eq { font-size: 64px; margin-top: 30px; white-space: nowrap; }
       .solo .rt-check { width: 84px; height: 84px; font-size: 52px; line-height: 84px; right: 34px; top: 34px; }
+      .recap-tile.has-art { height: 620px; padding: 44px 48px; }
+      .rt-art { width: 694px; height: 300px; border: 4px solid var(--ink); border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+      .rt-art svg { display: block; width: 100%; height: 100%; overflow: hidden; }
+      .rt-art .draw { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .has-art .rt-check { top: 374px; } .has-art .rt-eq { font-size: 56px; margin-top: 22px; }
       .rt-eq { font: 600 38px/1.2 "Fredoka", sans-serif; color: var(--hot); margin-top: 18px; }
       .rt-check { position: absolute; right: 26px; top: 22px; width: 64px; height: 64px; border-radius: 50%; background: #16a34a;
                   color: #fff; font: 700 40px/64px "Fredoka", sans-serif; text-align: center; }
@@ -612,6 +643,12 @@ const html = `<!doctype html>
       .g-top { height: 220px; flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
                background: color-mix(in srgb, var(--c) 13%, #fff); border-bottom: 5px solid var(--ink); }
       .g-big { font: 700 150px/1 "Fredoka", sans-serif; color: var(--c); white-space: nowrap; }
+      .g-top.art { height: 290px; }
+      .g-art svg { display: block; width: 420px; height: 260px; overflow: hidden; }
+      .g-art .draw, .intro-scene .draw { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .intro-scene { position: absolute; left: 60px; top: 230px; width: 960px; height: 640px; border: 5px solid var(--ink); border-radius: 30px;
+                     box-shadow: 10px 10px 0 var(--ink); overflow: hidden; background: #fff; transform-origin: 50% 60%; z-index: 2; }
+      .intro-scene svg { display: block; width: 950px; height: 630px; overflow: hidden; }
       .g-sub { font: 600 27px/1.2 "Fredoka", sans-serif; color: var(--mute); margin-top: 10px; text-align: center; padding: 0 16px; }
       .g-facts { padding: 6px 24px; }
       .g-fact { padding: 10px 8px 8px; border-bottom: 2px solid #f0f0f0; transform-origin: 50% 50%; border-radius: 10px; }

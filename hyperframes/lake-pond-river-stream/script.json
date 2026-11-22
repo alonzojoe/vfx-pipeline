@@ -1,0 +1,156 @@
+{
+  "title": "Lake vs Pond + River vs Stream",
+  "voice": {
+    "id": "TX3LPaxmHKxFdv7VOQHJ",
+    "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.38,
+    "similarity": 0.8,
+    "style": 0.35,
+    "speed": 1.12
+  },
+  "background": "auto",
+  "outro": 1,
+  "maxLineGap": 0.3,
+  "maxWordGap": 0.22,
+  "pauseRule": "\"pause\" = TOTAL silence (seconds) after that line — only on important beats (hook question, topic switch, into recap, before CTA).",
+  "pairs": {
+    "p1": { "left": "lake", "right": "pond" },
+    "p2": { "left": "river", "right": "stream" }
+  },
+  "artNote": "Hook = big animated landscape (intro scene, 950x630): mountain ridge sketches in, a fish jumps in a big lake, a duck bobs on a pond, clouds drift, orange ? marks bob over both. Only pair 1 is teased; river/stream stay a surprise until the topic switch. p1 cards = side cross-sections (deep lake: sun rays stop, bottom dark, fish swims; shallow pond: rays hit the bottom, plants sway). p2 cards = top-down (river: wide, flowing, fed by two streams that draw in, paper boat bobs; stream: narrow, a frog hops and an orange arc shows you can step across).",
+  "intro": {
+    "art": "<svg viewBox='0 0 950 630' width='950' height='630'><rect width='950' height='630' fill='#dff1ff'/><g id='in-sun'><circle cx='830' cy='100' r='52' fill='#ffc400' stroke='#161616' stroke-width='5'/></g><g id='in-cloud' fill='#fff' stroke='#161616' stroke-width='4'><path d='M120,120 q0,-34 36,-34 q12,-30 48,-22 q30,-14 48,14 q34,0 34,30 q0,22 -30,22 h-110 q-26,0 -26,-10 Z'/><path d='M560,90 q0,-28 30,-28 q12,-24 40,-18 q26,-10 40,12 q28,0 28,24 q0,18 -24,18 h-92 q-22,0 -22,-8 Z'/></g><path d='M0,340 L170,150 L300,290 L430,110 L620,340 Z' fill='#b9c7d6'/><path d='M140,184 L170,150 L200,184 L185,176 L170,190 L155,176 Z M398,146 L430,110 L462,146 L446,138 L430,152 L414,138 Z' fill='#fff'/><path class='draw' pathLength='1' d='M0,340 L170,150 L300,290 L430,110 L620,340'/><path d='M0,310 Q240,290 475,312 T950,300 V630 H0 Z' fill='#9bd17d' stroke='#161616' stroke-width='5'/><ellipse cx='720' cy='535' rx='200' ry='80' fill='#2f6bff' stroke='#161616' stroke-width='5'/><g id='in-wave' fill='none' stroke='#fff' stroke-width='4' stroke-linecap='round'><path d='M660,545 q15,-8 30,0 t30,0'/><path d='M780,578 q15,-8 30,0 t30,0'/><path d='M800,510 q15,-8 30,0 t30,0'/></g><g id='in-fish'><path d='M700,500 l-16,-12 v24 Z' fill='#ff8a5c' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><path d='M700,500 q24,-18 48,0 q-24,18 -48,0 Z' fill='#ff8a5c' stroke='#161616' stroke-width='4'/></g><ellipse cx='210' cy='530' rx='140' ry='55' fill='#7fc4ff' stroke='#161616' stroke-width='5'/><g id='in-reed1'><path d='M362,540 q-6,-44 6,-78' fill='none' stroke='#16a34a' stroke-width='6' stroke-linecap='round'/><ellipse cx='368' cy='470' rx='7' ry='16' fill='#8a5a2b' stroke='#161616' stroke-width='3'/></g><g id='in-reed2'><path d='M380,544 q4,-40 -4,-66' fill='none' stroke='#16a34a' stroke-width='6' stroke-linecap='round'/><ellipse cx='376' cy='486' rx='6' ry='14' fill='#8a5a2b' stroke='#161616' stroke-width='3'/></g><g id='in-duck'><ellipse cx='200' cy='520' rx='30' ry='17' fill='#ffd84d' stroke='#161616' stroke-width='4'/><circle cx='224' cy='498' r='13' fill='#ffd84d' stroke='#161616' stroke-width='4'/><path d='M235,496 l14,4 l-14,4 Z' fill='#ff4d2e' stroke='#161616' stroke-width='3' stroke-linejoin='round'/><circle cx='227' cy='494' r='3' fill='#161616'/></g><g id='in-q1' font-family='Patrick Hand' font-size='110' text-anchor='middle' fill='#ff4d2e' stroke='#161616' stroke-width='3' paint-order='stroke'><text x='720' y='440'>?</text></g><g id='in-q2' font-family='Patrick Hand' font-size='110' text-anchor='middle' fill='#ff4d2e' stroke='#161616' stroke-width='3' paint-order='stroke'><text x='210' y='455'>?</text></g></svg>",
+    "motion": [
+      { "el": "#in-sun", "y": 8, "dur": 1.2, "yoyo": true },
+      { "el": "#in-cloud", "x": 40, "dur": 2.4, "yoyo": true },
+      { "el": "#in-wave", "x": 14, "dur": 1.1, "yoyo": true },
+      { "el": "#in-fish", "y": -40, "dur": 0.55, "yoyo": true, "delay": 0.3 },
+      { "el": "#in-duck", "y": 5, "dur": 0.8, "yoyo": true },
+      { "el": "#in-reed1", "rot": 6, "dur": 1.1, "yoyo": true, "origin": "50% 100%" },
+      { "el": "#in-reed2", "rot": -6, "dur": 1.3, "yoyo": true, "origin": "50% 100%" },
+      { "el": "#in-q1", "y": -14, "dur": 0.7, "yoyo": true },
+      { "el": "#in-q2", "y": -14, "dur": 0.7, "yoyo": true, "delay": 0.35 }
+    ]
+  },
+  "cards": {
+    "lake": {
+      "label": "Lake",
+      "color": "green",
+      "facts": [["Deep bottom", "stays dark"], ["So Walden Pond is", "a lake!"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><defs><clipPath id='lk-clip'><path d='M10,62 H410 C400,200 330,250 210,250 C90,250 20,200 10,62 Z'/></clipPath></defs><rect width='420' height='62' fill='#dff1ff'/><rect y='62' width='420' height='198' fill='#c9a26b'/><g id='lk-sun'><circle cx='370' cy='32' r='20' fill='#ffc400' stroke='#161616' stroke-width='4'/></g><path d='M10,62 H410 C400,200 330,250 210,250 C90,250 20,200 10,62 Z' fill='#4f8dff'/><g clip-path='url(#lk-clip)'><rect y='125' width='420' height='30' fill='#2f5fd0'/><rect y='155' width='420' height='105' fill='#1e3a8a'/></g><g id='lk-rays' stroke='#ffd84d' stroke-width='7' stroke-linecap='round'><path d='M120,74 L108,128'/><path d='M210,74 L206,134'/><path d='M300,74 L310,128'/></g><g id='lk-fish'><path d='M170,205 q20,-14 40,0 q-20,14 -40,0 Z M210,205 l14,-10 v20 Z' fill='#9aa8c7' stroke='#161616' stroke-width='3' stroke-linejoin='round'/><circle cx='180' cy='203' r='2.5' fill='#161616'/></g><path d='M10,62 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0' fill='none' stroke='#fff' stroke-width='4'/><path class='draw' pathLength='1' d='M10,62 C20,200 90,250 210,250 C330,250 400,200 410,62'/></svg>",
+      "motion": [
+        { "el": "#lk-sun", "y": 5, "dur": 1.2, "yoyo": true },
+        { "el": "#lk-rays", "y": 5, "dur": 1, "yoyo": true },
+        { "el": "#lk-fish", "x": 40, "dur": 2.4, "yoyo": true }
+      ]
+    },
+    "pond": {
+      "label": "Pond",
+      "color": "orange",
+      "facts": [["Shallow bottom", "all sunlit"], ["Walden Pond", "100+ ft deep"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><rect width='420' height='120' fill='#fff4d6'/><rect y='120' width='420' height='140' fill='#c9a26b'/><g id='pd-sun'><circle cx='60' cy='52' r='26' fill='#ffc400' stroke='#161616' stroke-width='4'/></g><path d='M14,120 H406 C398,190 330,212 210,212 C90,212 22,190 14,120 Z' fill='#7fc4ff'/><g stroke='#ffc400' stroke-width='7' stroke-linecap='round'><path d='M110,130 L102,196'/><path d='M210,130 L210,204'/><path d='M310,130 L320,196'/></g><g id='pd-pl1' fill='none' stroke='#16a34a' stroke-width='6' stroke-linecap='round'><path d='M150,208 q-8,-30 4,-56'/><path d='M162,209 q10,-28 0,-50'/></g><g id='pd-pl2' fill='none' stroke='#16a34a' stroke-width='6' stroke-linecap='round'><path d='M262,209 q-10,-30 4,-54'/><path d='M274,208 q8,-26 -2,-46'/></g><path d='M14,120 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t32,0' fill='none' stroke='#fff' stroke-width='4'/><g id='pd-duck'><ellipse cx='300' cy='112' rx='24' ry='13' fill='#ffd84d' stroke='#161616' stroke-width='4'/><circle cx='320' cy='94' r='10' fill='#ffd84d' stroke='#161616' stroke-width='4'/><path d='M329,92 l11,3 l-11,3 Z' fill='#ff4d2e' stroke='#161616' stroke-width='3' stroke-linejoin='round'/><circle cx='322' cy='91' r='2.5' fill='#161616'/></g><path class='draw' pathLength='1' d='M14,120 C22,190 90,212 210,212 C330,212 398,190 406,120'/></svg>",
+      "motion": [
+        { "el": "#pd-sun", "y": 5, "dur": 1.3, "yoyo": true },
+        { "el": "#pd-pl1", "rot": 7, "dur": 1.1, "yoyo": true, "origin": "50% 100%" },
+        { "el": "#pd-pl2", "rot": -7, "dur": 1.3, "yoyo": true, "origin": "50% 100%" },
+        { "el": "#pd-duck", "y": 4, "dur": 0.8, "yoyo": true }
+      ]
+    },
+    "river": {
+      "label": "River",
+      "color": "ink",
+      "facts": [["Fed by", "streams"], ["Mississippi", "2,300+ mi"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><defs><clipPath id='rv-clip'><path d='M-20,90 C80,60 140,170 230,150 C320,130 360,80 440,100 L440,190 C360,170 320,220 230,240 C140,260 80,150 -20,180 Z'/></clipPath></defs><rect width='420' height='260' fill='#9bd17d'/><path d='M376,62 v-18' stroke='#8a5a2b' stroke-width='8'/><circle cx='376' cy='34' r='22' fill='#16a34a' stroke='#161616' stroke-width='4'/><path d='M40,252 v-14' stroke='#8a5a2b' stroke-width='7'/><circle cx='40' cy='228' r='17' fill='#16a34a' stroke='#161616' stroke-width='4'/><path class='draw' pathLength='1' style='stroke:#2f6bff;stroke-width:9' d='M96,0 C120,40 90,70 109,122'/><path class='draw' pathLength='1' style='stroke:#2f6bff;stroke-width:9' d='M360,260 C330,240 350,225 339,196'/><path d='M-20,90 C80,60 140,170 230,150 C320,130 360,80 440,100 L440,190 C360,170 320,220 230,240 C140,260 80,150 -20,180 Z' fill='#4f8dff' stroke='#161616' stroke-width='5' stroke-linejoin='round'/><g clip-path='url(#rv-clip)'><g id='rv-flow' fill='none' stroke='#fff' stroke-width='4' stroke-linecap='round' opacity='0.7'><path d='M-80,135 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/><path d='M-80,185 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/></g></g><g id='rv-boat'><path d='M230,188 V166 L246,186' fill='#ff4d2e' stroke='#161616' stroke-width='3' stroke-linejoin='round'/><path d='M205,188 H255 L245,202 H215 Z' fill='#fff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/></g></svg>",
+      "motion": [
+        { "el": "#rv-flow", "x": 80, "dur": 1.2 },
+        { "el": "#rv-boat", "y": 4, "dur": 0.9, "yoyo": true }
+      ]
+    },
+    "stream": {
+      "label": "Stream",
+      "color": "blue",
+      "facts": [["Depth", "shallow"], ["Mississippi starts", "walk across"]],
+      "art": "<svg viewBox='0 0 420 260' width='420' height='260'><defs><clipPath id='st-clip'><path d='M-10,118 C100,96 160,150 250,134 C330,120 380,112 430,122 L430,156 C380,146 330,154 250,168 C160,184 100,130 -10,152 Z'/></clipPath></defs><rect width='420' height='260' fill='#b5e08f'/><circle cx='80' cy='60' r='9' fill='#ffd84d' stroke='#161616' stroke-width='3'/><circle cx='330' cy='58' r='9' fill='#ff8fb1' stroke='#161616' stroke-width='3'/><circle cx='370' cy='215' r='9' fill='#ffd84d' stroke='#161616' stroke-width='3'/><circle cx='70' cy='220' r='8' fill='#ff8fb1' stroke='#161616' stroke-width='3'/><path d='M-10,118 C100,96 160,150 250,134 C330,120 380,112 430,122 L430,156 C380,146 330,154 250,168 C160,184 100,130 -10,152 Z' fill='#8fd0ff' stroke='#161616' stroke-width='4' stroke-linejoin='round'/><g clip-path='url(#st-clip)'><g id='st-flow' fill='none' stroke='#fff' stroke-width='3' stroke-linecap='round'><path d='M-80,138 q20,-6 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0'/></g></g><ellipse cx='250' cy='151' rx='17' ry='10' fill='#a8a29e' stroke='#161616' stroke-width='3'/><path class='draw' pathLength='1' style='stroke:#ff4d2e;stroke-width:6' d='M250,188 Q276,140 252,94 M238,106 L252,92 L265,105'/><g id='st-frog'><ellipse cx='250' cy='212' rx='22' ry='15' fill='#4caf50' stroke='#161616' stroke-width='3'/><circle cx='240' cy='198' r='7' fill='#fff' stroke='#161616' stroke-width='3'/><circle cx='260' cy='198' r='7' fill='#fff' stroke='#161616' stroke-width='3'/><circle cx='240' cy='198' r='3' fill='#161616'/><circle cx='260' cy='198' r='3' fill='#161616'/></g></svg>",
+      "motion": [
+        { "el": "#st-flow", "x": 80, "dur": 1 },
+        { "el": "#st-frog", "y": -12, "dur": 0.45, "yoyo": true }
+      ]
+    }
+  },
+  "lines": [
+    { "text": "Lake or pond? Most people just guess.", "pair": "intro", "react": "shrug", "sfx": ["hook"], "pause": 0.3 },
+    { "text": "This is a lake.", "pair": "p1", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is a pond.", "pair": "p1", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "What's the difference?", "pair": "p1", "react": "thinking-2", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "A lake is deep, so its bottom stays dark.", "pair": "p1", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#lake-f1", "word": "dark.", "sfx": "tap" }] },
+    { "text": "A pond is shallow. Sun hits the whole bottom.", "pair": "p1", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#pond-f1", "word": "whole", "sfx": "tap" }] },
+    { "text": "But Walden Pond is over 100 feet deep.", "pair": "p1", "react": "shocked-2",
+      "actions": [{ "type": "pop", "el": "#pond-f2", "word": "100", "sfx": "tap" }] },
+    { "text": "So it's really a lake!", "pair": "p1", "react": "laugh", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#lake-f2", "word": "lake!", "sfx": "tap" }] },
+    { "text": "This is a river.", "pair": "p2", "show": "left", "react": "point-up-left", "sfx": ["pop"] },
+    { "text": "This is a stream.", "pair": "p2", "show": "right", "react": "point-up-right", "sfx": ["pop"] },
+    { "text": "So where's the line?", "pair": "p2", "react": "look-up", "question": true, "sfx": ["question"], "pause": 0.3 },
+    { "text": "A river is big, fed by smaller streams.", "pair": "p2", "focus": "left", "react": "point-up-left",
+      "actions": [{ "type": "pop", "el": "#river-f1", "word": "streams.", "sfx": "tap" }] },
+    { "text": "A stream is small and shallow.", "pair": "p2", "focus": "right", "react": "point-up-right",
+      "actions": [{ "type": "pop", "el": "#stream-f1", "word": "shallow.", "sfx": "tap" }] },
+    { "text": "The Mississippi starts as a stream you can walk across.", "pair": "p2", "react": "cool",
+      "actions": [{ "type": "pop", "el": "#stream-f2", "word": "walk", "sfx": "tap" }] },
+    { "text": "Then it runs over 2,300 miles!", "pair": "p2", "react": "double-thumbs-up", "pause": 0.4,
+      "actions": [{ "type": "pop", "el": "#river-f2", "word": "2,300", "sfx": "tap" }] },
+    { "text": "Tip: a river is just a stream that grew up.", "pair": "tip", "react": "peace",
+      "recap": { "term": "Joe's tip", "means": "river = big stream" }, "sfx": ["check"], "pause": 0.35 },
+    { "text": "Like and follow for more!", "cta": true, "pair": "tip", "react": "point-at-you", "sfx": ["cta"] }
+  ],
+  "sfx": {
+    "hook": {
+      "src": "general/sfx/earshot/drip/drop.mp3", "volume": 0.36,
+      "layers": [{ "src": "general/sfx/earshot/reverse_swell/breath.mp3", "volume": 0.14, "offset": 0 }]
+    },
+    "pop": [
+      { "src": "general/sfx/earshot/pro_pop_in/round.mp3", "volume": 0.4 },
+      { "src": "general/sfx/earshot/drip/plink.mp3", "volume": 0.36 },
+      { "src": "general/sfx/earshot/pro_pop_in/airy.mp3", "volume": 0.4 },
+      { "src": "general/sfx/earshot/ui_pop/blip.mp3", "volume": 0.38 }
+    ],
+    "tap": [
+      { "src": "general/sfx/earshot/tap/table.mp3", "volume": 0.26 },
+      { "src": "general/sfx/earshot/pro_tap/soft.mp3", "volume": 0.28 },
+      { "src": "general/sfx/uisfx/zen/select.mp3", "volume": 0.26 }
+    ],
+    "question": {
+      "src": "general/sfx/earshot/mallet/glock.mp3", "volume": 0.36,
+      "layers": [{ "src": "general/sfx/earshot/drip/tiny.mp3", "volume": 0.16, "offset": 0.05 }]
+    },
+    "swoosh-left": {
+      "src": "general/sfx/earshot/swish/flick.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/crisp.mp3", "volume": 0.14 }]
+    },
+    "swoosh-right": {
+      "src": "general/sfx/earshot/swish/soft.mp3", "volume": 0.26,
+      "layers": [{ "src": "general/sfx/earshot/whoosh_fast/crisp.mp3", "volume": 0.14 }]
+    },
+    "check": {
+      "src": "general/sfx/uisfx/zen/check.mp3", "volume": 0.46,
+      "layers": [{ "src": "general/sfx/earshot/mallet/marimba.mp3", "volume": 0.2, "offset": 0.04 }]
+    },
+    "cta": {
+      "src": "general/sfx/uisfx/zen/achievement.mp3", "volume": 0.46,
+      "layers": [
+        { "src": "general/sfx/earshot/notify/mid_tine.mp3", "volume": 0.2, "offset": 0.06 },
+        { "src": "general/sfx/earshot/shimmer/m1.mp3", "volume": 0.18, "offset": 0.12 }
+      ]
+    },
+    "whoosh": [
+      { "src": "general/sfx/earshot/swipe/velvet.mp3", "volume": 0.3 },
+      { "src": "general/sfx/earshot/swipe/cloth.mp3", "volume": 0.3 }
+    ],
+    "whoosh-big": { "src": "general/sfx/earshot/whoosh_big/gust.mp3", "volume": 0.26 },
+    "riser": { "src": "general/sfx/earshot/riser/air.mp3", "volume": 0.2 }
+  },
+  "sfxNote": "Library sounds only (uisfx CC0 'zen' + earshot renders), water-themed and varied from alligator-crocodile-turtle-tortoise (rubber/knock/mallet pluck): drip drop + breath swell hook, round/plink/airy/blip pops, table/soft taps, glock + tiny drip question, flick/soft swishes with crisp whoosh, zen check + marimba, velvet/cloth swipes, gust whoosh, air riser, zen achievement + tine + shimmer CTA."
+}

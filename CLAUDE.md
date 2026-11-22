@@ -112,6 +112,11 @@ YouTube pays for original, authored content and refuses "content that looks like
 - `cards` in script.json: `{label, big, sub, color (blue|orange|green|red|ink), facts: [[label, value], …]}` → fact
   rows `#<key>-f1…` (pop/pulse them on the spoken word; unrevealed ones pop on the card's focus line). `{label, html}`
   still makes a hand-made mock UI. A single `recap` line = one big centered "Joe's tip" tile.
+- Motion so the reel isn't text-only (the first second decides the swipe): a card can swap its big symbol for `art`
+  (inline SVG, 420×260; `.draw` paths with `pathLength="1"` sketch themselves in) and loop parts with
+  `motion: [{el, x, y, rot, dur, yoyo, origin, delay}]` (finite repeats, so the timeline stays seekable);
+  `"intro": {art, motion}` (SVG 950×630) is a big animated scene behind the `pair: "intro"` hook lines; a solo
+  `recap` can carry `art` + `motion` too (tall tip tile with a 700×300 scene).
 - `script.json` lines: `pair` + `show`/`focus` (cards + one orange arrow), `react` (sticker), `question: true` (wiggle + "?"),
   `pause` (important beats only), `sfx: [...]`, `recap: {term, means}` (2x2 tick tiles), `cta: true` (handle pulses).
 - Generic `actions`: `{type:"pop", el:"#id", word, sfx}` reveals a hidden `.later` element on a word;

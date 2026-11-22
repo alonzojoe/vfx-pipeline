@@ -1,0 +1,518 @@
+{
+  "text": "Every overpass is a bridge. But not every bridge is an overpass. This is a bridge. This is an overpass. Which is which? A bridge crosses water or a valley. An overpass crosses another road. Trivia: the longest bridge, in China, is about 165 kilometers! This is a tunnel. This is an underpass. Spot the difference? A tunnel goes through a hill, or under water. An underpass is a short way under a road. Trivia: the longest train tunnel runs 57 kilometers under the Alps. My trick: over the road, overpass. Under the road, underpass. Save this video so you don't forget!",
+  "voice": "TX3LPaxmHKxFdv7VOQHJ",
+  "model": "eleven_multilingual_v2",
+  "duration": 38.034,
+  "words": [
+    {
+      "word": "Every",
+      "start": 0,
+      "end": 0.29
+    },
+    {
+      "word": "overpass",
+      "start": 0.348,
+      "end": 0.778
+    },
+    {
+      "word": "is",
+      "start": 0.824,
+      "end": 0.906
+    },
+    {
+      "word": "a",
+      "start": 0.952,
+      "end": 0.975
+    },
+    {
+      "word": "bridge.",
+      "start": 1.022,
+      "end": 1.428
+    },
+    {
+      "word": "But",
+      "start": 1.649,
+      "end": 1.788
+    },
+    {
+      "word": "not",
+      "start": 1.834,
+      "end": 1.974
+    },
+    {
+      "word": "every",
+      "start": 2.032,
+      "end": 2.31
+    },
+    {
+      "word": "bridge",
+      "start": 2.357,
+      "end": 2.624
+    },
+    {
+      "word": "is",
+      "start": 2.659,
+      "end": 2.728
+    },
+    {
+      "word": "an",
+      "start": 2.763,
+      "end": 2.821
+    },
+    {
+      "word": "overpass.",
+      "start": 2.868,
+      "end": 3.437
+    },
+    {
+      "word": "This",
+      "start": 3.622,
+      "end": 3.866
+    },
+    {
+      "word": "is",
+      "start": 3.936,
+      "end": 4.052
+    },
+    {
+      "word": "a",
+      "start": 4.098,
+      "end": 4.133
+    },
+    {
+      "word": "bridge.",
+      "start": 4.168,
+      "end": 4.609
+    },
+    {
+      "word": "This",
+      "start": 4.899,
+      "end": 5.085
+    },
+    {
+      "word": "is",
+      "start": 5.132,
+      "end": 5.213
+    },
+    {
+      "word": "an",
+      "start": 5.248,
+      "end": 5.306
+    },
+    {
+      "word": "overpass.",
+      "start": 5.352,
+      "end": 5.991
+    },
+    {
+      "word": "Which",
+      "start": 6.142,
+      "end": 6.327
+    },
+    {
+      "word": "is",
+      "start": 6.374,
+      "end": 6.444
+    },
+    {
+      "word": "which?",
+      "start": 6.502,
+      "end": 6.896
+    },
+    {
+      "word": "A",
+      "start": 7.233,
+      "end": 7.303
+    },
+    {
+      "word": "bridge",
+      "start": 7.361,
+      "end": 7.616
+    },
+    {
+      "word": "crosses",
+      "start": 7.663,
+      "end": 7.976
+    },
+    {
+      "word": "water",
+      "start": 8.046,
+      "end": 8.336
+    },
+    {
+      "word": "or",
+      "start": 8.417,
+      "end": 8.568
+    },
+    {
+      "word": "a",
+      "start": 8.615,
+      "end": 8.638
+    },
+    {
+      "word": "valley.",
+      "start": 8.684,
+      "end": 9.172
+    },
+    {
+      "word": "An",
+      "start": 9.392,
+      "end": 9.509
+    },
+    {
+      "word": "overpass",
+      "start": 9.567,
+      "end": 9.973
+    },
+    {
+      "word": "crosses",
+      "start": 10.019,
+      "end": 10.333
+    },
+    {
+      "word": "another",
+      "start": 10.379,
+      "end": 10.612
+    },
+    {
+      "word": "road.",
+      "start": 10.658,
+      "end": 11.029
+    },
+    {
+      "word": "Trivia:",
+      "start": 11.656,
+      "end": 12.249
+    },
+    {
+      "word": "the",
+      "start": 12.643,
+      "end": 12.748
+    },
+    {
+      "word": "longest",
+      "start": 12.806,
+      "end": 13.108
+    },
+    {
+      "word": "bridge,",
+      "start": 13.154,
+      "end": 13.549
+    },
+    {
+      "word": "in",
+      "start": 13.735,
+      "end": 13.897
+    },
+    {
+      "word": "China,",
+      "start": 13.955,
+      "end": 14.478
+    },
+    {
+      "word": "is",
+      "start": 14.699,
+      "end": 14.838
+    },
+    {
+      "word": "about",
+      "start": 14.884,
+      "end": 15.093
+    },
+    {
+      "word": "165",
+      "start": 15.151,
+      "end": 15.976
+    },
+    {
+      "word": "kilometers!",
+      "start": 16.034,
+      "end": 16.73
+    },
+    {
+      "word": "This",
+      "start": 17.45,
+      "end": 17.624
+    },
+    {
+      "word": "is",
+      "start": 17.671,
+      "end": 17.74
+    },
+    {
+      "word": "a",
+      "start": 17.787,
+      "end": 17.822
+    },
+    {
+      "word": "tunnel.",
+      "start": 17.868,
+      "end": 18.309
+    },
+    {
+      "word": "This",
+      "start": 18.53,
+      "end": 18.681
+    },
+    {
+      "word": "is",
+      "start": 18.727,
+      "end": 18.808
+    },
+    {
+      "word": "an",
+      "start": 18.843,
+      "end": 18.913
+    },
+    {
+      "word": "underpass.",
+      "start": 18.971,
+      "end": 19.563
+    },
+    {
+      "word": "Spot",
+      "start": 19.668,
+      "end": 19.9
+    },
+    {
+      "word": "the",
+      "start": 19.935,
+      "end": 20.004
+    },
+    {
+      "word": "difference?",
+      "start": 20.051,
+      "end": 20.573
+    },
+    {
+      "word": "A",
+      "start": 21.2,
+      "end": 21.281
+    },
+    {
+      "word": "tunnel",
+      "start": 21.339,
+      "end": 21.606
+    },
+    {
+      "word": "goes",
+      "start": 21.665,
+      "end": 21.85
+    },
+    {
+      "word": "through",
+      "start": 21.897,
+      "end": 22.129
+    },
+    {
+      "word": "a",
+      "start": 22.175,
+      "end": 22.222
+    },
+    {
+      "word": "hill,",
+      "start": 22.326,
+      "end": 22.628
+    },
+    {
+      "word": "or",
+      "start": 22.663,
+      "end": 22.814
+    },
+    {
+      "word": "under",
+      "start": 22.918,
+      "end": 23.139
+    },
+    {
+      "word": "water.",
+      "start": 23.197,
+      "end": 23.638
+    },
+    {
+      "word": "An",
+      "start": 24.172,
+      "end": 24.3
+    },
+    {
+      "word": "underpass",
+      "start": 24.358,
+      "end": 24.811
+    },
+    {
+      "word": "is",
+      "start": 24.857,
+      "end": 24.939
+    },
+    {
+      "word": "a",
+      "start": 24.985,
+      "end": 25.008
+    },
+    {
+      "word": "short",
+      "start": 25.078,
+      "end": 25.298
+    },
+    {
+      "word": "way",
+      "start": 25.345,
+      "end": 25.473
+    },
+    {
+      "word": "under",
+      "start": 25.519,
+      "end": 25.705
+    },
+    {
+      "word": "a",
+      "start": 25.751,
+      "end": 25.786
+    },
+    {
+      "word": "road.",
+      "start": 25.844,
+      "end": 26.192
+    },
+    {
+      "word": "Trivia:",
+      "start": 26.819,
+      "end": 27.365
+    },
+    {
+      "word": "the",
+      "start": 27.76,
+      "end": 27.864
+    },
+    {
+      "word": "longest",
+      "start": 27.934,
+      "end": 28.282
+    },
+    {
+      "word": "train",
+      "start": 28.317,
+      "end": 28.538
+    },
+    {
+      "word": "tunnel",
+      "start": 28.584,
+      "end": 28.816
+    },
+    {
+      "word": "runs",
+      "start": 28.863,
+      "end": 29.048
+    },
+    {
+      "word": "57",
+      "start": 29.106,
+      "end": 29.536
+    },
+    {
+      "word": "kilometers",
+      "start": 29.582,
+      "end": 30.023
+    },
+    {
+      "word": "under",
+      "start": 30.081,
+      "end": 30.267
+    },
+    {
+      "word": "the",
+      "start": 30.314,
+      "end": 30.383
+    },
+    {
+      "word": "Alps.",
+      "start": 30.441,
+      "end": 30.848
+    },
+    {
+      "word": "My",
+      "start": 31.475,
+      "end": 31.637
+    },
+    {
+      "word": "trick:",
+      "start": 31.695,
+      "end": 32.055
+    },
+    {
+      "word": "over",
+      "start": 32.392,
+      "end": 32.589
+    },
+    {
+      "word": "the",
+      "start": 32.636,
+      "end": 32.705
+    },
+    {
+      "word": "road,",
+      "start": 32.752,
+      "end": 32.996
+    },
+    {
+      "word": "overpass.",
+      "start": 33.135,
+      "end": 33.785
+    },
+    {
+      "word": "Under",
+      "start": 34.319,
+      "end": 34.517
+    },
+    {
+      "word": "the",
+      "start": 34.551,
+      "end": 34.621
+    },
+    {
+      "word": "road,",
+      "start": 34.667,
+      "end": 34.911
+    },
+    {
+      "word": "underpass.",
+      "start": 35.097,
+      "end": 35.747
+    },
+    {
+      "word": "Save",
+      "start": 36.2,
+      "end": 36.421
+    },
+    {
+      "word": "this",
+      "start": 36.455,
+      "end": 36.595
+    },
+    {
+      "word": "video",
+      "start": 36.641,
+      "end": 36.885
+    },
+    {
+      "word": "so",
+      "start": 36.931,
+      "end": 37.013
+    },
+    {
+      "word": "you",
+      "start": 37.071,
+      "end": 37.14
+    },
+    {
+      "word": "don't",
+      "start": 37.187,
+      "end": 37.361
+    },
+    {
+      "word": "forget!",
+      "start": 37.407,
+      "end": 38.034
+    }
+  ]
+}
