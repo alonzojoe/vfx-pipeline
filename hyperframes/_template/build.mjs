@@ -24,22 +24,29 @@ function prevRow() {
   return own > 0 ? rows[own - 1] : own === 0 ? null : rows[rows.length - 1] ?? null;
 }
 
-// ---------- CTA: randomized per reel — follow / like / save — never the same type as the previous reel ----------
-// script.json: { "text": "auto", "cta": true }  → picks here (or force a type with "ctaType": "save").
-// Log the type in TOPICS.md ("cta: save") so the next reel picks a different one.
+// ---------- CTA: randomized per reel — follow or like — never the same type as the previous reel ----------
+// script.json: { "text": "auto", "cta": true }  → picks here (or force a type with "ctaType": "like").
+// Log the type in TOPICS.md ("cta: like") so the next reel picks the other one; the wording rotates within a type.
+// (No "save" CTA any more: follows and likes are what grow the channel.)
 const CTA_POOL = {
-  follow: ["Follow for more big ideas!", "Follow for more everyday knowledge!", "Follow so you learn something new every day!"],
-  like: ["Like this video if you learned something!", "Hit like if this made sense!"],
-  save: ["Save this video so you don't forget!", "Save this video for later!"],
+  follow: [
+    "Follow for more quick comparisons!", "Follow for more everyday knowledge!",
+    "Follow so you learn something new every day!", "Follow for a new comparison every day!",
+  ],
+  like: [
+    "Like this video if you learned something!", "Hit like if this made sense!",
+    "Like this video if one of these surprised you!", "Give this a like if you mixed these up too!",
+  ],
 };
 const CTA_TYPES = Object.keys(CTA_POOL);
 let CTA_TYPE = null;
 S.lines.forEach((l) => {
   if (!l.cta) return;
-  if (l.text && l.text !== "auto") { CTA_TYPE = l.ctaType || (/^save/i.test(l.text) ? "save" : /like/i.test(l.text) ? "like" : "follow"); return; }
+  const forced = CTA_POOL[l.ctaType] ? l.ctaType : null;
+  if (l.text && l.text !== "auto") { CTA_TYPE = forced || (/like/i.test(l.text) ? "like" : "follow"); return; }
   const prevType = ((prevRow() || "").match(/cta:\s*(\w+)/) || [])[1];
-  let t = l.ctaType || CTA_TYPES[PH % CTA_TYPES.length];
-  if (!l.ctaType && t === prevType) t = CTA_TYPES[(PH + 1) % CTA_TYPES.length];
+  let t = forced || CTA_TYPES[PH % CTA_TYPES.length];
+  if (!forced && t === prevType) t = CTA_TYPES[(PH + 1) % CTA_TYPES.length];
   CTA_TYPE = t;
   l.text = CTA_POOL[t][(PH >>> 4) % CTA_POOL[t].length];
 });
@@ -372,7 +379,7 @@ lines.forEach((l) => {
   if (l.cta) {
     // CTA: the channel handle pulses so viewers see who to follow
     tl.push(`tl.to("#channel-badge", {scale:1.22, duration:0.18, yoyo:true, repeat:3, ease:"power2.out"}, ${r3(l.start + 0.2)});`);
-    // icon for the CTA type (follow = +, like = thumbs-up, save = bookmark) pops at the left of the handle
+    // icon for the CTA type (follow = +, like = thumbs-up) pops at the left of the handle
     tl.push(`tl.fromTo("#cta-icon", {scale:0, rotation:-25, opacity:0}, {scale:1, rotation:0, opacity:1, duration:0.4, ease:"back.out(3)"}, ${r3(l.start + 0.15)});`);
     tl.push(`tl.to("#cta-icon", {scale:1.2, duration:0.18, yoyo:true, repeat:3, ease:"power2.out"}, ${r3(l.start + 0.6)});`);
   }
@@ -414,7 +421,6 @@ SPARKS.forEach(([dx, dy], k) => {
 const CTA_ICON = {
   follow: `<circle r="34" /><path class="ink" d="M0,-17 V17 M-17,0 H17" />`,
   like: `<rect x="-35" y="-6" width="15" height="38" rx="3" /><path d="M-14,32 H17 Q25,32 27,24 L33,0 Q35,-12 24,-12 H9 L12,-25 Q14,-37 3,-37 Q-2,-37 -4,-31 L-14,-8 Z" />`,
-  save: `<path d="M-22,-34 H22 Q26,-34 26,-30 V34 L0,16 L-26,34 V-30 Q-26,-34 -22,-34Z" />`,
 };
 if (BRAND?.handle) {
   const parts = BRAND.parts || [[BRAND.handle, "hot"]];

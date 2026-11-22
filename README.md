@@ -1,14 +1,27 @@
 # vfx — code-based video editor
 
-The pipeline behind **Knowledge by Joe** (@knowledgebyjoe): 30–45 second
-explainer reels — big ideas, simple explanations — written as code, voiced with ElevenLabs and rendered to MP4.
+The pipeline behind **Knowledge by Joe** (@knowledgebyjoe) — *Quick comparisons. Easy explanations. Learn something
+new every day.* 30–40 second reels, two quick comparisons each, written as code, voiced with ElevenLabs and rendered to MP4.
 Two rendering engines + GSAP for motion + FFmpeg for the heavy lifting, plus **vfx Studio**, a Mac app to make
 reels without the terminal. Everything is per project, and reels are 1080×1920 (9:16) by default.
 
-**What a reel is:** paste a script → `script.json` (lines, cards, Joe's reaction stickers, actions, recap, CTA) →
-`build.mjs` syncs every caption and animation to the ElevenLabs word timings → HyperFrames renders →
-`<project>-final_edit.mp4` (or `-final-edit.mp4`), full HD at ~5 MB, reviewed against `REVIEW.md` before posting.
-Brand rules (fonts, colors, layout, sound, CTA rotation) live in `BRAND.md`; every topic is logged in `TOPICS.md`.
+**What a reel is:** paste a topic or a script → `script.json` (lines, cards, Joe's reaction stickers, actions, tip, CTA)
+→ `build.mjs` syncs every caption and animation to the ElevenLabs word timings → HyperFrames renders →
+`<project>-final_edit.mp4` (or `-final-edit.mp4`), full HD at ~5.5 MB, reviewed against `REVIEW.md` before posting.
+Brand rules (fonts, colors, layout, sound, CTA) live in `BRAND.md`; every topic is logged in `TOPICS.md`.
+
+### The format — two comparisons per reel
+Any topic, general knowledge (Celsius vs Fahrenheit, kilometers vs miles, weather vs climate…). Per comparison:
+**"This is X." → "This is Y."** (cards pop in) → **a difference question** → **one line about each** → **a real example
+with numbers** (the facts pop on the cards as they're said). Then **one line in Joe's own voice** (a take or a memory
+trick, shown as a "Joe's tip" tile) and a **follow or like CTA** (never the same type twice in a row).
+
+To stay monetizable (YouTube's July 2026 "repetitive / template-based" rule) the spine stays fixed but every reel changes
+the hook, the question wording, card colours, stickers, background, SFX style, Joe's line and the CTA — and never
+repeats a topic or pair from `TOPICS.md`. Education only, never advice. Details: `BRAND.md` §1–2, `CLAUDE.md` (YPP).
+
+**Voice:** ElevenLabs **Liam** at 1.12× (a default voice — works on the free plan). Library voices (e.g. Brian S) and
+commercial rights need a paid plan. **SFX:** library sounds only (CC0 uisfx + earshot renders), no Content ID risk.
 
 ```
 vfx/
@@ -22,7 +35,8 @@ vfx/
 ├── output/
 │   └── <project>/               # ONE video: <project>-final_edit.mp4 or -final-edit.mp4 (+ review/)
 ├── hyperframes/
-│   ├── _template/               # starter for new projects
+│   ├── _template/               # starter for new reels: build.mjs (cards from script.json), make.sh,
+│   │                            #   script.json (voice, timing, library-only sound mix)
 │   └── <project>/index.html     # the HyperFrames edit
 │         assets/  → input/<project>     general/ → input/general
 ├── app/                         # vfx Studio — the Mac app (Electron + React + TypeScript)
@@ -37,12 +51,15 @@ You never copy footage into the engine folders. Each project reads straight from
 
 A CapCut-style editor on top of this pipeline — no Terminal needed:
 
-- **+ New reel → paste a script** in the chat: it writes the reel, names it from the topic, builds the cards and makes
-  the ElevenLabs voice. Ask for revisions in the same chat.
+- **+ New reel → paste a topic or a script** in the chat: it picks the two comparisons (skipping anything already in
+  `TOPICS.md`), writes the reel, names it, builds the cards and makes the ElevenLabs voice. Ask for revisions in the
+  same chat. A reel without a voice gets one as soon as you open it.
 - **Media bin** (stickers, 1,194 SFX, backgrounds, your files), **frame-accurate preview** with voice + SFX in sync
   (full screen, Esc to exit), **timeline** you can drag clips on (snaps to words).
-- **Export** at **30 or 60 fps** → small full-HD MP4 → automatic review (loudness, dead air, every frame).
-- Light / dark / follow macOS; the app icon follows Tahoe's Icon & widget style.
+- **Export** at **30 or 60 fps** with a **progress bar** (Preparing → Rendering frames → Encoding → Balancing loudness;
+  the log sits behind "Show details") → small full-HD MP4, encoded once → automatic review (loudness, dead air, every frame).
+- Light / dark / follow macOS; the app icon follows Tahoe's Icon & widget style. In `npm run dev` it's named
+  **vfx Studio** in the menu bar, Dock and ⌘-Tab (not "Electron").
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/editor-dark.png">
@@ -62,7 +79,7 @@ cd ~/Desktop/vfx
 
 ```bash
 ./scripts/new-project.sh "Rancho at Mula de Victoria"   # → rancho-at-mula-de-victoria (both engines)
-./scripts/new-project.sh halloween hf                    # HyperFrames only   (or: remotion)
+./scripts/new-project.sh halloween hf                    # HyperFrames only   (or: remotion) — copies the reel builder
 
 # drop footage into input/<project>/, shared stuff into input/general/
 
@@ -70,6 +87,7 @@ cd ~/Desktop/vfx
 ./scripts/preview.sh halloween remotion   # Remotion Studio
 ./scripts/check.sh halloween              # lint a HyperFrames project
 ./scripts/render.sh halloween             # → output/halloween/halloween-final_edit.mp4 (or -final-edit), full HD, small
+                                          #   prints "progress: 45% Rendering frames" lines; full log in $TMPDIR
 ./scripts/render.sh halloween remotion
 FPS=60 ./scripts/render.sh halloween      # 60 fps (default 30) · CRF=20 for a bigger, closer file · VERBOSE=1 full log
 ./scripts/render.sh halloween hf -q delivery    # extra args go to the engine
