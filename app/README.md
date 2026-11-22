@@ -12,10 +12,10 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | **Preview** (center) | The real HyperFrames composition, seeked frame-accurately to the playhead, with voice + SFX playing in sync. Safe-zone overlay (REVIEW.md zones). "Rendered" switch plays the FINAL mp4. Full-screen button (right of the controls) fills the screen; <kbd>Esc</kbd> returns. |
 | **Timeline** (bottom) | Captions, Cards, Avatar, FX, Media, Voice (waveform), SFX, Background. Click/drag the ruler to scrub, drag clips to move them (snaps to words), drop media to add it, ⌫ removes media you added, zoom slider. |
 | **Inspector** (right) | Start/duration of the selected clip, position + volume of added media, and a sticker picker that swaps the reaction for that script line. |
-| **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a new script, ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
-| **+ New reel** (title bar, media bin tile, reel picker) | Creates and opens `new-reel` right away (drop files into it), then you paste a script in the chat: Claude renames the reel from the topic, writes the script + cards, the app builds the preview and makes the **ElevenLabs voice by itself** — no Terminal. |
+| **Chat** (right) | Claude Code running in the vfx folder (`claude -p`, your own login — no API key). Paste a topic or a script for a new reel (always two comparisons — see BRAND.md §2), ask for changes, "review this reel". It follows CLAUDE.md, BRAND.md, REVIEW.md and `.claude/`. |
+| **+ New reel** (title bar, media bin tile, reel picker) | Creates and opens `new-reel` right away (drop files into it), then you paste a topic or a script in the chat: Claude picks the two comparisons, renames the reel, writes the script + cards (builder and voice/sound settings from `hyperframes/_template/`), the app builds the preview and makes the **ElevenLabs voice by itself** — no Terminal. Opening any reel that has a script but no voice makes the voice too. |
 | **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
-| **Export / Review** (title bar) | Export renders `<p>-final_edit.mp4` or `<p>-final-edit.mp4` (random name, small H.264, same 1080×1920) at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Live log for every run. |
+| **Export / Review** (title bar) | Export renders `<p>-final_edit.mp4` or `<p>-final-edit.mp4` (random name, small H.264, same 1080×1920) at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Export shows a **progress bar** with the stage; every run's log sits behind "Show details" (opens by itself if a run fails). |
 
 **Appearance:** the System / Light / Dark switch in the title bar. Saved in the app's `settings.json` (userData,
 next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
@@ -26,7 +26,8 @@ on macOS 26 Tahoe+ it follows **System Settings → Appearance → Icon & widget
 switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an Icon Composer icon
 (`build/AppIcon.icon`) that `npm run icon` compiles into `Assets.car` during `npm run dist:mac`; this needs
 **Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
-In `npm run dev` the Dock shows that classic icon too (dev runs inside Electron's own app bundle).
+In `npm run dev` the Dock shows that classic icon too. Dev runs inside Electron's own app bundle, which the `predev` step
+renames to `vfx Studio.app` (`scripts/dev-app-name.ts`), so the menu bar, Dock and ⌘-Tab say **vfx Studio**.
 
 Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second · <kbd>Esc</kbd> leave full screen.
 

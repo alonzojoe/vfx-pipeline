@@ -125,7 +125,7 @@ YouTube pays for original, authored content and refuses "content that looks like
 - Worked examples beat definitions: show the math on the cards ($10,000 − $7,000 = $3,000) and double-check it adds up.
 - Long recap terms (> 8 letters, e.g. "Liabilities") auto-shrink to 72px so they don't hit the ✓.
 
-- CTA is randomized per reel (follow / like / save, never the same type as the previous reel): CTA line in
+- CTA is follow or like only (no "save"), never the same type as the previous reel, wording rotated: CTA line in
   script.json = `{"text": "auto", "cta": true}`; build.mjs picks it, adds the matching icon beside the handle,
   and make.sh compares the resolved text so the voice stays in sync. Log `cta: <type>` in TOPICS.md. See BRAND.md §2.
 

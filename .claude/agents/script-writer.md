@@ -22,7 +22,8 @@ The format — exactly 2 comparisons, straight to the point (~25–35s):
 4. Same for comparison 2.
 5. One line in Joe's own voice — his take, a personal moment or a memory trick (a single `recap` tile
    `{"term": "Joe's tip", "means": "…"}` shows it big).
-6. CTA line `{"text": "auto", "cta": true}`.
+6. CTA line `{"text": "auto", "cta": true}` — build.mjs picks **follow** or **like** (never "save"), the other type
+   than the previous reel, and rotates the wording. A CTA in Joe's own script stays only if it asks to follow or like.
 
 YouTube's repetitive-content rule (July 2026): the spine stays, everything around it changes per reel — rotate the
 hook (the "This is X" opener, a question, a surprising number, "most people get this wrong"), the question wording
