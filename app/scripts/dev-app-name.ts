@@ -3,12 +3,17 @@
 // Monitor, and after Info.plist in the menu bar / Dock — so both have to say the app's productName:
 //   1. rename the bundle to "<productName>.app" and point electron's path.txt at it (that's how `electron` and
 //      electron-vite find the binary)
-//   2. set CFBundleName / CFBundleDisplayName in its Info.plist, re-sign it ad hoc (Apple Silicon needs a valid
-//      signature) and register it with LaunchServices so the new name shows right away.
+//   2. set CFBundleName / CFBundleDisplayName in its Info.plist
+//   3. swap Electron's icon for ours (build/icon.png → the bundle's .icns, plus build/mac-resources/Assets.car for the
+//      macOS 26 Icon & widget style when `npm run icon` has built it) — notifications, Finder and ⌘-Tab read the
+//      bundle's icon, not the Dock icon the app sets at runtime
+//   4. re-sign it ad hoc (Apple Silicon needs a valid signature) and register it with LaunchServices so the new name
+//      and icon show right away.
 // The built app (npm run dist:mac) is already named by electron-builder. npm install re-creates Electron.app, so this
 // runs every time (a no-op once everything is right).
 import { execFileSync } from 'node:child_process'
-import { existsSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const LSREGISTER = '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
@@ -37,17 +42,46 @@ if (process.platform === 'darwin') {
 
   // 2. Info.plist name
   const plist = join(bundle, 'Contents/Info.plist')
-  if (existsSync(plist)) {
-    const read = (key: string): string => {
-      try {
-        return execFileSync('/usr/libexec/PlistBuddy', ['-c', `Print :${key}`, plist], { encoding: 'utf8' }).trim()
-      } catch {
-        return ''
-      }
+  const read = (key: string): string => {
+    try {
+      return execFileSync('/usr/libexec/PlistBuddy', ['-c', `Print :${key}`, plist], { encoding: 'utf8' }).trim()
+    } catch {
+      return ''
     }
+  }
+  if (existsSync(plist)) {
     if (read('CFBundleName') !== name || read('CFBundleDisplayName') !== name) {
       for (const key of ['CFBundleName', 'CFBundleDisplayName']) execFileSync('plutil', ['-replace', key, '-string', name, plist])
       changed = true
+    }
+  }
+
+  // 3. icon: our build/icon.png (and the Icon Composer Assets.car, if built) instead of Electron's atom
+  const png = join(root, 'build/icon.png')
+  const car = join(root, 'build/mac-resources/Assets.car')
+  const res = join(bundle, 'Contents/Resources')
+  const stamp = join(res, '.vfx-icon')
+  const version = [png, car].map((f) => (existsSync(f) ? `${statSync(f).size}:${statSync(f).mtimeMs}` : '-')).join('|')
+  if (existsSync(plist) && existsSync(png) && (!existsSync(stamp) || readFileSync(stamp, 'utf8') !== version)) {
+    try {
+      const icns = join(res, read('CFBundleIconFile') || 'electron.icns')
+      const set = join(tmpdir(), 'vfx-dev-icon.iconset')
+      rmSync(set, { recursive: true, force: true })
+      mkdirSync(set)
+      for (const px of [16, 32, 128, 256, 512]) {
+        execFileSync('sips', ['-z', `${px}`, `${px}`, png, '--out', join(set, `icon_${px}x${px}.png`)], { stdio: 'ignore' })
+        execFileSync('sips', ['-z', `${px * 2}`, `${px * 2}`, png, '--out', join(set, `icon_${px}x${px}@2x.png`)], { stdio: 'ignore' })
+      }
+      execFileSync('iconutil', ['-c', 'icns', set, '-o', icns])
+      rmSync(set, { recursive: true, force: true })
+      if (existsSync(car)) {
+        copyFileSync(car, join(res, 'Assets.car'))
+        execFileSync('plutil', ['-replace', 'CFBundleIconName', '-string', 'AppIcon', plist])
+      }
+      writeFileSync(stamp, version)
+      changed = true
+    } catch (e) {
+      console.log(`• could not set the dev app icon (${(e as Error).message.split('\n')[0]}) — notifications keep Electron's icon`)
     }
   }
 
@@ -63,6 +97,7 @@ if (process.platform === 'darwin') {
     } catch {
       // not fatal: macOS picks the name up on its own after a moment
     }
-    console.log(`▸ dev app named "${name}" (menu bar, Dock, ⌘-Tab)`)
+    execFileSync('touch', [bundle]) // Finder / Notification Center notice the new icon
+    console.log(`▸ dev app named "${name}" with its own icon (menu bar, Dock, ⌘-Tab, notifications)`)
   }
 }
