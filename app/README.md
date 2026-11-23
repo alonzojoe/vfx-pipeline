@@ -27,7 +27,8 @@ switching Light/Dark mode alone doesn't change it, same as Apple's apps. It's an
 (`build/AppIcon.icon`) that `npm run icon` compiles into `Assets.car` during `npm run dist:mac`; this needs
 **Xcode 26** (`actool`). Without it, and on macOS 11–15, the app has the classic orange icon (`build/icon.png`).
 In `npm run dev` the Dock shows that classic icon too. Dev runs inside Electron's own app bundle, which the `predev` step
-renames to `vfx Studio.app` (`scripts/dev-app-name.ts`), so the menu bar, Dock and ⌘-Tab say **vfx Studio**.
+renames to `vfx Studio.app` (`scripts/dev-app-name.ts`) and gives our icon, so the menu bar, Dock, ⌘-Tab and
+notifications say **vfx Studio** with its own icon.
 
 Keys: <kbd>Space</kbd> play/pause · <kbd>Home</kbd>/<kbd>End</kbd> start/end · <kbd>←</kbd>/<kbd>→</kbd> one frame · <kbd>⇧</kbd>+arrow one second · <kbd>Esc</kbd> leave full screen.
 
