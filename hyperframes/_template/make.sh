@@ -16,7 +16,7 @@ if [ -f "$VOICE_DIR/script.words.json" ] && ! node -e '
   process.exit(s.id===w.voice && s.model===w.model && (w.text||"").trim()===txt ? 0 : 1)' "$HERE/script.json" "$VOICE_DIR/script.words.json"; then
   echo "▸ Script or voice changed in script.json → regenerating voice"; REVOICE=1
 fi
-if [ "$REVOICE" = 1 ]; then rm -f "$VOICE_DIR/script.mp3" "$VOICE_DIR/script.words.json"; fi
+if [ "$REVOICE" = 1 ]; then rm -f "$VOICE_DIR/script.mp3" "$VOICE_DIR/script.raw.mp3" "$VOICE_DIR/script.fx.json" "$VOICE_DIR/script.words.json"; fi
 if [ ! -f "$VOICE_DIR/script.mp3" ]; then
   echo "▸ Generating voiceover with ElevenLabs…"
   node "$HERE/build.mjs" --print-text > "$ROOT/input/$P/script.txt"
@@ -27,6 +27,10 @@ if [ ! -f "$VOICE_DIR/script.mp3" ]; then
   "$ROOT/scripts/voice.sh" "$P" -f "$ROOT/input/$P/script.txt" --name script \
     --voice "$VID" --model "$MODEL" --stability "$STAB" --similarity "$SIM" --style "$STYLE" --speed "$SPEED"
 fi
+
+# voice enhancer: the channel's own sound (preset in brand.json "voiceFx", or script.json "voice.fx"; "off" = raw).
+# Keeps the raw take as script.raw.mp3, so switching presets re-processes it for free (no ElevenLabs credits).
+node "$ROOT/scripts/voice-fx.mjs" "$P"
 
 echo "▸ Building edit synced to the voice…"
 node "$HERE/build.mjs"

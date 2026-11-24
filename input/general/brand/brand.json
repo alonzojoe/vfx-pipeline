@@ -29,6 +29,8 @@
   "ui": "Fredoka 600/700 (mock UIs, numbers)"
  },
  "rules": "See BRAND.md",
+ "voiceFx": "signature",
+ "voiceFxNote": "Voice enhancer preset for new reels (node scripts/voice-fx.mjs --list): clear | warm | signature | off. One reel can override it with script.json \"voice\": {\"fx\": \"...\"}.",
  "name": "Knowledge by Joe",
  "profile_picture": "my different reactions/chill.png on white, circle crop (same on YouTube, TikTok, Facebook)"
 }

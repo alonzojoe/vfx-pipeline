@@ -112,6 +112,12 @@ No other colors for brand elements. No gradients except inside mock bank cards.
   Library voices (e.g. Brian S) need a paid ElevenLabs plan, and so do commercial rights (YPP). New reels take the
   voice from `hyperframes/_template/script.json`. Future upgrade: Joe's own voice
   (recording or his own ElevenLabs voice clone) — strongest proof of a real creator for YPP.
+- **Voice enhancer (the channel's own sound):** every new reel's ElevenLabs take goes through `scripts/voice-fx.mjs`
+  so it doesn't sound like the stock Liam thousands of channels use. Preset in `input/general/brand/brand.json`
+  `"voiceFx"` (now **signature**): `clear` (presence lift, less mud, soft compression), `warm` (radio warmth + air,
+  tighter compression), `signature` (warm + ~1 semitone deeper at the same speed + a tiny room), `off`. Clarity first:
+  no pitch shift beyond 1 semitone, no audible echo. Same length (captions stay synced), level matched to the raw take
+  (SFX mix stays balanced); the raw take is kept as `script.raw.mp3`, so changing the preset costs no credits.
 - **New reels use library sounds only** (uisfx CC0 + earshot renders, `input/general/sfx/LICENSES.md`): Joe's 6
   downloaded SFX have unknown sources (Content ID risk for YPP), so they stay only in the older reels.
   Whoosh on scene changes, riser into the CTA, rotate variants so nothing repeats twice in a row; pick a different
