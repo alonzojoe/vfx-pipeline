@@ -28,6 +28,8 @@ Reels are 1080x1920 (9:16) by default.
   `voiceFx` or script.json `voice.fx` (`clear | warm | off`, `--list`; natural EQ + light compression, no pitch/echo). Raw take kept as `script.raw.mp3`,
   `script.fx.json` = preset applied; same length + level as the raw take. `--samples` → every preset in
   `input/<p>/voice/samples/` to compare. Older reels (own make.sh): run it by hand, then `node hyperframes/<p>/build.mjs`.
+  vfx Studio's title-bar **Voice** picker (Warm · Clear · Raw) writes the same brand.json key and re-applies it to the
+  open reel (`enhance` run).
 - FFmpeg helpers: `probe, trim, to-reel, concat, add-music, extract-audio, compress` in `scripts/`.
 
 ## Rules
