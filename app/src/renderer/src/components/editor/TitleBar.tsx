@@ -125,14 +125,14 @@ export const TitleBar = memo(function TitleBar({ project, projects, stages, busy
             <polygon points="7 4 20 12 7 20" />
           </svg>
         </span>
-        <span className="font-semibold tracking-tight">vfx Studio</span>
+        <span className="whitespace-nowrap font-semibold tracking-tight">vfx Studio</span>
       </div>
 
       <ReelPicker project={project} projects={projects} onProject={onProject} onNew={onNew} />
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-1.5 text-xs" aria-label="Pipeline">
+      <div className="hidden items-center gap-1.5 text-xs min-[1400px]:flex" aria-label="Pipeline">
         <Stage label="Script" state={stages.script} />
         <Stage label="Voice" state={stages.voice} />
         <Stage label="Build" state={stages.build} />
