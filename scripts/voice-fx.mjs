@@ -11,9 +11,10 @@
 //   node scripts/voice-fx.mjs <project>                 # apply the preset from script.json "voice.fx" or brand.json
 //   node scripts/voice-fx.mjs <project> --preset clear  # force one ("off" = raw voice)
 //   node scripts/voice-fx.mjs --in a.mp3 --out b.mp3 --preset warm   # any file (samples, A/B tests)
+//   node scripts/voice-fx.mjs <project> --samples       # every preset → input/<p>/voice/samples/ to compare by ear
 //   node scripts/voice-fx.mjs --list
 import { execFileSync, spawnSync } from "node:child_process";
-import { copyFileSync, existsSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -110,6 +111,18 @@ export function enhanceProject(project, force) {
   writeFileSync(stamp, JSON.stringify({ preset: want, chain }, null, 2) + "\n");
 }
 
+/** Every preset from the project's raw take → input/<p>/voice/samples/<preset>.mp3 (free, nothing else changes). */
+export function samplesFor(project) {
+  const dir = join(ROOT, "input", project, "voice");
+  const raw = existsSync(join(dir, "script.raw.mp3")) ? join(dir, "script.raw.mp3") : join(dir, "script.mp3");
+  if (!existsSync(raw)) throw new Error(`no voice yet for ${project}`);
+  const out = join(dir, "samples");
+  mkdirSync(out, { recursive: true });
+  copyFileSync(raw, join(out, "off.mp3"));
+  for (const k of Object.keys(PRESETS)) enhance(raw, join(out, `${k}.mp3`), k);
+  console.log(`✓ samples: input/${project}/voice/samples/{off,${Object.keys(PRESETS).join(",")}}.mp3 — listen, then set "voiceFx" in brand.json`);
+}
+
 // ---------- CLI ----------
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const a = process.argv.slice(2);
@@ -121,7 +134,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     const r = enhance(opt("in"), opt("out"), opt("preset") || "signature");
     console.log(`✓ ${opt("out")} · ${r.d0.toFixed(2)}s → ${r.d1.toFixed(2)}s · gain ${r.gain.toFixed(1)} dB`);
   } else if (a[0] && !a[0].startsWith("--")) {
-    enhanceProject(a[0], opt("preset"));
+    if (a.includes("--samples")) samplesFor(a[0]);
+    else enhanceProject(a[0], opt("preset"));
   } else {
     console.log("usage: voice-fx.mjs <project> [--preset name] | --in a.mp3 --out b.mp3 --preset name | --list");
     process.exit(1);
