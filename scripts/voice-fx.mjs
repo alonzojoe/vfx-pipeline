@@ -5,7 +5,7 @@
 //   input/<p>/voice/script.raw.mp3   ← what ElevenLabs made (kept)
 //   input/<p>/voice/script.mp3       ← enhanced (what the reel plays)
 //   input/<p>/voice/script.fx.json   ← which preset made it
-// The length never changes (pitch is shifted without changing tempo), so script.words.json timings stay exact, and the
+// The length never changes (EQ + gentle dynamics only), so script.words.json timings stay exact, and the
 // level is matched to the raw voice, so the sound-effect mix stays balanced.
 //
 //   node scripts/voice-fx.mjs <project>                 # apply the preset from script.json "voice.fx" or brand.json
@@ -20,44 +20,28 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-// Each preset is an ffmpeg audio filter chain. Order: clean → shape → (pitch) → control → (room) → safety.
-const CLEAN = "highpass=f=80,equalizer=f=250:t=q:w=1.2:g=-2";            // rumble + muddiness out
-const DEESS = "deesser=i=0.35:m=0.5:f=0.5";                                // tame harsh "s"
-const LIMIT = "alimiter=limit=0.89:attack=5:release=60:level=false";       // no clipping after the boosts
+// Each preset is an ffmpeg audio filter chain. Rule: sound like a person, not a processor —
+//  - gentle, wide EQ moves (±1–2 dB) instead of narrow boosts that sound "phone-y"
+//  - soft-knee, slow-attack compression (ratio ≤ 2) so loud/soft words keep their emotion; no squashing
+//  - no pitch shift, no echo, no de-esser artifacts — the voice's own tone stays
+const CLEAN = "highpass=f=70:p=2,equalizer=f=320:t=q:w=1.4:g=-1.5";       // rumble + boxy mud out, gently
+const GLUE = "acompressor=threshold=-18dB:ratio=1.8:attack=25:release=220:knee=6:makeup=1";  // even, still alive
+const LIMIT = "alimiter=limit=0.93:attack=7:release=80:level=false";       // only catches peaks
 export const PRESETS = {
   clear: {
-    about: "Clarity only — presence lift, less mud, soft compression. Closest to the raw voice.",
-    chain: [CLEAN, "equalizer=f=3500:t=q:w=1:g=3", DEESS,
-      "acompressor=threshold=-20dB:ratio=2.5:attack=10:release=120:makeup=1.5", LIMIT],
+    about: "Natural clarity — a touch less mud, gentle presence and air, light glue. Words easy to follow, tone untouched.",
+    chain: [CLEAN, "equalizer=f=2600:t=q:w=0.9:g=1.5", "treble=g=1.5:f=8500:w=0.6", "deesser=i=0.15:m=0.4:f=0.55", GLUE, LIMIT],
   },
   warm: {
-    about: "Warm radio — fuller low-mids, clear presence, a little air, tighter compression.",
-    chain: [CLEAN, "equalizer=f=170:t=q:w=1:g=2.5", "equalizer=f=450:t=q:w=1.5:g=-1.5",
-      "equalizer=f=3000:t=q:w=1:g=3", "treble=g=2:f=9000", DEESS,
-      "acompressor=threshold=-22dB:ratio=3.5:attack=8:release=110:makeup=2.5", LIMIT],
-  },
-  signature: {
-    about: "The channel voice — Warm radio + 1 semitone deeper (same speed) + a very small room.",
-    pitch: -1,
-    chain: [CLEAN, "equalizer=f=170:t=q:w=1:g=2.5", "equalizer=f=450:t=q:w=1.5:g=-1.5",
-      "equalizer=f=3000:t=q:w=1:g=3", "treble=g=2:f=9000", "@pitch", DEESS,
-      "acompressor=threshold=-22dB:ratio=3.5:attack=8:release=110:makeup=2.5",
-      "aecho=in_gain=1:out_gain=1:delays=17|29:decays=0.05|0.035", LIMIT],
+    about: "Natural warmth — fuller chest, smooth presence, soft air. Like a good mic close to a person: friendly, clear.",
+    chain: [CLEAN, "equalizer=f=140:t=q:w=1.1:g=2", "equalizer=f=2400:t=q:w=0.8:g=1.2", "treble=g=1:f=9500:w=0.6",
+      "deesser=i=0.15:m=0.4:f=0.55", GLUE, LIMIT],
   },
 };
 
 const sh = (args) => execFileSync("ffmpeg", ["-hide_banner", "-nostdin", ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
 /** ffmpeg's log (stderr) — where analysis filters like ebur128 print their results */
 const ffLog = (args) => spawnSync("ffmpeg", ["-hide_banner", "-nostdin", ...args], { encoding: "utf8" }).stderr || "";
-let hasRubberband;
-const rubberband = () => (hasRubberband ??= /\brubberband\b/.test(execFileSync("ffmpeg", ["-hide_banner", "-filters"], { encoding: "utf8" })));
-
-/** Pitch shift without changing the length: rubberband when ffmpeg has it, else resample + tempo back. */
-function pitchFilter(semitones, rate) {
-  const k = Math.pow(2, semitones / 12);
-  if (rubberband()) return `rubberband=pitch=${k.toFixed(5)}:transients=smooth:formant=shifted`;
-  return `asetrate=${Math.round(rate * k)},aresample=${rate},atempo=${(1 / k).toFixed(5)}`;
-}
 const probe = (f, entry) => execFileSync("ffprobe", ["-v", "error", "-select_streams", "a:0", "-show_entries", entry, "-of", "csv=p=0", f], { encoding: "utf8" }).trim();
 /** Integrated loudness (LUFS) of a file. */
 function lufs(f) {
@@ -70,7 +54,7 @@ export function enhance(raw, out, presetName) {
   const p = PRESETS[presetName];
   if (!p) throw new Error(`unknown voice preset "${presetName}" (presets: ${Object.keys(PRESETS).join(", ")}, off)`);
   const rate = Number(probe(raw, "stream=sample_rate")) || 44100;
-  const chain = p.chain.map((f) => (f === "@pitch" ? pitchFilter(p.pitch || 0, rate) : f)).join(",");
+  const chain = p.chain.join(",");
   const tmp = out.replace(/\.mp3$/, "") + ".fx-tmp.wav";
   sh(["-y", "-i", raw, "-af", chain, "-ar", String(rate), tmp]);
   const gain = (lufs(raw) ?? -20) - (lufs(tmp) ?? -20); // match the raw level so the SFX mix stays as tuned
@@ -79,7 +63,7 @@ export function enhance(raw, out, presetName) {
   rmSync(tmp, { force: true });
   const d0 = Number(probe(raw, "format=duration")), d1 = Number(probe(out, "format=duration"));
   if (Math.abs(d0 - d1) > 0.08) throw new Error(`voice length changed ${d0.toFixed(2)}s → ${d1.toFixed(2)}s — timings would drift`);
-  return { gain, d0, d1, pitch: p.pitch ? (rubberband() ? "rubberband" : "resample") : null };
+  return { gain, d0, d1 };
 }
 
 /** Which preset a project wants: script.json voice.fx → brand.json voiceFx → "off". */
@@ -106,7 +90,7 @@ export function enhanceProject(project, force) {
     copyFileSync(raw, mp3);
   } else {
     const r = enhance(raw, mp3, want);
-    console.log(`✓ voice fx: ${want} · level matched (${r.gain >= 0 ? "+" : ""}${r.gain.toFixed(1)} dB) · ${r.d1.toFixed(2)}s, timings unchanged${r.pitch ? ` · pitch via ${r.pitch}` : ""}`);
+    console.log(`✓ voice fx: ${want} · level matched (${r.gain >= 0 ? "+" : ""}${r.gain.toFixed(1)} dB) · ${r.d1.toFixed(2)}s, timings unchanged`);
   }
   writeFileSync(stamp, JSON.stringify({ preset: want, chain }, null, 2) + "\n");
 }
@@ -131,7 +115,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     for (const [k, p] of Object.entries(PRESETS)) console.log(`${k.padEnd(10)} ${p.about}`);
     console.log(`${"off".padEnd(10)} The raw ElevenLabs voice.`);
   } else if (opt("in")) {
-    const r = enhance(opt("in"), opt("out"), opt("preset") || "signature");
+    const r = enhance(opt("in"), opt("out"), opt("preset") || "warm");
     console.log(`✓ ${opt("out")} · ${r.d0.toFixed(2)}s → ${r.d1.toFixed(2)}s · gain ${r.gain.toFixed(1)} dB`);
   } else if (a[0] && !a[0].startsWith("--")) {
     if (a.includes("--samples")) samplesFor(a[0]);

@@ -4,10 +4,10 @@
     "id": "TX3LPaxmHKxFdv7VOQHJ",
     "name": "Liam (ElevenLabs default — young, energetic American; works on the free plan)",
     "model": "eleven_multilingual_v2",
-    "stability": 0.38,
+    "stability": 0.3,
     "similarity": 0.8,
-    "style": 0.35,
-    "speed": 1.12
+    "style": 0.5,
+    "speed": 1.08
   },
   "background": "auto",
   "outro": 1.0,
