@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { readLog } from '@/lib/runLog'
 
-const LABEL: Record<Run['kind'], string> = { make: 'Make reel', voice: 'Voice + rebuild', build: 'Rebuild', render: 'Export', review: 'Review' }
+const LABEL: Record<Run['kind'], string> = { make: 'Make reel', voice: 'Voice + rebuild', enhance: 'Voice preset', build: 'Rebuild', render: 'Export', review: 'Review' }
 
 /** Floating status panel for the running / last pipeline command: a progress bar, the log only on demand. */
 export function RunConsole({
