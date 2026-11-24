@@ -1,10 +1,11 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { ChevronDown, ClipboardCheck, Download, Folder, Plus } from 'lucide-react'
-import type { Fps, ProjectSummary } from '../../../../shared/types'
+import type { Fps, ProjectSummary, VoiceFx } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ThemeSwitch } from './ThemeSwitch'
 import { FpsSwitch } from './FpsSwitch'
+import { VoiceFxSwitch } from './VoiceFxSwitch'
 
 export type StageState = 'done' | 'doing' | 'todo'
 export type Stages = { script: StageState; voice: StageState; build: StageState; render: StageState }
@@ -20,6 +21,9 @@ type Props = {
   onExport: () => void
   fps: Fps
   onFps: (f: Fps) => void
+  /** voice enhancer preset (Warm by default) */
+  voiceFx: VoiceFx
+  onVoiceFx: (fx: VoiceFx) => void
 }
 
 function Stage({ label, state }: { label: string; state: StageState }): JSX.Element {
@@ -111,7 +115,7 @@ function ReelPicker({ project, projects, onProject, onNew }: Pick<Props, 'projec
   )
 }
 
-export const TitleBar = memo(function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport, fps, onFps }: Props): JSX.Element {
+export const TitleBar = memo(function TitleBar({ project, projects, stages, busy, onProject, onNew, onReview, onExport, fps, onFps, voiceFx, onVoiceFx }: Props): JSX.Element {
   const ready = !!project && !project.draft
   return (
     <header className="titlebar-drag flex h-[52px] shrink-0 items-center gap-3 border-b bg-titlebar pl-[84px] pr-3">
@@ -121,14 +125,14 @@ export const TitleBar = memo(function TitleBar({ project, projects, stages, busy
             <polygon points="7 4 20 12 7 20" />
           </svg>
         </span>
-        <span className="font-semibold tracking-tight">vfx Studio</span>
+        <span className="whitespace-nowrap font-semibold tracking-tight">vfx Studio</span>
       </div>
 
       <ReelPicker project={project} projects={projects} onProject={onProject} onNew={onNew} />
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-1.5 text-xs" aria-label="Pipeline">
+      <div className="hidden items-center gap-1.5 text-xs min-[1400px]:flex" aria-label="Pipeline">
         <Stage label="Script" state={stages.script} />
         <Stage label="Voice" state={stages.voice} />
         <Stage label="Build" state={stages.build} />
@@ -136,6 +140,7 @@ export const TitleBar = memo(function TitleBar({ project, projects, stages, busy
       </div>
 
       <ThemeSwitch />
+      <VoiceFxSwitch value={voiceFx} onChange={onVoiceFx} disabled={!!busy} />
 
       <Button variant="outline" className="no-drag" onClick={onReview} disabled={!ready || !!busy}>
         <ClipboardCheck />

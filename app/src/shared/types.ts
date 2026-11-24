@@ -91,7 +91,10 @@ export type AddedClip = {
   h?: number
 }
 
-export type RunKind = 'make' | 'voice' | 'review' | 'build' | 'render'
+export type RunKind = 'make' | 'voice' | 'enhance' | 'review' | 'build' | 'render'
+
+/** Voice enhancer preset (scripts/voice-fx.mjs): the channel's sound on top of the ElevenLabs voice */
+export type VoiceFx = 'warm' | 'clear' | 'off'
 
 export type RunEvent =
   | { runId: string; type: 'start'; kind: RunKind; project: string; command: string }

@@ -8,6 +8,8 @@ import { useVfx } from '@/hooks/useVfx'
 import { usePlayback } from '@/hooks/usePlayback'
 import { useAudioEngine } from '@/hooks/useAudioEngine'
 import { useFps } from '@/hooks/useFps'
+import { useVoiceFx } from '@/hooks/useVoiceFx'
+import type { VoiceFx } from '../../shared/types'
 import { Preview } from '@/components/editor/Preview'
 import { useEffect, useRef, useState } from 'react'
 import { Timeline } from '@/components/editor/Timeline'
@@ -25,6 +27,7 @@ export default function App(): JSX.Element {
   const pb = usePlayback(project?.duration ?? 0)
   useAudioEngine(project, pb.clock, pb.playing, pb.seekId)
   const { fps, setFps } = useFps()
+  const { voiceFx, setVoiceFx } = useVoiceFx()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // switching reels: stop and go back to the start — the old position (and the voice scheduled from it) belongs to
   // the other reel, and may even be past this one's end
@@ -85,7 +88,7 @@ export default function App(): JSX.Element {
   const active = runs.active?.project === vfx.current ? runs.active?.kind : undefined
   const stages: Stages = {
     script: summary?.draft ? 'todo' : summary ? 'done' : 'todo',
-    voice: active === 'voice' || active === 'make' ? 'doing' : project?.hasVoice ? 'done' : 'todo',
+    voice: active === 'voice' || active === 'make' || active === 'enhance' ? 'doing' : project?.hasVoice ? 'done' : 'todo',
     build: active === 'build' ? 'doing' : project?.hasBuild && !summary?.draft ? 'done' : 'todo',
     render: active === 'render' ? 'doing' : project?.hasFinal ? 'done' : 'todo'
   }
@@ -147,6 +150,11 @@ export default function App(): JSX.Element {
     await window.api.setLineReaction(vfx.current, line, sticker)
     rebuild()
   })
+  // a new voice preset: saved for every reel; the open reel's kept raw take is re-processed right away (no credits)
+  const onVoiceFx = useStable(async (fx: VoiceFx): Promise<void> => {
+    await setVoiceFx(fx)
+    if (vfx.current && project?.hasVoice && !runs.active) runs.start('enhance', vfx.current)
+  })
   const onReview = useStable(() => vfx.current && runs.start('review', vfx.current))
   const onExport = useStable(() => vfx.current && runs.start('render', vfx.current))
   const onDeleteClip = useStable((c: Clip) => {
@@ -207,6 +215,8 @@ export default function App(): JSX.Element {
           onExport={onExport}
           fps={fps}
           onFps={setFps}
+          voiceFx={voiceFx}
+          onVoiceFx={onVoiceFx}
         />
         <div className="flex min-h-0 flex-1">
           <MediaBin project={vfx.current} media={vfx.media} onImported={vfx.reload} onNew={newReel} />
