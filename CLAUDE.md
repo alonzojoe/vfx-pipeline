@@ -24,6 +24,10 @@ Reels are 1080x1920 (9:16) by default.
 - `./scripts/preview.sh <name> [hf|remotion]`, `./scripts/render.sh <name> [hf|remotion|both] [engine args]`, `./scripts/check.sh <name>`
 - Frame rate: 30 fps by default; `FPS=60 ./scripts/render.sh <name>` (or `FPS=60 ./make.sh`) renders 60. The app's 30/60 switch next to Export sets it.
 - Voiceover: `./scripts/voice.sh <project|general> "text" [--name x] [--voice id] [--model id]` → `input/<project>/voice/<name>.mp3` + `<name>.words.json` (word timings for captions). Key and defaults in `.env` (never print or commit it).
+- Voice enhancer: `node scripts/voice-fx.mjs <project>` (make.sh runs it after every voice) — preset from brand.json
+  `voiceFx` or script.json `voice.fx` (`clear | warm | signature | off`, `--list`). Raw take kept as `script.raw.mp3`,
+  `script.fx.json` = preset applied; same length + level as the raw take. `--samples` → every preset in
+  `input/<p>/voice/samples/` to compare. Older reels (own make.sh): run it by hand, then `node hyperframes/<p>/build.mjs`.
 - FFmpeg helpers: `probe, trim, to-reel, concat, add-music, extract-audio, compress` in `scripts/`.
 
 ## Rules
