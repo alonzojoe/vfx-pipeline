@@ -11,6 +11,8 @@ const COMMANDS: Record<RunKind, (p: string) => string> = {
   make: (p) => `FPS=${getFps()} ./hyperframes/${q(p)}/make.sh`, // voice (if missing/changed) → build → render
   voice: (p) => `./hyperframes/${q(p)}/make.sh --no-render`, // ElevenLabs voice → synced build (no terminal)
   build: (p) => `node hyperframes/${q(p)}/build.mjs`,
+  // re-process the kept raw take with the chosen voice preset (free, no ElevenLabs), then rebuild
+  enhance: (p) => `node scripts/voice-fx.mjs ${q(p)} && node hyperframes/${q(p)}/build.mjs`,
   render: (p) => `FPS=${getFps()} ./scripts/render.sh ${q(p)} hf`,
   review: (p) => `./scripts/review.sh ${q(p)}`
 }

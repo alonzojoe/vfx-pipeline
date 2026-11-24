@@ -11,7 +11,8 @@ import type {
   RunEvent,
   RunKind,
   ThemeSource,
-  ThemeState
+  ThemeState,
+  VoiceFx
 } from '../shared/types'
 
 // Theme before first paint: ask main for the saved theme synchronously, then tag <html> the moment the parser
@@ -40,6 +41,9 @@ const api = {
   /** export frame rate (30 / 60), saved across restarts */
   getFps: (): Promise<Fps> => ipcRenderer.invoke('fps:get'),
   setFps: (fps: Fps): Promise<Fps> => ipcRenderer.invoke('fps:set', fps),
+  /** voice enhancer preset (brand.json "voiceFx"): warm (default) / clear / off */
+  getVoiceFx: (): Promise<VoiceFx> => ipcRenderer.invoke('voicefx:get'),
+  setVoiceFx: (fx: VoiceFx): Promise<VoiceFx> => ipcRenderer.invoke('voicefx:set', fx),
   getTheme: (): Promise<ThemeState> => ipcRenderer.invoke('theme:get'),
   setTheme: (source: ThemeSource): Promise<ThemeState> => ipcRenderer.invoke('theme:set', source),
   onThemeChanged: (cb: (t: ThemeState) => void): (() => void) => on('theme:changed', cb),
