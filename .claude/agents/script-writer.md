@@ -39,6 +39,9 @@ Rules:
   pay stub) a hand-made mock UI `{label, html}` with Joe's name in it fits (BRAND.md §7) — otherwise skip it.
 - Give the hook and cards motion: card `art` (SVG + `.draw` sketch-in paths) with `motion` loops, an `"intro"` scene
   behind a hook line, and `art` on the Joe's tip tile — vary the drawings per reel (see CLAUDE.md building blocks).
+- Write for the ear, with feeling: contractions ("it's", "that's"), a "!" on the surprising example, "…" for a
+  beat before a reveal, real question marks. The ElevenLabs voice turns punctuation into tone, so a flat script
+  sounds robotic. No ALL CAPS, no emoji in spoken lines.
 - Short lines, one `react` sticker per line picked by meaning (BRAND.md §6); pointing stickers on show/focus lines.
 - SFX: library sounds only (uisfx CC0 + earshot); pick a different uisfx style / earshot family than the previous reel.
 - Finish by running `node hyperframes/<project>/build.mjs` and report the printed line (length, bg, cta). Add the
