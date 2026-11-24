@@ -19,7 +19,7 @@ export function useAudioEngine(project: ProjectDetail | null, clock: Clock, play
     if (!ctx.current) ctx.current = new AudioContext()
     let p = buffers.current.get(src)
     if (!p) {
-      p = fetch(vfxUrlOf(src))
+      p = fetch(vfxUrlOf(src), { cache: 'no-store' }) // a re-processed voice keeps its file name
         .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(r.status)))
         .then((b) => ctx.current!.decodeAudioData(b))
         .catch(() => null)
