@@ -20,9 +20,10 @@ To stay monetizable (YouTube's July 2026 "repetitive / template-based" rule) the
 the hook, card colours, stickers, background, SFX style, Joe's line and the CTA — and never
 repeats a topic or pair from `TOPICS.md`. Education only, never advice. Details: `BRAND.md` §1–2, `CLAUDE.md` (YPP).
 
-**Voice:** ElevenLabs **Liam** at 1.12× (a default voice — works on the free plan), then the **voice enhancer**
-(`scripts/voice-fx.mjs`, preset `signature`: clearer, warmer, a touch deeper, same timing) so the channel has its own
-sound. Compare presets on any reel: `node scripts/voice-fx.mjs <reel> --samples`. Library voices (e.g. Brian S) and
+**Voice:** ElevenLabs **Liam** at 1.08×, expressive settings (a default voice — works on the free plan), then the **voice enhancer**
+(`scripts/voice-fx.mjs`, preset `warm`: natural warmth and clarity, light compression that keeps the emotion, same
+timing) so the channel has its own sound; tone and emotion come from expressive voice settings and scripts written
+with feeling. Compare presets on any reel: `node scripts/voice-fx.mjs <reel> --samples`. Library voices (e.g. Brian S) and
 commercial rights need a paid plan. **SFX:** library sounds only (CC0 uisfx + earshot renders), no Content ID risk.
 
 ```
