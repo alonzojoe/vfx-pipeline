@@ -16,6 +16,11 @@ Any topic, general knowledge (Celsius vs Fahrenheit, kilometers vs miles, weathe
 with numbers** (the facts pop on the cards as they're said). Then **one line in Joe's own voice** (a take or a memory
 trick, shown as a "Joe's tip" tile) and a **follow or like CTA** (never the same type twice in a row).
 
+**Originality check** (`node scripts/originality.mjs <reel>`): YouTube's four examples of unmonetizable content —
+repetitive with minimal variation, the same storyline template, slideshow-like with little educational value,
+mass-produced AI without the creator's own perspective — are checked against every earlier reel before each export
+(a ✗ stops it; the review report and the app's new-reel checklist show the result).
+
 To stay monetizable (YouTube's July 2026 "repetitive / template-based" rule) the spine stays fixed but every reel changes
 the hook, card colours, stickers, background, SFX style, Joe's line and the CTA — and never
 repeats a topic or pair from `TOPICS.md`. Education only, never advice. Details: `BRAND.md` §1–2, `CLAUDE.md` (YPP).
