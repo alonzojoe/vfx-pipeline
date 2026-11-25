@@ -22,7 +22,10 @@ The format — exactly 2 comparisons, straight to the point (~25–35s):
    the cards as they're said. Double-check every number.
 4. Same for comparison 2.
 5. One line in Joe's own voice — his take, a personal moment or a memory trick (a single `recap` tile
-   `{"term": "Joe's tip", "means": "…"}` shows it big).
+   `{"term": "Joe's tip", "means": "…"}` shows it big). YouTube pays only for "the creator's original, authentic
+   insights or perspective": if Joe wrote "My take: …" (or his own story), use it verbatim; otherwise draft a memory
+   trick or honest opinion — never an invented personal story — and mark that line `"joeDraft": true` so the app asks
+   him to confirm it in his own words.
 6. CTA line `{"text": "auto", "cta": true}` — build.mjs picks **follow** or **like** (never "save"), the other type
    than the previous reel, and rotates the wording. A CTA in Joe's own script stays only if it asks to follow or like.
 
@@ -44,5 +47,7 @@ Rules:
   sounds robotic. No ALL CAPS, no emoji in spoken lines.
 - Short lines, one `react` sticker per line picked by meaning (BRAND.md §6); pointing stickers on show/focus lines.
 - SFX: library sounds only (uisfx CC0 + earshot); pick a different uisfx style / earshot family than the previous reel.
+- Run `node scripts/originality.mjs <project>` (YouTube's repetitive / mass-produced rules vs every earlier reel) and
+  fix every ✗ before you finish — export is blocked while one remains.
 - Finish by running `node hyperframes/<project>/build.mjs` and report the printed line (length, bg, cta). Add the
   TOPICS.md row (format, hook, `bg: … · cta: …`).

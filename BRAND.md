@@ -31,8 +31,10 @@ Per comparison (×2):
    The numbers are on the cards and pulse/pop as they're said. Math and facts double-checked.
 
 Then:
-5. **One line from Joe** — his own take, a personal moment or a memory trick ("I always mix these up when I travel" →
-   "Joe's tip: miles × 1.6 ≈ km" tile). This is the "own perspective" YouTube looks for.
+5. **One line from Joe — really his** — his own take, a personal moment or a memory trick ("Joe's tip" tile).
+   This is the "creator's original, authentic insights or perspective" YouTube requires. Joe writes it ("My take: …"
+   in the chat) or confirms the draft; a script never invents a personal story for him. A drafted line carries
+   `"joeDraft": true` and the originality check flags it until Joe has said it in his own words.
 6. **CTA: follow or like** (no "save" — follows and likes are what grow the channel). **follow** ("Follow for more
    quick comparisons!") or **like** ("Hit like if this made sense!"), never the same type as the previous reel, wording
    rotated from 4 variants each. In script.json: `{"text": "auto", "cta": true}` — build.mjs picks the type + wording
