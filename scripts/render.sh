@@ -7,6 +7,7 @@
 #   FPS=60 ./scripts/render.sh halloween               # 30 (default) or 60 fps — HyperFrames; the app's 30/60 switch sets it
 #   CRF=20 ./scripts/render.sh halloween               # bigger file (default 25 for HyperFrames ≈ 5.5 MB per 40s, 23 for Remotion)
 #   VERBOSE=1 ./scripts/render.sh halloween            # the full engine log instead of progress lines
+#   ORIGINALITY=off ./scripts/render.sh halloween      # skip the originality check (YouTube's repetitive-content rules)
 source "$(dirname "$0")/_project.sh"
 [ $# -ge 1 ] || { echo "usage: render.sh <name> [hf|remotion] [engine args...]"; exit 1; }
 NAME="$(slugify "$1")"; shift
@@ -68,6 +69,11 @@ render_hf(){
   LOG="${TMPDIR:-/tmp}/vfx-render-$NAME.log"
   local q=(--crf "${CRF:-$HF_CRF}") a
   for a in "$@"; do case "$a" in -q|--quality|--quality=*|--crf|--crf=*|--video-bitrate*) q=();; esac; done
+  # YouTube's repetitive / mass-produced rules (scripts/originality.mjs): a ✗ stops the export, ! only warns.
+  # ORIGINALITY=off skips it (e.g. re-exporting an old reel).
+  if [ "${ORIGINALITY:-on}" != off ] && [ -f "$ROOT/hyperframes/$NAME/script.json" ]; then
+    node "$ROOT/scripts/originality.mjs" "$NAME" || { [ $? = 1 ] && { echo "✖ export stopped: fix the ✗ lines above (or ORIGINALITY=off)"; return 1; }; }
+  fi
   echo "Exporting $NAME · 1080×1920 · $FPS fps"
   if [ "${VERBOSE:-0}" = 1 ]; then
     (cd "$ROOT/hyperframes" && $HF render "$NAME" -o "$OUT" --fps "$FPS" ${q[@]+"${q[@]}"} "$@") || return 1
