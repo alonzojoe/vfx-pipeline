@@ -6,6 +6,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { check as originality } from "./originality.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const [project, videoArg] = process.argv.slice(2);
@@ -80,6 +81,14 @@ const every = Array.from({ length: Math.floor(dur) }, (_, i) => i + 0.5);
 const okC = sheet(every, join(revDir, "contact.jpg"), 8);
 const okB = sheet(beats, join(revDir, "beats.jpg"), 6);
 
+// ---- originality (YouTube's repetitive / mass-produced rules) — same check render.sh runs before exporting
+let orig = null;
+try { orig = existsSync(join(ROOT, "hyperframes", project, "script.json")) ? originality(project) : null; } catch { orig = null; }
+const icon = { ok: "✅", warn: "⚠️", fail: "❌" };
+const origRows = orig
+  ? orig.results.map((o) => `| ${icon[o.level]} | ${o.rule} | ${o.msg.replace(/\|/g, "/")} |`)
+  : ["| ⚠️ | originality | not checked (no script.json) |"];
+
 // ---- report
 const checklist = existsSync(join(ROOT, "REVIEW.md"))
   ? readFileSync(join(ROOT, "REVIEW.md"), "utf8").split("\n## ").filter((s) => /^(Graphics|Motion|Audio|Content|Export)/.test(s)).map((s) => "### " + s.trim()).join("\n\n")
@@ -93,6 +102,12 @@ Video: \`${relative(ROOT, video)}\` · ${dur.toFixed(1)}s · reviewed ${new Date
 |---|---|---|
 ${rows.join("\n")}
 
+## Originality — YouTube's repetitive / mass-produced content rules
+Compared with ${orig ? orig.compared : 0} earlier reels${orig?.prev ? ` (previous: ${orig.prev})` : ""}. ❌ = would break a rule, ⚠️ = too close to an earlier reel.
+| | Rule | Result |
+|---|---|---|
+${origRows.join("\n")}
+
 ## Frames
 - Every second: ${okC ? "`contact.jpg`" : "(failed to build)"}
 - Every line start and action: ${okB ? "`beats.jpg`" : "(no beats found / failed)"} at ${beats.map((t) => t.toFixed(1) + "s").join(", ")}
@@ -102,4 +117,5 @@ ${checklist}
 `;
 writeFileSync(join(revDir, "REPORT.md"), report);
 console.log(rows.join("\n"));
+if (orig) console.log(`originality: ${orig.pass ? "passes" : "FAILS"} (${orig.results.filter((o) => o.level === "warn").length} warnings) — see REPORT.md`);
 console.log(`\n→ ${relative(ROOT, revDir)}/REPORT.md  (+ contact.jpg, beats.jpg) — now go through the manual checklist`);

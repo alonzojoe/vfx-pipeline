@@ -34,6 +34,8 @@ Nothing gets published (or sent to Joe as "final") until this passes.
 - [ ] Cards carry no names; only a mock UI of something personal (bank card, account, invoice, pay stub) uses Joe's
       name ("JOE", "Joe's Account"), never "You"/"User"/generic.
 - [ ] Both questions are exactly "What's the difference?".
+- [ ] Originality section of REPORT.md has no ❌ (YouTube's repetitive / mass-produced rules: new topic, own wording,
+      a different hook than the previous reel, a real example per comparison, a line in Joe's OWN words — not a draft).
 - [ ] Background fills the frame edge to edge (no strips, borders or letterboxing), and its texture doesn't fight the text.
 - [ ] No leftover elements: a stamp, notification, badge, "?" or sparkle hanging around after its beat ends.
 - [ ] No text on top of other text (floating numbers, badges, captions over card text).

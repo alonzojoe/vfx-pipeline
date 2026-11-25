@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { ArrowUp, Check, Loader2, Plus, Sparkles, Square, Wrench } from 'lucide-react'
-import type { ChatEvent } from '../../../../shared/types'
+import type { ChatEvent, Originality } from '../../../../shared/types'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
@@ -37,7 +37,36 @@ type Props = {
 }
 
 /** New-reel checklist shown while Claude builds it and the app makes the voice — with a Stop button while it works. */
-function BuildChecklist({ b, voice, preview, onStop }: { b: Build; voice: VoiceState; preview: VoiceState; onStop: () => void }): JSX.Element {
+/** The originality result under the checklist: what breaks YouTube's rules (✗) and what's too close to earlier reels (!). */
+function OriginalityNote({ o }: { o: Originality }): JSX.Element | null {
+  const issues = o.results.filter((r) => r.level !== 'ok')
+  if (!issues.length) return null
+  return (
+    <ul className="ml-[26px] flex flex-col gap-1 text-xs">
+      {issues.slice(0, 5).map((r) => (
+        <li key={r.rule + r.msg} className={r.level === 'fail' ? 'text-red-400' : 'text-amber-500'}>
+          {r.level === 'fail' ? '✗' : '!'} {r.msg}
+        </li>
+      ))}
+      <li className="text-muted-foreground">{o.pass ? 'Optional — ask me to change any of these.' : 'Export is blocked until the ✗ lines are fixed — ask me to fix them.'}</li>
+    </ul>
+  )
+}
+
+function BuildChecklist({
+  b,
+  voice,
+  preview,
+  orig,
+  onStop
+}: {
+  b: Build
+  voice: VoiceState
+  preview: VoiceState
+  /** undefined = not checked yet, null = couldn't check */
+  orig: Originality | null | undefined
+  onStop: () => void
+}): JSX.Element {
   // the cards live in script.json now, so they're written together with the script (no separate, slow step)
   const live = !b.stopped
   const steps: [string, boolean, boolean][] = [
@@ -45,7 +74,12 @@ function BuildChecklist({ b, voice, preview, onStop }: { b: Build; voice: VoiceS
     ['Script + cards → two comparisons, facts, tip, CTA', b.script, live && !!b.renamed && !b.script],
     ['Preview built', preview === 'done', live && b.done && preview === 'doing'],
     ['Voice — ElevenLabs', voice === 'done', live && b.done && voice === 'doing'],
-    ['Timeline synced to the voice', voice === 'done', false]
+    ['Timeline synced to the voice', voice === 'done', false],
+    [
+      orig === undefined || orig === null ? 'Originality — YouTube rules' : orig.pass ? 'Original — passes YouTube\'s repetitive-content rules' : 'Not original enough yet',
+      !!orig?.pass,
+      live && preview === 'done' && orig === undefined
+    ]
   ]
   const working = live && (!b.done || preview === 'doing' || voice === 'doing')
   return (
@@ -72,6 +106,7 @@ function BuildChecklist({ b, voice, preview, onStop }: { b: Build; voice: VoiceS
           {label}
         </div>
       ))}
+      {orig && <OriginalityNote o={orig} />}
       {preview === 'failed' && <div className="text-sm text-red-300">The preview build failed — see the log; ask me to fix it.</div>}
       {voice === 'failed' && <div className="text-sm text-red-300">The voice step failed — see the log, then press Export or ask me to fix it.</div>}
       {b.stopped && <div className="text-sm text-muted-foreground">Stopped. Ask me to continue, or paste the script again.</div>}
@@ -84,6 +119,17 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
   const [build, setBuild] = useState<Build | null>(null)
+  // YouTube's originality rules, checked once the new reel's preview is built (and again after each revision)
+  const [orig, setOrig] = useState<Originality | null | undefined>(undefined)
+  useEffect(() => {
+    setOrig(undefined)
+    if (!project || !build?.done || preview !== 'done') return
+    let live = true
+    window.api.checkOriginality(project).then((r) => live && setOrig(r))
+    return () => {
+      live = false
+    }
+  }, [project, build?.done, preview])
   const end = useRef<HTMLDivElement>(null)
   const input = useRef<HTMLTextAreaElement>(null)
   const edited = useRef(false)
@@ -245,6 +291,7 @@ export const Chat = memo(function Chat({ project, available, draft, voice, previ
               b={build}
               voice={voice}
               preview={preview}
+              orig={orig}
               onStop={() => {
                 setBuild((b) => b && { ...b, stopped: true })
                 setBusy(false)

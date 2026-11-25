@@ -40,6 +40,14 @@ Reels are 1080x1920 (9:16) by default.
 ## YouTube monetization (YPP) — follow on EVERY reel
 YouTube pays for original, authored content and refuses "content that looks like it's made with a template" or
 "gives the impression of mass production" (inauthentic content policy, clarified Jul 2026). So:
+- **YouTube's own examples of what can't be monetized → how this pipeline answers each** (enforced by
+  `node scripts/originality.mjs <p>`: export stops on a ✗, review REPORT.md lists it, the app's checklist shows it):
+  | YouTube's rule | Check |
+  |---|---|
+  | "Similar or repetitive content with low educational value … or minimal variation across videos" | no topic/pair already covered by an earlier reel; script ≤ 15% word overlap with any earlier reel (✗ at 30%); every comparison has a real example (a number, ideally); cards carry facts |
+  | "Characters put in the same situation … same outcome (highly similar storyline template)" | the hook must not copy the previous reel's opener (same kind = warn, same kind + words = ✗); card colours, stickers and SFX families must differ |
+  | "Image slideshows, templated storylines, or scrolling text with minimal narrative, commentary or educational value" | narrated explanation + real example in every reel; warn when no card has drawn art / motion |
+  | "AI-generated content … impression of mass production without the creator's original, authentic insights or perspective" | ✗ without a line in Joe's own voice; an AI-drafted line is flagged (`"joeDraft": true`) until Joe says it in his words ("My take: …" in the chat); never invent a personal story for him |
 - **New topic every video** — log it in `TOPICS.md` and never repeat a topic or pair.
 - **Fixed spine, varied reel**: every reel is two comparisons (BRAND.md §2), so never let it become "only the nouns
   change" — that's what the July 2026 "generic, repetitive, template-based" wording targets. Change the hook, card
