@@ -5,6 +5,7 @@ import type {
   Fps,
   MediaItem,
   MediaLibrary,
+  Originality,
   Overrides,
   ProjectDetail,
   ProjectSummary,
@@ -51,6 +52,8 @@ const api = {
   chooseRoot: (): Promise<AppInfo> => ipcRenderer.invoke('app:chooseRoot'),
   listProjects: (): Promise<ProjectSummary[]> => ipcRenderer.invoke('projects:list'),
   getProject: (name: string): Promise<ProjectDetail> => ipcRenderer.invoke('projects:get', name),
+  /** YouTube's repetitive / mass-produced rules for one reel (scripts/originality.mjs) */
+  checkOriginality: (name: string): Promise<Originality | null> => ipcRenderer.invoke('projects:originality', name),
   /** + New reel: creates and returns the draft project name (new-reel, new-reel-2, …) */
   createProject: (): Promise<string> => ipcRenderer.invoke('projects:create'),
   watchProject: (name: string): Promise<void> => ipcRenderer.invoke('projects:watch', name),

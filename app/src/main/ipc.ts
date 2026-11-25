@@ -12,6 +12,7 @@ import { hasClaude } from './services/shell'
 import { startRun, stopRun } from './services/runner'
 import { sendChat, stopChat } from './services/chat'
 import { getVoiceFx, setVoiceFx } from './services/voiceFx'
+import { checkOriginality } from './services/originality'
 
 const need = (): string => {
   const r = getRoot()
@@ -103,6 +104,7 @@ export function registerIpc(win: () => BrowserWindow | null): void {
   ipcMain.handle('projects:list', () => listProjects(need()))
   ipcMain.handle('projects:create', () => createProject(need()))
   ipcMain.handle('projects:get', (_e, name: string) => getProject(need(), projectName(name)))
+  ipcMain.handle('projects:originality', (_e, name: string) => checkOriginality(need(), projectName(name)))
   ipcMain.handle('projects:watch', (_e, name: string) => watchProject(win, projectName(name)))
   ipcMain.handle('projects:setReaction', (_e, name: string, line: number, react: string) => {
     if (!Number.isInteger(line) || line < 0 || typeof react !== 'string' || !/^[\w -]{1,60}$/.test(react)) throw new Error('Bad reaction')

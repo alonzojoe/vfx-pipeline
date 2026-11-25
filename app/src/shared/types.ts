@@ -93,6 +93,14 @@ export type AddedClip = {
 
 export type RunKind = 'make' | 'voice' | 'enhance' | 'review' | 'build' | 'render'
 
+/** scripts/originality.mjs --json: YouTube's repetitive / mass-produced content rules for one reel */
+export type Originality = {
+  pass: boolean
+  prev: string | null
+  compared: number
+  results: { level: 'ok' | 'warn' | 'fail'; rule: string; msg: string }[]
+}
+
 /** Voice enhancer preset (scripts/voice-fx.mjs): the channel's sound on top of the ElevenLabs voice */
 export type VoiceFx = 'warm' | 'clear' | 'off'
 
