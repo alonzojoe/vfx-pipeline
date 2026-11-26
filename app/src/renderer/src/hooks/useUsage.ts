@@ -7,7 +7,7 @@ const STALE_MS = 15 * 60_000
 /**
  * ElevenLabs credits + Claude plan limits for the title bar. Shows the last saved readings at once, then asks
  * ElevenLabs (free) and — when the Claude reading is older than 15 minutes — Claude Code. Chat runs update the
- * Claude bar by themselves.
+ * Claude bar by themselves; voice runs re-read the ElevenLabs credits when they end.
  */
 export function useUsage() {
   const [usage, setUsage] = useState<Usage>({ eleven: null, claude: null })
@@ -35,6 +35,15 @@ export function useUsage() {
       })
       .catch(() => {})
     return off
+  }, [refresh])
+
+  // a voice / make run spends ElevenLabs credits: read the new balance when it ends
+  useEffect(() => {
+    const spending = new Set<string>()
+    return window.api.onRun((e) => {
+      if (e.type === 'start' && (e.kind === 'voice' || e.kind === 'make')) spending.add(e.runId)
+      if (e.type === 'exit' && spending.delete(e.runId)) void refresh('eleven')
+    })
   }, [refresh])
 
   return { usage, busy, refresh }
