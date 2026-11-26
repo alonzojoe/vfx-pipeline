@@ -66,6 +66,8 @@ A CapCut-style editor on top of this pipeline — no Terminal needed:
   (full screen, Esc to exit), **timeline** you can drag clips on (snaps to words).
 - **Voice** picker in the title bar: **Warm** (default), **Clear** or **Raw** — switches the voice sound for every reel
   and re-processes the open reel instantly (no ElevenLabs credits).
+- **Usage bars** in the title bar: what's left of your **ElevenLabs** credits and your **Claude** plan, as an icon + bar
+  each (green → amber → red); hover for the numbers and reset time, click to check again.
 - **Export** at **30 or 60 fps** with a **progress bar** (Preparing → Rendering frames → Encoding → Balancing loudness;
   the log sits behind "Show details") → small full-HD MP4, encoded once → automatic review (loudness, dead air, every frame).
 - **macOS notifications**: "Reel ready to watch" when a new reel's voice and preview are done, "Export finished" when
