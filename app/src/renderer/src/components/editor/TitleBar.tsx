@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 import { ThemeSwitch } from './ThemeSwitch'
 import { FpsSwitch } from './FpsSwitch'
 import { VoiceFxSwitch } from './VoiceFxSwitch'
-import { UsageBars } from './UsageBars'
 
 export type StageState = 'done' | 'doing' | 'todo'
 export type Stages = { script: StageState; voice: StageState; build: StageState; render: StageState }
@@ -140,7 +139,6 @@ export const TitleBar = memo(function TitleBar({ project, projects, stages, busy
         <Stage label="Render" state={stages.render} />
       </div>
 
-      <UsageBars />
       <ThemeSwitch />
       <VoiceFxSwitch value={voiceFx} onChange={onVoiceFx} disabled={!!busy} />
 
