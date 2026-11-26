@@ -1,10 +1,8 @@
 import { AudioLines, Sparkle, type LucideIcon } from 'lucide-react'
-import type { Usage } from '../../../../shared/types'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { useUsage } from '@/hooks/useUsage'
 import { claudeMeter, elevenMeter, type Meter } from '@/lib/usage'
 import { cn } from '@/lib/utils'
-
-type Which = 'eleven' | 'claude'
 
 function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
   icon: LucideIcon
@@ -52,7 +50,8 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
 }
 
 /** What's left: ElevenLabs credits this cycle and Claude's plan limits. Icons + bars; the numbers are in the tooltips. */
-export function UsageBars({ usage, busy, onRefresh }: { usage: Usage; busy: Record<Which, boolean>; onRefresh: (w: Which) => void }): JSX.Element {
+export function UsageBars(): JSX.Element {
+  const { usage, busy, refresh: onRefresh } = useUsage()
   return (
     <div aria-label="Usage left" className="no-drag flex h-8 items-center gap-0.5 rounded-lg border border-input bg-surface-2 p-0.5">
       <Bar icon={AudioLines} name="ElevenLabs credits" meter={elevenMeter(usage.eleven)} busy={busy.eleven} onClick={() => onRefresh('eleven')} />
