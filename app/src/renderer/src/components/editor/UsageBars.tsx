@@ -25,14 +25,14 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
           aria-label={`${name}: ${left == null ? 'unknown' : `${Math.round(left)}% left`} — check again`}
           className="flex h-6 items-center gap-1.5 rounded-md px-1.5 hover:bg-background disabled:cursor-wait"
         >
-          <Icon className={cn('h-3.5 w-3.5 shrink-0', iconClass, busy && 'animate-pulse')} aria-hidden="true" />
+          <Icon className={cn('h-3.5 w-3.5 shrink-0', iconClass, left == null && !busy && 'opacity-40', busy && 'animate-pulse')} aria-hidden="true" />
           <span
             role="meter"
             aria-label={`${name} left`}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={left == null ? undefined : Math.round(left)}
-            className="relative h-1.5 w-12 overflow-hidden rounded-full bg-muted"
+            className={cn('relative h-1.5 w-12 overflow-hidden rounded-full bg-muted', left == null && 'bg-transparent outline-dashed outline-1 outline-border')}
           >
             {left != null && (
               <span className={cn('absolute inset-y-0 left-0 rounded-full transition-[width] duration-500', FILL[meter.tone])} style={{ width: `${Math.max(left, 3)}%` }} />
