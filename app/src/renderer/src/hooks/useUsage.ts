@@ -37,6 +37,21 @@ export function useUsage() {
     return off
   }, [refresh])
 
+  // the app can sit open for hours: coming back to it re-reads whatever has gone stale
+  useEffect(() => {
+    const back = (): void => {
+      window.api
+        .getUsage()
+        .then((u) => {
+          if (!u.eleven || Date.now() - u.eleven.at > 5 * 60_000) void refresh('eleven')
+          if (!u.claude || Date.now() - u.claude.at > STALE_MS) void refresh('claude')
+        })
+        .catch(() => {})
+    }
+    window.addEventListener('focus', back)
+    return () => window.removeEventListener('focus', back)
+  }, [refresh])
+
   // a voice / make run spends ElevenLabs credits: read the new balance when it ends
   useEffect(() => {
     const spending = new Set<string>()
