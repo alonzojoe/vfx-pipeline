@@ -17,6 +17,7 @@ The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top
 | **Reel picker** (title bar) | Every reel with its state (draft / no voice / voice ready / FINAL); switch between them. |
 | **Export / Review** (title bar) | Export renders `<p>-final_edit.mp4` or `<p>-final-edit.mp4` (random name, small H.264, same 1080×1920) at the **30 / 60 fps** chosen beside it (saved; `FPS=` for `render.sh`) and then runs `scripts/review.sh <p>`; Review runs the review alone. Export shows a **progress bar** with the stage; every run's log sits behind "Show details" (opens by itself if a run fails). A macOS notification says when a reel is **ready to watch** (voice + preview done) and when an **export is finished** (click → the video in Finder), or if either failed. |
 | **Voice** (title bar) | Warm · Clear · Raw — the voice enhancer preset for every reel (Warm by default), saved in `input/general/brand/brand.json` so the CLI pipeline uses the same one. Picking another re-processes the open reel's kept ElevenLabs take right away and rebuilds (free, no voice credits). |
+| **Usage bars** (title bar) | Two icons with a bar each, showing what's **left**: ElevenLabs credits this billing cycle (sound-wave icon) and your Claude plan (orange spark — the 5-hour session or the week, whichever is closer to its limit). Green → amber under 25% → red under 10%; hover for the numbers, reset time and roughly how many reels of voice are left; click to check again. ElevenLabs is read with the key in `.env` from the main process (free — no credits spent; the key never reaches the window). Claude's numbers come from Claude Code's own rate-limit events: every chat updates them, and when the reading is older than 15 min the app asks with one tiny Haiku "ok" (no tools, no project files). The last readings are kept in the app's `usage.json` (userData). Needs a Claude Pro/Max login; the key needs ElevenLabs' "User: Read" access. |
 
 **Appearance:** the System / Light / Dark switch in the title bar. Saved in the app's `settings.json` (userData,
 next to the vfx-folder choice), applied with Electron's `nativeTheme` before the window opens and tagged on `<html>`
@@ -83,13 +84,15 @@ src/main/            Electron main process
     overrides.ts     overrides.json read/write
     runner.ts        make / build / render / review via the login shell
     chat.ts          Claude Code (stream-json) bridge
+    usage.ts         ElevenLabs credits + Claude rate-limit parsing (tested: npm test)
+    usageStore.ts    last usage readings (userData/usage.json), Claude ping, change events
 src/preload/         typed window.api
 src/shared/types.ts  types shared by main + renderer
 src/renderer/src/
   App.tsx            layout + wiring
   components/ui/     shadcn/ui
-  components/editor/ TitleBar, MediaBin, Preview, Timeline, Waveform, Inspector, Chat, RightPanel, RunConsole
-  hooks/             useVfx, usePlayback, useAudioEngine, useEdits, useRuns
+  components/editor/ TitleBar, UsageBars, MediaBin, Preview, Timeline, Waveform, Inspector, Chat, RightPanel, RunConsole
+  hooks/             useVfx, usePlayback, useAudioEngine, useEdits, useRuns, useUsage
 ```
 
 Config (all TypeScript): `electron.vite.config.ts` (Vite + PostCSS/Tailwind), `tailwind.config.ts`,
