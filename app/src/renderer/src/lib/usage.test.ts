@@ -23,5 +23,9 @@ assert.deepEqual(c.lines.slice(1), ['5-hour session: 96% left', 'This week: 20% 
 assert.equal(claudeMeter(null).leftPct, null)
 
 assert.equal(resetText(null), '')
+assert.equal(resetText(now / 1000 + 56 * 60, now), 'resets in 56 min')
+assert.equal(resetText(now / 1000 + 190 * 60, now), 'resets in 3 h 10 min')
+assert.equal(resetText(now / 1000 + 120 * 60, now), 'resets in 2 h')
+assert.match(resetText(now / 1000 + 2 * 86400, now), /^resets [A-Z][a-z]{2} \d+:\d\d [AP]M$/)
 assert.match(resetText(now / 1000 + 30 * 86400, now), /^resets [A-Z][a-z]{2} \d+$/)
 console.log('usage ✓')

@@ -12,14 +12,15 @@ const REEL_CHARS = 600
 
 const n = (v: number): string => Math.round(v).toLocaleString('en-US')
 
-/** "resets 3:40 PM" today, "resets Mon 9:00 AM" this week, "resets Dec 3" later. */
+/** "resets in 40 min" / "resets in 3 h 10 min" soon, "resets Mon 9:00 AM" this week, "resets Dec 3" later. */
 export function resetText(unix: number | null, now = Date.now()): string {
   if (!unix) return ''
   const d = new Date(unix * 1000)
-  const hours = (d.getTime() - now) / 3_600_000
-  const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
-  if (hours < 24 && d.getDate() === new Date(now).getDate()) return `resets ${time}`
-  if (hours < 24 * 6) return `resets ${d.toLocaleDateString('en-US', { weekday: 'short' })} ${time}`
+  const mins = Math.max(1, Math.round((d.getTime() - now) / 60_000))
+  if (mins < 60) return `resets in ${mins} min`
+  if (mins < 12 * 60) return `resets in ${Math.floor(mins / 60)} h${mins % 60 ? ` ${mins % 60} min` : ''}`
+  if (mins < 6 * 24 * 60)
+    return `resets ${d.toLocaleDateString('en-US', { weekday: 'short' })} ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
   return `resets ${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
 }
 
