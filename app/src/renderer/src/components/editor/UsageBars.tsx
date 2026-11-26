@@ -37,7 +37,7 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
           </span>
         </button>
       </TooltipTrigger>
-      <TooltipContent className="max-w-[260px] py-1.5 leading-relaxed">
+      <TooltipContent className="whitespace-nowrap py-1.5 leading-relaxed">
         {meter.lines.map((l, i) => (
           <div key={i} className={i === 0 ? 'font-semibold' : undefined}>
             {l}
