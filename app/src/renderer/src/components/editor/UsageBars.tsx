@@ -46,12 +46,12 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
         </button>
       </TooltipTrigger>
       <TooltipContent className="whitespace-nowrap py-1.5 leading-relaxed">
-        {meter.lines.map((l, i) => (
+        {(busy && left == null ? [meter.lines[0], 'Checking…'] : meter.lines).map((l, i) => (
           <div key={i} className={i === 0 ? 'font-semibold' : undefined}>
             {l}
           </div>
         ))}
-        <div className="opacity-60">Click to check again</div>
+        {!busy && <div className="opacity-60">Click to check again</div>}
       </TooltipContent>
     </Tooltip>
   )

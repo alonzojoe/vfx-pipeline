@@ -25,7 +25,7 @@ export function resetText(unix: number | null, now = Date.now()): string {
 }
 
 export function elevenMeter(u: ElevenUsage | null, now = Date.now()): Meter {
-  if (!u) return { leftPct: null, tone: 'ok', lines: ['ElevenLabs credits', 'Checking…'] }
+  if (!u) return { leftPct: null, tone: 'ok', lines: ['ElevenLabs credits', 'No reading yet'] }
   if (!u.ok) return { leftPct: null, tone: 'ok', lines: ['ElevenLabs credits', u.reason] }
   const left = Math.max(0, u.limit - u.used)
   const leftPct = (left / u.limit) * 100
@@ -46,7 +46,7 @@ const windowLine = (label: string, w: UsageWindow | null, now: number): string |
 /** The bar shows whichever window is closer to running out (that's the one that stops a chat). */
 export function claudeMeter(u: ClaudeUsage | null, now = Date.now()): Meter {
   const head = 'Claude plan limits'
-  if (!u || (!u.session && !u.week)) return { leftPct: null, tone: 'ok', lines: [head, 'Checking…'] }
+  if (!u || (!u.session && !u.week)) return { leftPct: null, tone: 'ok', lines: [head, 'No reading yet — needs a Claude Pro/Max login'] }
   const tight = Math.max(u.session?.usedPct ?? 0, u.week?.usedPct ?? 0)
   const leftPct = 100 - tight
   return {
