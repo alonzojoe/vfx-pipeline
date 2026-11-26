@@ -13,6 +13,7 @@ import type {
   RunKind,
   ThemeSource,
   ThemeState,
+  Usage,
   VoiceFx
 } from '../shared/types'
 
@@ -45,6 +46,10 @@ const api = {
   /** voice enhancer preset (brand.json "voiceFx"): warm (default) / clear / off */
   getVoiceFx: (): Promise<VoiceFx> => ipcRenderer.invoke('voicefx:get'),
   setVoiceFx: (fx: VoiceFx): Promise<VoiceFx> => ipcRenderer.invoke('voicefx:set', fx),
+  /** ElevenLabs credits + Claude plan limits (last readings; refresh asks the services again) */
+  getUsage: (): Promise<Usage> => ipcRenderer.invoke('usage:get'),
+  refreshUsage: (which: 'eleven' | 'claude'): Promise<Usage> => ipcRenderer.invoke('usage:refresh', which),
+  onUsage: (cb: (u: Usage) => void): (() => void) => on('usage:changed', cb),
   getTheme: (): Promise<ThemeState> => ipcRenderer.invoke('theme:get'),
   setTheme: (source: ThemeSource): Promise<ThemeState> => ipcRenderer.invoke('theme:set', source),
   onThemeChanged: (cb: (t: ThemeState) => void): (() => void) => on('theme:changed', cb),

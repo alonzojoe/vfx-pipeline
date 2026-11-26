@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog, ipcMain, nativeTheme, shell } from 'electron'
 import { existsSync, watch, type FSWatcher } from 'node:fs'
 import { join } from 'node:path'
-import type { AppInfo, Fps, Overrides, RunKind, ThemeSource, VoiceFx } from '../shared/types'
+import type { AppInfo, Fps, Overrides, RunKind, ThemeSource, Usage, VoiceFx } from '../shared/types'
 import { importFiles, mediaLibrary } from './services/media'
 import { readOverrides, writeOverrides } from './services/overrides'
 import { inside, projectName } from './services/paths'
@@ -13,6 +13,7 @@ import { startRun, stopRun } from './services/runner'
 import { sendChat, stopChat } from './services/chat'
 import { getVoiceFx, setVoiceFx } from './services/voiceFx'
 import { checkOriginality } from './services/originality'
+import { getUsage, onUsage, pingClaude, refreshEleven } from './services/usageStore'
 
 const need = (): string => {
   const r = getRoot()
@@ -87,6 +88,18 @@ export function registerIpc(win: () => BrowserWindow | null): void {
   ipcMain.handle('fps:set', (_e, fps: Fps) => setFps(fps))
   ipcMain.handle('voicefx:get', () => getVoiceFx(need()))
   ipcMain.handle('voicefx:set', (_e, fx: VoiceFx) => setVoiceFx(need(), fx))
+
+  // Usage bars: ElevenLabs credits + Claude plan limits. Only numbers cross IPC — never the ElevenLabs key.
+  ipcMain.handle('usage:get', () => getUsage())
+  ipcMain.handle('usage:refresh', async (_e, which: 'eleven' | 'claude'): Promise<Usage> => {
+    if (which === 'eleven') return refreshEleven(need())
+    if (which === 'claude') return pingClaude()
+    throw new Error(`Bad usage: ${String(which)}`)
+  })
+  onUsage((u) => {
+    const w = win()
+    if (w && !w.isDestroyed()) w.webContents.send('usage:changed', u)
+  })
 
   ipcMain.handle('app:info', () => appInfo())
   ipcMain.handle('app:chooseRoot', async () => {

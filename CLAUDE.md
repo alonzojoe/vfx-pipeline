@@ -170,6 +170,9 @@ YouTube pays for original, authored content and refuses "content that looks like
 ## vfx Studio app (`app/`)
 - Mac editor for this pipeline (Electron + React + TS + Tailwind + shadcn/ui): media bin, frame-accurate preview,
   timeline, inspector, Claude Code chat, Make reel / Review buttons. See `app/README.md`.
+- Title-bar **usage bars**: ElevenLabs credits left (`GET /v1/user/subscription`, key read from `.env` in the main
+  process only — never sent to the window or logged) and Claude plan limits left (Claude Code's `rate_limit_event`
+  stream-json lines from every chat, or a tiny Haiku ping when stale). Last readings in userData `usage.json`.
 - Run: `cd app && npm install && npm run dev`. Build dmgs (Apple Silicon + Intel): `npm run dist:mac`.
 - Timeline edits live in `hyperframes/<project>/overrides.json` and are applied by every `build.mjs` through
   `scripts/overrides.mjs` — new projects copied from `hyperframes/business-terms/` already include that call.

@@ -129,3 +129,13 @@ export type Fps = 30 | 60
 
 export type ThemeSource = 'system' | 'light' | 'dark'
 export type ThemeState = { source: ThemeSource; dark: boolean }
+
+/** One usage window: how much is used (0–100) and when it resets (unix seconds). */
+export type UsageWindow = { usedPct: number; resetsAt: number | null }
+/** ElevenLabs credits this billing cycle — read in the main process; the key never reaches the renderer. */
+export type ElevenUsage =
+  | { ok: true; used: number; limit: number; resetsAt: number | null; tier: string; at: number }
+  | { ok: false; reason: string; at: number }
+/** Claude Code plan limits (5-hour session + weekly), from the rate_limit events Claude Code prints. */
+export type ClaudeUsage = { session: UsageWindow | null; week: UsageWindow | null; at: number }
+export type Usage = { eleven: ElevenUsage | null; claude: ClaudeUsage | null }
