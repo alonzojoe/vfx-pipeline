@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import type { ElevenUsage } from '../../shared/types'
+import type { ClaudeUsage, ElevenUsage, UsageWindow } from '../../shared/types'
 
 /**
  * The ElevenLabs key from the vfx folder's .env (the same file scripts/voice.sh uses). Main process only: it is
@@ -61,4 +61,36 @@ export async function elevenUsage(root: string): Promise<ElevenUsage> {
   } catch {
     return { ok: false, reason: 'Offline — couldn’t reach ElevenLabs', at }
   }
+}
+
+/** Claude Code's `rate_limit_event` stream-json line (only what the app reads). */
+type Window = { utilization?: number; resetsAt?: number }
+export type RateLimitEvent = {
+  type: 'rate_limit_event'
+  rate_limit_info?: Window & { rateLimitType?: string; unifiedWindows?: Record<string, Window | undefined> }
+}
+
+const win = (w: Window | undefined): UsageWindow | null =>
+  w && typeof w.utilization === 'number'
+    ? { usedPct: Math.max(0, Math.min(100, w.utilization * 100)), resetsAt: typeof w.resetsAt === 'number' ? w.resetsAt : null }
+    : null
+
+/**
+ * Plan usage from one rate_limit_event, merged over what the app saw before (an event may carry only one window).
+ * Returns null when the event has no numbers (API-key logins have no plan windows).
+ */
+export function claudeFromEvent(e: RateLimitEvent, prev: ClaudeUsage | null, at = Date.now()): ClaudeUsage | null {
+  const info = e.rate_limit_info
+  if (!info) return null
+  const all = info.unifiedWindows ?? (info.rateLimitType ? { [info.rateLimitType]: info } : {})
+  const session = win(all.five_hour)
+  const week = win(all.seven_day)
+  if (!session && !week) return null
+  return { session: session ?? prev?.session ?? null, week: week ?? prev?.week ?? null, at }
+}
+
+/** A window whose reset time has passed starts again from 0%. */
+export function fresh(w: UsageWindow | null, now = Date.now()): UsageWindow | null {
+  if (!w) return null
+  return w.resetsAt && w.resetsAt * 1000 <= now ? { usedPct: 0, resetsAt: null } : w
 }
