@@ -1,6 +1,6 @@
 # vfx Studio
 
-The Mac app for the Knowledge by Joe reel pipeline: a CapCut-style editor on top of `hyperframes/<project>`.
+The Mac app for the reel pipeline: a CapCut-style editor on top of `hyperframes/<project>`.
 
 | Light | Dark |
 |---|---|

@@ -1,7 +1,7 @@
 # vfx — code-based video editor
 
-The pipeline behind **Knowledge by Joe** (@knowledgebyjoe) — *Quick comparisons. Easy explanations. Learn something
-new every day.* 30–40 second reels, two quick comparisons each, written as code, voiced with ElevenLabs and rendered to MP4.
+A code-based pipeline for short explainer reels: 30–40 seconds, two quick comparisons each, written as code, voiced
+with ElevenLabs and rendered to MP4.
 Two rendering engines + GSAP for motion + FFmpeg for the heavy lifting, plus **vfx Studio**, a Mac app to make
 reels without the terminal. Everything is per project, and reels are 1080×1920 (9:16) by default.
 
