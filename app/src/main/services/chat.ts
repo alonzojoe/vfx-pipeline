@@ -4,6 +4,7 @@ import { join } from 'node:path'
 import type { ChildProcess } from 'node:child_process'
 import type { ChatEvent } from '../../shared/types'
 import { loginShell, q } from './shell'
+import { noteClaudeLine } from './usageStore'
 
 /** A reel made with "+ New reel" has a script.json with no lines yet. */
 function isDraft(root: string, project: string): boolean {
@@ -62,7 +63,7 @@ type StreamPart =
   | { type: 'tool_use'; name: string; input?: Record<string, unknown> }
   | { type: 'tool_result'; content?: string | { text?: string }[] }
 type StreamMessage = {
-  type: 'system' | 'assistant' | 'user' | 'result'
+  type: 'system' | 'assistant' | 'user' | 'result' | 'rate_limit_event'
   session_id?: string
   message?: { content?: StreamPart[] }
   is_error?: boolean
@@ -124,6 +125,7 @@ export function sendChat(win: BrowserWindow, root: string, message: string, proj
         continue
       }
       if (m.session_id) sessionId = m.session_id
+      noteClaudeLine(m) // plan limits → the Claude usage bar
       if (m.type === 'assistant') {
         for (const part of m.message?.content ?? []) {
           if (part.type === 'text' && part.text?.trim()) send({ id, type: 'text', text: part.text })
