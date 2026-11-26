@@ -45,7 +45,7 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
           </span>
         </button>
       </TooltipTrigger>
-      <TooltipContent className="whitespace-nowrap py-1.5 leading-relaxed">
+      <TooltipContent side="top" className="whitespace-nowrap py-1.5 leading-relaxed">
         {(busy && left == null ? [meter.lines[0], 'Checking…'] : meter.lines).map((l, i) => (
           <div key={i} className={i === 0 ? 'font-semibold' : undefined}>
             {l}
@@ -61,7 +61,7 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
 export function UsageBars(): JSX.Element {
   const { usage, busy, refresh: onRefresh } = useUsage()
   return (
-    <div aria-label="Usage left" className="no-drag flex h-8 items-center gap-0.5 rounded-lg border border-input bg-surface-2 p-0.5">
+    <div aria-label="Usage left" className="flex h-7 shrink-0 items-center gap-0.5 rounded-lg border border-input bg-surface-2 p-0.5">
       <Bar icon={AudioLines} name="ElevenLabs credits" meter={elevenMeter(usage.eleven)} busy={busy.eleven} onClick={() => onRefresh('eleven')} />
       <Bar icon={Sparkle} name="Claude plan" meter={claudeMeter(usage.claude)} busy={busy.claude} onClick={() => onRefresh('claude')} iconClass="text-[#d97757]" />
     </div>
