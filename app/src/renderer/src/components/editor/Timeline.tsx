@@ -6,6 +6,7 @@ import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Waveform } from './Waveform'
+import { UsageBars } from './UsageBars'
 import { clamp, MEDIA_MIME } from '@/lib/time'
 import { vfxUrlOf } from '@/lib/vfx'
 import { cn } from '@/lib/utils'
@@ -168,6 +169,8 @@ export const Timeline = memo(function Timeline({ project, clock, selectedId, onS
           <Switch checked={snap} onCheckedChange={setSnap} aria-label="Snap to words" />
         </label>
         <div className="flex-1" />
+        <UsageBars />
+        <span className="mx-1 h-4 w-px bg-border" />
         <span className="text-xs text-muted-foreground">Zoom</span>
         <Button variant="ghost" size="icon-sm" aria-label="Zoom out" onClick={() => setPps((p) => clamp(p / 1.25, 8, 240))}>
           <Minus />
