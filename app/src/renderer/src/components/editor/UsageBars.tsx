@@ -1,8 +1,11 @@
 import { AudioLines, Sparkle, type LucideIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useUsage } from '@/hooks/useUsage'
-import { claudeMeter, elevenMeter, type Meter } from '@/lib/usage'
+import { claudeMeter, elevenMeter, type Meter, type Tone } from '@/lib/usage'
 import { cn } from '@/lib/utils'
+
+/** Fill colour by what's left: plenty / under 25% / under 10%. */
+const FILL: Record<Tone, string> = { ok: 'bg-emerald-500', low: 'bg-amber-400', out: 'bg-red-500' }
 
 function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
   icon: LucideIcon
@@ -32,7 +35,7 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
             className="relative h-1.5 w-12 overflow-hidden rounded-full bg-muted"
           >
             {left != null && (
-              <span className="absolute inset-y-0 left-0 rounded-full bg-foreground/70 transition-[width] duration-500" style={{ width: `${Math.max(left, 3)}%` }} />
+              <span className={cn('absolute inset-y-0 left-0 rounded-full transition-[width] duration-500', FILL[meter.tone])} style={{ width: `${Math.max(left, 3)}%` }} />
             )}
           </span>
         </button>
