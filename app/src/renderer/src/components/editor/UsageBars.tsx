@@ -5,7 +5,12 @@ import { claudeMeter, elevenMeter, type Meter, type Tone } from '@/lib/usage'
 import { cn } from '@/lib/utils'
 
 /** Fill colour by what's left: plenty / under 25% / under 10%. */
-const FILL: Record<Tone, string> = { ok: 'bg-emerald-500', low: 'bg-amber-400', out: 'bg-red-500' }
+// one shade deeper on light backgrounds so the colour still reads against white
+const FILL: Record<Tone, string> = {
+  ok: 'bg-emerald-600 dark:bg-emerald-500',
+  low: 'bg-amber-500 dark:bg-amber-400',
+  out: 'bg-red-600 dark:bg-red-500'
+}
 
 function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
   icon: LucideIcon
@@ -32,7 +37,7 @@ function Bar({ icon: Icon, name, meter, busy, onClick, iconClass }: {
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={left == null ? undefined : Math.round(left)}
-            className={cn('relative h-1.5 w-12 overflow-hidden rounded-full bg-muted', left == null && 'bg-transparent outline-dashed outline-1 outline-border')}
+            className={cn('relative h-1.5 w-12 overflow-hidden rounded-full bg-foreground/15', left == null && 'bg-transparent outline-dashed outline-1 outline-border')}
           >
             {left != null && (
               <span className={cn('absolute inset-y-0 left-0 rounded-full transition-[width] duration-500', FILL[meter.tone])} style={{ width: `${Math.max(left, 3)}%` }} />
